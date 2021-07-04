@@ -1,0 +1,9 @@
+E:\Eren\Eren Production Management\EPM.Fason.Core\bin\Debug\netcoreapp3.1\EPM.Fason.Core.deps.json
+E:\Eren\Eren Production Management\EPM.Fason.Core\bin\Debug\netcoreapp3.1\EPM.Fason.Core.dll
+E:\Eren\Eren Production Management\EPM.Fason.Core\bin\Debug\netcoreapp3.1\EPM.Fason.Core.pdb
+E:\Eren\Eren Production Management\EPM.Fason.Core\obj\Debug\netcoreapp3.1\EPM.Fason.Core.csprojAssemblyReference.cache
+E:\Eren\Eren Production Management\EPM.Fason.Core\obj\Debug\netcoreapp3.1\EPM.Fason.Core.AssemblyInfoInputs.cache
+E:\Eren\Eren Production Management\EPM.Fason.Core\obj\Debug\netcoreapp3.1\EPM.Fason.Core.AssemblyInfo.cs
+E:\Eren\Eren Production Management\EPM.Fason.Core\obj\Debug\netcoreapp3.1\EPM.Fason.Core.csproj.CoreCompileInputs.cache
+E:\Eren\Eren Production Management\EPM.Fason.Core\obj\Debug\netcoreapp3.1\EPM.Fason.Core.dll
+E:\Eren\Eren Production Management\EPM.Fason.Core\obj\Debug\netcoreapp3.1\EPM.Fason.Core.pdb

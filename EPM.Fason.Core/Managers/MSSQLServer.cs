@@ -14,7 +14,7 @@ namespace EPM.Fason.Core.Managers
     public static class MSSQLServer
     { 
 
-        public static string connectionString = @"Data Source=192.168.2.7;Persist Security Info=True;User ID=sa;password=Eren5959++;Initial Catalog={3};MultipleActiveResultSets=true;Application Name=1";
+        public static string connectionString = @"Data Source=192.168.2.7;Persist Security Info=True;User ID=sa;password=Eren5959++;Initial Catalog=EPMFASON;MultipleActiveResultSets=true;Application Name=1";
 
         public static DataTable QueryFill(DataTable dt, string sql)
         {
@@ -65,23 +65,27 @@ namespace EPM.Fason.Core.Managers
                 DynamicParameters parameters = new DynamicParameters();
                 for (int i = 0; i < pi.Length; i++)
                 {
-                    if (((KeyAttribute)Attribute.GetCustomAttribute(pi[i], typeof(KeyAttribute))) == null)
+                    if (!pi[i].PropertyType.Name.StartsWith("List"))
                     {
-
-                        if (!(pi[i].PropertyType.DbType() == System.Data.DbType.DateTime && (pi[i].GetValue(obj, null) == null || ((DateTime)pi[i].GetValue(obj, null)).Year == 1)))
+                        if (((KeyAttribute)Attribute.GetCustomAttribute(pi[i], typeof(KeyAttribute))) == null)
                         {
-                            fieldNames += (fieldNames == string.Empty ? string.Empty : ",") + pi[i].Name;
-                            insertParameters += (insertParameters == string.Empty ? string.Empty : ",") + "@" + pi[i].Name;
-                            updateParameters += (updateParameters == string.Empty ? string.Empty : ",") + pi[i].Name + "=@" + pi[i].Name;
-                            parameters.Add(pi[i].Name, pi[i].GetValue(obj, null));
+
+                            if (!(pi[i].PropertyType.DbType() == System.Data.DbType.DateTime && (pi[i].GetValue(obj, null) == null || ((DateTime)pi[i].GetValue(obj, null)).Year == 1)))
+                            {
+                                fieldNames += (fieldNames == string.Empty ? string.Empty : ",") + pi[i].Name;
+                                insertParameters += (insertParameters == string.Empty ? string.Empty : ",") + "@" + pi[i].Name;
+                                updateParameters += (updateParameters == string.Empty ? string.Empty : ",") + pi[i].Name + "=@" + pi[i].Name;
+                                parameters.Add(pi[i].Name, pi[i].GetValue(obj, null));
+                            }
+                        }
+                        else
+                        {
+                            keyName = pi[i].Name;
+                            keyValue = pi[i].GetValue(obj, null);
+                            keyInfo = pi[i];
                         }
                     }
-                    else
-                    {
-                        keyName = pi[i].Name;
-                        keyValue = pi[i].GetValue(obj, null);
-                        keyInfo = pi[i];
-                    }
+                   
                 }
                 if (Convert.ToInt64(keyValue) > 0)
                     sqlConnection.Execute(string.Format("UPDATE {0} SET {1} WHERE {2} = {3}", tableName, updateParameters, keyName, keyValue), parameters, null, commandType: System.Data.CommandType.Text);
