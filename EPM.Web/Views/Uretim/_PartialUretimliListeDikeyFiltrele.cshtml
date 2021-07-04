@@ -1,0 +1,80 @@
+﻿
+@model EPM.Core.FormModels.Uretim.UretimOnayliListe
+@using EPM.Core.Models;
+@{
+    var editable = new EPM.Core.Helpers.MenuHelper().CanUserEditUretim(this.Context);
+}
+
+
+<div class="dx-card wide-card">
+    @(Html.DevExtreme().DataGrid<EPM.Core.FormModels.Uretim.VerticalList> ().ID("edgridHeader")
+    .ShowBorders(false)
+    .DataSource(
+        ob=>ob.Mvc().Controller("Uretim")
+        .LoadParams(Model)
+        .LoadAction("UretimListeDikeyLoad")
+        .Key("DETAIL_ID")
+    )
+    .OnExporting("exportingDikeyListe")
+    .Export(e =>
+    {
+        e.Enabled(true);
+    })
+    .FilterRow(f => f.Visible(true))
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .AllowColumnResizing(true)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .Pager(p=>p.Visible(true).ShowInfo(true).ShowPageSizeSelector(true).ShowNavigationButtons(true))
+    .ShowBorders(true)
+    //.Scrolling(ob=>ob.Mode(GridScrollingMode.Standard))
+    .Paging(p=> {
+        p.Enabled(true);
+        p.PageSize(50);
+    })
+    .Height("calc(100vh - 200px)")
+    .ShowColumnLines(true)
+    .ColumnChooser(ch => { ch.Mode(GridColumnChooserMode.Select);ch.Enabled(true); })
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(60)
+    .Summary(ob=>ob.TotalItems(items=> {
+    items.AddFor(m => m.QUANTITY).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+        items.AddFor(m => m.EXPECTED_COST).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+        items.AddFor(m => m.MODEL).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
+    }))
+    //.Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
+    .Columns(columns =>
+    {
+        //columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn => btn.Add().Icon("fa fa-history").OnClick("LogSearchHeader"));
+        columns.AddFor(m => m.ID).Width(60).AllowEditing(false);
+        columns.AddFor(m => m.APPROVAL_STATUS).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetApprovalStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.BRAND).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.SUB_BRAND).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetSubBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.SEASON).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.MODEL);
+        columns.AddFor(m => m.COLOR);
+        columns.AddFor(m => m.COLLECTION_TYPE).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetCollectionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.ROYALTY);
+        columns.AddFor(m => m.TEMA);
+        columns.AddFor(m => m.ANA_TEMA);
+        columns.AddFor(m => m.PRODUCT_GROUP).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetProductGroupList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.FABRIC_TYPE).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetFabricList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.PRODUCTION_TYPE).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetProductionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.ORDER_TYPE).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetOrderList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.RECIPE).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetRecipeList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.BAND_ID).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.DEADLINE).Caption("1. DEADLINE").AllowEditing(false).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
+        columns.AddFor(m => m.DEADLINE_2).Caption("2. DEADLINE").DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
+        columns.AddFor(m => m.DEADLINE_3).Caption("3. DEADLINE").Visible(true).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
+        columns.AddFor(m => m.DEADLINE_4).Caption("4. DEADLINE").Visible(true).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
+        columns.AddFor(m => m.SHIPMENT_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
+        columns.AddFor(m => m.EXPECTED_COST);
+        columns.AddFor(m => m.CURRENCY_UNIT).Width(80).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetCurrencyUnits").Key("ID")).DisplayExpr("CURRENCY_UNIT").ValueExpr("ID"));
+        columns.AddFor(m => m.MARKET).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetMarkets").Key("ID").LoadParams(new { all = false })).DisplayExpr("ADI").ValueExpr("ID")).AllowExporting(true);
+        columns.AddFor(m => m.PRODUCT_SIZE);
+        columns.AddFor(m => m.QUANTITY);
+    })
+    )
+</div>
+

@@ -1,0 +1,63 @@
+﻿<div id="form-container">
+    <div class="dx-card wide-card">
+        @(Html.DevExtreme().Form<EPM.Core.FormModels.UretimTakip.KaliteGerceklesenFilter>()
+        .ID("edOnayliListe").ShowValidationSummary(true)
+        .ColCount(8)
+        .Items(items =>
+        {
+
+            items.AddSimpleFor(m => m.SEASON).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimpleFor(m => m.MODEL).Editor(ob=>ob.TextBox().ID("edModel")).IsRequired(false);
+            items.AddSimpleFor(m => m.COLOR).Editor(ob=>ob.TextBox().ID("edColor")).IsRequired(false);
+            items.AddSimpleFor(m => m.BEDEN).Editor(ob=>ob.TextBox().ID("edBeden")).IsRequired(false);
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddButton().HorizontalAlignment(HorizontalAlignment.Left).VerticalAlignment(VerticalAlignment.Center)
+                   .ButtonOptions(b => b.Text("FİLTRELE")
+                       .Type(ButtonType.Default)
+                       .Icon("fas fa-sign-in-alt")
+                       .Width("100%")
+                       .OnClick("UretimOnayliFiltrele")
+                       .UseSubmitBehavior(true)
+               );
+
+        })
+        .FormData(Model).ShowValidationSummary(false)
+    )
+
+        <div id="edListe">
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+      function UretimOnayliFiltrele() {
+          $("#edListe").html("");
+        var data = {
+            BRAND: jQuery("[name=BRAND]").val(),
+            SEASON: jQuery("[name=SEASON]").val(),
+            MODEL: jQuery("[name=MODEL]").val(),
+            COLOR: jQuery("[name=COLOR]").val()
+        };
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("_PartiaEgemenGerceklesenFiltrele", "UretimTakip")',
+            data: data,
+            contentType: 'application/x-www-form-urlencoded',
+            timeout: 180000,
+            success: function (income, status, xmlRequest) {
+                $("#edListe").html(income);
+
+            }, beforeSend: function () {
+                getLoadPanelInstance().show();
+            }
+
+
+        }).always(function () {
+            getLoadPanelInstance().hide();
+        });
+    }
+</script>

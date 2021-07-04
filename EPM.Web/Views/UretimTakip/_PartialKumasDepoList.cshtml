@@ -1,0 +1,30 @@
+﻿@model int[];
+    @(Html.DevExtreme().DataGrid<EPM.Core.FormModels.UretimTakip.KumasDepo>().ID("edKumasDepoList")
+    .ShowBorders(false)
+    .DataSource(
+        ob => ob.Mvc().Controller("UretimTakip")
+        .LoadParams(new { ITEM_ID = Model[0], PO_HEADER_ID = Model[1] })
+        .LoadAction("KumasDepoListLoad")
+        .Key("TRANSACTION_ID")
+    )
+    .FocusedRowEnabled(true)
+    .Height("calc((100vh / 2) - 100px)")
+    .FocusedRowIndex(0)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .ShowBorders(true)
+    .Scrolling(ob => ob.Mode(GridScrollingMode.Virtual))
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(60)
+    .Columns(cl =>
+    {
+        cl.AddFor(m => m.CREATION_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Width(100);
+        cl.AddFor(m => m.OLUSTURAN).Width(120);
+        cl.AddFor(m => m.KALEM).Width(100);
+        cl.AddFor(m => m.URUN_GRUBU).Width(170);
+        cl.AddFor(m => m.ISLEM_TIPI).Width(120);
+        cl.AddFor(m => m.ISLEM_MIKTARI).Width(100);
+        cl.AddFor(m => m.BIRIM).Width(100);
+    })
+    ) 

@@ -1,0 +1,58 @@
+﻿<div class="dx-card wide-card" id="fileuploader">
+    <div class="widget-container">
+        @(Html.DevExtreme().FileUploader()
+            .ID("file-uploader")
+            .Name("myFile")
+            .Multiple(false)
+            .Accept(".xlsx").LabelText("Yada Excel Dosyasını Sürükleyip Bırakınız")
+            .UploadMode(FileUploadMode.Instantly)
+            .UploadUrl(Url.Action("UretimListesiAktarExcelYukle", "Uretim"))
+            .OnValueChanged("fileUploader_valueChanged")
+            .SelectButtonText("DOSYA SEÇİNİZ")
+            .UploadButtonText("Yükle")
+            .UploadedMessage("Dosya Başarıyla Yüklendi. İşlemler Tamamlandığında Tarafınıza Mail Bilgilendirmesi Yapılacaktır.")
+            .UploadFailedMessage("Dosya yüklenemedi").OnUploadError("uploadError")
+            .OnUploadAborted("uploadError")
+        )
+        <div class="content" id="selected-files">
+            <div> 
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script> 
+    function uploadError(e) {
+        console.log(e.file.name);
+        console.log(e.request.responseText);
+        setTimeout(function () {
+            $(".dx-fileuploader-file-status-message").html(e.request.responseText);
+        }, 1000);
+    }
+    function getFileUploaderInstance() {
+        return $("#file-uploader").dxFileUploader("instance");
+    }
+
+    function fileUploader_valueChanged(e) {
+        var files = e.value;
+        if(files.length > 0) {
+            $("#selected-files .selected-item").remove();
+
+            $.each(files, function(i, file) {
+                var $selectedItem = $("<div />").addClass("selected-item");
+                $selectedItem.append(
+                    $("<span />").html("Adı: " + file.name + "<br/>"),
+                    $("<span />").html("Boyutu " + file.size + " bytes" + "<br/>"),
+                    $("<span />").html("Tipi " + file.type + "<br/>"),
+                    $("<span />").html("Last Modified Date: " + file.lastModifiedDate)
+                );
+                $selectedItem.appendTo($("#selected-files"));
+            });
+            $("#selected-files").show();
+        }
+        else
+            $("#selected-files").hide();
+    }
+     
+</script>

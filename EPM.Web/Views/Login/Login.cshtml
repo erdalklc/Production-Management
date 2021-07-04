@@ -1,0 +1,73 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewBag.Title = "Eren Production Management";
+}
+
+
+@model EPM.Core.FormModels.Login
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post, new { id = "edLoginForm" }))
+{
+
+<div id="form-container">
+    <div class="login-container">
+        <div class="login-form">
+           
+            <img class="login-img" src="~/images/eren.png" />
+            @(Html.DevExtreme().Form<EPM.Core.FormModels.Login>()
+        .ID("form").ShowValidationSummary(true)
+        .ColCount(1)
+        .Items(items => {
+            items.AddGroup()
+                .Items(groupItems => {
+                    groupItems.AddSimpleFor(m => m.EMail).Editor(e => e.TextBox().ID("edMail").Mode(TextBoxMode.Email).Buttons(b => b.Add().Name("btnMail").Location(TextEditorButtonLocation.Before).Widget(w => w.Button().Disabled(true).Icon("fas fa-envelope")))).IsRequired(true);
+                    groupItems.AddSimpleFor(m => m.Password).Editor(e => e.TextBox().ID("edPassword").Mode(TextBoxMode.Password).Buttons(b => {
+                        b.Add().Name("btnPass").Location(TextEditorButtonLocation.Before).Widget(w => w.Button().Disabled(true).Icon("fas fa-key"));
+                        b.Add().Name("btnShowPassword").Location(TextEditorButtonLocation.After).Widget(w => w.Button().Type(ButtonType.Default).Icon("fas fa-eye").OnClick("changePasswordMode"));
+                    }) ).IsRequired(true);
+                    groupItems.AddSimpleFor(m => m.BeniHatirla).Editor(e => e.CheckBox()).Label(o=>o.Location(FormLabelLocation.Left).Alignment(HorizontalAlignment.Left)).IsRequired(false);
+                });
+
+            items.AddButton().HorizontalAlignment(HorizontalAlignment.Left)
+                   .ButtonOptions(b => b.Text("LOGİN")
+                       .Type(ButtonType.Default)
+                       .Icon("fas fa-sign-in-alt")
+                       .Width("100%")
+                       .UseSubmitBehavior(true)
+               );
+
+        })
+        .FormData(Model).ValidationGroup("edGroup")
+    )
+        </div>
+
+    </div>
+
+</div>
+}
+
+<script>
+    $(document).ready(function () {
+        DevExpress.validationEngine.validateGroup("edGroup"); 
+        if ('@Model.Message' != '') {
+            DevExpress.ui.notify('@Html.Raw(Model.Message)', "error", 5500);
+        }
+
+        if (jQuery("[name=EMail]").val() == "")
+            DevExpress.validationEngine.groups[1].validators[0].reset()
+
+        if (jQuery("[name=Password]").val() == "")
+            DevExpress.validationEngine.groups[1].validators[1].reset()
+    }); 
+
+    function changePasswordMode() {
+        var passwordEditor = $("#edPassword").dxTextBox("instance");
+        passwordEditor.option("mode", passwordEditor.option("mode") === "text" ? "password" : "text");
+    }
+    $("#edLoginForm").on("submit", function () {
+        getLoadPanelInstance().show();
+    });//submit
+
+</script>

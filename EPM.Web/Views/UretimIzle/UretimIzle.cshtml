@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "UretimIzle";
+}
+
+
+
+<div id="form-container">
+    <div class="dx-card wide-card">
+        <div style="display:inline-block;float:left;width:200px">
+
+            @Html.Partial("_PartialSeasons")
+        </div>
+
+        <div id="edWeeks" class="list-container" style="display:inline-block;float:left;width:200px"></div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+    function GetWeeks(e) {
+        var data = {
+            SEASON: e.row.data.ID
+        };
+        $.get('@Url.Action("_PartialWeeks", "UretimIzle")', data, function (data) {
+            $("#edWeeks").html("");
+            $("#edWeeks").html(data);
+        });
+    }
+
+</script>

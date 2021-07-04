@@ -1,0 +1,28 @@
+﻿@using EPM.Core.FormModels.UretimIzle;
+
+@model IEnumerable<Weeks>
+
+ 
+@(Html.DevExtreme().DataGrid<Weeks>
+    ().ID("edGridWeeks")
+    .ShowBorders(false)
+     .DataSource(Model,"ID")
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .Height(300)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ShowBorders(true)
+    .Editing(ob => ob.Mode(GridEditMode.Cell).AllowUpdating(true))
+    .AllowColumnResizing(true)
+    .ShowColumnLines(true)
+    .Grouping(os=>os.ContextMenuEnabled(true))
+    .GroupPanel(p=>p.Visible(true))
+    .ShowColumnHeaders(true) 
+    .Sorting(sr=>sr.Mode(GridSortingMode.None))
+    .Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
+    .Columns(columns =>
+    {
+        columns.AddFor(m => m.YEAR).Width(80).AllowEditing(false).AllowGrouping(true).GroupIndex(1);
+        columns.AddFor(m => m.WEEK).Width(100).AllowEditing(false);
+    })
+    )

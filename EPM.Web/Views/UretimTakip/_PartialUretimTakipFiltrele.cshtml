@@ -1,0 +1,75 @@
+﻿
+@model EPM.Core.FormModels.Uretim.UretimOnayliListe
+@using EPM.Core.Models;
+
+
+@{
+    var editable = new EPM.Core.Helpers.MenuHelper().CanUserEditUretim(this.Context);
+}
+
+<div class="dx-card wide-card">
+    @(Html.DevExtreme().DataGrid<EPM.Core.FormModels.UretimTakip.UretimTakipListesi>().ID("edUretimTakipGrid")
+    .ShowBorders(false)
+    .DataSource(
+        ob => ob.Mvc().Controller("UretimTakip")
+        .LoadParams(Model)
+        .LoadAction("UretimTakiplLoad")
+        .Key("ID")
+    )
+    .FilterRow(f => f.Visible(true))
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .ShowBorders(true)
+    .HeaderFilter(a=>a.Visible(true))
+    .Scrolling(ob => ob.Mode(GridScrollingMode.Virtual))
+    .Height("calc(100vh - 150px)")
+    .ColumnChooser(ch=>ch.Enabled(true).Mode(GridColumnChooserMode.Select))
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(60)
+    .AllowColumnResizing(true)
+    .Columns(columns => {
+        if (editable)
+        {
+            columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn => btn.Add().Icon("fa fa-edit").OnClick("EditClicked")); 
+        }
+        columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn => btn.Add().Icon("fa fa-search").OnClick("DetailSearch"));
+        columns.AddFor(m => m.ID).Width(100).AllowEditing(false);
+        columns.AddFor(m => m.TAKIP_NO).Width(120).AllowEditing(false);
+        columns.AddFor(m => m.APPROVAL_STATUS).Visible(false).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetApprovalStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.BRAND).Visible(false).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.SEASON).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.MODEL);
+        columns.AddFor(m => m.COLOR);
+        columns.AddFor(m => m.COLLECTION_TYPE).Visible(false).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetCollectionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.ROYALTY).Visible(false);
+        columns.AddFor(m => m.TEMA).Visible(false);
+        columns.AddFor(m => m.ANA_TEMA).Visible(false);
+        columns.AddFor(m => m.PRODUCT_GROUP).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetProductGroupList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.FABRIC_TYPE).Visible(false).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetFabricList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.PRODUCTION_TYPE).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetProductionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.ORDER_TYPE).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetOrderList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.RECIPE).Width(140).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetRecipeList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.BAND_ID).Visible(false).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.DEADLINE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy");
+        columns.AddFor(m => m.SHIPMENT_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Visible(false);
+        columns.AddFor(m => m.QUANTITY);
+        columns.AddFor(m => m.PROCESS_INFO).Caption("SÜREÇ DURUMU");
+        columns.AddFor(m => m.MUSTBE_STATE).Caption("OLMASI GEREKEN DURUMU");
+    })
+    .Summary(sm =>
+    {
+        sm.TotalItems(t =>
+        {
+        t.AddFor(ob => ob.MODEL).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
+            t.AddFor(ob => ob.QUANTITY).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+        });
+    })
+    .OnCellPrepared("edUretimTakipGridCellPrepared")
+    )
+</div>
+<script>
+
+</script>

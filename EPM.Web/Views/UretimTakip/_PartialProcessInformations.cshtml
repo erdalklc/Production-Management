@@ -1,0 +1,31 @@
+﻿@model int[];
+
+ 
+@(Html.DevExtreme().DataGrid<EPM.Core.FormModels.UretimTakip.SurecBilgileri> ().ID("edgridProcessInformations")
+    .ShowBorders(false)
+    .DataSource(
+        ob=>ob.Mvc().Controller("UretimTakip")
+        .LoadAction("GetProcessInformations")
+        .LoadParams(new { PO_HEADER_ID = Model[0], DETAIL_ID = Model[1], HEADER_ID = Model[2] })
+        .Key("ID")
+    )
+    .FilterRow(f => f.Visible(true))
+    .FocusedRowEnabled(false)
+    .FocusedRowIndex(0)
+    .Height("calc((100vh / 2) - 100px)")
+    .ColumnAutoWidth(true)
+    .ShowBorders(true)
+    .Selection(a=>a.Mode(SelectionMode.None))
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(30)
+    .Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
+    .Columns(columns => {
+        columns.AddFor(m => m.PROCESS_NAME);
+        columns.AddFor(m => m.STATUS_TEXT);
+        columns.AddFor(m => m.START_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy");
+        columns.AddFor(m => m.END_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy");
+    })
+    .OnRowPrepared("edGridProcessRowPrepared")
+    )
+ 

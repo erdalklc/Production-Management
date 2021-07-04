@@ -1,0 +1,73 @@
+﻿@model int
+
+@{ 
+    bool ormeVisible = true;
+    EPM.Core.Nesneler.EPM_MASTER_PRODUCTION_H header = EPM.Core.Managers.OracleServer.Deserialize<EPM.Core.Nesneler.EPM_MASTER_PRODUCTION_H>(Model);
+    if (header.PRODUCTION_TYPE == 1 && header.FABRIC_TYPE == 1)
+        ormeVisible = true;
+    else ormeVisible = false;
+}
+
+<div class="dx-card wide-card">
+    <div style="width:calc(100% - 305px);display:inline-block;float:left">
+        @(Html.DevExtreme().DataGrid<EPM.Core.FormModels.UretimTakip.SatinAlmaDetay> ().ID("edgridSatinAlmaDetay")
+    .ShowBorders(false)
+    .DataSource(
+        ob=>ob.Mvc().Controller("UretimTakip")
+        .LoadAction("SatinAlmaDetayGetir")
+        .LoadParams(new { HEADER_ID = Model })
+        .Key("DETAIL_TAKIP_NO")
+    )
+    .FilterRow(f => f.Visible(true))
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .Height("calc((100vh / 2) - 100px)")
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .ShowBorders(true) 
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true) 
+    .ColumnMinWidth(30)
+    .Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
+    .Columns(columns => {
+        columns.AddFor(m => m.PO_HEADER_ID);
+        columns.AddFor(m => m.TAKIP_NO);
+        columns.AddFor(m => m.DETAIL_TAKIP_NO);
+        columns.AddFor(m => m.FIRMA).Width(250);
+        columns.AddFor(m => m.AGENT_NAME).Width(110);
+        columns.AddFor(m => m.CREATION_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Width(110);
+        columns.AddFor(m => m.URUN).Width(200);
+        columns.AddFor(m => m.KALEM).Width(80);
+        columns.AddFor(m => m.MODELDETAY).Width(80);
+        columns.AddFor(m => m.RENKDETAY).Width(80);
+        columns.AddFor(m => m.BIRIM).Width(80);
+        columns.AddFor(m => m.BIRIM_FIYAT).Width(80);
+        columns.AddFor(m => m.TEDARIK).Width(80);
+        columns.AddFor(m => m.TUTAR).Width(80);
+    }).OnFocusedRowChanged("gridSatinAlmaFocusedRowChanged")
+    )
+    </div>
+    <div style="width:300px;display:inline-block;float:right" id="edProcessInformations">
+
+    </div>
+</div>
+
+@(Html.DevExtreme().TabPanel().ID("edDetailTabs")
+    .Loop(false)
+    .AnimationEnabled(true)
+    .SwipeEnabled(true)
+    .DeferRendering(false)
+    .ActiveStateEnabled(true)
+    .Items(itm =>
+    {
+        if (ormeVisible)
+        {
+            itm.Add().Title("ÖRME").Html("<div id='edOrmeTab'>ÖRME DETAY</div>");
+        }
+        itm.Add().Title("KUMAŞ DEPO").Html("<div id='edKumasDepoTab'>KUMAŞ DEPO DETAY</div>");
+        itm.Add().Title("KESİM - TASNİF").Html("<div id='edKesimTab'>KESİ DETAY</div>");
+        itm.Add().Title("BANT").Html("<div id='edBantTab'>BANT DETAY</div>");
+        itm.Add().Title("KALİTE").Html("<div id='edKaliteTab'>KALİTE DETAY</div>");
+    })
+
+)

@@ -1,0 +1,220 @@
+﻿
+@using EPM.Core.FormModels.Uretim; 
+@model UretimOnayliListe
+
+ 
+<div id="form-container">
+    <div class="dx-card wide-card">
+        @(Html.DevExtreme().Form<EPM.Core.FormModels.Uretim.UretimOnayliListe>()
+        .ID("edOnayliListe").ShowValidationSummary(true)
+        .ColCount(8)
+        .Items(items =>
+        {
+
+            items.AddSimpleFor(m => m.BRAND).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimpleFor(m => m.SEASON).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimpleFor(m => m.MODEL).Editor(ob=>ob.TextBox().ID("edModel")).IsRequired(false);
+            items.AddSimpleFor(m => m.COLOR).Editor(ob=>ob.TextBox().ID("edColor")).IsRequired(false);
+            items.AddSimpleFor(m => m.ORDER_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetOrderList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimpleFor(m => m.PRODUCTION_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetProductionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimpleFor(m => m.FABRIC_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetFabricList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddButton().HorizontalAlignment(HorizontalAlignment.Left).VerticalAlignment(VerticalAlignment.Center)
+                   .ButtonOptions(b => b.Text("FİLTRELE")
+                       .Type(ButtonType.Default)
+                       .Icon("fas fa-sign-in-alt")
+                       .Width("100%")
+                       .OnClick("UretimOnayliFiltrele")
+                       .UseSubmitBehavior(true)
+               );
+
+        })
+        .FormData(Model).ShowValidationSummary(false)
+    )
+
+
+    </div>
+</div>
+
+<div id="form-container">
+    <div class="dx-card wide-card">
+        <div id="edReport" style="height:calc(100vh - 150px)">
+        </div>
+    </div>
+</div>
+<script>
+
+    var datax = null;
+    function UretimOnayliFiltrele() {
+        var data = {
+            BRAND: jQuery("[name=BRAND]").val(),
+            SEASON: jQuery("[name=SEASON]").val(),
+            MODEL: jQuery("[name=MODEL]").val(),
+            COLOR: jQuery("[name=COLOR]").val(),
+            ORDER_TYPE: jQuery("[name=ORDER_TYPE]").val(),
+            PRODUCTION_TYPE: jQuery("[name=PRODUCTION_TYPE]").val(),
+            FABRIC_TYPE: jQuery("[name=FABRIC_TYPE]").val(),
+        };
+        getLoadPanelInstance().show();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("_PartialGetPlanList", "UretimPlan")',
+            data: data,
+            contentType: 'application/x-www-form-urlencoded',
+            async: true,
+            success: function (income, status, xmlRequest) {
+                var formData = JSON.parse(income).DATA;
+                var YEARS = JSON.parse(income).YEARS;
+                var COLUMNNAMES = JSON.parse(income).COLUMNNAMES;
+                $("#edReport").dxDataGrid({
+                    dataSource: formData,
+                    keyExpr: "ROW_ID",
+                    loadPanel: {
+                        enabled: true
+                    },
+                    remoteOperations: false,
+                    scrolling: {
+                        mode: 'virtual'
+                    },
+                    sorting: {
+                        mode: "multiple"
+                    },
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    headerFilter: { visible: true },
+                    editing: {
+                        mode: "cell",
+                        allowUpdating: true
+                    }, columnChooser: {
+                        enabled: true
+                    }, customizeColumns: function (columns) {
+                        for (var i = 0; i < YEARS.length; i++) {
+                            columns.push({
+                                caption: YEARS[i].YEAR,
+                                isBand: true
+                            });
+                            for (var a = 0; a < columns.length - 1; a++) {
+                                if (a < 16) {
+                                    columns[a].fixed = true;
+                                    columns[a].allowEditing = false;
+                                }
+                                if (columns[a].dataField == "ID" || columns[a].dataField == "PRODUCT_GROUP" || columns[a].dataField == "MARKET_ID" || columns[a].dataField == "FABRIC_TYPE" || columns[a].dataField == "ROW_ID") {
+                                    columns[a].visible = false;
+                                }
+                                else if (columns[a].dataField == "MARKET") {
+                                    columns[a].width = 100;
+                                }
+                                else if (columns[a].dataField == "DEADLINE") {
+                                    columns[a].width = 100;
+                                    columns[a].dataType = "date";
+                                }
+                                else if (columns[a].dataField == "PLANSIZ_ADET" || columns[a].dataField == "URETIM_ADET" || columns[a].dataField == "PLANLANAN_ADET") {
+                                    columns[a].dataType = "number";
+                                }
+                                if (columns[a].dataField == "PLANLANAN_ADET") {
+                                    columns[a].calculateCellValue = function (rowData) {
+                                        var top = 0;
+                                        for (var m = 0; m < COLUMNNAMES.length; m++) {
+                                            if (rowData[COLUMNNAMES[m].NAME])
+                                                top += rowData[COLUMNNAMES[m].NAME];
+                                        }
+                                        rowData.PLANLANAN_ADET = parseFloat(top);
+                                        return rowData.PLANLANAN_ADET;
+                                    }
+                                }
+                                if (columns[a].dataField == "PLANSIZ_ADET") {
+                                    columns[a].calculateCellValue = function (rowData) {
+                                        rowData.PLANSIZ_ADET = rowData.URETIM_ADET - rowData.PLANLANAN_ADET;
+                                        return rowData.PLANSIZ_ADET;
+                                    }
+                                }
+                                try {
+                                    if (columns[a].dataField.startsWith(YEARS[i].YEAR)) {
+                                        columns[a].summary = {
+                                            totalItems: [{
+                                                column: "2021",
+                                                summaryType: "sum",
+                                                alignment: "center",
+                                                displayFormat: "TOP: {0}"
+                                            }]
+                                        };
+                                        columns[a].ownerBand = columns.length - 1;
+                                        columns[a].dataType = "number";
+                                        columns[a].allowFiltering = false;
+                                        columns[a].caption = columns[a].dataField.replace(YEARS[i].YEAR + '_', '') + ".HAFTA";
+
+
+                                    } else {
+
+                                    }
+                                } catch (e) {
+
+                                }
+                            }
+                        }
+                    },
+                    onRowUpdating: function (e) {
+                        var package = {
+                            new: null, old:null
+                        };
+                        package.newValue = e.newData;
+                        package.oldValue = e.oldData;
+                        var d = $.Deferred();
+                        var settings = {
+                            "async": false,
+                            "url": "@Url.Action("UpdateTask", "UretimPlan")",
+                            "method": "POST",
+                            "timeout": 0,
+                            "headers": {
+                                "Content-Type": "application/json"
+                            },
+                            "data": JSON.stringify(package),
+                        };
+                        $.ajax(settings).done(function (response) {
+                            try {
+                                var parsedIncome = response;
+                                if (parsedIncome.isOK) {
+                                    d.resolve();
+                                } else {
+                                    d.reject(parsedIncome.errorText);
+                                }
+                            } catch (e) {
+
+                                d.reject("İşlem hatası :" + e.message);
+                            }
+
+                        }).fail(function (jqXHR, textStatus) {
+                            d.reject("Kayıt Hatası : " + textStatus);
+                        });
+                        e.cancel = d.promise();
+                    },
+                    focusedRowEnabled: true,
+                    focusedRowIndex: 0,
+                    focusedColumnIndex: 0 ,
+                    showColumnLines: true,
+                    showRowLines: true,
+                    rowAlternationEnabled: true,
+                    showBorders: true,
+                    onContentReady: function (e) {
+                    },
+                    onCellDblClick: function (e) {
+                        e.component.cellValue(e.rowIndex, e.columnIndex, e.data["PLANSIZ_ADET"]);
+                        e.component.saveEditData();
+
+                    },
+                    columnMinWidth: 80,
+                    showBorders: true,
+                }).dxDataGrid("instance");
+
+
+            }
+            , beforeSend: function () { 
+            }
+
+
+        }).always(function () {
+            getLoadPanelInstance().hide();
+        });
+    }
+</script>

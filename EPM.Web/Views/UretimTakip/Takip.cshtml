@@ -1,0 +1,188 @@
+﻿@using EPM.Core.FormModels.Uretim; 
+@model UretimOnayliListe
+
+
+<div id="form-container">
+    <div class="dx-card wide-card">
+        @(Html.DevExtreme().Form<EPM.Core.FormModels.Uretim.UretimOnayliListe>()
+        .ID("edOnayliListe").ShowValidationSummary(true)
+        .ColCount(9)
+        .Items(items =>
+        {
+
+            items.AddSimpleFor(m => m.BRAND).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimpleFor(m => m.SEASON).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimpleFor(m => m.MODEL).Editor(ob=>ob.TextBox().ID("edModel")).IsRequired(false);
+            items.AddSimpleFor(m => m.COLOR).Editor(ob=>ob.TextBox().ID("edColor")).IsRequired(false);
+            items.AddSimpleFor(m => m.ORDER_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetOrderList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimpleFor(m => m.RECIPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetRecipeList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimpleFor(m => m.PRODUCTION_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetProductionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimpleFor(m => m.FABRIC_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetFabricList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddButton().HorizontalAlignment(HorizontalAlignment.Left).VerticalAlignment(VerticalAlignment.Center)
+                   .ButtonOptions(b => b.Text("FİLTRELE")
+                       .Type(ButtonType.Default)
+                       .Icon("fas fa-sign-in-alt")
+                       .Width("100%")
+                       .OnClick("UretimTakipFiltrele")
+                       .UseSubmitBehavior(true)
+               );
+
+        })
+        .FormData(Model).ShowValidationSummary(false)
+    )
+        <div id="popup"></div>
+        <div id="popupDetay"></div>
+        <div id="edListe">
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function UretimTakipFiltrele() {
+        $("#edListe").html("");
+        var data = {
+            BRAND: jQuery("[name=BRAND]").val(),
+            SEASON: jQuery("[name=SEASON]").val(),
+            MODEL: jQuery("[name=MODEL]").val(),
+            COLOR: jQuery("[name=COLOR]").val(),
+            ORDER_TYPE: jQuery("[name=ORDER_TYPE]").val(),
+            PRODUCTION_TYPE: jQuery("[name=PRODUCTION_TYPE]").val(),
+            FABRIC_TYPE: jQuery("[name=FABRIC_TYPE]").val(),
+            RECIPE: jQuery("[name=RECIPE]").val(),
+        };
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("_PartialUretimTakipFiltrele", "UretimTakip")',
+            data: data,
+            contentType: 'application/x-www-form-urlencoded',
+            timeout: 180000,
+            success: function (income, status, xmlRequest) {
+                $("#edListe").html(income);
+
+            }, beforeSend: function () {
+                getLoadPanelInstance().show();
+            }
+
+
+        }).always(function () {
+            getLoadPanelInstance().hide();
+        });
+    }
+
+    function EditClicked(e) {
+        var header_id = e.row.data.ID;
+        tempHeaderId = header_id;
+        var popupOptions = {
+            width: 420,
+            height: 320,
+            contentTemplate: function () {
+                var data = {
+                    HEADER_ID: tempHeaderId
+                };
+                return  $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("_PartialProductionOrderList", "UretimTakip")',
+                    data: data,
+                    async: false,
+                    success: function (status) {
+                    }
+                }).responseText;
+            },
+            showTitle: true,
+            title: "SATIN ALMA SİPARİŞ BAĞLANTISI",
+            dragEnabled: false,
+            closeOnOutsideClick: true
+        };
+
+        $("#popup").dxPopup(popupOptions).dxPopup("instance").show();
+    }
+    var tempHeaderId = 0;
+    function DetailSearch(e) {
+        var header_id = e.row.data.ID;
+        tempHeaderId = header_id;
+        var header_id = e.row.data.ID;
+        tempHeaderId = header_id;
+        var popupOptions = {
+            contentTemplate: function () {
+                var data = {
+                    HEADER_ID: tempHeaderId
+                };
+                return  $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("_PartialUretimTakipSatinAlmaDetayi", "UretimTakip")',
+                    data: data,
+                    async: false,
+                    success: function (status) {
+                    }
+                }).responseText;
+            },
+            width: function () { return "calc(100% - 20px)"; },
+            height: function () { return "calc(100% - 10px)"; },
+            showTitle: true,
+            title: "SATIN ALMA DETAYI",
+            dragEnabled: true,
+            closeOnOutsideClick: true
+        };
+
+        $("#popupDetay").dxPopup(popupOptions).dxPopup("instance").show();
+    }
+
+    function InitProductionOrders(e) {
+        e.data.HEADER_ID = tempHeaderId;
+    }
+
+    function gridSatinAlmaFocusedRowChanged(e) {
+        console.log(e.row.data);
+        setTimeout(function () {
+            $("#edProcessInformations").load('@Url.Action("_PartialProcessInformations", "UretimTakip")', {
+                PO_HEADER_ID: e.row.data.PO_HEADER_ID,
+                HEADER_ID: e.row.data.HEADER_ID,
+                DETAIL_ID: e.row.data.DETAIL_TAKIP_NO
+            });
+
+
+            $("#edOrmeTab").load('@Url.Action("_PartialEgemenOrmeList", "UretimTakip")', {
+                TAKIP_NO: e.row.data.TAKIP_NO,
+                DETAIL_TAKIP_NO: e.row.data.DETAIL_TAKIP_NO
+            });
+
+            $("#edKumasDepoTab").load('@Url.Action("_PartialKumasDepoList", "UretimTakip")', {
+                ITEM_ID: e.row.data.ITEM_ID,
+                PO_HEADER_ID: e.row.data.PO_HEADER_ID
+            });
+            $("#edKesimTab").load('@Url.Action("_PartialKesimFoyuList", "UretimTakip")', {
+                ITEM_ID: e.row.data.ITEM_ID,
+                PO_HEADER_ID: e.row.data.PO_HEADER_ID,
+                RENK_DETAY: e.row.data.RENKDETAY,
+            });
+            $("#edBantTab").load('@Url.Action("_PartialBantList", "UretimTakip")', {
+                ITEM_ID: e.row.data.ITEM_ID,
+                PO_HEADER_ID: e.row.data.PO_HEADER_ID,
+                RENK_DETAY: e.row.data.RENKDETAY,
+            });
+            $("#edKaliteTab").load('@Url.Action("_PartialKaliteList", "UretimTakip")', {
+                ITEM_ID: e.row.data.ITEM_ID,
+                PO_HEADER_ID: e.row.data.PO_HEADER_ID,
+                RENK_DETAY: e.row.data.RENKDETAY,
+            });
+        }, 200);
+
+
+    }
+    function edGridProcessRowPrepared(e) {
+        if (e.rowType != "data")
+            return;
+        e.rowElement.css('backgroundColor', e.data.COLOR);
+    }
+    function edUretimTakipGridCellPrepared(e) {
+        if (e.rowType != "data")
+            return;
+        if (e.column.dataField == 'END_DATE' || e.column.dataField == 'PROCESS_INFO' || e.column.dataField == 'MUSTBE_STATE') {
+
+            e.cellElement.css('backgroundColor', e.data.BACKGROUND_COLOR);
+        }
+    }
+
+</script>

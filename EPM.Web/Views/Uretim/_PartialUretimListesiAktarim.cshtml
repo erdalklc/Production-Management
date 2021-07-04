@@ -1,0 +1,60 @@
+﻿<div id="fileuploader">
+    <div class="widget-container">
+        @(Html.DevExtreme().FileUploader()
+            .ID("file-uploader")
+            .Name("myFile")
+            .Multiple(false)
+            .Accept(".xlsx").LabelText("Yada Excel Dosyasını Sürükleyip Bırakınız")
+            .UploadMode(FileUploadMode.Instantly)
+            .UploadUrl(Url.Action("UretimListesiAktarExcelYukle", "Uretim"))
+            .OnValueChanged("fileUploader_valueChanged")
+            .SelectButtonText("DOSTA SEÇİNİZ")
+            .UploadButtonText("Yükle")
+            .UploadedMessage("Dosys Başarıyla Yüklendi. İşlemler Tamamlandığında Tarafınıza Mail Bilgilendirmesi Yapılacaktır.") 
+            .OnUploadError("uploadError")
+            .OnUploadAborted("uploadError") 
+        )
+        <div class="content" id="selected-files">
+            <div>
+                <h4>Selected Files</h4>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function uploadError(e) {
+        console.log(e.file.name);
+        console.log(e.request.responseText);
+        setTimeout(function () {
+            var $file = e.element.find(".dx-fileuploader-file:contains('" + e.file.name + "')");
+            $file.find(".dx-fileuploader-file-status-message").text("Error: " + e.request.responseText);
+        }, 400);
+    }
+    function getFileUploaderInstance() {
+        return $("#file-uploader").dxFileUploader("instance");
+    }
+
+    function fileUploader_valueChanged(e) {
+        var files = e.value;
+        if (files.length > 0) {
+            $("#selected-files .selected-item").remove();
+
+            $.each(files, function (i, file) {
+                var $selectedItem = $("<div />").addClass("selected-item");
+                $selectedItem.append(
+                    $("<span />").html("Name: " + file.name + "<br/>"),
+                    $("<span />").html("Size " + file.size + " bytes" + "<br/>"),
+                    $("<span />").html("Type " + file.type + "<br/>"),
+                    $("<span />").html("Last Modified Date: " + file.lastModifiedDate)
+                );
+                $selectedItem.appendTo($("#selected-files"));
+            });
+            $("#selected-files").show();
+        }
+        else
+            $("#selected-files").hide();
+    }
+
+</script>

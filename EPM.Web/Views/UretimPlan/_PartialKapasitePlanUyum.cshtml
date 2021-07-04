@@ -1,0 +1,71 @@
+﻿@{ 
+    int[] years = { DateTime.Now.Year - 1, DateTime.Now.Year, DateTime.Now.Year + 1 };
+} 
+<div class="dx-card wide-card">
+    @(Html.DevExtreme().Form()
+        .ID("edFilter").ShowValidationSummary(true)
+        .ColCount(8)
+        .Items(items =>
+        {
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddSimple().Editor(ob => ob.Lookup().Name("edProductGroup").OnSelectionChanged("RefreshChart").DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimple().Editor(ob => ob.Lookup().Name("edYear").OnSelectionChanged("RefreshChart").DataSource(d => d.Array().Data(years)));
+            items.AddEmpty();
+            items.AddEmpty(); 
+            items.AddEmpty();
+
+        })
+        .FormData(Model).ShowValidationSummary(false)
+    )
+
+
+</div>
+<div class="dx-card wide-card">
+    <div style="width:87%;max-width:100%">
+        @(Html.DevExtreme().Chart()
+    .ID("edChart")
+    .CommonSeriesSettings(s => s
+        .ArgumentField("WEEK")
+        .Type(SeriesType.Bar)
+        .HoverMode(ChartSeriesHoverMode.AllArgumentPoints)
+        .SelectionMode(ChartSeriesSelectionMode.AllArgumentPoints)
+
+    )
+    .RedrawOnResize(true)
+    .AdjustOnZoom(true)
+    .Series(s =>
+    {
+        s.Add().ValueField("QUANTITY").Name("QUANTITY");
+        s.Add().ValueField("CAPACITY").Name("CAPACITY");
+    })
+    .Legend(l => l
+        .VerticalAlignment(VerticalEdge.Bottom)
+        .HorizontalAlignment(HorizontalAlignment.Center)
+        .ItemTextPosition(Position.Top)
+    ).ArgumentAxis(a => a.Type(AxisScaleType.Discrete)
+       .VisualRange(range => range.StartValue(1).EndValue(54))
+    )
+    .DataSource(ob=>
+        ob.Mvc()
+        .Controller("UretimPlan")
+        .LoadAction("KapasitePlanUyumLoad")
+        .LoadParams(new { YEAR = new JS("GetYear"), BAND_GROUP = new JS("GetGroup") })
+        )
+)
+    </div>
+</div>
+
+<script>
+   
+    function GetYear() { 
+        return jQuery("[name=edYear]").val();
+    }
+    function RefreshChart() {
+        $("#edChart").dxChart("getDataSource").reload();
+    }
+    function GetGroup() { 
+        return jQuery("[name=edProductGroup]").val();
+    }
+</script>

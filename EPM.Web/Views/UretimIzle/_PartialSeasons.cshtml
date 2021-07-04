@@ -1,0 +1,26 @@
+﻿
+ 
+@(Html.DevExtreme().DataGrid<EPM.Core.Nesneler.EPM_PRODUCTION_BRANDS>
+    ().ID("edGridSeason")
+    .ShowBorders(false)
+     .DataSource(
+         d => d.Mvc().Controller("Uretim").LoadAction("GetSeasonList").Key("ID")
+        )
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .Height(300)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ShowBorders(true)
+    .Editing(ob => ob.Mode(GridEditMode.Cell).AllowUpdating(true))
+    .AllowColumnResizing(true)
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true) 
+    .OnFocusedRowChanged("GetWeeks") 
+    .Sorting(sr=>sr.Mode(GridSortingMode.None))
+    .Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
+    .Columns(columns =>
+    {
+        columns.AddFor(m => m.ID).AllowEditing(false).Visible(false);
+        columns.AddFor(m => m.ADI).AllowEditing(false);
+    })
+    )

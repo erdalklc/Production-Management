@@ -1,0 +1,43 @@
+﻿@model object[];
+@(Html.DevExtreme().DataGrid<EPM.Core.FormModels.UretimTakip.KesimFoyleri>().ID("edKesimFoyuList")
+    .ShowBorders(false)
+    .DataSource(
+        ob => ob.Mvc().Controller("UretimTakip")
+        .LoadParams(new { ITEM_ID = Model[0], PO_HEADER_ID = Model[1], RENK_DETAY = Model[2] })
+        .LoadAction("KesimFoyuListLoad")
+        .Key("IS_EMRI_ID")
+    )
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .ShowBorders(true)
+    .Scrolling(ob => ob.Mode(GridScrollingMode.Virtual))
+    .Height("calc((100vh / 2) - 100px)")
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(60)
+    .Summary(sm =>
+    {
+        sm.TotalItems(it =>
+        {
+            it.AddFor(ob => ob.PLANLANAN_KESIM).SummaryType(SummaryType.Sum);
+            it.AddFor(ob => ob.FIILI_KESIM).SummaryType(SummaryType.Sum);
+            it.AddFor(ob => ob.TASNIF_MIKTARI).SummaryType(SummaryType.Sum);
+        });
+    })
+    .Columns(cl =>
+    { 
+        cl.AddFor(m => m.IS_EMRI_NO).Width(120);
+        cl.AddFor(m => m.SEZON_BILGISI).Width(100);
+        cl.AddFor(m => m.WIP_ENTITY_NAME).Width(100);
+        cl.AddFor(m => m.MODEL).Width(70);
+        cl.AddFor(m => m.MAMUL_RENGI).Caption("COLOR").Width(100);
+        cl.AddFor(m => m.BEDEN).Caption("SIZE").Width(100);
+        cl.AddFor(m => m.DEGERLENDIRME).Width(150);
+        cl.AddFor(m => m.PLANLANAN_KESIM).Width(100);
+        cl.AddFor(m => m.FIILI_KESIM).Width(100);
+        cl.AddFor(m => m.TASNIF_MIKTARI).Width(100);
+    })
+
+    ) 

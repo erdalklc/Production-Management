@@ -1,0 +1,13 @@
+﻿@(Html.DevExtreme().TabPanel().ID("edAyarlarTab")
+    .Loop(false)
+    .AnimationEnabled(true)
+    .SwipeEnabled(true)
+    .DeferRendering(false)
+    .ActiveStateEnabled(true)
+    .Items(itm =>
+    {
+        itm.Add().Title("KULLANICI YETKİLERİ").Html("<div id='edKullaniciYetkiTab'></div>");
+        itm.Add().Title("ÜRETİM SÜREÇLERİ").Html("<div id='edUretimSurecTab'></div>");
+    })
+
+)

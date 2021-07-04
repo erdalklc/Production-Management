@@ -1,0 +1,143 @@
+﻿
+@{
+    string[] allowed = new string[] { ".xlsx", ".xls" };
+}
+<div class="widget-container">
+    @(Html.DevExtreme().FileUploader()
+            .ID("file-uploader")
+            .Name("myFile")
+            .Multiple(false)
+            .InvalidFileExtensionMessage("Dosya tipi desteklenmiyor")
+            .AllowedFileExtensions(allowed).LabelText("Yada Excel Dosyasını Sürükleyip Bırakınız")
+            .UploadMode(FileUploadMode.Instantly)
+            .UploadUrl(Url.Action("SatinAlmaListesiAktarExcelYukle", "SatinAlma"))
+            //.OnValueChanged("fileUploader_valueChanged")
+            .SelectButtonText("DOSYA SEÇİNİZ")
+            .UploadButtonText("Yükle")
+            .UploadedMessage("Şablon Başarıyla Yüklendi")
+            .UploadFailedMessage("Dosya Yüklenemedi")
+            .OnUploaded("FilesUploaded")
+            .OnUploadError("FailedUpload")
+    )
+    @(Html.DevExtreme().Form()
+    .ColCount(1)
+    .ID("edSatinAlmaUploadForm")
+    .Visible(false)
+    .Items(items =>
+    {
+        items.AddSimple().Editor(ob => ob.DateBox()
+              .Name("ED_TERMIN")
+              .ID("ED_TERMIN")
+              .Value(DateTime.Now)
+              .ValidationMessageMode(ValidationMessageMode.Always))
+              .IsRequired(true)
+              .Label(lbl => lbl.Text("TERMİN"));
+        items.AddSimple().Editor(ob => ob.Lookup()
+            .Name("ED_INVENTORIES")
+            .ID("ED_INVENTORIES")
+            .ValidationMessageMode(ValidationMessageMode.Always)
+                .SearchEnabled(true)
+                .ID("ED_INVENTORIES")
+                .DataSource(ob => ob.Mvc()
+                .Controller("SatinAlma")
+                .LoadAction("GetInventories")
+                .Key("CODE"))
+                .DisplayExpr("CODE")
+                .ValueExpr("CODE"))
+                .IsRequired(true)
+                    .Label(lbl => lbl.Text("STOK YERİ"));
+        items.AddSimple().Editor(ob => ob.Lookup()
+            .Name("ED_VENDOR").ValidationMessageMode(ValidationMessageMode.Always)
+            .ID("ED_VENDOR")
+            .SearchEnabled(true)
+            .OnSelectionChanged("VendorSelectionChanged")
+            .DataSource(ob => ob.Mvc()
+            .Controller("SatinAlma")
+            .LoadAction("GetVendorList")
+            .Key("VENDOR_SITE_ID"))
+            .DisplayExpr("VENDOR_NAME")
+            .ValueExpr("VENDOR_SITE_ID"))
+            .IsRequired(true)
+            .Label(lbl => lbl.Text("Tedarikçi"));
+        items.AddSimple().Editor(ob => ob.Lookup()
+            .Name("ED_PB")
+            .ID("ED_PB").ValidationMessageMode(ValidationMessageMode.Always)
+            .SearchEnabled(true)
+            .DataSource(ob => ob.Mvc()
+            .Controller("SatinAlma")
+            .LoadAction("GetParaBirimleriList")
+            .OnBeforeSend("ParaBirimiBeforeSend")
+            .Key("CURRENCY_CODE"))
+            .DisplayExpr("CURRENCY_CODE")
+            .ValueExpr("CURRENCY_CODE")).IsRequired(true)
+            .Label(lbl => lbl.Text("PARA BİRİMİ"));
+
+        items.AddButton().ButtonOptions(ob => ob.Text("AKTAR").Width("100%").OnClick("SatinAlmaAktar").UseSubmitBehavior(true).Type(ButtonType.Default));
+
+    }
+    ))
+
+
+</div>
+
+<script>
+    var uploadOK = false;
+    function FilesUploaded(e) {
+        uploadOK = true;
+        $("#edSatinAlmaUploadForm").dxForm("instance").option("visible", true)
+    }
+    function FailedUpload(e) {
+        e.message += " " + e.error.responseText;
+        uploadOK = false; $("#edSatinAlmaUploadForm").dxForm("instance").option("visible", false);
+    }
+    function SatinAlmaAktar() {
+        if (uploadOK) {
+
+            if ($("#edSatinAlmaUploadForm").dxForm("instance").validate().isValid) {
+                var data = {
+                    "STOK_YERI": $("#ED_INVENTORIES").data("dxLookup").option("value"),
+                    "TEDARIK": $("#ED_VENDOR").data("dxLookup").option("value"),
+                    "PB": $("#ED_VENDOR").data("dxLookup").option("value"),
+                    "TERMIN": $("#ED_TERMIN").data("dxDateBox").option("value"),
+                }; 
+                var settings = {
+                    "async": false,
+                    "url": "@Url.Action("SatinAlmaListesiAktar", "SatinAlma")",
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "data": JSON.stringify(data),
+                };
+                $.ajax(settings).done(function (response) { 
+                }).fail(function (jqXHR, textStatus) {
+                });
+            } else {
+
+                DevExpress.ui.notify("Lütfen tüm bilgileri seçiniz", "warning");
+            }
+
+        } else {
+            DevExpress.ui.notify("Lütfen oluşturulacak satın alma formu için excel dosyasını yükleyiniz", "warning");
+        }
+    }
+    function VendorSelectionChanged(e) {
+        $("#ED_PB").data("dxLookup").getDataSource().reload();
+        @*var fileUploader = $("#file-uploader").dxFileUploader("instance");
+        var url = '@Url.Action("SatinAlmaListesiAktarExcelYukle", "SatinAlma")' + '?VENDOR_SITE_ID=' + $("#ED_VENDOR").data("dxLookup").option("value");
+        fileUploader.option('uploadUrl', url);
+        console.log(url);*@
+    }
+    function ParaBirimiBeforeSend(method, ajaxOptions) {
+        var data = {
+            "VENDOR_SITE_ID": $("#ED_VENDOR").data("dxLookup").option("value")
+        };
+        ajaxOptions.data = data;
+    }
+
+    function getFileUploaderInstance() {
+        return $("#file-uploader").dxFileUploader("instance");
+    }
+
+</script>

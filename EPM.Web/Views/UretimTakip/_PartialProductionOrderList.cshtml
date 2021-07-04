@@ -1,0 +1,36 @@
+﻿@model int
+@using EPM.Core.Models;
+
+<div class="dx-card wide-card">
+    @(Html.DevExtreme().DataGrid<EPM.Core.Nesneler.EPM_MASTER_PRODUCTION_ORDERS> ().ID("edgridOrderList")
+    .ShowBorders(false)
+    .DataSource(
+        ob=>ob.Mvc().Controller("UretimTakip")
+        .LoadParams(Model)
+        .LoadAction("ProductionOrderslLoad")
+        .InsertAction("ProductionOrdersInsert")
+        .UpdateAction("ProductionOrdersUpdate")
+        .DeleteAction("ProductionOrdersDelete")
+        .LoadParams(new { HEADER_ID = Model })
+        .Key("ID")
+    )
+    .FilterRow(f => f.Visible(true))
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .ShowBorders(true)
+    .Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
+    .Editing(ob => ob.Mode(GridEditMode.Cell).AllowUpdating(true).AllowDeleting(true).AllowAdding(true))
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true) 
+    .ColumnMinWidth(30) 
+    .Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
+    .Columns(columns => {
+        columns.AddFor(m => m.ID).Width(60).AllowEditing(false);
+        columns.AddFor(m => m.HEADER_ID).Width(110).AllowEditing(false);
+        columns.AddFor(m => m.TAKIP_NO).Width(110).AllowEditing(true);
+    })
+    .OnInitNewRow("InitProductionOrders")
+    )
+</div>

@@ -1,0 +1,21 @@
+﻿@model int;
+@(Html.DevExtreme().DataGrid<EPM.Core.Loglar.LOG_EPM_MASTER_PRODUCTION_D>
+    ().ID("edBantBitisList")
+    .ShowBorders(false)
+    .DataSource(
+    ob => ob.Mvc().Controller("Uretim")
+    .LoadParams(new { DETAIL_ID = Model})
+    .LoadAction("UretimOnayliDetailLogLoad")
+    .Key("ID")
+    )
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .ShowBorders(true)
+    .Scrolling(ob => ob.Mode(GridScrollingMode.Virtual))
+    .Height("calc((100vh / 2))")
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(60)
+    )

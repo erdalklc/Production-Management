@@ -1,0 +1,52 @@
+﻿
+@model EPM.Core.FormModels.UretimTakip.KaliteGerceklesenFilter
+@using EPM.Core.Models;
+
+<div class="dx-card wide-card">
+    @(Html.DevExtreme().PivotGrid<EPM.Core.FormModels.UretimTakip.KaliteGerceklesen>().ID("edgridHeader")
+    .ShowBorders(false)
+    .DataSource(ob => ob.Store(s => s.Mvc().Controller("UretimTakip").LoadParams(Model).LoadAction("EgemenGerceklesenLoad").Key("ID"))
+    .Fields(f =>
+    {
+        f.AddFor(ff => ff.BRAND_NAME).Area(PivotGridArea.Filter).Expanded(true);
+        f.AddFor(ff => ff.SEASON_NAME).Area(PivotGridArea.Column).Expanded(true);
+        f.AddFor(ff => ff.MARKET_NAME).Area(PivotGridArea.Row).Expanded(true);
+        f.AddFor(ff => ff.ORDER_TYPE).Area(PivotGridArea.Filter).Expanded(true);
+        f.AddFor(ff => ff.EXTERNAL_COMPANY).Area(PivotGridArea.Row).Expanded(true);
+        f.AddFor(ff => ff.KESIM_FOYU_NO).Area(PivotGridArea.Filter).Expanded(true);
+        f.AddFor(ff => ff.PRODUCT_GROUP).Area(PivotGridArea.Row).Expanded(true);
+        f.AddFor(ff => ff.FABRIC_TYPE).Area(PivotGridArea.Filter).Expanded(true);
+        f.AddFor(ff => ff.COLLECTION).Area(PivotGridArea.Filter).Expanded(true);
+        f.AddFor(ff => ff.TEMA).Area(PivotGridArea.Filter).Expanded(true);
+        f.AddFor(ff => ff.ANA_TEMA).Area(PivotGridArea.Filter).Expanded(true);
+        f.AddFor(ff => ff.ROYALTY).Area(PivotGridArea.Filter).Expanded(true);
+        f.AddFor(ff => ff.DEADLINE).Area(PivotGridArea.Filter).Expanded(true);
+        f.AddFor(ff => ff.MODEL).Area(PivotGridArea.Row).Expanded(true);
+        f.AddFor(ff => ff.COLOR).Area(PivotGridArea.Row).Expanded(true);
+        f.AddFor(ff => ff.PRODUCT_SIZE).Area(PivotGridArea.Row).Expanded(true);
+        f.AddFor(ff => ff.PLANNED).Area(PivotGridArea.Data)
+                    .SummaryType(SummaryType.Sum)
+                    .Format(Format.FixedPoint);
+        f.AddFor(ff => ff.RELEASED).Area(PivotGridArea.Data)
+                    .SummaryType(SummaryType.Sum)
+                    .Format(Format.FixedPoint);
+
+    }
+    )) 
+    .ShowBorders(true)
+    .Scrolling(ob=>ob.Mode(PivotGridScrollingMode.Virtual))
+    .Height("calc(100vh - 150px)")
+    .AllowSortingBySummary(true)
+        .AllowFiltering(true)
+        .ShowBorders(true)
+        .ShowColumnGrandTotals(false)
+        .ShowRowGrandTotals(true)
+        .ShowRowTotals(false)
+        .ShowColumnTotals(false)
+        .AllowExpandAll(true) 
+        .FieldPanel(p => p.Visible(true))
+        .FieldChooser(c => c.Enabled(true).Height(400))
+    .Export(ob => ob.Enabled(true))
+    )
+</div>
+

@@ -1,0 +1,30 @@
+﻿@model object[];
+@(Html.DevExtreme().DataGrid<EPM.Core.FormModels.UretimTakip.EgemenOrmeSiparis>().ID("edEgemenOrmeSiparis")
+    .ShowBorders(false)
+    .DataSource(
+        ob => ob.Mvc().Controller("UretimTakip")
+        .LoadParams(new { TAKIP_NO = Model[0], DETAIL_TAKIP_NO = Model[1] })
+        .LoadAction("EgemenOrmeListLoad")
+        .Key("GUID")
+    )
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .Height("calc((100vh / 2) - 100px)")
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .ShowBorders(true)
+    .Scrolling(ob => ob.Mode(GridScrollingMode.Virtual))
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(60)
+    .Columns(cl =>
+    {
+        cl.AddFor(m => m.TARIH).Width(100).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy");
+        cl.AddFor(m => m.KULLANICI_ADI).Width(120);
+        cl.AddFor(m => m.URUN_ADI).Width(150);
+        cl.AddFor(m => m.HAREKET_ADI).Width(120);
+        cl.AddFor(m => m.FIRMA_ADI).Width(250);
+        cl.AddFor(m => m.MIKTAR).Width(100);
+        cl.AddFor(m => m.BIRIMID).Width(100);
+    } )
+    ) 

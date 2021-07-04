@@ -1,0 +1,38 @@
+﻿@model object[];
+@(Html.DevExtreme().DataGrid<EPM.Core.FormModels.UretimTakip.BantBitisleri>
+    ().ID("edBantBitisList")
+    .ShowBorders(false)
+    .DataSource(
+    ob => ob.Mvc().Controller("UretimTakip")
+    .LoadParams(new { ITEM_ID = Model[0], PO_HEADER_ID = Model[1], RENK_DETAY = Model[2] })
+    .LoadAction("BantBitisListLoad")
+    .Key("ISEMRIKAYITID")
+    )
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .ShowBorders(true)
+    .Scrolling(ob => ob.Mode(GridScrollingMode.Virtual))
+    .Height("calc((100vh / 2) - 100px)")
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(60)
+    .Summary(sm =>
+    {
+    sm.TotalItems(it =>
+    {
+    it.AddFor(ob => ob.MIKTAR).SummaryType(SummaryType.Sum);
+    });
+    })
+    .Columns(cl =>
+    {
+    cl.AddFor(m => m.PAZARADI).Width(100);
+    cl.AddFor(m => m.MODELADI).Width(100);
+    cl.AddFor(m => m.RENKADI).Width(70);
+    cl.AddFor(m => m.BEDENID).Caption("COLOR").Width(100);
+    cl.AddFor(m => m.BEDENID).Caption("SIZE").Width(100);
+    cl.AddFor(m => m.MIKTAR).Width(100);
+    })
+
+    )
