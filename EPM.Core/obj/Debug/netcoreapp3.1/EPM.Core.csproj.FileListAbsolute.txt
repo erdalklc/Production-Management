@@ -16,3 +16,12 @@ E:\Eren\Eren-Production-Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.csp
 E:\Eren\Eren-Production-Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.AssemblyInfoInputs.cache
 E:\Eren\Eren-Production-Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.AssemblyInfo.cs
 E:\Eren\Eren-Production-Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.csproj.CoreCompileInputs.cache
+E:\Eren\Eren Production Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Core.deps.json
+E:\Eren\Eren Production Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Core.dll
+E:\Eren\Eren Production Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Core.pdb
+E:\Eren\Eren Production Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.csprojAssemblyReference.cache
+E:\Eren\Eren Production Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.AssemblyInfoInputs.cache
+E:\Eren\Eren Production Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.AssemblyInfo.cs
+E:\Eren\Eren Production Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.csproj.CoreCompileInputs.cache
+E:\Eren\Eren Production Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.dll
+E:\Eren\Eren Production Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.pdb
