@@ -97,3 +97,5 @@ D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runt
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\linux\native\libmongocrypt.so
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\osx\native\libmongocrypt.dylib
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win\native\mongocrypt.dll
+E:\Eren\Eren-Production-Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.dll
+E:\Eren\Eren-Production-Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.pdb

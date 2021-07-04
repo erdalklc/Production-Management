@@ -17,6 +17,7 @@ namespace EPM_Web.Controllers
     [ServiceFilter(typeof(AppFilterAttribute), Order = 1)]
     public class HomeController : Controller
     {
+        //Erdal KILIÇ
         private readonly IAyarlarService _ayarlarRepository;
         private readonly IADAccountService _aDARepository;
         public HomeController(IAyarlarService ayarlarRepository, IADAccountService aDARepository)
