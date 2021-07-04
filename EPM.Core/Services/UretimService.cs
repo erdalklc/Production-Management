@@ -238,6 +238,155 @@ namespace EPM.Core.Services
                 }
             }
         }
+
+        public object[] CheckForErrors(HttpRequest request
+            , List<EPM_PRODUCTION_BRANDS> brandList
+            , List<EPM_PRODUCTION_SUB_BRANDS> subBrandList
+            , List<EPM_PRODUCTION_FABRIC_TYPES> fabricTypes
+            , List<EPM_PRODUCTION_MARKET> marketList
+            , List<EPM_PRODUCTION_ORDER_TYPES> orderTypes
+            , List<EPM_PRODUCTION_SEASON> seasonList
+            , List<EPM_PRODUCTION_TYPES> productionTypes
+            , List<EPM_PRODUCT_GROUP> productGroups
+            , List<EPM_PRODUCTION_RECIPE> productionRecipe
+            , List<EPM_PRODUCTION_BAND_GROUP> productionBandGroup)
+        {
+            object[] err = { true, "" };
+            var myFile = request.Form.Files["myFile"];
+            using (var reader = ExcelReaderFactory.CreateReader(myFile.OpenReadStream()))
+            {
+                int i = 0;
+                while (reader.Read())
+                {
+                    if (i == 0)
+                    {
+                        if (reader.GetValue(0).ToStringParse() != "SEASON")
+                            err[1] += "0.Kolon SEASON olmalıdır<br>";
+                        if (reader.GetValue(1).ToStringParse() != "BRAND")
+                            err[1] += "1.Kolon BRAND olmalıdır<br>";
+                        if (reader.GetValue(2).ToStringParse() != "SUB_BRAND")
+                            err[1] += "2.Kolon SUB_BRAND olmalıdır<br>";
+                        if (reader.GetValue(3).ToStringParse() != "MODEL")
+                            err[1] += "3.Kolon MODEL olmalıdır<br>";
+                        if (reader.GetValue(4).ToStringParse() != "COLOR")
+                            err[1] += "4.Kolon COLOR olmalıdır<br>";
+                        if (reader.GetValue(5).ToStringParse() != "PRODUCT_GROUP")
+                            err[1] += "5.Kolon PRODUCT_GROUP olmalıdır<br>";
+                        if (reader.GetValue(6).ToStringParse() != "FABRIC_TYPE")
+                            err[1] += "6.Kolon FABRIC_TYPE olmalıdır<br>";
+                        if (reader.GetValue(7).ToStringParse() != "PRODUCTION_TYPE")
+                            err[1] += "7.Kolon PRODUCTION_TYPE olmalıdır<br>";
+                        if (reader.GetValue(8).ToStringParse() != "ORDER_TYPE")
+                            err[1] += "8.Kolon ORDER_TYPE olmalıdır<br>";
+                        if (reader.GetValue(9).ToStringParse() != "RECIPE")
+                            err[1] += "9.Kolon RECIPE olmalıdır<br>";
+                        if (reader.GetValue(10).ToStringParse() != "DEADLINE")
+                            err[1] += "10.Kolon DEADLINE olmalıdır<br>";
+                        if (reader.GetValue(11).ToStringParse() != "MARKET")
+                            err[1] += "11.Kolon MARKET olmalıdır<br>";
+                        if (reader.GetValue(12).ToStringParse() != "PRODUCT_SIZE")
+                            err[1] += "12.Kolon PRODUCT_SIZE olmalıdır<br>";
+                        if (reader.GetValue(13).ToStringParse() != "QUANTITY")
+                            err[1] += "13.Kolon QUANTITY olmalıdır<br>";
+                        if (reader.GetValue(14).ToStringParse() != "BAND_ID")
+                            err[1] += "14.Kolon BAND_ID olmalıdır<br>";
+                        if (reader.GetValue(15).ToStringParse() != "SHIPMENT_DATE")
+                            err[1] += "15.Kolon SHIPMENT_DATE olmalıdır<br>";
+                        if (reader.GetValue(16).ToStringParse() != "ATTRIBUTE1")
+                            err[1] += "16.Kolon ATTRIBUTE1 olmalıdır<br>";
+                        if (reader.GetValue(17).ToStringParse() != "ATTRIBUTE2")
+                            err[1] += "17.Kolon ATTRIBUTE2 olmalıdır<br>";
+                        if (reader.GetValue(18).ToStringParse() != "ATTRIBUTE3")
+                            err[1] += "18.Kolon ATTRIBUTE3 olmalıdır<br>";
+                        if (reader.GetValue(19).ToStringParse() != "ATTRIBUTE4")
+                            err[1] += "19.Kolon ATTRIBUTE4 olmalıdır<br>";
+                        if (reader.GetValue(20).ToStringParse() != "ATTRIBUTE5")
+                            err[1] += "20.Kolon ATTRIBUTE5 olmalıdır<br>";
+                        if (reader.GetValue(21).ToStringParse() != "ATTRIBUTE6")
+                            err[1] += "21.Kolon ATTRIBUTE6 olmalıdır<br>";
+                        if (reader.GetValue(22).ToStringParse() != "ATTRIBUTE7")
+                            err[1] += "22.Kolon ATTRIBUTE7 olmalıdır<br>";
+                        if (reader.GetValue(23).ToStringParse() != "ATTRIBUTE8")
+                            err[1] += "23.Kolon ATTRIBUTE8 olmalıdır<br>";
+                        if (reader.GetValue(24).ToStringParse() != "ATTRIBUTE9")
+                            err[1] += "24.Kolon ATTRIBUTE9 olmalıdır<br>";
+                        if (reader.GetValue(25).ToStringParse() != "ATTRIBUTE10")
+                            err[1] += "25.Kolon ATTRIBUTE10 olmalıdır<br>";
+                        if (reader.GetValue(26).ToStringParse() != "COLLECTION_TYPE")
+                            err[1] += "26.Kolon COLLECTION_TYPE olmalıdır<br>";
+                        if (reader.GetValue(27).ToStringParse() != "ROYALTY")
+                            err[1] += "27.Kolon ROYALTY olmalıdır<br>";
+                        if (reader.GetValue(28).ToStringParse() != "ANA_TEMA")
+                            err[1] += "28.Kolon ANA_TEMA olmalıdır<br>";
+                        if (reader.GetValue(29).ToStringParse() != "TEMA")
+                            err[1] += "29.Kolon TEMA olmalıdır<br>";
+                        if (reader.GetValue(30).ToStringParse() != "PLAN_YEAR")
+                            err[1] += "30.Kolon PLAN_YEAR olmalıdır<br>";
+                        if (reader.GetValue(31).ToStringParse() != "PLAN_WEEK")
+                            err[1] += "31.Kolon PLAN_WEEK olmalıdır<br>";
+
+                        if (err[1].ToStringParse() != "")
+                            err[0] = false;
+
+                        if (!(bool)err[0])
+                            break;
+                    }
+
+
+                    if (i > 0)
+                    {
+                        if (seasonList.Count(ob => ob.ADI == reader.GetValue(0).ToStringParse()) == 0)
+                        {
+                            err[0] = false;
+                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(0).ToStringParse() + " Bilgisi SEASON Alanında Bulunamadı<br>";
+                        }
+                        if (brandList.Count(ob => ob.ADI == reader.GetValue(1).ToStringParse()) == 0)
+                        {
+                            err[0] = false;
+                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(1).ToStringParse() + " Bilgisi BRAND Alanında Bulunamadı<br>";
+                        }
+                        if (subBrandList.Count(ob => ob.ADI == reader.GetValue(2).ToStringParse()) == 0)
+                        {
+                            err[0] = false;
+                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(2).ToStringParse() + " Bilgisi SUB_BRAND Alanında Bulunamadı<br>";
+                        }
+                        if (productGroups.Count(ob => ob.ADI == reader.GetValue(5).ToStringParse()) == 0)
+                        {
+                            err[0] = false;
+                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(5).ToStringParse() + " Bilgisi PRODUCT_GROUP Alanında Bulunamadı<br>";
+                        }
+                        if (fabricTypes.Count(ob => ob.ADI == reader.GetValue(6).ToStringParse()) == 0)
+                        {
+                            err[0] = false;
+                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(6).ToStringParse() + " Bilgisi FABRIC_TYPE Alanında Bulunamadı<br>";
+                        }
+                        if (productionTypes.Count(ob => ob.ADI == reader.GetValue(7).ToStringParse()) == 0)
+                        {
+                            err[0] = false;
+                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(7).ToStringParse() + " Bilgisi PRODUCTION_TYPE Alanında Bulunamadı<br>";
+                        }
+                        if (orderTypes.Count(ob => ob.ADI == reader.GetValue(8).ToStringParse()) == 0)
+                        {
+                            err[0] = false;
+                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(8).ToStringParse() + " Bilgisi ORDER_TYPE Alanında Bulunamadı<br>";
+                        }
+                        if (productionRecipe.Count(ob => ob.ADI == reader.GetValue(9).ToStringParse()) == 0)
+                        {
+                            err[0] = false;
+                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(9).ToStringParse() + " Bilgisi RECIPE Alanında Bulunamadı<br>";
+                        }
+                        if (marketList.Count(ob => ob.ADI == reader.GetValue(11).ToStringParse()) == 0)
+                        {
+                            err[0] = false;
+                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(11).ToStringParse() + " Bilgisi MARKET Alanında Bulunamadı<br>";
+                        }
+                    }
+                    
+                    i++;
+                }
+            }
+            return err;
+        }
         public object[] UretimListesiAktarExcelYukle(HttpRequest request)
         {
             object[] obj = { true, "" };
@@ -257,6 +406,18 @@ namespace EPM.Core.Services
                 List<EPM_PRODUCT_GROUP> productGroups = OracleServer.DeserializeList<EPM_PRODUCT_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCT_GROUP");
                 List<EPM_PRODUCTION_RECIPE> productionRecipe = OracleServer.DeserializeList<EPM_PRODUCTION_RECIPE>("SELECT * FROM FDEIT005.EPM_PRODUCTION_RECIPE");
                 List<EPM_PRODUCTION_BAND_GROUP> productionBandGroup = OracleServer.DeserializeList<EPM_PRODUCTION_BAND_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCTION_BAND_GROUP");
+
+                object[] kontrol = CheckForErrors(request, brandList, subBrandList, fabricTypes, marketList, orderTypes, seasonList, productionTypes, productGroups, productionRecipe, productionBandGroup);
+
+                if (!(bool)kontrol[0])
+                {
+                    obj[0] = false;
+                    obj[1] = kontrol[1];  
+                    request.HttpContext.Response.StatusCode = 400;
+                    new MailHelper().SendEMail(user.EMAIL, "Üretim Listesi Aktarımı HK.","Aktarım Tamamlanamadı\n" +obj[1].ToString());
+                    return obj;
+                }
+
                 using (var reader = ExcelReaderFactory.CreateReader(myFile.OpenReadStream()))
                 {
 
@@ -267,39 +428,41 @@ namespace EPM.Core.Services
                         {
                             UretimListesiAktarim aktarim = new UretimListesiAktarim();
 
-                            aktarim.BRAND = brandList.Find(ob => ob.ADI == reader.GetValue(0).ToStringParse().Trim()).ID;
-                            aktarim.SEASON = seasonList.Find(ob => ob.ADI == reader.GetValue(1).ToStringParse().Trim()).ID;
-                            aktarim.MODEL = reader.GetValue(2).ToStringParse();
-                            aktarim.COLOR = reader.GetValue(3).ToStringParse();
-                            aktarim.PRODUCT_GROUP = productGroups.Find(ob => ob.ADI == reader.GetValue(4).ToStringParse().Trim()).ID;
-                            aktarim.FABRIC_TYPE = fabricTypes.Find(ob => ob.ADI == reader.GetValue(5).ToStringParse().Trim()).ID;
-                            aktarim.PRODUCTION_TYPE = productionTypes.Find(ob => ob.ADI == reader.GetValue(6).ToStringParse().Trim()).ID;
-                            aktarim.ORDER_TYPE = orderTypes.Find(ob => ob.ADI == reader.GetValue(7).ToStringParse().Trim()).ID;
-                            aktarim.RECIPE = productionRecipe.Find(ob => ob.ADI == reader.GetValue(8).ToStringParse().Trim()).ID;
-                            aktarim.DEADLINE = reader.GetValue(9).DatetimeParse();
+                            aktarim.SEASON = seasonList.Find(ob => ob.ADI == reader.GetValue(0).ToStringParse().Trim()).ID;
+                            aktarim.BRAND = brandList.Find(ob => ob.ADI == reader.GetValue(1).ToStringParse().Trim()).ID;
+                            aktarim.SUB_BRAND = subBrandList.Find(ob => ob.ADI == reader.GetValue(2).ToStringParse()).ID;
+                            aktarim.MODEL = reader.GetValue(3).ToStringParse();
+                            aktarim.COLOR = reader.GetValue(4).ToStringParse();
+                            aktarim.PRODUCT_GROUP = productGroups.Find(ob => ob.ADI == reader.GetValue(5).ToStringParse().Trim()).ID;
+                            aktarim.FABRIC_TYPE = fabricTypes.Find(ob => ob.ADI == reader.GetValue(6).ToStringParse().Trim()).ID;
+                            aktarim.PRODUCTION_TYPE = productionTypes.Find(ob => ob.ADI == reader.GetValue(7).ToStringParse().Trim()).ID;
+                            aktarim.ORDER_TYPE = orderTypes.Find(ob => ob.ADI == reader.GetValue(8).ToStringParse().Trim()).ID;
+                            aktarim.RECIPE = productionRecipe.Find(ob => ob.ADI == reader.GetValue(9).ToStringParse().Trim()).ID;
+                            aktarim.DEADLINE = reader.GetValue(10).DatetimeParse();
                             aktarim.CREATED_BY = user.USER_CODE;
                             aktarim.APPROVAL_STATUS = true;
                             aktarim.STATUS = 0;
-                            aktarim.MARKET = marketList.Find(ob => ob.ADI == reader.GetValue(10).ToStringParse()).ID;
-                            aktarim.PRODUCT_SIZE = reader.GetValue(11).ToStringParse();
-                            aktarim.QUANTITY = reader.GetValue(12).IntParse();
-                            aktarim.BAND_ID = productionBandGroup.Find(ob => ob.ADI == (reader.GetValue(13).ToStringParse() == "0" ? " " : reader.GetValue(13).ToStringParse())).ID;
-                            aktarim.SHIPMENT_DATE = reader.GetValue(14).DatetimeParse();
-                            aktarim.ATTRIBUTE1 = reader.GetValue(15).ToStringParse();
-                            aktarim.ATTRIBUTE2 = reader.GetValue(16).ToStringParse();
-                            aktarim.ATTRIBUTE3 = reader.GetValue(17).ToStringParse();
-                            aktarim.ATTRIBUTE4 = reader.GetValue(18).ToStringParse();
-                            aktarim.ATTRIBUTE5 = reader.GetValue(19).ToStringParse();
-                            aktarim.ATTRIBUTE6 = reader.GetValue(20).ToStringParse();
-                            aktarim.ATTRIBUTE7 = reader.GetValue(21).ToStringParse();
-                            aktarim.ATTRIBUTE8 = reader.GetValue(22).ToStringParse();
-                            aktarim.ATTRIBUTE9 = reader.GetValue(23).ToStringParse();
-                            aktarim.ATTRIBUTE10 = reader.GetValue(24).ToStringParse();
-                            aktarim.COLLECTION_TYPE = reader.GetValue(25).IntParse();
-                            aktarim.ROYALTY = reader.GetValue(26).ToStringParse() == "0" ? "" : reader.GetValue(26).ToStringParse();
-                            aktarim.ANA_TEMA = reader.GetValue(27).ToStringParse() == "0" ? "" : reader.GetValue(27).ToStringParse();
-                            aktarim.TEMA = reader.GetValue(28).ToStringParse() == "0" ? "" : reader.GetValue(28).ToStringParse();
-                            aktarim.SUB_BRAND = subBrandList.Find(ob => ob.ADI == reader.GetValue(29).ToStringParse()).ID;
+                            aktarim.MARKET = marketList.Find(ob => ob.ADI == reader.GetValue(11).ToStringParse()).ID;
+                            aktarim.PRODUCT_SIZE = reader.GetValue(12).ToStringParse();
+                            aktarim.QUANTITY = reader.GetValue(13).IntParse();
+                            aktarim.BAND_ID = productionBandGroup.Find(ob => ob.ADI == (reader.GetValue(14).ToStringParse() == "0" ? " " : reader.GetValue(14).ToStringParse())).ID;
+                            aktarim.SHIPMENT_DATE = reader.GetValue(15).DatetimeParse();
+                            aktarim.ATTRIBUTE1 = reader.GetValue(16).ToStringParse();
+                            aktarim.ATTRIBUTE2 = reader.GetValue(17).ToStringParse();
+                            aktarim.ATTRIBUTE3 = reader.GetValue(18).ToStringParse();
+                            aktarim.ATTRIBUTE4 = reader.GetValue(19).ToStringParse();
+                            aktarim.ATTRIBUTE5 = reader.GetValue(20).ToStringParse();
+                            aktarim.ATTRIBUTE6 = reader.GetValue(21).ToStringParse();
+                            aktarim.ATTRIBUTE7 = reader.GetValue(22).ToStringParse();
+                            aktarim.ATTRIBUTE8 = reader.GetValue(23).ToStringParse();
+                            aktarim.ATTRIBUTE9 = reader.GetValue(24).ToStringParse();
+                            aktarim.ATTRIBUTE10 = reader.GetValue(25).ToStringParse();
+                            aktarim.COLLECTION_TYPE = reader.GetValue(26).IntParse();
+                            aktarim.ROYALTY = reader.GetValue(27).ToStringParse() == "0" ? "" : reader.GetValue(27).ToStringParse();
+                            aktarim.ANA_TEMA = reader.GetValue(28).ToStringParse() == "0" ? "" : reader.GetValue(28).ToStringParse();
+                            aktarim.TEMA = reader.GetValue(29).ToStringParse() == "0" ? "" : reader.GetValue(29).ToStringParse();
+                            aktarim.PLAN_YEAR = reader.GetValue(30).IntParse();
+                            aktarim.PLAN_WEEK = reader.GetValue(31).IntParse();
                             aktarimList.Add(aktarim);
                         }
                         i++;
@@ -378,6 +541,18 @@ namespace EPM.Core.Services
                                 QUANTITY = item.QUANTITY,
                                 PRODUCT_SIZE = item.PRODUCT_SIZE
                             });
+                            if(item.PLAN_YEAR!=0 && item.PLAN_WEEK != 0)
+                            {
+                                h.PLAN.Add(new EPM_PRODUCTION_PLAN()
+                                {
+                                    MARKET_ID = item.MARKET,
+                                    QUANTITY = item.QUANTITY,
+                                    WEEK = item.PLAN_WEEK,
+                                    YEAR = item.PLAN_YEAR,
+                                    CREATED_BY = item.CREATED_BY
+                                }); 
+                            }
+                           
                             header.Add(h);
                         }
                         else
@@ -406,7 +581,7 @@ namespace EPM.Core.Services
                 text += "Lütfen sistem yöneticinize başvurunuz";
                 obj[0] = false;
                 obj[1] = text;
-                new MailHelper().SendEMail(user.EMAIL, "Üretim Listesi Aktarımı HK.", text);
+                new MailHelper().SendEMail(user.EMAIL, "Üretim Listesi Aktarımı HK.", "Aktarım Tamamlanamadı\n" + text);
             }
 
             return obj;
@@ -431,6 +606,12 @@ namespace EPM.Core.Services
                              EPM_MASTER_PRODUCTION_D dd = hh.DETAIL[b];
                              dd.HEADER_ID = hh.ID;
                              OracleServer.Serialize(dd);
+                         }
+                         for (int p = 0; p < hh.PLAN.Count; p++)
+                         {
+                             EPM_PRODUCTION_PLAN plan = hh.PLAN[p];
+                             plan.HEADER_ID = hh.ID;
+                             OracleServer.Serialize(plan);
                          }
                      }
                      string text = "Merhaba " + user.USER_CODE + ",<br>";

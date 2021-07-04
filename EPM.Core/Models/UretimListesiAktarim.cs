@@ -43,5 +43,7 @@ namespace EPM.Core.Models
         public string ANA_TEMA { get; set; }
         public string ROYALTY { get; set; }
         public int COLLECTION_TYPE { get; set; }
+        public int PLAN_YEAR { get; set; }
+        public int PLAN_WEEK { get; set; }
     }
 }

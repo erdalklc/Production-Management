@@ -59,5 +59,6 @@ namespace EPM.Core.Nesneler
         public decimal EXPECTED_COST { get; set; } = 0;
         public int CURRENCY_UNIT { get; set; } = 2;
         public List<EPM_MASTER_PRODUCTION_D> DETAIL=new List<EPM_MASTER_PRODUCTION_D>();
+        public List<EPM_PRODUCTION_PLAN> PLAN=new List<EPM_PRODUCTION_PLAN>();
     }
 }

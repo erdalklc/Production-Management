@@ -2,10 +2,10 @@ body, html {
     margin: 0;
     min-height: 100%;
     height: 100%;
-    font-size:11px!important;
+    font-size:10px!important;
 }
 .dx-widget{
-    font-size:11px!important;
+    font-size:10px!important;
 }
 .dx-card{
     padding:3px 10px!important;
@@ -17,10 +17,10 @@ body, html {
     width: 100%;
 }
 .dx-fileuploader-file-status-message{
-    height:80px!important;
+    height:240px!important;
 }
 .dx-list-item-content, .dx-lookup-field {
-    font-size: 11px !important;
+    font-size: 10px !important;
 }
 .layout-header {
     flex: 0 0 auto;
@@ -213,9 +213,9 @@ body, html {
     color: #fff;
 }
 .dx-datagrid .dx-row > td {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 11px!important;
+    padding-top: 8px!important;
+    padding-bottom: 8px!important;
+    font-size: 10px!important;
     line-height: 14px!important;
 }
 .dx-datagrid-headers .dx-datagrid-table .dx-row > td {
