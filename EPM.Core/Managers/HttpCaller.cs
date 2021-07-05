@@ -46,6 +46,7 @@ namespace EPM.Core.Managers
         public async Task<object> PostAsyncObject(string url)
         {
             object m = null;
+            //erdal
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.PostAsync(url, "");
             if (response.IsSuccessStatusCode)
