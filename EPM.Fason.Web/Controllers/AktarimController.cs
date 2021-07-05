@@ -2,6 +2,7 @@
 using EPM.Fason.Core.Nesneler;
 using EPM.Fason.Core.Services; 
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace EPM.Fason.Web.Controllers
@@ -25,13 +26,13 @@ namespace EPM.Fason.Web.Controllers
             else return BadRequest(obj[1].ToString());
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult<PRODUCTION_STATUS> GetProductionStatus(int HEADER_ID) => _aktarimService.GetProductionStatus(HEADER_ID);
 
         [HttpGet]
-        public ActionResult<List<PRODUCTION_PROCESS>> GetProcessList() => _aktarimService.GetProcessList();
+        public ActionResult<IEnumerable<PRODUCTION_PROCESS>> GetProcessList() =>  _aktarimService.GetProcessList();
 
         [HttpGet]
-        public ActionResult<List<PRODUCTION_FASON_USERS>> GetFasonUsers() => _aktarimService.GetFasonUsers();
+        public ActionResult<IEnumerable<PRODUCTION_FASON_USERS>> GetFasonUsers() => _aktarimService.GetFasonUsers();
     }
 }

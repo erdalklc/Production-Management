@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +21,26 @@ namespace EPM.Core.Managers
             }
             return d; 
         }
+        public async Task<List<T>> GetListAsync<T>(string url) where T : class
+        { 
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<T>>(json);
+            }
+            return null;
+        }
 
+        public async Task<string> GetStringAsync(string url)
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders
+      .Accept
+      .Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
+            return await client.GetStringAsync(url);
+        }
         public async Task<object[]> PostAsync<T>(string url,T t)
         {
             object[] obj = { true, "" }; 
@@ -48,10 +69,13 @@ namespace EPM.Core.Managers
             object m = null;
             //erdal
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.PostAsync(url, "");
+            client.DefaultRequestHeaders
+      .Accept
+      .Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
+            HttpResponseMessage response = await client.PostAsJsonAsync(url, "");
             if (response.IsSuccessStatusCode)
             {
-                m = await response.Content.ReadAsAsync<object>();
+                m = await response.Content.ReadAsStringAsync();
             }
             return m;
         }

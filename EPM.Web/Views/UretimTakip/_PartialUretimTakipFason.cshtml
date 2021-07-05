@@ -3,5 +3,115 @@
 *@
 @{
 }
-@model string
-<div>@Model</div>
+@model Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>
+
+
+@{
+}
+@using EPM.Core.FormModels.FasonTakip;
+
+<div class='txtText'>
+    222
+</div>
+<div id="form-container">
+    <div style="width:50%;display:inline-block;float:left" id="plannedList"></div>
+    <div style="width:50%;display:inline-block;float:right" id="doingList"></div>
+</div>
+
+
+<script>
+
+    var tasks = @Html.Raw(Json.Serialize(Model.Item2));
+    var listPlanned = $("#plannedList").dxList({
+        items: tasks,
+        repaintChangesOnly: true,
+        keyExpr: "ID",
+        itemTemplate: function (data, index) { 
+            return $("<div>")
+                .append($("<div>").text(data.NAME))
+                .append($("<div id='idText" + data.ID + "' data-value='" + data.TIME + "' data-sirano='" + data.ID + "' >"));
+
+        },
+        itemDragging: {
+            allowReordering: true,
+            group: "tasks",
+            onDragStart: function (e) {
+                e.itemData = tasks[e.fromIndex];
+            },
+            onAdd: function (e) {
+                tasks.splice(e.toIndex, 0, e.itemData);
+                listPlanned.option("items", tasks);
+            },
+            onRemove: function (e) {
+                tasks.splice(e.fromIndex, 1);
+                listPlanned.option("items", tasks);
+            }
+        }, onContentReady: function () {
+            for (var i = 0; i < tasks.length; i++) {
+                $("#idText" + tasks[i].ID + "").dxTextBox({
+                    value: tasks[i].TIME,
+                    onValueChanged: function (data) {
+                        for (var a = 0; a < tasks.length; a++) {
+                            if (tasks[a].ID == parseFloat(data.element[0].id.replace("idText", ""))) {
+                                tasks[a].TIME = data.value;
+                            }
+                        }
+                    }
+                });
+            }
+
+        }
+
+    }).dxList("instance");
+
+    var others = [];
+    var listOthers = $("#doingList").dxList({
+        items: others,
+        repaintChangesOnly: true,
+        keyExpr: "ID",
+        itemTemplate: function (data, index) {
+            return $("<div>")
+                .append($("<div>").text(data.NAME))
+                .append($("<div id='idSecondText" + data.ID + "' data-value='" + data.TIME + "' data-sirano='" + data.ID + "' >"));
+        },
+        itemDragging: {
+            allowReordering: true,
+            group: "tasks",
+            onDragStart: function (e) {
+                e.itemData = others[e.fromIndex];
+            },
+            onAdd: function (e) {
+                others.splice(e.toIndex, 0, e.itemData);
+                listOthers.option("items", others);
+            },
+            onRemove: function (e) {
+                others.splice(e.fromIndex, 1);
+                listOthers.option("items", others);
+            }
+        }, onContentReady: function () {
+            for (var i = 0; i < others.length; i++) {
+                $("#idSecondText" + others[i].ID + "").dxTextBox({
+                    value: others[i].TIME,
+                    onValueChanged: function (data) {
+                        for (var a = 0; a < others.length; a++) {
+                            if (others[a].ID == parseFloat(data.element[0].id.replace("idSecondText", ""))) {
+                                others[a].TIME = data.value;
+                            }
+                        }
+                    }
+                });
+            }
+
+        }
+    }).dxList("instance");
+    function inputChange(array, index, val) {
+        if (array == 0) {
+            tasks[index].TIME = val;
+        } else {
+            others[index].TIME = val;
+        }
+    }
+    $(document).ready(function () {
+        $(".txtText").dxTextBox();
+    });
+</script>

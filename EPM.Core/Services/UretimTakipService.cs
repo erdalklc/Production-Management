@@ -490,9 +490,10 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
             return list;
         }
 
-        public async Task<string> FasonTakipListeAyarlaAsync(string Url, int HEADER_ID)
+        public async Task<Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>> FasonTakipListeAyarlaAsync(string Url, int HEADER_ID)
         {
 
+            Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>> responce = new Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>(null, null, null);
             #region Belge Insert
             string sql = @"SELECT  DISTINCT ID AS ENTEGRATION_ID, 
    BRAND,
@@ -534,15 +535,16 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
             HttpCaller caller = new HttpCaller();
             object[] sonuc = await caller.PostAsync(Url + "FasonUretimInsert", header);
 
-            object processList = await caller.PostAsyncObject(Url + "GetProcessList");
+            List<PRODUCTION_PROCESS> processList = await caller.GetListAsync<PRODUCTION_PROCESS>(Url + "GetProcessList");
 
-            if ((bool)sonuc[0])
-            {
+            List<PRODUCTION_FASON_USERS> fasonUsers = await caller.GetListAsync< PRODUCTION_FASON_USERS>(Url + "GetFasonUsers");
 
-            }
+
+
+
 
             #endregion Belge Insert
-            return "";
+            return new Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>(header, processList, fasonUsers);
 
         }
 

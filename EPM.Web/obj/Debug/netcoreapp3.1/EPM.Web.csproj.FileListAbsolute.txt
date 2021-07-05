@@ -1482,3 +1482,5 @@ E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.pdb
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.genruntimeconfig.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimTakip\_PartialUretimTakipFason.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimTakip\_PartialUretimTakipFason.cshtml.g.cs

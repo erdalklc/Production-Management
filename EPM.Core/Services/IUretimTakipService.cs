@@ -48,7 +48,7 @@ namespace EPM.Core.Services
 
         public IEnumerable<ContractProcessList> GetContractProcessList(HttpContext context, int HEADER_ID);
 
-        public Task<string> FasonTakipListeAyarlaAsync(string Url, int HEADER_ID);
+        public Task<Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>> FasonTakipListeAyarlaAsync(string Url, int HEADER_ID);
 
         public void TestCall(string url);
     }

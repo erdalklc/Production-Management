@@ -24,7 +24,7 @@ namespace EPM.Web.Controllers
             _uretimTakipRepository = uretimTakipRepository;
             _config = config;
         }
-         
+
         public IActionResult Takip()
         {
             return View(new UretimOnayliListe());
@@ -42,7 +42,7 @@ namespace EPM.Web.Controllers
         [HttpPost, HttpGet]
         public IActionResult _PartialUretimTakipFiltrele(UretimOnayliListe liste) => PartialView(liste);
 
-        public async Task<IActionResult> _PartialUretimTakipDetayAsync(int HEADER_ID,int RECIPE)
+        public async Task<IActionResult> _PartialUretimTakipDetayAsync(int HEADER_ID, int RECIPE)
         {
             switch (RECIPE)
             {
@@ -52,21 +52,20 @@ namespace EPM.Web.Controllers
                     return PartialView("_PartialUretimTakipSatinAlmaDetayi", HEADER_ID);
                 case 4:
                 case 5:
-                    var a=await _uretimTakipRepository.FasonTakipListeAyarlaAsync(_config.Value.FasonTakip,HEADER_ID);
-                    return PartialView("_PartialUretimTakipFason", a);
+                    return PartialView("_PartialUretimTakipFason", await _uretimTakipRepository.FasonTakipListeAyarlaAsync(_config.Value.FasonTakip, HEADER_ID));
                 default:
                     return PartialView("_PartialUretimTakipSatinAlmaDetayi", HEADER_ID);
             }
-            
+
         }
 
-        public IActionResult _PartialEgemenOrmeList(string TAKIP_NO,int DETAIL_TAKIP_NO)
+        public IActionResult _PartialEgemenOrmeList(string TAKIP_NO, int DETAIL_TAKIP_NO)
         {
             object[] values = { TAKIP_NO, DETAIL_TAKIP_NO };
             return PartialView(values);
         }
 
-        public IActionResult _PartialKumasDepoList(int ITEM_ID,int PO_HEADER_ID)
+        public IActionResult _PartialKumasDepoList(int ITEM_ID, int PO_HEADER_ID)
         {
             int[] values = { ITEM_ID, PO_HEADER_ID };
             return PartialView(values);
@@ -88,9 +87,9 @@ namespace EPM.Web.Controllers
             object[] values = { ITEM_ID, PO_HEADER_ID, RENK_DETAY };
             return PartialView(values);
         }
-        public IActionResult _PartialProcessInformations(int PO_HEADER_ID, int DETAIL_ID,int HEADER_ID)
+        public IActionResult _PartialProcessInformations(int PO_HEADER_ID, int DETAIL_ID, int HEADER_ID)
         {
-            int[] values = { PO_HEADER_ID, DETAIL_ID , HEADER_ID };
+            int[] values = { PO_HEADER_ID, DETAIL_ID, HEADER_ID };
             return PartialView(values);
         }
         [HttpGet]
@@ -102,7 +101,7 @@ namespace EPM.Web.Controllers
         [HttpGet]
         public object EgemenOrmeListLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "TAKIP_NO")] string TAKIP_NO, [FromQuery(Name = "DETAIL_TAKIP_NO")] int DETAIL_TAKIP_NO)
         {
-            return DataSourceLoader.Load(_uretimTakipRepository.GetEgemenOrmeList(TAKIP_NO,DETAIL_TAKIP_NO), loadOptions);
+            return DataSourceLoader.Load(_uretimTakipRepository.GetEgemenOrmeList(TAKIP_NO, DETAIL_TAKIP_NO), loadOptions);
         }
         [HttpGet]
         public object KumasDepoListLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "ITEM_ID")] int ITEM_ID, [FromQuery(Name = "PO_HEADER_ID")] int PO_HEADER_ID)
@@ -112,7 +111,7 @@ namespace EPM.Web.Controllers
         [HttpGet]
         public object KesimFoyuListLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "ITEM_ID")] int ITEM_ID, [FromQuery(Name = "PO_HEADER_ID")] int PO_HEADER_ID, [FromQuery(Name = "RENK_DETAY")] string RENK_DETAY)
         {
-            return DataSourceLoader.Load(_uretimTakipRepository.GetKesimFoyuList(ITEM_ID, PO_HEADER_ID,RENK_DETAY), loadOptions);
+            return DataSourceLoader.Load(_uretimTakipRepository.GetKesimFoyuList(ITEM_ID, PO_HEADER_ID, RENK_DETAY), loadOptions);
         }
 
         [HttpGet]
@@ -134,7 +133,7 @@ namespace EPM.Web.Controllers
         [HttpGet]
         public object UretimTakiplLoad(DataSourceLoadOptions loadOptions, UretimOnayliListe liste)
         {
-            return DataSourceLoader.Load(_uretimTakipRepository.GetUretimTakipListesi(Request.HttpContext,liste), loadOptions);
+            return DataSourceLoader.Load(_uretimTakipRepository.GetUretimTakipListesi(Request.HttpContext, liste), loadOptions);
         }
 
         [HttpGet]
@@ -143,7 +142,7 @@ namespace EPM.Web.Controllers
             return DataSourceLoader.Load(_uretimTakipRepository.SatinAlmaDetay(HEADER_ID), loadOptions);
         }
 
-        [HttpGet] 
+        [HttpGet]
         public object GetProcessInformations(DataSourceLoadOptions loadOptions, [FromQuery(Name = "PO_HEADER_ID")] int PO_HEADER_ID, [FromQuery(Name = "DETAIL_ID")] int DETAIL_ID, [FromQuery(Name = "HEADER_ID")] int HEADER_ID)
         {
             return DataSourceLoader.Load(_uretimTakipRepository.GetProcessInformations(PO_HEADER_ID, DETAIL_ID, HEADER_ID), loadOptions);
@@ -159,7 +158,7 @@ namespace EPM.Web.Controllers
         public IActionResult ProductionOrdersInsert(string values)
         {
             object[] islem = _uretimTakipRepository.ProductionOrdersInsert(values);
-             if ((bool)islem[0])
+            if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
         }
@@ -185,7 +184,7 @@ namespace EPM.Web.Controllers
         [HttpGet]
         public object GetContractList(DataSourceLoadOptions loadOptions) => DataSourceLoader.Load(_uretimTakipRepository.GetContractList(), loadOptions);
 
-        
+
 
     }
 }
