@@ -1,5 +1,6 @@
  
 using EPM.Core.Managers;
+using EPM.Core.Models;
 using EPM.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting; 
@@ -32,8 +33,9 @@ namespace EPM_Web
                 .Build());
             });
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddControllersWithViews();  
+            services.AddControllersWithViews();
 
+            services.Configure<AppServices>(Configuration.GetSection("AppServices"));
             services.AddScoped<AppFilterAttribute>(); 
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IUretimService, UretimService>();
@@ -51,7 +53,7 @@ namespace EPM_Web
                 }
              ); 
         }
-
+         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         { 

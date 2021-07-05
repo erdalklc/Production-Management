@@ -3,8 +3,10 @@ using DevExtreme.AspNet.Mvc;
 using EPM.Core.FormModels.Uretim;
 using EPM.Core.FormModels.UretimTakip;
 using EPM.Core.Managers;
+using EPM.Core.Models;
 using EPM.Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +17,13 @@ namespace EPM.Web.Controllers
     [ServiceFilter(typeof(AppFilterAttribute), Order = 1)]
     public class UretimTakipController : Controller
     {
+        private readonly IOptions<AppServices> _config;
         private readonly IUretimTakipService _uretimTakipRepository;
-        public UretimTakipController(IUretimTakipService uretimTakipRepository) => _uretimTakipRepository = uretimTakipRepository;
+        public UretimTakipController(IUretimTakipService uretimTakipRepository, IOptions<AppServices> config)
+        {
+            _uretimTakipRepository = uretimTakipRepository;
+            _config = config;
+        }
          
         public IActionResult Takip()
         {
@@ -35,7 +42,23 @@ namespace EPM.Web.Controllers
         [HttpPost, HttpGet]
         public IActionResult _PartialUretimTakipFiltrele(UretimOnayliListe liste) => PartialView(liste);
 
-        public IActionResult _PartialUretimTakipSatinAlmaDetayi(int HEADER_ID) => PartialView(HEADER_ID);
+        public async Task<IActionResult> _PartialUretimTakipDetayAsync(int HEADER_ID,int RECIPE)
+        {
+            switch (RECIPE)
+            {
+                case 1:
+                case 2:
+                case 3:
+                    return PartialView("_PartialUretimTakipSatinAlmaDetayi", HEADER_ID);
+                case 4:
+                case 5:
+                    var a=await _uretimTakipRepository.FasonTakipListeAyarlaAsync(_config.Value.FasonTakip,HEADER_ID);
+                    return PartialView("_PartialUretimTakipFason", a);
+                default:
+                    return PartialView("_PartialUretimTakipSatinAlmaDetayi", HEADER_ID);
+            }
+            
+        }
 
         public IActionResult _PartialEgemenOrmeList(string TAKIP_NO,int DETAIL_TAKIP_NO)
         {

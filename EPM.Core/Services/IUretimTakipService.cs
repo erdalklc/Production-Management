@@ -1,10 +1,12 @@
-﻿using EPM.Core.FormModels.Uretim;
+﻿using EPM.Core.FormModels.FasonTakip;
+using EPM.Core.FormModels.Uretim;
 using EPM.Core.FormModels.UretimTakip;
 using EPM.Core.Nesneler;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EPM.Core.Services
 {
@@ -45,5 +47,9 @@ namespace EPM.Core.Services
         public IEnumerable<EPM_CONTRACT_WEB_USERS> GetContractList();
 
         public IEnumerable<ContractProcessList> GetContractProcessList(HttpContext context, int HEADER_ID);
+
+        public Task<string> FasonTakipListeAyarlaAsync(string Url, int HEADER_ID);
+
+        public void TestCall(string url);
     }
 }

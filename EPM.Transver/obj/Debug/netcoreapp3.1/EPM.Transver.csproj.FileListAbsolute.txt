@@ -99,3 +99,5 @@ D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runt
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win\native\mongocrypt.dll
 E:\Eren\Eren-Production-Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.dll
 E:\Eren\Eren-Production-Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.pdb
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll

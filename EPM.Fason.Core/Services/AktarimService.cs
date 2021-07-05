@@ -1,4 +1,5 @@
 ﻿using EPM.Fason.Core.Managers;
+using EPM.Fason.Core.Models;
 using EPM.Fason.Core.Nesneler;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace EPM.Fason.Core.Services
     {
         public object[] FasonUretimInsert(PRODUCTION_HEADER header)
         {
-            object[] obj = { true, "" };
+            object[] obj = { true, header.ENTEGRATION_ID.ToString()};
             try
             {
                 string sql = "DELETE PRODUCTION_HEADER WHERE ENTEGRATION_ID=" + header.ENTEGRATION_ID;
@@ -32,6 +33,23 @@ namespace EPM.Fason.Core.Services
             
 
             return obj;
+        } 
+
+        public PRODUCTION_STATUS GetProductionStatus(int _HEADER_ID)
+        { 
+            return new PRODUCTION_STATUS() { HEADER_ID = _HEADER_ID, LAST_STATE = "BEKLENİYOR", MUST_STATE = "AYARLANIYOR" };
         }
+
+        public List<PRODUCTION_PROCESS> GetProcessList()
+        {
+            return MSSQLServer.DeserializeList<PRODUCTION_PROCESS>("SELECT * FROM PRODUCTION_PROCESS");
+        }
+
+        public List<PRODUCTION_FASON_USERS> GetFasonUsers()
+        {
+            return MSSQLServer.DeserializeList<PRODUCTION_FASON_USERS>("SELECT * FROM PRODUCTION_FASON_USERS");
+        }
+
+
     }
 }

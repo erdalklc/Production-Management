@@ -432,6 +432,21 @@
           "lib/netstandard2.0/FirebirdSql.Data.FirebirdClient.dll": {}
         }
       },
+      "Microsoft.AspNet.WebApi.Client/5.2.7": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
+          "Newtonsoft.Json.Bson": "1.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Net.Http.Formatting.dll": {
+            "assemblyVersion": "5.2.7.0",
+            "fileVersion": "5.2.61128.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/System.Net.Http.Formatting.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Antiforgery/2.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.DataProtection": "2.0.0",
@@ -2601,6 +2616,7 @@
           "Dapper.Oracle": "2.0.2",
           "ExcelDataReader": "3.6.0",
           "FirebirdSql.Data.FirebirdClient": "7.10.1",
+          "Microsoft.AspNet.WebApi.Client": "5.2.7",
           "Microsoft.AspNetCore.Http": "2.2.2",
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
           "MongoDB.Driver": "2.12.2",
@@ -4319,6 +4335,13 @@
       "sha512": "sha512-G/RWvT8swecaoNRcLw/5pT7QFXPUbofbDp12cxNPWalq8Wl9JEIXiXygpFaHIKs71fdE3UMmUgOw660U8SKJrw==",
       "path": "firebirdsql.data.firebirdclient/7.10.1",
       "hashPath": "firebirdsql.data.firebirdclient.7.10.1.nupkg.sha512"
+    },
+    "Microsoft.AspNet.WebApi.Client/5.2.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/76fAHknzvFqbznS6Uj2sOyE9rJB3PltY+f53TH8dX9RiGhk02EhuFCWljSj5nnqKaTsmma8DFR50OGyQ4yJ1g==",
+      "path": "microsoft.aspnet.webapi.client/5.2.7",
+      "hashPath": "microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Antiforgery/2.0.0": {
       "type": "package",

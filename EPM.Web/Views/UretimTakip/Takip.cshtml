@@ -100,6 +100,7 @@
     }
     var tempHeaderId = 0;
     function DetailSearch(e) {
+        console.log(e.row.data);
         var header_id = e.row.data.ID;
         tempHeaderId = header_id;
         var header_id = e.row.data.ID;
@@ -107,11 +108,12 @@
         var popupOptions = {
             contentTemplate: function () {
                 var data = {
-                    HEADER_ID: tempHeaderId
+                    HEADER_ID: tempHeaderId,
+                    RECIPE: e.row.data.RECIPE
                 };
                 return  $.ajax({
                     type: "GET",
-                    url: '@Url.Action("_PartialUretimTakipSatinAlmaDetayi", "UretimTakip")',
+                    url: '@Url.Action("_PartialUretimTakipDetay", "UretimTakip")',
                     data: data,
                     async: false,
                     success: function (status) {

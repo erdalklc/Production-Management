@@ -1,4 +1,5 @@
-﻿using EPM.Core.FormModels.Uretim;
+﻿using EPM.Core.FormModels.FasonTakip;
+using EPM.Core.FormModels.Uretim;
 using EPM.Core.FormModels.UretimTakip;
 using EPM.Core.Helpers;
 using EPM.Core.Managers;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EPM.Core.Services
 {
@@ -486,6 +488,68 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
             }
             list = list.OrderBy(ob => ob.PROCESS_ID).ToList();
             return list;
+        }
+
+        public async Task<string> FasonTakipListeAyarlaAsync(string Url, int HEADER_ID)
+        {
+
+            #region Belge Insert
+            string sql = @"SELECT  DISTINCT ID AS ENTEGRATION_ID, 
+   BRAND,
+   SUB_BRAND,
+   SEASON,
+   MODEL,
+   COLOR,
+   PRODUCT_GROUP,
+   FABRIC_TYPE,
+   PRODUCTION_TYPE,
+   RECIPE,
+   DEADLINE,
+   ORDER_TYPE,
+   CREATE_DATE,  
+   ATTRIBUTE1,
+   ATTRIBUTE2,
+   ATTRIBUTE3,
+   ATTRIBUTE4,
+   ATTRIBUTE5,
+   ATTRIBUTE6,
+   ATTRIBUTE7,
+   ATTRIBUTE8,
+   ATTRIBUTE9,
+   ATTRIBUTE10,
+   TEMA,
+   ANA_TEMA,
+   ROYALTY,
+   COLLECTION_TYPE FROM FDEIT005.EPM_PRODUCTION_ORDER_V   WHERE ID=" + HEADER_ID;
+            PRODUCTION_HEADER header = OracleServer.Deserialize<PRODUCTION_HEADER>(sql);
+
+
+            header.DETAIL = OracleServer.DeserializeList<PRODUCTION_DETAIL>(string.Format(@"SELECT  DETAIL_ID AS ENTEGRATION_ID, 
+   ID AS ENTEGRATION_HEADER_ID,
+   MARKET,  
+   PRODUCT_SIZE,
+   QUANTITY
+   FROM FDEIT005.EPM_PRODUCTION_ORDER_V   WHERE ID={0}", HEADER_ID));
+
+            HttpCaller caller = new HttpCaller();
+            object[] sonuc = await caller.PostAsync(Url + "FasonUretimInsert", header);
+
+            object processList = await caller.PostAsyncObject(Url + "GetProcessList");
+
+            if ((bool)sonuc[0])
+            {
+
+            }
+
+            #endregion Belge Insert
+            return "";
+
+        }
+
+        public void TestCall(string url)
+        {
+            HttpCaller caller = new HttpCaller();
+            var a = caller.GetAsync<PRODUCTION_PROCESS>(url + "GetProcessList");
         }
     }
 
