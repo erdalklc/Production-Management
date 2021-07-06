@@ -1,8 +1,6 @@
-﻿using EPM.Fason.Core.Models;
-using EPM.Fason.Core.Nesneler;
-using EPM.Fason.Core.Services; 
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+﻿using EPM.Fason.Dto.Fason;
+using EPM.Fason.Service.Services;
+using Microsoft.AspNetCore.Mvc; 
 using System.Collections.Generic;
 
 namespace EPM.Fason.Web.Controllers

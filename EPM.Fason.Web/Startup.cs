@@ -1,4 +1,5 @@
-using EPM.Fason.Core.Services;
+using EPM.Fason.Repository.Repository;
+using EPM.Fason.Service.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,7 @@ namespace EPM.Fason.Web
         {
             services.AddRazorPages().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddScoped<IAktarimService, AktarimService>();
+            services.AddSingleton<IFasonRepository, FasonRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
