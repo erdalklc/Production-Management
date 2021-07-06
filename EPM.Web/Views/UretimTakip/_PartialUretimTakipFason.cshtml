@@ -1,36 +1,56 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
 @model Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>
 
 
 @{
 }
 @using EPM.Core.FormModels.FasonTakip;
-
-<div class='txtText'>
-    222
-</div>
+ 
 <div id="form-container">
-    <div style="width:50%;display:inline-block;float:left" id="plannedList"></div>
-    <div style="width:50%;display:inline-block;float:right" id="doingList"></div>
+    <div id="formContainer"></div>
+     
+    <div class="dx-card wide-card" style="width:49%;min-height:400px;display:inline-block;float:left">
+        <div class="dx-field" style="background-color:#03a9f4;margin:5px;padding:10px;color:white">
+            <div class="dx-field-label" style="color:white" >SÜREÇ LİSTESİ</div>
+        </div>
+        <div id="plannedList" style="margin:5px"></div>
+    </div>
+    <div class="dx-card wide-card" style="width: 49%;min-height:400px;display: inline-block; float: right">
+        <div class="dx-field" style="background-color:#03a9f4;margin:5px; padding:10px;color:white">
+            <div class="dx-field-label " style="color:white" >SÜREÇ AŞAMALARI</div>
+        </div>
+        <div id="doingList" style="margin:5px"></div>
+    </div>
 </div>
 
 
 <script>
 
+    $(function () {
+        $("#formContainer").dxForm({ 
+            labelLocation: "top", // or "left" | "right"
+            colCount:6,
+            items: [{
+                dataField: "firmaBilgi",
+                editorType: "dxSelectBox", 
+                editorOptions: {
+                    items: @Html.Raw(Json.Serialize(Model.Item3)),
+                    value: 0, valueExpr: "ID",
+                    displayExpr: "NAME",
+                }
+            }]
+        });
+    }); 
     var tasks = @Html.Raw(Json.Serialize(Model.Item2));
     var listPlanned = $("#plannedList").dxList({
-        items: tasks,
-        repaintChangesOnly: true,
+        items: tasks, selectionMode: "none",
+        height: 400,
+        repaintChangesOnly: true, focusStateEnabled: false,
         keyExpr: "ID",
-        itemTemplate: function (data, index) { 
+        itemTemplate: function (data, index) {
             return $("<div>")
-                .append($("<div>").text(data.NAME))
-                .append($("<div id='idText" + data.ID + "' data-value='" + data.TIME + "' data-sirano='" + data.ID + "' >"));
-
+                .append($("<div style='display:inline-block;width:49%'>").text(data.NAME))
+                .append($("<div style='display:inline-block;width:49%' id='idText" + data.ID + "' data-value='" + data.TIME + "' data-sirano='" + data.ID + "' >")); 
         },
         itemDragging: {
             allowReordering: true,
@@ -61,18 +81,17 @@
             }
 
         }
-
     }).dxList("instance");
 
     var others = [];
     var listOthers = $("#doingList").dxList({
-        items: others,
-        repaintChangesOnly: true,
+        items: others, selectionMode: "none",
+        repaintChangesOnly: true, height: 400,
         keyExpr: "ID",
         itemTemplate: function (data, index) {
             return $("<div>")
-                .append($("<div>").text(data.NAME))
-                .append($("<div id='idSecondText" + data.ID + "' data-value='" + data.TIME + "' data-sirano='" + data.ID + "' >"));
+                .append($("<div style='display:inline-block;width:49%'>").text(data.NAME))
+                .append($("<div style='display:inline-block;width:49%' id='idSecondText" + data.ID + "' data-value='" + data.TIME + "' data-sirano='" + data.ID + "' >"));
         },
         itemDragging: {
             allowReordering: true,
@@ -100,8 +119,7 @@
                         }
                     }
                 });
-            }
-
+            } 
         }
     }).dxList("instance");
     function inputChange(array, index, val) {
@@ -112,6 +130,5 @@
         }
     }
     $(document).ready(function () {
-        $(".txtText").dxTextBox();
     });
 </script>
