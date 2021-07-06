@@ -2199,6 +2199,19 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "EPM.Fason.Dto/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper.Contrib": "2.0.78"
+        },
+        "compile": {
+          "bin/placeholder/EPM.Fason.Dto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EPM.Fason.Dto.dll": {}
+        }
       }
     }
   },
@@ -7252,12 +7265,18 @@
         "system.xml.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "EPM.Fason.Dto/1.0.0": {
+      "type": "project",
+      "path": "../EPM.Fason.Dto/EPM.Fason.Dto.csproj",
+      "msbuildProject": "../EPM.Fason.Dto/EPM.Fason.Dto.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Dapper.Contrib >= 2.0.78",
       "Dapper.Oracle >= 2.0.2",
+      "EPM.Fason.Dto >= 1.0.0",
       "ExcelDataReader >= 3.6.0",
       "FirebirdSql.Data.FirebirdClient >= 7.10.1",
       "Microsoft.AspNet.WebApi.Client >= 5.2.7",
@@ -7305,7 +7324,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\Eren\\Eren Production Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj": {
+              "projectPath": "E:\\Eren\\Eren Production Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

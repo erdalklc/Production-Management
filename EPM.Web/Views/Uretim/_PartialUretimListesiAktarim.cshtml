@@ -24,9 +24,7 @@
 </div>
 
 <script>
-    function uploadError(e) {
-        console.log(e.file.name);
-        console.log(e.request.responseText);
+    function uploadError(e) { 
         setTimeout(function () {
             var $file = e.element.find(".dx-fileuploader-file:contains('" + e.file.name + "')");
             $file.find(".dx-fileuploader-file-status-message").text("Error: " + e.request.responseText);

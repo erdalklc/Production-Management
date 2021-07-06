@@ -1,7 +1,7 @@
-﻿using EPM.Core.FormModels.FasonTakip;
-using EPM.Core.FormModels.Uretim;
+﻿using EPM.Core.FormModels.Uretim;
 using EPM.Core.FormModels.UretimTakip;
 using EPM.Core.Nesneler;
+using EPM.Fason.Dto.Fason;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -20,11 +20,9 @@ namespace EPM.Core.Services
 
         public List<KaliteGerceklesen> GetKaliteGerceklesenler(KaliteGerceklesenFilter filter);
 
-        public IEnumerable<UretimTakipListesi> GetUretimTakipListesi(HttpContext context, UretimOnayliListe liste);
+        public IEnumerable<UretimTakipListesi> GetUretimTakipListesi(HttpContext context, UretimOnayliListe liste); 
 
-
-        public IEnumerable<EPM_MASTER_PRODUCTION_ORDERS> ProductionOrderList(int HEADER_ID);
-
+        public IEnumerable<EPM_MASTER_PRODUCTION_ORDERS> ProductionOrderList(int HEADER_ID); 
 
         public object[] ProductionOrdersInsert(string Values);
 

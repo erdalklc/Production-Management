@@ -2206,6 +2206,7 @@
         "dependencies": {
           "Dapper.Contrib": "2.0.78",
           "Dapper.Oracle": "2.0.2",
+          "EPM.Fason.Dto": "1.0.0",
           "ExcelDataReader": "3.6.0",
           "FirebirdSql.Data.FirebirdClient": "7.10.1",
           "Microsoft.AspNet.WebApi.Client": "5.2.7",
@@ -2223,6 +2224,19 @@
         },
         "runtime": {
           "bin/placeholder/EPM.Core.dll": {}
+        }
+      },
+      "EPM.Fason.Dto/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper.Contrib": "2.0.78"
+        },
+        "compile": {
+          "bin/placeholder/EPM.Fason.Dto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EPM.Fason.Dto.dll": {}
         }
       }
     }
@@ -7282,6 +7296,11 @@
       "type": "project",
       "path": "../EPM.Core/EPM.Core.csproj",
       "msbuildProject": "../EPM.Core/EPM.Core.csproj"
+    },
+    "EPM.Fason.Dto/1.0.0": {
+      "type": "project",
+      "path": "../EPM.Fason.Dto/EPM.Fason.Dto.csproj",
+      "msbuildProject": "../EPM.Fason.Dto/EPM.Fason.Dto.csproj"
     }
   },
   "projectFileDependencyGroups": {

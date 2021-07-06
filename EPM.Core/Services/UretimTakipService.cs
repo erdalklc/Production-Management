@@ -1,10 +1,10 @@
-﻿using EPM.Core.FormModels.FasonTakip;
-using EPM.Core.FormModels.Uretim;
+﻿using EPM.Core.FormModels.Uretim;
 using EPM.Core.FormModels.UretimTakip;
 using EPM.Core.Helpers;
 using EPM.Core.Managers;
 using EPM.Core.Models;
 using EPM.Core.Nesneler;
+using EPM.Fason.Dto.Fason;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;

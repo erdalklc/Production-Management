@@ -99,10 +99,7 @@
         $("#popup").dxPopup(popupOptions).dxPopup("instance").show();
     }
     var tempHeaderId = 0;
-    function DetailSearch(e) {
-        console.log(e.row.data);
-        var header_id = e.row.data.ID;
-        tempHeaderId = header_id;
+    function DetailSearch(e) {  
         var header_id = e.row.data.ID;
         tempHeaderId = header_id;
         var popupOptions = {

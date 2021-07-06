@@ -35,6 +35,7 @@
           "DevExtreme.AspNet.Core": "20.2.3",
           "DevExtreme.AspNet.Data": "2.7.1",
           "EPM.Core": "1.0.0",
+          "EPM.Fason.Dto": "1.0.0",
           "Microsoft.AspNetCore.Authentication.Negotiate": "3.1.14",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "3.1.12",
           "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "3.1.12",
@@ -2614,6 +2615,7 @@
         "dependencies": {
           "Dapper.Contrib": "2.0.78",
           "Dapper.Oracle": "2.0.2",
+          "EPM.Fason.Dto": "1.0.0",
           "ExcelDataReader": "3.6.0",
           "FirebirdSql.Data.FirebirdClient": "7.10.1",
           "Microsoft.AspNet.WebApi.Client": "5.2.7",
@@ -2631,6 +2633,17 @@
         },
         "compile": {
           "EPM.Core.dll": {}
+        }
+      },
+      "EPM.Fason.Dto/1.0.0": {
+        "dependencies": {
+          "Dapper.Contrib": "2.0.78"
+        },
+        "runtime": {
+          "EPM.Fason.Dto.dll": {}
+        },
+        "compile": {
+          "EPM.Fason.Dto.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery.Reference/3.1.0.0": {
@@ -5695,6 +5708,11 @@
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
     },
     "EPM.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EPM.Fason.Dto/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

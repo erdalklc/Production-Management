@@ -2,22 +2,38 @@
 @model Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>
 
 
-@{
+@using EPM.Fason.Dto.Fason;
+
+@{ 
+    var quantity = Model.Item1.DETAIL.Sum(ob => ob.QUANTITY);
+    var dateval = Model.Item1.DEADLINE.ToString("dd.MM.yyyy");
 }
-@using EPM.Core.FormModels.FasonTakip;
- 
 <div id="form-container">
+    @*@(Html.DevExtreme().Form<PRODUCTION_HEADER>()
+        .ID("formContainer2")
+        .ColCount(10)
+        .Items(items =>
+        {
+            items.AddSimpleFor(m => m.SEASON).Label(lb => lb.Visible(false)).Editor(ed=>ed.TextBox().ID("edSeason").ReadOnly(true));
+            items.AddSimpleFor(m => m.MODEL).Label(lb => lb.Visible(false)).Editor(ed => ed.TextBox().ID("edModel").ReadOnly(true));
+            items.AddSimpleFor(m => m.COLOR).Label(lb=>lb.Visible(false)).Editor(ed => ed.TextBox().ID("edColor").ReadOnly(true));
+            items.AddSimple().Editor(ed => ed.NumberBox().ID("edQuantity").Value(quantity).ReadOnly(true));
+            items.AddSimpleFor(m => m.DEADLINE).Label(lb => lb.Visible(false)).Editor(ed => ed.DateBox().DisplayFormat("dd.MM.yyyy").ID("edDeadline").ReadOnly(true)).IsRequired(false);
+        }).FormData(Model.Item1)
+
+    )*@
+    <h6 style="margin:10px 0">@Model.Item1.SEASON @Model.Item1.MODEL.@Model.Item1.COLOR @quantity ADETLİK SİPARİŞ İÇİN BİLGİLERİ GİRİNİZ </h6>
     <div id="formContainer"></div>
-     
+
     <div class="dx-card wide-card" style="width:49%;min-height:400px;display:inline-block;float:left">
         <div class="dx-field" style="background-color:#03a9f4;margin:5px;padding:10px;color:white">
-            <div class="dx-field-label" style="color:white" >SÜREÇ LİSTESİ</div>
+            <div class="dx-field-label" style="color:white">SÜREÇ LİSTESİ</div>
         </div>
         <div id="plannedList" style="margin:5px"></div>
     </div>
     <div class="dx-card wide-card" style="width: 49%;min-height:400px;display: inline-block; float: right">
         <div class="dx-field" style="background-color:#03a9f4;margin:5px; padding:10px;color:white">
-            <div class="dx-field-label " style="color:white" >SÜREÇ AŞAMALARI</div>
+            <div class="dx-field-label " style="color:white">SÜREÇ AŞAMALARI</div>
         </div>
         <div id="doingList" style="margin:5px"></div>
     </div>
@@ -27,30 +43,64 @@
 <script>
 
     $(function () {
-        $("#formContainer").dxForm({ 
+        $("#formContainer").dxForm({
             labelLocation: "top", // or "left" | "right"
-            colCount:6,
+            colCount: 6,
             items: [{
-                dataField: "firmaBilgi",
-                editorType: "dxSelectBox", 
+                editorType: "dxSelectBox",
+                label: {
+                    text: "FİRMA"
+                },
                 editorOptions: {
                     items: @Html.Raw(Json.Serialize(Model.Item3)),
                     value: 0, valueExpr: "ID",
+                    icon: "link",
                     displayExpr: "NAME",
+                }
+            }, {
+                editorType: "dxDateBox",
+                label: {
+                    text: "TERMİN TARİHİ"
+                }, editorOptions: {
+                    min: new Date(),
+                    displayFormat: "dd.MM.yyyy",
+                    value: new Date(@Model.Item1.DEADLINE.Year+"," +@Model.Item1.DEADLINE.Month+"," +@Model.Item1.DEADLINE.Day)
+                }
+            }, {
+                itemType: "empty"
+            }, {
+                itemType: "empty"
+            }, {
+                itemType: "empty"
+            }, {
+                itemType: "button",
+                alignment: "center",
+                buttonOptions: {
+                    text: "SİPARİŞ OLUŞTUR",
+                    type: "default",
+                    icon: "link",
+                    width: "100%",
+                    onClick: function (e) {
+                        var result = DevExpress.ui.dialog.confirm("<i>Are you sure?</i>", "Confirm changes");
+                        result.done(function (dialogResult) {
+                            alert(dialogResult ? "Confirmed" : "Canceled");
+                        });
+                    }
                 }
             }]
         });
-    }); 
-    var tasks = @Html.Raw(Json.Serialize(Model.Item2));
+
+    });
+    var tasks = [];
+    var others =  @Html.Raw(Json.Serialize(Model.Item2));
     var listPlanned = $("#plannedList").dxList({
-        items: tasks, selectionMode: "none",
-        height: 400,
+        items: tasks, selectionMode: "none", 
         repaintChangesOnly: true, focusStateEnabled: false,
         keyExpr: "ID",
         itemTemplate: function (data, index) {
             return $("<div>")
-                .append($("<div style='display:inline-block;width:49%'>").text(data.NAME))
-                .append($("<div style='display:inline-block;width:49%' id='idText" + data.ID + "' data-value='" + data.TIME + "' data-sirano='" + data.ID + "' >")); 
+                .append($("<div style='display:inline-block;'>").text(data.NAME))
+                .append($("<div style='display:inline-block;width:50px;float:right' id='idText" + data.ID + "' data-value='" + data.TIME + "' data-sirano='" + data.ID + "' >"));
         },
         itemDragging: {
             allowReordering: true,
@@ -68,8 +118,10 @@
             }
         }, onContentReady: function () {
             for (var i = 0; i < tasks.length; i++) {
-                $("#idText" + tasks[i].ID + "").dxTextBox({
+                $("#idText" + tasks[i].ID + "").dxNumberBox({
+                    showSpinButtons: true,
                     value: tasks[i].TIME,
+                    hint: "Gün",
                     onValueChanged: function (data) {
                         for (var a = 0; a < tasks.length; a++) {
                             if (tasks[a].ID == parseFloat(data.element[0].id.replace("idText", ""))) {
@@ -83,15 +135,23 @@
         }
     }).dxList("instance");
 
-    var others = [];
     var listOthers = $("#doingList").dxList({
         items: others, selectionMode: "none",
-        repaintChangesOnly: true, height: 400,
+        repaintChangesOnly: true,
         keyExpr: "ID",
+        allowItemDeleting: true,
+        itemDeleteMode: "swipe",
         itemTemplate: function (data, index) {
             return $("<div>")
-                .append($("<div style='display:inline-block;width:49%'>").text(data.NAME))
-                .append($("<div style='display:inline-block;width:49%' id='idSecondText" + data.ID + "' data-value='" + data.TIME + "' data-sirano='" + data.ID + "' >"));
+                .append($("<div style='display:inline-block;'>").text(data.NAME))
+                .append($("<div style='display:inline-block;width:50px;float:right' id='idSecondText" + data.ID + "' data-value='" + data.TIME + "' data-sirano='" + data.ID + "' >"));
+        },
+        onItemDeleted: function (e) { 
+            if (e.itemData) { 
+                tasks.push(e.itemData);
+                listPlanned.option("items", tasks);
+                listOthers.option("items", others);
+            }
         },
         itemDragging: {
             allowReordering: true,
@@ -109,7 +169,9 @@
             }
         }, onContentReady: function () {
             for (var i = 0; i < others.length; i++) {
-                $("#idSecondText" + others[i].ID + "").dxTextBox({
+                $("#idSecondText" + others[i].ID + "").dxNumberBox({
+                    showSpinButtons: true,
+                    hint:"Gün",
                     value: others[i].TIME,
                     onValueChanged: function (data) {
                         for (var a = 0; a < others.length; a++) {
@@ -119,7 +181,7 @@
                         }
                     }
                 });
-            } 
+            }
         }
     }).dxList("instance");
     function inputChange(array, index, val) {
