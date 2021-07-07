@@ -2,6 +2,7 @@
 using EPM.Fason.Dto.Extensions;
 using EPM.Fason.Dto.Fason;
 using EPM.Fason.Repository.Repository;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -81,7 +82,7 @@ namespace EPM.Fason.Service.Services
                 h.END_DATE = terminTarihi;
                 _fasonRepository.Serialize(h);
                 DateTime end_date = terminTarihi;
-                for (int i = plan.Count; i > 0; i++)
+                for (int i = plan.Count; i > 0; i--)
                 {
                     PRODUCTION_PROCESS p = plan[i - 1];
                     PRODUCTION_LIST_L l = new PRODUCTION_LIST_L();
@@ -109,5 +110,6 @@ namespace EPM.Fason.Service.Services
 
             return obj;
         }
+         
     }
 }

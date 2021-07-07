@@ -370,7 +370,7 @@
         "dependencies": {
           "DevExtreme.AspNet.Data": "2.7.1",
           "Microsoft.AspNetCore.Mvc": "2.0.0",
-          "Newtonsoft.Json": "12.0.3"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/netstandard2.0/DevExtreme.AspNet.Core.dll": {
@@ -385,7 +385,7 @@
       "DevExtreme.AspNet.Data/2.7.1": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
-          "Newtonsoft.Json": "12.0.3"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/netstandard2.0/DevExtreme.AspNet.Data.dll": {
@@ -435,7 +435,7 @@
       },
       "Microsoft.AspNet.WebApi.Client/5.2.7": {
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3",
+          "Newtonsoft.Json": "13.0.1",
           "Newtonsoft.Json.Bson": "1.0.2"
         },
         "runtime": {
@@ -499,8 +499,8 @@
       },
       "Microsoft.AspNetCore.Connections.Abstractions/3.1.14": {
         "dependencies": {
-          "Microsoft.AspNetCore.Http.Features": "3.1.14",
-          "System.IO.Pipelines": "4.7.4"
+          "Microsoft.AspNetCore.Http.Features": "5.0.7",
+          "System.IO.Pipelines": "5.0.1"
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.AspNetCore.Connections.Abstractions.dll": {
@@ -545,7 +545,7 @@
       },
       "Microsoft.AspNetCore.Hosting.Server.Abstractions/2.2.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Http.Features": "3.1.14",
+          "Microsoft.AspNetCore.Http.Features": "5.0.7",
           "Microsoft.Extensions.Configuration.Abstractions": "2.2.0"
         }
       },
@@ -565,7 +565,7 @@
       },
       "Microsoft.AspNetCore.Http.Abstractions/2.2.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Http.Features": "3.1.14",
+          "Microsoft.AspNetCore.Http.Features": "5.0.7",
           "System.Text.Encodings.Web": "4.5.0"
         }
       },
@@ -577,25 +577,25 @@
           "System.Buffers": "4.5.1"
         }
       },
-      "Microsoft.AspNetCore.Http.Features/3.1.14": {
+      "Microsoft.AspNetCore.Http.Features/5.0.7": {
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "3.1.14",
-          "System.IO.Pipelines": "4.7.4"
+          "Microsoft.Extensions.Primitives": "5.0.1",
+          "System.IO.Pipelines": "5.0.1"
         },
         "runtime": {
-          "lib/netcoreapp3.1/Microsoft.AspNetCore.Http.Features.dll": {
-            "assemblyVersion": "3.1.14.0",
-            "fileVersion": "3.100.1421.16608"
+          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.721.26309"
           }
         },
         "compile": {
-          "lib/netcoreapp3.1/Microsoft.AspNetCore.Http.Features.dll": {}
+          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll": {}
         }
       },
       "Microsoft.AspNetCore.JsonPatch/3.1.12": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
-          "Newtonsoft.Json": "12.0.3"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.dll": {
@@ -688,7 +688,7 @@
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson/3.1.12": {
         "dependencies": {
           "Microsoft.AspNetCore.JsonPatch": "3.1.12",
-          "Newtonsoft.Json": "12.0.3",
+          "Newtonsoft.Json": "13.0.1",
           "Newtonsoft.Json.Bson": "1.0.2"
         },
         "runtime": {
@@ -755,7 +755,7 @@
           "Microsoft.AspNetCore.Routing.Abstractions": "2.2.0",
           "Microsoft.Extensions.Caching.Memory": "2.0.0",
           "Microsoft.Extensions.FileSystemGlobbing": "2.0.0",
-          "Microsoft.Extensions.Primitives": "3.1.14"
+          "Microsoft.Extensions.Primitives": "5.0.1"
         }
       },
       "Microsoft.AspNetCore.Mvc.ViewFeatures/2.0.0": {
@@ -794,7 +794,7 @@
       },
       "Microsoft.AspNetCore.ResponseCaching.Abstractions/2.2.0": {
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "3.1.14"
+          "Microsoft.Extensions.Primitives": "5.0.1"
         }
       },
       "Microsoft.AspNetCore.Routing/2.2.0": {
@@ -1066,7 +1066,7 @@
       "Microsoft.CSharp/4.7.0": {},
       "Microsoft.Extensions.Caching.Abstractions/2.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "3.1.14"
+          "Microsoft.Extensions.Primitives": "5.0.1"
         }
       },
       "Microsoft.Extensions.Caching.Memory/2.0.0": {
@@ -1078,7 +1078,7 @@
       },
       "Microsoft.Extensions.Configuration.Abstractions/2.2.0": {
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "3.1.14"
+          "Microsoft.Extensions.Primitives": "5.0.1"
         }
       },
       "Microsoft.Extensions.DependencyInjection/3.1.0": {
@@ -1103,7 +1103,7 @@
       },
       "Microsoft.Extensions.FileProviders.Abstractions/2.2.0": {
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "3.1.14"
+          "Microsoft.Extensions.Primitives": "5.0.1"
         }
       },
       "Microsoft.Extensions.FileProviders.Composite/2.0.0": {
@@ -1134,19 +1134,22 @@
       "Microsoft.Extensions.Options/2.2.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.0",
-          "Microsoft.Extensions.Primitives": "3.1.14",
+          "Microsoft.Extensions.Primitives": "5.0.1",
           "System.ComponentModel.Annotations": "4.5.0"
         }
       },
-      "Microsoft.Extensions.Primitives/3.1.14": {
+      "Microsoft.Extensions.Primitives/5.0.1": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0"
+        },
         "runtime": {
-          "lib/netcoreapp3.1/Microsoft.Extensions.Primitives.dll": {
-            "assemblyVersion": "3.1.14.0",
-            "fileVersion": "3.100.1421.16509"
+          "lib/netcoreapp3.0/Microsoft.Extensions.Primitives.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.521.16609"
           }
         },
         "compile": {
-          "lib/netcoreapp3.1/Microsoft.Extensions.Primitives.dll": {}
+          "lib/netcoreapp3.0/Microsoft.Extensions.Primitives.dll": {}
         }
       },
       "Microsoft.Extensions.WebEncoders/2.0.0": {
@@ -1158,7 +1161,7 @@
       },
       "Microsoft.Net.Http.Headers/2.2.0": {
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "3.1.14",
+          "Microsoft.Extensions.Primitives": "5.0.1",
           "System.Buffers": "4.5.1"
         }
       },
@@ -1181,7 +1184,7 @@
       },
       "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/3.1.5": {
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll": {
@@ -1197,7 +1200,7 @@
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "3.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Templating": "3.1.5",
-          "Newtonsoft.Json": "12.0.3"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll": {
@@ -1259,7 +1262,7 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "3.3.1",
           "Microsoft.VisualStudio.Web.CodeGeneration.Contracts": "3.1.5",
-          "Newtonsoft.Json": "12.0.3",
+          "Newtonsoft.Json": "13.0.1",
           "NuGet.Frameworks": "4.7.0"
         },
         "runtime": {
@@ -1459,11 +1462,11 @@
           "System.Xml.XDocument": "4.3.0"
         }
       },
-      "Newtonsoft.Json/12.0.3": {
+      "Newtonsoft.Json/13.0.1": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
-            "assemblyVersion": "12.0.0.0",
-            "fileVersion": "12.0.3.23909"
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.25517"
           }
         },
         "compile": {
@@ -1472,7 +1475,7 @@
       },
       "Newtonsoft.Json.Bson/1.0.2": {
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3"
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {
@@ -2084,11 +2087,11 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "System.IO.Pipelines/4.7.4": {
+      "System.IO.Pipelines/5.0.1": {
         "runtime": {
           "lib/netcoreapp3.0/System.IO.Pipelines.dll": {
-            "assemblyVersion": "4.0.2.3",
-            "fileVersion": "4.700.20.56604"
+            "assemblyVersion": "5.0.0.1",
+            "fileVersion": "5.0.120.57516"
           }
         },
         "compile": {
@@ -2622,7 +2625,7 @@
           "Microsoft.AspNetCore.Http": "2.2.2",
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
           "MongoDB.Driver": "2.12.2",
-          "Newtonsoft.Json": "12.0.3",
+          "Newtonsoft.Json": "13.0.1",
           "Oracle.ManagedDataAccess.Core": "3.21.1",
           "System.Collections": "4.3.0",
           "System.Data.SqlClient": "4.8.2",
@@ -2637,7 +2640,10 @@
       },
       "EPM.Fason.Dto/1.0.0": {
         "dependencies": {
-          "Dapper.Contrib": "2.0.78"
+          "Dapper.Contrib": "2.0.78",
+          "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
+          "Microsoft.AspNetCore.Http.Features": "5.0.7",
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "EPM.Fason.Dto.dll": {}
@@ -4482,12 +4488,12 @@
       "path": "microsoft.aspnetcore.http.extensions/2.2.0",
       "hashPath": "microsoft.aspnetcore.http.extensions.2.2.0.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Http.Features/3.1.14": {
+    "Microsoft.AspNetCore.Http.Features/5.0.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Et9jvGWoo7DgcFeVmxApDbdWbh23Afsg9QkUi6EIvZnQTCRBkh8UAOHprKh02B4AUYL2E0PtNeQdPSwprQe/hA==",
-      "path": "microsoft.aspnetcore.http.features/3.1.14",
-      "hashPath": "microsoft.aspnetcore.http.features.3.1.14.nupkg.sha512"
+      "sha512": "sha512-bF4sJrrHHFooGKjGMCU+qqEz0gTRSHDieYXCgn18ci8gV3VS5wIOP2d0WEXV5WmjDzXxfCLoQpBJIl4rogdSdA==",
+      "path": "microsoft.aspnetcore.http.features/5.0.7",
+      "hashPath": "microsoft.aspnetcore.http.features.5.0.7.nupkg.sha512"
     },
     "Microsoft.AspNetCore.JsonPatch/3.1.12": {
       "type": "package",
@@ -4811,12 +4817,12 @@
       "path": "microsoft.extensions.options/2.2.0",
       "hashPath": "microsoft.extensions.options.2.2.0.nupkg.sha512"
     },
-    "Microsoft.Extensions.Primitives/3.1.14": {
+    "Microsoft.Extensions.Primitives/5.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-OusiQZUlEHI5MwfIymyJgY8nN0bKqCsGvALG0khcNkO9h8H8d4wtakaKBQORDlKkYYLSq/pap7wRUxh6eLs3vg==",
-      "path": "microsoft.extensions.primitives/3.1.14",
-      "hashPath": "microsoft.extensions.primitives.3.1.14.nupkg.sha512"
+      "sha512": "sha512-5WPSmL4YeP7eW+Vc8XZ4DwjYWBAiSwDV9Hm63JJWcz1Ie3Xjv4KuJXzgCstj48LkLfVCYa7mLcx7y+q6yqVvtw==",
+      "path": "microsoft.extensions.primitives/5.0.1",
+      "hashPath": "microsoft.extensions.primitives.5.0.1.nupkg.sha512"
     },
     "Microsoft.Extensions.WebEncoders/2.0.0": {
       "type": "package",
@@ -4958,12 +4964,12 @@
       "path": "netstandard.library/1.6.1",
       "hashPath": "netstandard.library.1.6.1.nupkg.sha512"
     },
-    "Newtonsoft.Json/12.0.3": {
+    "Newtonsoft.Json/13.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
-      "path": "newtonsoft.json/12.0.3",
-      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+      "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "path": "newtonsoft.json/13.0.1",
+      "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
     },
     "Newtonsoft.Json.Bson/1.0.2": {
       "type": "package",
@@ -5364,12 +5370,12 @@
       "path": "system.io.filesystem.primitives/4.3.0",
       "hashPath": "system.io.filesystem.primitives.4.3.0.nupkg.sha512"
     },
-    "System.IO.Pipelines/4.7.4": {
+    "System.IO.Pipelines/5.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-TQqNjDcTVu6eTDB2S0vjSUhn0udEugL93D9zgsOsSiJO1kv1UWDM2o0+79H95I5X+S0VPEzm4ihj6KPwhNEb7g==",
-      "path": "system.io.pipelines/4.7.4",
-      "hashPath": "system.io.pipelines.4.7.4.nupkg.sha512"
+      "sha512": "sha512-qEePWsaq9LoEEIqhbGe6D5J8c9IqQOUuTzzV6wn1POlfdLkJliZY3OlB0j0f17uMWlqZYjH7txj+2YbyrIA8Yg==",
+      "path": "system.io.pipelines/5.0.1",
+      "hashPath": "system.io.pipelines.5.0.1.nupkg.sha512"
     },
     "System.Linq/4.3.0": {
       "type": "package",

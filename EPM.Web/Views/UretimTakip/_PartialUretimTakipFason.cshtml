@@ -85,10 +85,11 @@
                                 console.log(formData);
                                 $.ajax({
                                     type: "POST",
-                                    url: '@Url.Action("FasonSiparisOlusturAsync", "UretimTakip")',
-                                    data: formData,
+                                    url: '@Url.Action("FasonSiparisOlustur", "UretimTakip")',
+                                    data:  formData,
                                     async: false,
-                                    contentType: 'application/json',
+                                    dataType:"json",
+                                    //contentType: 'application/json',
                                     timeout: 180000,
                                     success: function (income, status, xmlRequest) {
                                         $("#edReportDetail").html(income);

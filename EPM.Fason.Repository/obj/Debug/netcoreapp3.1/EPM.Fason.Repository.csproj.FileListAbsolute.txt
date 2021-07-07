@@ -1,12 +1,3 @@
-E:\Eren\Eren Production Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.deps.json
-E:\Eren\Eren Production Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.dll
-E:\Eren\Eren Production Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.pdb
-E:\Eren\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.csprojAssemblyReference.cache
-E:\Eren\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.AssemblyInfoInputs.cache
-E:\Eren\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.AssemblyInfo.cs
-E:\Eren\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.csproj.CoreCompileInputs.cache
-E:\Eren\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.dll
-E:\Eren\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.pdb
 D:\Projects\Eren Production Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.deps.json
 D:\Projects\Eren Production Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.dll
 D:\Projects\Eren Production Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.pdb
@@ -15,3 +6,11 @@ D:\Projects\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp
 D:\Projects\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.dll
 D:\Projects\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.pdb
+E:\Eren\Eren Production Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.deps.json
+E:\Eren\Eren Production Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.dll
+E:\Eren\Eren Production Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.pdb
+E:\Eren\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.AssemblyInfoInputs.cache
+E:\Eren\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.AssemblyInfo.cs
+E:\Eren\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.csproj.CoreCompileInputs.cache
+E:\Eren\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.dll
+E:\Eren\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.pdb

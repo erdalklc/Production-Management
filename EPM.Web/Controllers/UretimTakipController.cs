@@ -40,6 +40,7 @@ namespace EPM.Web.Controllers
 
         [HttpPost, HttpGet]
         public IActionResult _PartiaEgemenGerceklesenFiltrele(KaliteGerceklesenFilter liste) => PartialView(liste);
+
         [HttpPost, HttpGet]
         public IActionResult _PartialUretimTakipFiltrele(UretimOnayliListe liste) => PartialView(liste);
 
@@ -59,25 +60,15 @@ namespace EPM.Web.Controllers
             }
 
         }
-        [HttpPost, HttpGet]
-        public IActionResult FasonSiparisOlusturAsync2([FromBody]PRODUCTION_HEADER header, [FromQuery(Name = "plan")] List<PRODUCTION_PROCESS> plan, [FromQuery(Name = "firmaBilgi")] int firmaBilgi, [FromQuery(Name = "terminTarihi")] DateTime terminTarihi)
-        {
-            return Ok();
-            //object[] obj =await _uretimTakipRepository.FasonSiparisOlusturAsync(_config.Value.FasonTakip, header, plan, firmaBilgi, terminTarihi);
-            //if ((bool)obj[0])
-            //    return Ok();
-            //else return BadRequest(obj[1].ToString());
-        }
-        [HttpPost, HttpGet]
-        public IActionResult FasonSiparisOlusturAsync(PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan,int firmaBilgi,DateTime terminTarihi)
-        {
-            return Ok();
-            //object[] obj =await _uretimTakipRepository.FasonSiparisOlusturAsync(_config.Value.FasonTakip, header, plan, firmaBilgi, terminTarihi);
-            //if ((bool)obj[0])
-            //    return Ok();
-            //else return BadRequest(obj[1].ToString());
-        }
 
+        public async Task<IActionResult> FasonSiparisOlustur(PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan,int firmaBilgi,DateTime terminTarihi)
+        {
+            object[] obj = await _uretimTakipRepository.FasonSiparisOlusturAsync(_config.Value.FasonTakip, header, plan, firmaBilgi, terminTarihi);
+            if ((bool)obj[0])
+                return Ok();
+            else return BadRequest(obj[1].ToString());
+        } 
+         
         public IActionResult _PartialEgemenOrmeList(string TAKIP_NO, int DETAIL_TAKIP_NO)
         {
             object[] values = { TAKIP_NO, DETAIL_TAKIP_NO };

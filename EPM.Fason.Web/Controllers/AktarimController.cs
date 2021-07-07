@@ -33,11 +33,13 @@ namespace EPM.Fason.Web.Controllers
 
         [HttpGet]
         public ActionResult<IEnumerable<PRODUCTION_FASON_USERS>> GetFasonUsers() => _aktarimService.GetFasonUsers();
+        
+
 
         [HttpPost]
-        public ActionResult CreateOrder(Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, int, DateTime> t)
+        public ActionResult CreateOrder(CREATEORDER order)
         { 
-            object[] obj= _aktarimService.SiparisOlustur(t.Item1, t.Item2, t.Item3, t.Item4);
+            object[] obj= _aktarimService.SiparisOlustur(order.header, order.plan, order.firma, order.termin);
             if ((bool)obj[0])
                 return Ok();
             else return BadRequest(obj[1].ToString());

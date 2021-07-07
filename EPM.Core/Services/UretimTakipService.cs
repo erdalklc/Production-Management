@@ -192,7 +192,7 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
 
         public IEnumerable<UretimTakipListesi> GetUretimTakipListesi(HttpContext context, UretimOnayliListe liste)
         {
-            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            Models.WebLogin user = new CookieHelper().GetUserFromCookie(context);
             string sql = @" SELECT A.*,
        CASE
           WHEN SATIN_ALMA_BAGLANTI > 0
@@ -448,7 +448,7 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
 
         public IEnumerable<ContractProcessList> GetContractProcessList(HttpContext context, int HEADER_ID)
         {
-            WebLogin login = new CookieHelper().GetUserFromCookie(context);
+            Models.WebLogin login = new CookieHelper().GetUserFromCookie(context);
             EPM_MASTER_PRODUCTION_H master = OracleServer.Deserialize<EPM_MASTER_PRODUCTION_H>(HEADER_ID);
             EPM_CONTRACT_TRACK_H header = OracleServer.Deserialize<EPM_CONTRACT_TRACK_H>("SELECT * FROM FDEIT005.EPM_CONTRACT_TRACK_H WHERE HEADER_ID=" + HEADER_ID);
             List<EPM_CONTRACT_TRACK_L> detail = OracleServer.DeserializeList<EPM_CONTRACT_TRACK_L>("SELECT * FROM FDEIT005.EPM_CONTRACT_TRACK_H WHERE HEADER_ID=" + header.ID);
@@ -534,7 +534,7 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
    FROM FDEIT005.EPM_PRODUCTION_ORDER_V   WHERE ID={0}", HEADER_ID));
 
             HttpCaller caller = new HttpCaller();
-            object[] sonuc = await caller.PostAsync(Url + "FasonUretimInsert", header);
+            //object[] sonuc = await caller.PostAsync(Url + "FasonUretimInsert", header);
 
             List<PRODUCTION_PROCESS> processList = await caller.GetListAsync<PRODUCTION_PROCESS>(Url + "GetProcessList");
 
@@ -551,8 +551,13 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
 
         public async Task<object[]> FasonSiparisOlusturAsync(string url, PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan, int firmaBilgi, DateTime terminTarihi)
         {
+            CREATEORDER order = new CREATEORDER();
+            order.header = header;
+            order.plan = plan;
+            order.firma = firmaBilgi;
+            order.termin = terminTarihi;
             HttpCaller caller = new HttpCaller();
-            object[] sonuc = await caller.PostAsync(url + "CreateOrder", new Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, int, DateTime>(header,plan,firmaBilgi,terminTarihi));
+            object[] sonuc = await caller.PostAsync(url + "CreateOrder", order);
             return sonuc;
         }
     }

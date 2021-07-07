@@ -27,7 +27,9 @@ namespace EPM.Fason.Web
         {
             services.AddRazorPages().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddScoped<IAktarimService, AktarimService>();
+            services.AddScoped<ILoginService, LoginService>();
             services.AddSingleton<IFasonRepository, FasonRepository>();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,10 +53,10 @@ namespace EPM.Fason.Web
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapRazorPages();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Login}/{action=Login}/{id?}");
             });
         }
     }

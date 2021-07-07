@@ -4628,10 +4628,11 @@
   background-color: rgba(0,0,0,.14);
   color: #000;
 }
-.dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-state-focused {
-  background-color: rgba(0,0,0,.04);
-  color: rgba(0,0,0,.87);
-}
+    .dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-state-focused {
+        /*background-color: rgba(0,0,0,.04);*/
+        background-color: #337ab7;
+        color: white;
+    }
 .dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-state-focused.dx-list-item-selected {
   background-color: rgba(0,0,0,.18);
   color: #000;

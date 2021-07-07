@@ -1,71 +1,234 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+body, html {
+    margin: 0;
+    min-height: 100%;
+    height: 100%;
+    font-size:10px!important;
+}
+.dx-widget{
+    font-size:10px!important;
+}
+.dx-card{
+    padding:3px 10px!important;
+}
+#app-side-nav-outer-toolbar {
+    flex-direction: column;
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+.dx-fileuploader-file-status-message{
+    height:240px!important;
+}
+.dx-list-item-content, .dx-lookup-field {
+    font-size: 10px !important;
+}
+.layout-header {
+    flex: 0 0 auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    position: relative;
+    z-index: 1501;
+}
+.dx-drawer-panel-content{
+    width:220px!important;
+}
+.dx-treeview-item .dx-treeview-item-content span{
+    font-size:10px!important;
+    text-transform:uppercase;
+}
+.dx-scrollbar-horizontal {
+    height: 20px !important;
+}
+    .dx-scrollbar-horizontal .dx-scrollable-scroll{
+        height:20px!important;
+    }
+.dx-scrollbar-vertical {
+    width: 20px !important;
+    min-height:40px!important;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+    .dx-scrollbar-vertical .dx-scrollable-scroll {
+        width: 20px !important;
+        min-height: 40px !important;
+    }
+    .main-container {
+        border-radius: 2px;
+        background-color: white;
+    }
+.dx-toolbar .dx-toolbar-item.menu-button {
+    width: 60px;
+    text-align: center;
+    padding: 0;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    .dx-toolbar .dx-toolbar-item.menu-button > .dx-toolbar-item-content .dx-icon {
+        color: #35baf6;
+    }
+
+.dx-card {
+    box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+    border-radius: 4px;
+    background-color: #fff;
+    margin: 2px 2px 3px;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.dx-card.wide-card {
+    border-radius: 0;
+    margin-left: 0;
+    margin-right: 0;
+    border-right: 0;
+    border-left: 0;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.with-footer > div > div > .dx-scrollable-content {
+    height: 100%;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.with-footer > div > div > .dx-scrollable-content > .dx-scrollview-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.layout-body {
+    background-color: #f2f2f2;
+    flex: 1;
+    height: 100%;
+    min-height: 0;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+.layout-body .menu-container {
+    height: 100%;
+    width: 220px;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+.layout-body .content {
+    flex-grow: 1;
+    height: 100%;
+    line-height: 1.5;
+    padding:0 4px;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+
+.layout-body .content h2 {
+    font-size: 30px;
+    font-weight: 300;
+    letter-spacing: -.5px;
+}
+
+.layout-body .content-block {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.layout-body .content-footer {
+    display: block;
+    color: rgba(0,0,0,.609);
+    border-top: 1px solid rgba(0,0,0,.1);
+    padding-top: 20px;
+    padding-bottom: 24px;
+}
+
+.layout-body .responsive-paddings {
+    padding: 20px;
+}
+
+.layout-body-hidden {
+    visibility: hidden;
+}
+
+@media screen and (min-width: 600px) {
+    .layout-body .content-block {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .layout-body .responsive-paddings {
+        padding: 40px;
+    }
+}
+
+.menu-container .dx-widget {
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: Roboto,RobotoFallback,Helvetica,Arial,sans-serif;
+    line-height: 24px;
+}
+
+.menu-container .dx-treeview {
+    white-space: nowrap;
+}
+
+.menu-container .dx-treeview .dx-treeview-item {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.menu-container .dx-treeview .dx-treeview-item .dx-icon {
+    width: 40px !important;
+    margin: 0 !important;
+}
+
+.menu-container .dx-treeview .dx-treeview-node {
+    padding: 0 0 !important;
+}
+
+.menu-container .dx-treeview .dx-treeview-toggle-item-visibility {
+    right: 10px;
+    left: auto;
+}
+
+.menu-container .dx-treeview .dx-rtl .dx-treeview-toggle-item-visibility {
+    left: 10px;
+    right: auto;
+}
+
+.menu-container .dx-treeview .dx-treeview-node[aria-level="1"] {
+    font-weight: bold;
+    border-bottom: 1px solid #515159;
+}
+
+.menu-container .dx-treeview .dx-treeview-node[aria-level="2"] .dx-treeview-item-content {
+    font-weight: normal;
+   /* padding: 0 10px;*/
+}
+
+.menu-container .dx-treeview .dx-treeview-node-container .dx-treeview-node.dx-state-selected:not(.dx-state-focused) > .dx-treeview-item {
+    background: transparent;
+}
+
+    .menu-container .dx-treeview .dx-treeview-node-container .dx-treeview-node.dx-state-selected > .dx-treeview-item * {
+        color: #35baf6;
+    }
+
+.menu-container .dx-treeview .dx-treeview-node-container .dx-treeview-node:not(.dx-state-focused) > .dx-treeview-item.dx-state-hover {
+    background-color: #3F3F4B;
+}
+
+
+.dx-swatch-additional .dx-treeview-item-without-checkbox.dx-state-focused > .dx-treeview-item {
+    background-color: #35baf6;
+    color: #fff;
+}
+.dx-datagrid .dx-row > td {
+    padding-top: 8px!important;
+    padding-bottom: 8px!important;
+    font-size: 10px!important;
+    line-height: 14px!important;
+}
+.dx-datagrid-headers .dx-datagrid-table .dx-row > td {
+    border-bottom: 1px solid #e0e0e0;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    line-height: 14px!important;
+    font-weight: 500;
+    font-size: 11px!important;
+}
+.dx-texteditor-input {
+    margin: 0;
+    background-color: transparent;
+    color: rgba(0,0,0,.87);
+    font-size: 11px!important;
 }

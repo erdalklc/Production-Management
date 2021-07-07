@@ -1,0 +1,21 @@
+﻿body{
+    background:#cacaca!important;
+}
+.login-container {
+    width: 380px;
+    padding-left: calc((100vw - 380px) / 2);
+    padding-top: 100px;
+}
+.login-form {
+    background-color: white;
+    border-radius: 2px;
+    padding: 20px;
+}
+
+.login-img {
+    max-width: 100%;
+    height: auto;
+    width: 190px;
+    margin:auto;
+    display:flex
+} 
