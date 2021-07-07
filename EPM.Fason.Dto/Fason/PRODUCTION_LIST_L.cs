@@ -13,6 +13,8 @@ namespace EPM.Fason.Dto.Fason
         public int STATUS { get; set; }
         public int PROCESS_ID { get; set; }
         public int QUEUE { get; set; }
+        public int TIME { get; set; }
+        public int HANDLE_SIDE { get; set; }
         public DateTime START_DATE { get; set; }
         public DateTime END_DATE { get; set; }
     }

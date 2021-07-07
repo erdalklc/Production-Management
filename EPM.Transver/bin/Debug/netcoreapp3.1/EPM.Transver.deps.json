@@ -1580,6 +1580,7 @@
         "dependencies": {
           "Dapper.Contrib": "2.0.78",
           "Dapper.Oracle": "2.0.2",
+          "EPM.Fason.Dto": "1.0.0",
           "ExcelDataReader": "3.6.0",
           "FirebirdSql.Data.FirebirdClient": "7.10.1",
           "Microsoft.AspNet.WebApi.Client": "5.2.7",
@@ -1594,6 +1595,14 @@
         },
         "runtime": {
           "EPM.Core.dll": {}
+        }
+      },
+      "EPM.Fason.Dto/1.0.0": {
+        "dependencies": {
+          "Dapper.Contrib": "2.0.78"
+        },
+        "runtime": {
+          "EPM.Fason.Dto.dll": {}
         }
       }
     }
@@ -2606,6 +2615,11 @@
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
     },
     "EPM.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EPM.Fason.Dto/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

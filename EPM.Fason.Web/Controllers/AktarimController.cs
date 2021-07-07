@@ -1,6 +1,7 @@
 ﻿using EPM.Fason.Dto.Fason;
 using EPM.Fason.Service.Services;
-using Microsoft.AspNetCore.Mvc; 
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace EPM.Fason.Web.Controllers
@@ -32,5 +33,14 @@ namespace EPM.Fason.Web.Controllers
 
         [HttpGet]
         public ActionResult<IEnumerable<PRODUCTION_FASON_USERS>> GetFasonUsers() => _aktarimService.GetFasonUsers();
+
+        [HttpPost]
+        public ActionResult CreateOrder(Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, int, DateTime> t)
+        { 
+            object[] obj= _aktarimService.SiparisOlustur(t.Item1, t.Item2, t.Item3, t.Item4);
+            if ((bool)obj[0])
+                return Ok();
+            else return BadRequest(obj[1].ToString());
+        }
     }
 }

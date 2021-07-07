@@ -1,3 +1,5 @@
+E:\Eren\Eren-Production-Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.dll
+E:\Eren\Eren-Production-Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.pdb
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Transver.exe
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Transver.deps.json
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Transver.runtimeconfig.json
@@ -6,8 +8,11 @@ D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Transver.pdb
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Dapper.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Dapper.Contrib.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Dapper.Oracle.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\DnsClient.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\ExcelDataReader.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\FirebirdSql.Data.FirebirdClient.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Abstractions.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Core.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authorization.dll
@@ -37,8 +42,14 @@ D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Micr
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.Net.Http.Headers.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\MongoDB.Driver.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\MongoDB.Driver.Core.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\MongoDB.Libmongocrypt.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Oracle.ManagedDataAccess.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\SharpCompress.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.Diagnostics.PerformanceCounter.dll
@@ -47,6 +58,7 @@ D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Syst
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.DirectoryServices.Protocols.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.IO.FileSystem.AccessControl.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.Security.AccessControl.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.Security.Permissions.dll
@@ -54,6 +66,12 @@ D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Syst
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.Text.Json.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.Windows.Extensions.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win\native\libzstd.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy32.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy64.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\linux\native\libmongocrypt.so
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\osx\native\libmongocrypt.dylib
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win\native\mongocrypt.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
@@ -74,7 +92,9 @@ D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runt
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Core.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Fason.Dto.dll
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Core.pdb
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Fason.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.AssemblyInfo.cs
@@ -83,21 +103,3 @@ D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.dll
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.pdb
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.genruntimeconfig.cache
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Dapper.Oracle.dll
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\DnsClient.dll
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\MongoDB.Driver.dll
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\MongoDB.Driver.Core.dll
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\MongoDB.Libmongocrypt.dll
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\SharpCompress.dll
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win\native\libzstd.dll
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy32.dll
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy64.dll
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\linux\native\libmongocrypt.so
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\osx\native\libmongocrypt.dylib
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\runtimes\win\native\mongocrypt.dll
-E:\Eren\Eren-Production-Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.dll
-E:\Eren\Eren-Production-Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.pdb
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
-D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll

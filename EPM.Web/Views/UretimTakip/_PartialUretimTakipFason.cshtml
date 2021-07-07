@@ -9,19 +9,7 @@
     var dateval = Model.Item1.DEADLINE.ToString("dd.MM.yyyy");
 }
 <div id="form-container">
-    @*@(Html.DevExtreme().Form<PRODUCTION_HEADER>()
-        .ID("formContainer2")
-        .ColCount(10)
-        .Items(items =>
-        {
-            items.AddSimpleFor(m => m.SEASON).Label(lb => lb.Visible(false)).Editor(ed=>ed.TextBox().ID("edSeason").ReadOnly(true));
-            items.AddSimpleFor(m => m.MODEL).Label(lb => lb.Visible(false)).Editor(ed => ed.TextBox().ID("edModel").ReadOnly(true));
-            items.AddSimpleFor(m => m.COLOR).Label(lb=>lb.Visible(false)).Editor(ed => ed.TextBox().ID("edColor").ReadOnly(true));
-            items.AddSimple().Editor(ed => ed.NumberBox().ID("edQuantity").Value(quantity).ReadOnly(true));
-            items.AddSimpleFor(m => m.DEADLINE).Label(lb => lb.Visible(false)).Editor(ed => ed.DateBox().DisplayFormat("dd.MM.yyyy").ID("edDeadline").ReadOnly(true)).IsRequired(false);
-        }).FormData(Model.Item1)
-
-    )*@
+   
     <h6 style="margin:10px 0">@Model.Item1.SEASON @Model.Item1.MODEL.@Model.Item1.COLOR @quantity ADETLİK SİPARİŞ İÇİN BİLGİLERİ GİRİNİZ </h6>
     <div id="formContainer"></div>
 
@@ -48,6 +36,7 @@
             colCount: 6,
             items: [{
                 editorType: "dxSelectBox",
+                name: "firmaBilgi",
                 label: {
                     text: "FİRMA"
                 },
@@ -59,6 +48,7 @@
                 }
             }, {
                 editorType: "dxDateBox",
+                name: "terminTarihi",
                 label: {
                     text: "TERMİN TARİHİ"
                 }, editorOptions: {
@@ -81,9 +71,35 @@
                     icon: "link",
                     width: "100%",
                     onClick: function (e) {
-                        var result = DevExpress.ui.dialog.confirm("<i>Are you sure?</i>", "Confirm changes");
+                        var result = DevExpress.ui.dialog.confirm("Süreç Oluşturulup Firma Bilgilendirilecektir. Onaylıyor musunuz ?", "Süreç Oluşturma");
                         result.done(function (dialogResult) {
-                            alert(dialogResult ? "Confirmed" : "Canceled");
+                            if (dialogResult) {
+                                var firmaBilgi = $("#formContainer").dxForm("instance").getEditor("firmaBilgi").option("value");
+                                var terminTarihi = $("#formContainer").dxForm("instance").getEditor("terminTarihi").option("text");
+                                var formData = {
+                                    header: @Json.Serialize(Model.Item1),
+                                    plan: others,
+                                    firmaBilgi: firmaBilgi,
+                                    terminTarihi: terminTarihi
+                                }
+                                console.log(formData);
+                                $.ajax({
+                                    type: "POST",
+                                    url: '@Url.Action("FasonSiparisOlusturAsync", "UretimTakip")',
+                                    data: formData,
+                                    async: false,
+                                    contentType: 'application/json',
+                                    timeout: 180000,
+                                    success: function (income, status, xmlRequest) {
+                                        $("#edReportDetail").html(income);
+
+                                    }, beforeSend: function () {
+                                    }
+
+
+                                }).always(function () {
+                                });
+                            }
                         });
                     }
                 }
@@ -94,7 +110,7 @@
     var tasks = [];
     var others =  @Html.Raw(Json.Serialize(Model.Item2));
     var listPlanned = $("#plannedList").dxList({
-        items: tasks, selectionMode: "none", 
+        items: tasks, selectionMode: "none",
         repaintChangesOnly: true, focusStateEnabled: false,
         keyExpr: "ID",
         itemTemplate: function (data, index) {
@@ -146,8 +162,8 @@
                 .append($("<div style='display:inline-block;'>").text(data.NAME))
                 .append($("<div style='display:inline-block;width:50px;float:right' id='idSecondText" + data.ID + "' data-value='" + data.TIME + "' data-sirano='" + data.ID + "' >"));
         },
-        onItemDeleted: function (e) { 
-            if (e.itemData) { 
+        onItemDeleted: function (e) {
+            if (e.itemData) {
                 tasks.push(e.itemData);
                 listPlanned.option("items", tasks);
                 listOthers.option("items", others);

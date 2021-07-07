@@ -5,6 +5,7 @@ using EPM.Core.FormModels.UretimTakip;
 using EPM.Core.Managers;
 using EPM.Core.Models;
 using EPM.Core.Services;
+using EPM.Fason.Dto.Fason;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
@@ -58,6 +59,24 @@ namespace EPM.Web.Controllers
             }
 
         }
+        [HttpPost, HttpGet]
+        public IActionResult FasonSiparisOlusturAsync2([FromBody]PRODUCTION_HEADER header, [FromQuery(Name = "plan")] List<PRODUCTION_PROCESS> plan, [FromQuery(Name = "firmaBilgi")] int firmaBilgi, [FromQuery(Name = "terminTarihi")] DateTime terminTarihi)
+        {
+            return Ok();
+            //object[] obj =await _uretimTakipRepository.FasonSiparisOlusturAsync(_config.Value.FasonTakip, header, plan, firmaBilgi, terminTarihi);
+            //if ((bool)obj[0])
+            //    return Ok();
+            //else return BadRequest(obj[1].ToString());
+        }
+        [HttpPost, HttpGet]
+        public IActionResult FasonSiparisOlusturAsync(PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan,int firmaBilgi,DateTime terminTarihi)
+        {
+            return Ok();
+            //object[] obj =await _uretimTakipRepository.FasonSiparisOlusturAsync(_config.Value.FasonTakip, header, plan, firmaBilgi, terminTarihi);
+            //if ((bool)obj[0])
+            //    return Ok();
+            //else return BadRequest(obj[1].ToString());
+        }
 
         public IActionResult _PartialEgemenOrmeList(string TAKIP_NO, int DETAIL_TAKIP_NO)
         {
@@ -82,16 +101,19 @@ namespace EPM.Web.Controllers
             object[] values = { ITEM_ID, PO_HEADER_ID, RENK_DETAY };
             return PartialView(values);
         }
+
         public IActionResult _PartialKaliteList(int ITEM_ID, int PO_HEADER_ID, string RENK_DETAY)
         {
             object[] values = { ITEM_ID, PO_HEADER_ID, RENK_DETAY };
             return PartialView(values);
         }
+
         public IActionResult _PartialProcessInformations(int PO_HEADER_ID, int DETAIL_ID, int HEADER_ID)
         {
             int[] values = { PO_HEADER_ID, DETAIL_ID, HEADER_ID };
             return PartialView(values);
         }
+
         [HttpGet]
         public object TabPanelListLoad(DataSourceLoadOptions loadOptions)
         {

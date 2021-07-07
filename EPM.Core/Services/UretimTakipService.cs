@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
+using System.Linq; 
 using System.Text;
 using System.Threading.Tasks;
 
@@ -110,6 +110,7 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
             return bantBitisler;
 
         }
+
         public object GetProductionDetail(int PO_HEADER_ID, int DETAIL_TAKIP_NO, int ITEM_ID , string RENKDETAY, string MODEL)
         {
             EgemenDevanlayHelper devanlayHelper = new EgemenDevanlayHelper();
@@ -546,12 +547,13 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
             #endregion Belge Insert
             return new Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>(header, processList, fasonUsers);
 
-        }
+        } 
 
-        public void TestCall(string url)
+        public async Task<object[]> FasonSiparisOlusturAsync(string url, PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan, int firmaBilgi, DateTime terminTarihi)
         {
             HttpCaller caller = new HttpCaller();
-            var a = caller.GetAsync<PRODUCTION_PROCESS>(url + "GetProcessList");
+            object[] sonuc = await caller.PostAsync(url + "CreateOrder", new Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, int, DateTime>(header,plan,firmaBilgi,terminTarihi));
+            return sonuc;
         }
     }
 

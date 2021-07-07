@@ -14,15 +14,15 @@ namespace EPM.Core.Services
     {
         public List<SatinAlmaDetay> SatinAlmaDetay(int HEADER_ID);
 
-        public List<SurecBilgileri> GetProcessInformations(int PO_HEADER_ID, int DETAIL_ID,int HEADER_ID);
+        public List<SurecBilgileri> GetProcessInformations(int PO_HEADER_ID, int DETAIL_ID, int HEADER_ID);
 
         public object GetProductionDetail(int PO_HEADER_ID, int DETAIL_TAKIP_NO, int ITEM_ID, string RENKDETAY, string MODEL);
 
         public List<KaliteGerceklesen> GetKaliteGerceklesenler(KaliteGerceklesenFilter filter);
 
-        public IEnumerable<UretimTakipListesi> GetUretimTakipListesi(HttpContext context, UretimOnayliListe liste); 
+        public IEnumerable<UretimTakipListesi> GetUretimTakipListesi(HttpContext context, UretimOnayliListe liste);
 
-        public IEnumerable<EPM_MASTER_PRODUCTION_ORDERS> ProductionOrderList(int HEADER_ID); 
+        public IEnumerable<EPM_MASTER_PRODUCTION_ORDERS> ProductionOrderList(int HEADER_ID);
 
         public object[] ProductionOrdersInsert(string Values);
 
@@ -48,6 +48,6 @@ namespace EPM.Core.Services
 
         public Task<Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>> FasonTakipListeAyarlaAsync(string Url, int HEADER_ID);
 
-        public void TestCall(string url);
+        public Task<object[]> FasonSiparisOlusturAsync(string url, PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan, int firmaBilgi, DateTime terminTarihi);
     }
 }
