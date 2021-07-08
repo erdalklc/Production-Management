@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewData["Title"] = "Fason Sipariş Listesi";
+}
+
+@model EPM.Fason.Dto.Fason.SIPARIS_FILTER
+
+
+<div id="form-container">
+    <div class="dx-card wide-card">
+        @(Html.DevExtreme().Form<EPM.Fason.Dto.Fason.SIPARIS_FILTER>()
+        .ID("edOnayliListe").ShowValidationSummary(true)
+        .ColCount(9)
+        .Items(items =>
+        {
+
+            items.AddSimpleFor(m => m.BASLANGIC_TARIHI).Editor(ob => ob.DateBox()).IsRequired(false);
+            items.AddSimpleFor(m => m.BITIS_TARIHI).Editor(ob => ob.DateBox()).IsRequired(false);
+            items.AddSimpleFor(m => m.MODEL).Editor(ob=>ob.TextBox().ID("edModel")).IsRequired(false);
+            items.AddSimpleFor(m => m.COLOR).Editor(ob=>ob.TextBox().ID("edColor")).IsRequired(false);
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddButton().HorizontalAlignment(HorizontalAlignment.Left).VerticalAlignment(VerticalAlignment.Center)
+                   .ButtonOptions(b => b.Text("FİLTRELE")
+                       .Type(ButtonType.Default)
+                       .Icon("fas fa-sign-in-alt")
+                       .Width("100%")
+                       .OnClick("FasonSiparisFiltrele")
+                       .UseSubmitBehavior(true)
+               );
+
+        })
+        .FormData(Model).ShowValidationSummary(false)
+    )
+        <div id="popup"></div>
+        <div id="popupDetay"></div>
+        <div id="edListe">
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function FasonSiparisFiltrele() {
+        $("#edListe").html("");
+        var data = {
+            BASLANGIC_TARIHI: jQuery("[name=BASLANGIC_TARIHI]").val(),
+            BITIS_TARIHI: jQuery("[name=BITIS_TARIHI]").val(),
+            MODEL: jQuery("[name=MODEL]").val(),
+            COLOR: jQuery("[name=COLOR]").val(), 
+        };
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("_PartialUretimTakipFiltrele", "UretimTakip")',
+            data: data,
+            contentType: 'application/x-www-form-urlencoded',
+            timeout: 180000,
+            success: function (income, status, xmlRequest) {
+                $("#edListe").html(income);
+
+            }, beforeSend: function () {
+                getLoadPanelInstance().show();
+            }
+
+
+        }).always(function () {
+            getLoadPanelInstance().hide();
+        });
+    }
+</script>
+

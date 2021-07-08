@@ -26,7 +26,7 @@ namespace EPM.Fason.Web.Controllers
                 if (loginM.USER_NAME != "")
                 {
                     //_loginRepository.LoginLog(loginM, _logRepository);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("SiparisListesi", "Fason");
                 }
                 else
                 {

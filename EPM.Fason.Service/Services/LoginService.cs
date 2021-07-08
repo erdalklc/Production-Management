@@ -26,16 +26,17 @@ namespace EPM.Fason.Service.Services
             {
                 login.EMAIL = user.EMAIL;
                 login.ENTERY_DATE = DateTime.Now;
-                login.USER_NAME = login.USER_NAME;
+                login.USER_NAME = user.NAME;
+                login.USER_ID = user.ID;
 
                 CookieHelper cHelper = new CookieHelper();
-                cHelper.AddCookie(context, login, "USER", CryptHelper.hash);
+                cHelper.AddCookie(context, login, "USER_FASON", CryptHelper.hash);
 
                 if (model.BeniHatirla)
                 {
 
                     cHelper = new CookieHelper();
-                    cHelper.AddCookie(context, model.EMail, "EMAIL", CryptHelper.hash2);
+                    cHelper.AddCookie(context, model.EMail, "EMAIL_FASON", CryptHelper.hash2);
                 }
             }
 

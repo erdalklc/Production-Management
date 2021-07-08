@@ -28,6 +28,7 @@ namespace EPM.Fason.Web
             services.AddRazorPages().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddScoped<IAktarimService, AktarimService>();
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IFasonService, FasonService>();
             services.AddSingleton<IFasonRepository, FasonRepository>();
             services.AddControllersWithViews();
         }

@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DevExtreme.AspNet.Data;
+using DevExtreme.AspNet.Mvc;
+using EPM.Fason.Dto.Fason;
+using EPM.Fason.Service.Services;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +12,27 @@ namespace EPM.Fason.Web.Controllers
 {
     public class FasonController : Controller
     {
-        public IActionResult Index()
+        private readonly IFasonService _fasonService;
+        public FasonController(IFasonService fasonService)
         {
-            return View();
+            _fasonService = fasonService;
         }
+        public IActionResult SiparisListesi(SIPARIS_FILTER filter)
+        {
+            return View(filter);
+        }
+        [HttpGet]
+        public object MenuList(DataSourceLoadOptions loadOptions)
+        {
+            return DataSourceLoader.Load(_fasonService.GetMenuList(), loadOptions);
+        }
+        public PartialViewResult _PartialLeftMenu()
+        {
+            return PartialView("~/Views/Shared/_PartialLeftMenu.cshtml");
+        }
+
+
+        [HttpPost, HttpGet]
+        public IActionResult _PartialSiparisListesi(SIPARIS_FILTER liste) => PartialView(liste);
     }
 }
