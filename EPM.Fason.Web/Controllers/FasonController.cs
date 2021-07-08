@@ -30,7 +30,11 @@ namespace EPM.Fason.Web.Controllers
         {
             return PartialView("~/Views/Shared/_PartialLeftMenu.cshtml");
         }
-
+        [HttpGet]
+        public object SiparisListesiLoad(DataSourceLoadOptions loadOptions, SIPARIS_FILTER liste)
+        {
+            return DataSourceLoader.Load(_uretimTakipRepository.GetUretimTakipListesi(Request.HttpContext, liste), loadOptions);
+        }
 
         [HttpPost, HttpGet]
         public IActionResult _PartialSiparisListesi(SIPARIS_FILTER liste) => PartialView(liste);

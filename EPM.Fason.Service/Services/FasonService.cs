@@ -60,21 +60,21 @@ namespace EPM.Fason.Service.Services
 //WHERE HEADER_ID = 3 AND STATUS NOT IN(0,3) ORDER BY QUEUE
 
 
-//  CREATE FUNCTION dbo.SENDSTATUSEX(@input int)
-//RETURNS VARCHAR(250)
-//AS BEGIN
-//    DECLARE @Work VARCHAR(250)
+        //  CREATE FUNCTION dbo.SENDSTATUSEX(@input int)
+        //RETURNS VARCHAR(250)
+        //AS BEGIN
+        //    DECLARE @Work VARCHAR(250)
 
-//    if @input =0 
-//		SET @Work = 'BEKLENİYOR'
-//	else if @input=1
-//		SET @Work = 'BAŞLAMASI BEKLENİYOR' 
-//	else if @input=2
-//		SET @Work = 'BAŞLADI' 
-//	else if @input=3
-//		SET @Work = 'TAMAMLANDI'
+        //    if @input =0 
+        //		SET @Work = 'BEKLENİYOR'
+        //	else if @input=1
+        //		SET @Work = 'BAŞLAMASI BEKLENİYOR' 
+        //	else if @input=2
+        //		SET @Work = 'BAŞLADI' 
+        //	else if @input=3
+        //		SET @Work = 'TAMAMLANDI'
 
-//    RETURN @work
-//END
+        //    RETURN @work
+        //END
     }
 }
