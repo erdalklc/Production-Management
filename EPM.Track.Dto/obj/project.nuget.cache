@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "5Y933tCICWy79UAj4vsPoeUAwV9z/I92X33YD1bojxSj0+nFEQfryh7d5FLVay9GS8NnlQSizSoVLRLqCpCh6A==",
+  "success": true,
+  "projectFilePath": "E:\\Eren\\Eren Production Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Code\\.nuget\\packages\\dapper\\2.0.78\\dapper.2.0.78.nupkg.sha512",
+    "C:\\Users\\Code\\.nuget\\packages\\dapper.contrib\\2.0.78\\dapper.contrib.2.0.78.nupkg.sha512",
+    "C:\\Users\\Code\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\Code\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
+    "C:\\Users\\Code\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -3246,6 +3246,19 @@
           "bin/placeholder/EPM.Core.dll": {}
         }
       },
+      "EPM.Dto/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper.Contrib": "2.0.78"
+        },
+        "compile": {
+          "bin/placeholder/EPM.Dto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EPM.Dto.dll": {}
+        }
+      },
       "EPM.Fason.Dto/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -3275,6 +3288,20 @@
         },
         "runtime": {
           "bin/placeholder/EPM.Tools.dll": {}
+        }
+      },
+      "EPM.Track.Dto/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper.Contrib": "2.0.78",
+          "EPM.Dto": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/EPM.Track.Dto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EPM.Track.Dto.dll": {}
         }
       }
     }
@@ -9679,6 +9706,11 @@
       "path": "../EPM.Core/EPM.Core.csproj",
       "msbuildProject": "../EPM.Core/EPM.Core.csproj"
     },
+    "EPM.Dto/1.0.0": {
+      "type": "project",
+      "path": "../EPM.Dto/EPM.Dto.csproj",
+      "msbuildProject": "../EPM.Dto/EPM.Dto.csproj"
+    },
     "EPM.Fason.Dto/1.0.0": {
       "type": "project",
       "path": "../EPM.Fason.Dto/EPM.Fason.Dto.csproj",
@@ -9688,6 +9720,11 @@
       "type": "project",
       "path": "../EPM.Tools/EPM.Tools.csproj",
       "msbuildProject": "../EPM.Tools/EPM.Tools.csproj"
+    },
+    "EPM.Track.Dto/1.0.0": {
+      "type": "project",
+      "path": "../EPM.Track.Dto/EPM.Track.Dto.csproj",
+      "msbuildProject": "../EPM.Track.Dto/EPM.Track.Dto.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -9698,6 +9735,7 @@
       "EPM.Core >= 1.0.0",
       "EPM.Fason.Dto >= 1.0.0",
       "EPM.Tools >= 1.0.0",
+      "EPM.Track.Dto >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.Negotiate >= 3.1.14",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 3.1.12",
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 3.1.12",
@@ -9706,34 +9744,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\FDEIT005\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages": {},
+    "C:\\Users\\Code\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\Eren Production Management\\EPM.Web\\EPM.Web.csproj",
+      "projectUniqueName": "E:\\Eren\\Eren Production Management\\EPM.Web\\EPM.Web.csproj",
       "projectName": "EPM.Web",
-      "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Web\\EPM.Web.csproj",
-      "packagesPath": "C:\\Users\\FDEIT005\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\Eren Production Management\\EPM.Web\\obj\\",
+      "projectPath": "E:\\Eren\\Eren Production Management\\EPM.Web\\EPM.Web.csproj",
+      "packagesPath": "C:\\Users\\Code\\.nuget\\packages\\",
+      "outputPath": "E:\\Eren\\Eren Production Management\\EPM.Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "D:\\Projects\\Eren Production Management\\NuGet.Config",
-        "C:\\Users\\FDEIT005\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+        "E:\\Eren\\Eren Production Management\\NuGet.Config",
+        "C:\\Users\\Code\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\System\\Components\\Packages": {},
+        "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
         "C:\\Program Files (x86)\\DevExpress 20.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
@@ -9742,14 +9778,17 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Projects\\Eren Production Management\\EPM.Core\\EPM.Core.csproj": {
-              "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Core\\EPM.Core.csproj"
+            "E:\\Eren\\Eren Production Management\\EPM.Core\\EPM.Core.csproj": {
+              "projectPath": "E:\\Eren\\Eren Production Management\\EPM.Core\\EPM.Core.csproj"
             },
-            "D:\\Projects\\Eren Production Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj": {
-              "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj"
+            "E:\\Eren\\Eren Production Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj": {
+              "projectPath": "E:\\Eren\\Eren Production Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj"
             },
-            "D:\\Projects\\Eren Production Management\\EPM.Tools\\EPM.Tools.csproj": {
-              "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Tools\\EPM.Tools.csproj"
+            "E:\\Eren\\Eren Production Management\\EPM.Tools\\EPM.Tools.csproj": {
+              "projectPath": "E:\\Eren\\Eren Production Management\\EPM.Tools\\EPM.Tools.csproj"
+            },
+            "E:\\Eren\\Eren Production Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj": {
+              "projectPath": "E:\\Eren\\Eren Production Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj"
             }
           }
         }
@@ -9815,7 +9854,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.204\\RuntimeIdentifierGraph.json"
       }
     }
   }

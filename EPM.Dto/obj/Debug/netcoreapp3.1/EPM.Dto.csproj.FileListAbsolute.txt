@@ -1,0 +1,9 @@
+E:\Eren\Eren Production Management\EPM.Dto\obj\Debug\netcoreapp3.1\EPM.Dto.AssemblyInfoInputs.cache
+E:\Eren\Eren Production Management\EPM.Dto\obj\Debug\netcoreapp3.1\EPM.Dto.AssemblyInfo.cs
+E:\Eren\Eren Production Management\EPM.Dto\obj\Debug\netcoreapp3.1\EPM.Dto.csproj.CoreCompileInputs.cache
+E:\Eren\Eren Production Management\EPM.Dto\bin\Debug\netcoreapp3.1\EPM.Dto.deps.json
+E:\Eren\Eren Production Management\EPM.Dto\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+E:\Eren\Eren Production Management\EPM.Dto\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
+E:\Eren\Eren Production Management\EPM.Dto\obj\Debug\netcoreapp3.1\EPM.Dto.dll
+E:\Eren\Eren Production Management\EPM.Dto\obj\Debug\netcoreapp3.1\EPM.Dto.pdb
+E:\Eren\Eren Production Management\EPM.Dto\obj\Debug\netcoreapp3.1\EPM.Dto.csprojAssemblyReference.cache

@@ -1,10 +1,10 @@
-﻿@using EPM.Core.FormModels.Uretim; 
-@model UretimOnayliListe
+﻿@using EPM.Track.Dto.Track; 
+@model TrackList_Filter
 
 
 <div id="form-container">
     <div class="dx-card wide-card">
-        @(Html.DevExtreme().Form<EPM.Core.FormModels.Uretim.UretimOnayliListe>()
+        @(Html.DevExtreme().Form<EPM.Track.Dto.Track.TrackList_Filter>()
         .ID("edOnayliListe").ShowValidationSummary(true)
         .ColCount(9)
         .Items(items =>

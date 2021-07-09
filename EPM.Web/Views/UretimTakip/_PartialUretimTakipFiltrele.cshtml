@@ -1,6 +1,6 @@
 ﻿
-@model EPM.Core.FormModels.Uretim.UretimOnayliListe
-@using EPM.Core.Models;
+@model EPM.Track.Dto.Track.TrackList_Filter
+
 
 
 @{
@@ -8,7 +8,7 @@
 }
 
 <div class="dx-card wide-card">
-    @(Html.DevExtreme().DataGrid<EPM.Core.FormModels.UretimTakip.UretimTakipListesi>().ID("edUretimTakipGrid")
+    @(Html.DevExtreme().DataGrid<EPM.Track.Dto.Track.UretimTakipListesi>().ID("edUretimTakipGrid")
     .ShowBorders(false)
     .DataSource(
         ob => ob.Mvc().Controller("UretimTakip")

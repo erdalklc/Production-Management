@@ -3,6 +3,7 @@ using EPM.Core.Helpers;
 using EPM.Core.Managers;
 using EPM.Core.Models;
 using EPM.Core.Services;
+using EPM.Web.ServiceHelper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,6 +30,8 @@ namespace EPM.Web.Controllers
         }
         public IActionResult Login(Login model)
         {
+            //
+            //UretimTakipServiceHelper.GetUretimTakipListesi("ERDAL",new Track.Dto.Track.TrackList_Filter());
             if (ModelState.IsValid && model.EMail != null && model.Password != null)
             {
                

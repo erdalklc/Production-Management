@@ -24,7 +24,10 @@ namespace EPM.Tools.Helpers
             {
                 case EPMServiceType.FasonTakip:
                     apiUrl = config.GetSection("AppServices:FasonTakip").Value;
-                    break; 
+                    break;
+                case EPMServiceType.Track:
+                    apiUrl = config.GetSection("AppServices:Track").Value;
+                    break;
             }
             apiUrl = apiUrl == null ? string.Empty : apiUrl.Trim();
             if (apiUrl.Length > 0 && !apiUrl.EndsWith("/"))

@@ -33,3 +33,5 @@ E:\Eren\Eren Production Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.dll
 E:\Eren\Eren Production Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.pdb
 D:\Projects\Eren Production Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Tools.dll
 D:\Projects\Eren Production Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Tools.pdb
+E:\Eren\Eren Production Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Tools.dll
+E:\Eren\Eren Production Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Tools.pdb

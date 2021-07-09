@@ -58,7 +58,7 @@ namespace EPM.Tools.Helpers
         }
 
         protected static TReturn PostRequest<T, TReturn>(EPMServiceType serviceType, string apiUrl, T model)
-        {
+        { 
             var rval = default(TReturn);
             using (EPMHttpClient client = new EPMHttpClient(serviceType))
             {
@@ -70,7 +70,15 @@ namespace EPM.Tools.Helpers
                 if (response.IsSuccessStatusCode)
                 {
                     var data = response.Content.ReadAsStringAsync().Result;
-                    rval = JsonConvert.DeserializeObject<TReturn>(data);
+                    try
+                    {
+
+                        rval = JsonConvert.DeserializeObject<TReturn>(data);
+                    }
+                    catch (Exception ex)
+                    {
+                         
+                    }
 
                 }
                 else
@@ -95,7 +103,15 @@ namespace EPM.Tools.Helpers
                 if (response.IsSuccessStatusCode)
                 {
                     var data = response.Content.ReadAsStringAsync().Result;
-                    rval = JsonConvert.DeserializeObject<TReturn>(data);
+                    try
+                    {
+
+                        rval = JsonConvert.DeserializeObject<TReturn>(data);
+                    }
+                    catch (Exception ex)
+                    {
+                         
+                    }
                     returnVal = true;
                 }
                 else
