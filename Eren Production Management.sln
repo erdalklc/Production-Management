@@ -18,11 +18,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EPM.Fason", "EPM.Fason", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPM.Fason.Web", "EPM.Fason.Web\EPM.Fason.Web.csproj", "{85903C9C-6094-4C19-9EC1-03FCC967699E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPM.Fason.Dto", "EPM.Fason.Dto\EPM.Fason.Dto.csproj", "{DE64172A-B76F-41F4-A2CC-9E641A3B23D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPM.Fason.Dto", "EPM.Fason.Dto\EPM.Fason.Dto.csproj", "{DE64172A-B76F-41F4-A2CC-9E641A3B23D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPM.Fason.Service", "EPM.Fason.Service\EPM.Fason.Service.csproj", "{9BE242EE-D2BA-4C4D-BF4A-520DE9CCDAD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPM.Fason.Service", "EPM.Fason.Service\EPM.Fason.Service.csproj", "{9BE242EE-D2BA-4C4D-BF4A-520DE9CCDAD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPM.Fason.Repository", "EPM.Fason.Repository\EPM.Fason.Repository.csproj", "{5B3556DC-AE99-45D3-AA97-5278EC21E437}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPM.Fason.Repository", "EPM.Fason.Repository\EPM.Fason.Repository.csproj", "{5B3556DC-AE99-45D3-AA97-5278EC21E437}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPM.Tools", "EPM.Tools\EPM.Tools.csproj", "{B2FC5EF5-066A-4E1B-9697-28479B636121}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{5B3556DC-AE99-45D3-AA97-5278EC21E437}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B3556DC-AE99-45D3-AA97-5278EC21E437}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B3556DC-AE99-45D3-AA97-5278EC21E437}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2FC5EF5-066A-4E1B-9697-28479B636121}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2FC5EF5-066A-4E1B-9697-28479B636121}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2FC5EF5-066A-4E1B-9697-28479B636121}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2FC5EF5-066A-4E1B-9697-28479B636121}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

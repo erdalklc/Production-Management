@@ -39,5 +39,6 @@ namespace EPM.Fason.Dto.Fason
         public string PROCESS_NAME { get; set; }
         public DateTime START_DATE { get; set; }
         public DateTime END_DATE { get; set; }
+        public DateTime DEADLINE_CUSTOMER { get; set; }
     }
 }

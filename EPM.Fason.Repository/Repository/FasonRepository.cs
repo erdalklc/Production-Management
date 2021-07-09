@@ -168,7 +168,10 @@ namespace EPM.Fason.Repository.Repository
             else
                 return obj.ToString();
         }
-
+        public string DateTimeString(DateTime datetime)
+        {
+            return "{ ts '" + datetime.ToString("yyyy-MM-dd HH:mm:ss.fff") + "'}";
+        }
         public T Serialize<T>(T obj)
         {
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))

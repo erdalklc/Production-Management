@@ -9,5 +9,6 @@ namespace EPM.Fason.Service.Services
     {
 
         public List<PRODUCTION_FASON_MENU> GetMenuList();
+        IEnumerable<SIPARIS_LISTESI> GetSiparisList(SIPARIS_FILTER liste);
     }
 }

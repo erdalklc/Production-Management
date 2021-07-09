@@ -18,12 +18,10 @@ namespace EPM.Web.Controllers
     [ServiceFilter(typeof(AppFilterAttribute), Order = 1)]
     public class UretimTakipController : Controller
     {
-        private readonly IOptions<AppServices> _config;
-        private readonly IUretimTakipService _uretimTakipRepository;
-        public UretimTakipController(IUretimTakipService uretimTakipRepository, IOptions<AppServices> config)
+        private readonly IUretimTakipService _uretimTakipService;
+        public UretimTakipController(IUretimTakipService uretimTakipRepository)
         {
-            _uretimTakipRepository = uretimTakipRepository;
-            _config = config;
+            _uretimTakipService = uretimTakipRepository;
         }
 
         public IActionResult Takip()
@@ -44,7 +42,7 @@ namespace EPM.Web.Controllers
         [HttpPost, HttpGet]
         public IActionResult _PartialUretimTakipFiltrele(UretimOnayliListe liste) => PartialView(liste);
 
-        public async Task<IActionResult> _PartialUretimTakipDetayAsync(int HEADER_ID, int RECIPE)
+        public IActionResult _PartialUretimTakipDetay(int HEADER_ID, int RECIPE)
         {
             switch (RECIPE)
             {
@@ -54,16 +52,16 @@ namespace EPM.Web.Controllers
                     return PartialView("_PartialUretimTakipSatinAlmaDetayi", HEADER_ID);
                 case 4:
                 case 5:
-                    return PartialView("_PartialUretimTakipFason", await _uretimTakipRepository.FasonTakipListeAyarlaAsync(_config.Value.FasonTakip, HEADER_ID));
+                    return PartialView("_PartialUretimTakipFason", _uretimTakipService.FasonTakipListeAyarla( HEADER_ID));
                 default:
                     return PartialView("_PartialUretimTakipSatinAlmaDetayi", HEADER_ID);
             }
 
         }
 
-        public async Task<IActionResult> FasonSiparisOlustur(PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan,int firmaBilgi,DateTime terminTarihi)
+        public IActionResult FasonSiparisOlustur(PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan,int firmaBilgi,DateTime terminTarihi)
         {
-            object[] obj = await _uretimTakipRepository.FasonSiparisOlusturAsync(_config.Value.FasonTakip, header, plan, firmaBilgi, terminTarihi);
+            object[] obj =  _uretimTakipService.FasonSiparisOlustur( header, plan, firmaBilgi, terminTarihi);
             if ((bool)obj[0])
                 return Ok();
             else return BadRequest(obj[1].ToString());
@@ -108,69 +106,69 @@ namespace EPM.Web.Controllers
         [HttpGet]
         public object TabPanelListLoad(DataSourceLoadOptions loadOptions)
         {
-            return DataSourceLoader.Load(_uretimTakipRepository.GetTabList(), loadOptions);
+            return DataSourceLoader.Load(_uretimTakipService.GetTabList(), loadOptions);
         }
 
         [HttpGet]
         public object EgemenOrmeListLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "TAKIP_NO")] string TAKIP_NO, [FromQuery(Name = "DETAIL_TAKIP_NO")] int DETAIL_TAKIP_NO)
         {
-            return DataSourceLoader.Load(_uretimTakipRepository.GetEgemenOrmeList(TAKIP_NO, DETAIL_TAKIP_NO), loadOptions);
+            return DataSourceLoader.Load(_uretimTakipService.GetEgemenOrmeList(TAKIP_NO, DETAIL_TAKIP_NO), loadOptions);
         }
         [HttpGet]
         public object KumasDepoListLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "ITEM_ID")] int ITEM_ID, [FromQuery(Name = "PO_HEADER_ID")] int PO_HEADER_ID)
         {
-            return DataSourceLoader.Load(_uretimTakipRepository.GetKumasDepoList(ITEM_ID, PO_HEADER_ID), loadOptions);
+            return DataSourceLoader.Load(_uretimTakipService.GetKumasDepoList(ITEM_ID, PO_HEADER_ID), loadOptions);
         }
         [HttpGet]
         public object KesimFoyuListLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "ITEM_ID")] int ITEM_ID, [FromQuery(Name = "PO_HEADER_ID")] int PO_HEADER_ID, [FromQuery(Name = "RENK_DETAY")] string RENK_DETAY)
         {
-            return DataSourceLoader.Load(_uretimTakipRepository.GetKesimFoyuList(ITEM_ID, PO_HEADER_ID, RENK_DETAY), loadOptions);
+            return DataSourceLoader.Load(_uretimTakipService.GetKesimFoyuList(ITEM_ID, PO_HEADER_ID, RENK_DETAY), loadOptions);
         }
 
         [HttpGet]
         public object BantBitisListLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "ITEM_ID")] int ITEM_ID, [FromQuery(Name = "PO_HEADER_ID")] int PO_HEADER_ID, [FromQuery(Name = "RENK_DETAY")] string RENK_DETAY)
         {
-            return DataSourceLoader.Load(_uretimTakipRepository.GetBantList(ITEM_ID, PO_HEADER_ID, RENK_DETAY), loadOptions);
+            return DataSourceLoader.Load(_uretimTakipService.GetBantList(ITEM_ID, PO_HEADER_ID, RENK_DETAY), loadOptions);
         }
         [HttpGet]
         public object KaliteBitisListLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "ITEM_ID")] int ITEM_ID, [FromQuery(Name = "PO_HEADER_ID")] int PO_HEADER_ID, [FromQuery(Name = "RENK_DETAY")] string RENK_DETAY)
         {
-            return DataSourceLoader.Load(_uretimTakipRepository.GetKaliteList(ITEM_ID, PO_HEADER_ID, RENK_DETAY), loadOptions);
+            return DataSourceLoader.Load(_uretimTakipService.GetKaliteList(ITEM_ID, PO_HEADER_ID, RENK_DETAY), loadOptions);
         }
 
         [HttpGet]
         public object EgemenGerceklesenLoad(DataSourceLoadOptions loadOptions, KaliteGerceklesenFilter liste)
         {
-            return DataSourceLoader.Load(_uretimTakipRepository.GetKaliteGerceklesenler(liste), loadOptions);
+            return DataSourceLoader.Load(_uretimTakipService.GetKaliteGerceklesenler(liste), loadOptions);
         }
         [HttpGet]
         public object UretimTakiplLoad(DataSourceLoadOptions loadOptions, UretimOnayliListe liste)
         {
-            return DataSourceLoader.Load(_uretimTakipRepository.GetUretimTakipListesi(Request.HttpContext, liste), loadOptions);
+            return DataSourceLoader.Load(_uretimTakipService.GetUretimTakipListesi(Request.HttpContext, liste), loadOptions);
         }
 
         [HttpGet]
         public object SatinAlmaDetayGetir(DataSourceLoadOptions loadOptions, [FromQuery(Name = "HEADER_ID")] int HEADER_ID)
         {
-            return DataSourceLoader.Load(_uretimTakipRepository.SatinAlmaDetay(HEADER_ID), loadOptions);
+            return DataSourceLoader.Load(_uretimTakipService.SatinAlmaDetay(HEADER_ID), loadOptions);
         }
 
         [HttpGet]
         public object GetProcessInformations(DataSourceLoadOptions loadOptions, [FromQuery(Name = "PO_HEADER_ID")] int PO_HEADER_ID, [FromQuery(Name = "DETAIL_ID")] int DETAIL_ID, [FromQuery(Name = "HEADER_ID")] int HEADER_ID)
         {
-            return DataSourceLoader.Load(_uretimTakipRepository.GetProcessInformations(PO_HEADER_ID, DETAIL_ID, HEADER_ID), loadOptions);
+            return DataSourceLoader.Load(_uretimTakipService.GetProcessInformations(PO_HEADER_ID, DETAIL_ID, HEADER_ID), loadOptions);
         }
 
         [HttpGet]
         public object ProductionOrderslLoad(DataSourceLoadOptions loadOptions, int HEADER_ID)
         {
-            return DataSourceLoader.Load(_uretimTakipRepository.ProductionOrderList(HEADER_ID), loadOptions);
+            return DataSourceLoader.Load(_uretimTakipService.ProductionOrderList(HEADER_ID), loadOptions);
         }
 
         [HttpPost]
         public IActionResult ProductionOrdersInsert(string values)
         {
-            object[] islem = _uretimTakipRepository.ProductionOrdersInsert(values);
+            object[] islem = _uretimTakipService.ProductionOrdersInsert(values);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
@@ -178,7 +176,7 @@ namespace EPM.Web.Controllers
         [HttpPut]
         public IActionResult ProductionOrdersUpdate(int key, string values)
         {
-            object[] islem = _uretimTakipRepository.ProductionOrdersUpdate(key, values);
+            object[] islem = _uretimTakipService.ProductionOrdersUpdate(key, values);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
@@ -187,7 +185,7 @@ namespace EPM.Web.Controllers
         [HttpDelete]
         public IActionResult ProductionOrdersDelete(int key)
         {
-            object[] islem = _uretimTakipRepository.ProductionOrdersDelete(key);
+            object[] islem = _uretimTakipService.ProductionOrdersDelete(key);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
@@ -195,7 +193,7 @@ namespace EPM.Web.Controllers
 
 
         [HttpGet]
-        public object GetContractList(DataSourceLoadOptions loadOptions) => DataSourceLoader.Load(_uretimTakipRepository.GetContractList(), loadOptions);
+        public object GetContractList(DataSourceLoadOptions loadOptions) => DataSourceLoader.Load(_uretimTakipService.GetContractList(), loadOptions);
 
 
 

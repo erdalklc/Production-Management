@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\AppServices.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper.Contrib" Version="2.0.78" />
     <PackageReference Include="Dapper.Oracle" Version="2.0.2" />
     <PackageReference Include="ExcelDataReader" Version="3.6.0" />
@@ -22,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EPM.Fason.Dto\EPM.Fason.Dto.csproj" />
+    <ProjectReference Include="..\EPM.Tools\EPM.Tools.csproj" />
   </ItemGroup>
 
 </Project>

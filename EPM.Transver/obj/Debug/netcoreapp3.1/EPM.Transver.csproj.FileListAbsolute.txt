@@ -207,3 +207,11 @@ E:\Eren\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Tran
 E:\Eren\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.dll
 E:\Eren\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.pdb
 E:\Eren\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.genruntimeconfig.cache
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Json.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Tools.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Tools.pdb

@@ -52,9 +52,10 @@
             MODEL: jQuery("[name=MODEL]").val(),
             COLOR: jQuery("[name=COLOR]").val(), 
         };
+        console.log(data);
         $.ajax({
             type: "POST",
-            url: '@Url.Action("_PartialUretimTakipFiltrele", "UretimTakip")',
+            url: '@Url.Action("_PartialSiparisListesi", "Fason")',
             data: data,
             contentType: 'application/x-www-form-urlencoded',
             timeout: 180000,

@@ -46,8 +46,8 @@ namespace EPM.Core.Services
 
         public IEnumerable<ContractProcessList> GetContractProcessList(HttpContext context, int HEADER_ID);
 
-        public Task<Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>> FasonTakipListeAyarlaAsync(string Url, int HEADER_ID);
+        public Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>> FasonTakipListeAyarla(int HEADER_ID);
 
-        public Task<object[]> FasonSiparisOlusturAsync(string url, PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan, int firmaBilgi, DateTime terminTarihi);
+        public object[] FasonSiparisOlustur(PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan, int firmaBilgi, DateTime terminTarihi);
     }
 }

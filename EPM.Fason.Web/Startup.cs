@@ -25,12 +25,29 @@ namespace EPM.Fason.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                      .AllowAnyMethod()
+                      .AllowAnyOrigin()
+                      .AllowAnyHeader()
+                      .AllowCredentials()
+                .Build());
+            });
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddScoped<IAktarimService, AktarimService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IFasonService, FasonService>();
             services.AddSingleton<IFasonRepository, FasonRepository>();
             services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options => {
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    options.UseMemberCasing();
+                }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

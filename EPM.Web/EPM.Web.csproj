@@ -19,6 +19,7 @@
     <ItemGroup>
       <ProjectReference Include="..\EPM.Core\EPM.Core.csproj" />
       <ProjectReference Include="..\EPM.Fason.Dto\EPM.Fason.Dto.csproj" />
+      <ProjectReference Include="..\EPM.Tools\EPM.Tools.csproj" />
     </ItemGroup>
 
     <ProjectExtensions><VisualStudio><UserProperties TemplateFeatures="NETCORE" /></VisualStudio></ProjectExtensions>

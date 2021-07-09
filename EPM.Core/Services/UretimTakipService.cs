@@ -5,6 +5,7 @@ using EPM.Core.Managers;
 using EPM.Core.Models;
 using EPM.Core.Nesneler;
 using EPM.Fason.Dto.Fason;
+using EPM.Tools.Helpers;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace EPM.Core.Services
 {
-    public class UretimTakipService : IUretimTakipService
+    public class UretimTakipService : EPMHttpCaller, IUretimTakipService
     { 
         public List<SatinAlmaDetay> SatinAlmaDetay(int HEADER_ID)
         {
@@ -491,11 +492,10 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
             return list;
         }
 
-        public async Task<Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>> FasonTakipListeAyarlaAsync(string Url, int HEADER_ID)
+        public Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>> FasonTakipListeAyarla(int HEADER_ID)
         {
 
             Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>> responce = new Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>(null, null, null);
-            #region Belge Insert
             string sql = @"SELECT  DISTINCT ID AS ENTEGRATION_ID, 
    BRAND,
    SUB_BRAND,
@@ -533,31 +533,23 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
    QUANTITY
    FROM FDEIT005.EPM_PRODUCTION_ORDER_V   WHERE ID={0}", HEADER_ID));
 
-            HttpCaller caller = new HttpCaller();
-            //object[] sonuc = await caller.PostAsync(Url + "FasonUretimInsert", header);
 
-            List<PRODUCTION_PROCESS> processList = await caller.GetListAsync<PRODUCTION_PROCESS>(Url + "GetProcessList");
+            List<PRODUCTION_PROCESS> processList =  GetRequest<List<PRODUCTION_PROCESS>>(EPMServiceType.FasonTakip, "GetProcessList");
+            List<PRODUCTION_FASON_USERS> fasonUsers =  GetRequest<List<PRODUCTION_FASON_USERS>>(EPMServiceType.FasonTakip, "GetFasonUsers");
 
-            List<PRODUCTION_FASON_USERS> fasonUsers = await caller.GetListAsync< PRODUCTION_FASON_USERS>(Url + "GetFasonUsers");
-
-
-
-
-
-            #endregion Belge Insert
             return new Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>(header, processList, fasonUsers);
 
         } 
 
-        public async Task<object[]> FasonSiparisOlusturAsync(string url, PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan, int firmaBilgi, DateTime terminTarihi)
+        public object[] FasonSiparisOlustur(PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan, int firmaBilgi, DateTime terminTarihi)
         {
             CREATEORDER order = new CREATEORDER();
             order.header = header;
             order.plan = plan;
             order.firma = firmaBilgi;
             order.termin = terminTarihi;
-            HttpCaller caller = new HttpCaller();
-            object[] sonuc = await caller.PostAsync(url + "CreateOrder", order);
+
+            object[] sonuc =  PostRequest<CREATEORDER, object[]>(EPMServiceType.FasonTakip, "CreateOrder", order);
             return sonuc;
         }
     }

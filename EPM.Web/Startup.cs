@@ -35,7 +35,7 @@ namespace EPM_Web
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();
 
-            services.Configure<AppServices>(Configuration.GetSection("AppServices"));
+            //services.Configure<AppServices>(Configuration.GetSection("AppServices"));
             services.AddScoped<AppFilterAttribute>(); 
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IUretimService, UretimService>();

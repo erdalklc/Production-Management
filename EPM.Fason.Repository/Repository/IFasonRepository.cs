@@ -36,5 +36,7 @@ namespace EPM.Fason.Repository.Repository
         public decimal ReadDecimal(string sqlText);
 
         public DateTime ReadDateTime(string sqlText);
+
+        public string DateTimeString(DateTime datetime);
     }
 }
