@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EPM.Dto\EPM.Dto.csproj" />
+    <ProjectReference Include="..\EPM.Fason.Dto\EPM.Fason.Dto.csproj" />
     <ProjectReference Include="..\EPM.Track.Dto\EPM.Track.Dto.csproj" />
     <ProjectReference Include="..\EPM.Track.Repository\EPM.Track.Repository.csproj" />
   </ItemGroup>

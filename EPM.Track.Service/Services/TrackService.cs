@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using EPM.Fason.Dto.Fason;
 
 namespace EPM.Track.Service.Services
 {
@@ -189,7 +190,7 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
 
         public List<KaliteGerceklesen> GetKaliteGerceklesenler(KaliteGerceklesenFilter filter)
         { 
-            return _egemenRepository.DeserializeList<KaliteGerceklesen>(new EgemenDevanlayHelper().KaliteGerceklesenSQL(filter.MODEL, filter.COLOR, filter.BEDEN, "", filter.SEASON), FirebirdConnectionDB.DEVANLAY);
+            return _trackRepository.DeserializeList<KaliteGerceklesen>(new EgemenDevanlayHelper().KaliteGerceklesenSQL(filter.MODEL, filter.COLOR, filter.BEDEN, "", filter.SEASON));
         }
 
         public List<UretimTakipListesi> GetUretimTakipListesi(string USER_CODE, TrackList_Filter liste)
@@ -490,6 +491,48 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
             return list;
         }
 
-        
+        public PRODUCTION_HEADER GetProductionList(int HEADER_ID)
+        {
+            object[] obj = { "",""};
+            string sql = @"SELECT  DISTINCT ID AS ENTEGRATION_ID, 
+   BRAND,
+   SUB_BRAND,
+   SEASON,
+   MODEL,
+   COLOR,
+   PRODUCT_GROUP,
+   FABRIC_TYPE,
+   PRODUCTION_TYPE,
+   RECIPE,
+   DEADLINE,
+   ORDER_TYPE,
+   CREATE_DATE,  
+   ATTRIBUTE1,
+   ATTRIBUTE2,
+   ATTRIBUTE3,
+   ATTRIBUTE4,
+   ATTRIBUTE5,
+   ATTRIBUTE6,
+   ATTRIBUTE7,
+   ATTRIBUTE8,
+   ATTRIBUTE9,
+   ATTRIBUTE10,
+   TEMA,
+   ANA_TEMA,
+   ROYALTY,
+   COLLECTION_TYPE FROM FDEIT005.EPM_PRODUCTION_ORDER_V   WHERE ID=" + HEADER_ID;
+            PRODUCTION_HEADER  header= _trackRepository.Deserialize<PRODUCTION_HEADER>(sql);
+
+
+            header.DETAIL = _trackRepository.DeserializeList<PRODUCTION_DETAIL>(string.Format(@"SELECT  DETAIL_ID AS ENTEGRATION_ID, 
+   ID AS ENTEGRATION_HEADER_ID,
+   MARKET,  
+   PRODUCT_SIZE,
+   QUANTITY
+   FROM FDEIT005.EPM_PRODUCTION_ORDER_V   WHERE ID={0}", HEADER_ID));
+
+            return header;
+
+        }
     }
 }

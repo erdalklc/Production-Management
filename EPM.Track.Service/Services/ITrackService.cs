@@ -1,4 +1,5 @@
 ﻿using EPM.Dto.Base;
+using EPM.Fason.Dto.Fason;
 using EPM.Track.Dto.Track;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,8 @@ namespace EPM.Track.Service.Services
         public List<EPM_CONTRACT_WEB_USERS> GetContractList();
 
         public List<ContractProcessList> GetContractProcessList(int HEADER_ID);
-         
+
+        public PRODUCTION_HEADER GetProductionList(int HEADER_ID);
+
     }
 }

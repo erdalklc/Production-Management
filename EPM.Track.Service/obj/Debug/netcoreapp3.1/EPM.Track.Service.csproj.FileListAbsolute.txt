@@ -30,3 +30,5 @@ D:\Projects\Eren Production Management\EPM.Track.Service\obj\Debug\netcoreapp3.1
 D:\Projects\Eren Production Management\EPM.Track.Service\obj\Debug\netcoreapp3.1\EPM.Track.Service.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Track.Service\obj\Debug\netcoreapp3.1\EPM.Track.Service.dll
 D:\Projects\Eren Production Management\EPM.Track.Service\obj\Debug\netcoreapp3.1\EPM.Track.Service.pdb
+D:\Projects\Eren Production Management\EPM.Track.Service\bin\Debug\netcoreapp3.1\EPM.Fason.Dto.dll
+D:\Projects\Eren Production Management\EPM.Track.Service\bin\Debug\netcoreapp3.1\EPM.Fason.Dto.pdb

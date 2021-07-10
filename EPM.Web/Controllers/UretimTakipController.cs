@@ -19,11 +19,9 @@ namespace EPM.Web.Controllers
 {
     [ServiceFilter(typeof(AppFilterAttribute), Order = 1)]
     public class UretimTakipController : Controller
-    {
-        private readonly IUretimTakipService _uretimTakipService;
-        public UretimTakipController(IUretimTakipService uretimTakipRepository)
-        {
-            _uretimTakipService = uretimTakipRepository;
+    { 
+        public UretimTakipController()
+        { 
         }
 
         public IActionResult Takip()
@@ -54,7 +52,7 @@ namespace EPM.Web.Controllers
                     return PartialView("_PartialUretimTakipSatinAlmaDetayi", HEADER_ID);
                 case 4:
                 case 5:
-                    return PartialView("_PartialUretimTakipFason", _uretimTakipService.FasonTakipListeAyarla( HEADER_ID));
+                    return PartialView("_PartialUretimTakipFason", FasonServiceHelper.FasonTakipListeAyarla( HEADER_ID));
                 default:
                     return PartialView("_PartialUretimTakipSatinAlmaDetayi", HEADER_ID);
             }
@@ -191,8 +189,7 @@ namespace EPM.Web.Controllers
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
-        }
-
+        } 
 
         [HttpGet]
         public object GetContractList(DataSourceLoadOptions loadOptions) => DataSourceLoader.Load(UretimTakipServiceHelper.GetContractList(), loadOptions);

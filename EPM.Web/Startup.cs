@@ -40,7 +40,7 @@ namespace EPM_Web
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IUretimService, UretimService>();
             services.AddScoped<IUretimPlanService, UretimPlanService>();
-            services.AddScoped<IUretimTakipService, UretimTakipService>();
+            //services.AddScoped<IUretimTakipService, UretimTakipService>();
             services.AddScoped<ISatinAlmaService, SatinAlmaService>();
             services.AddScoped<IAyarlarService, AyarlarService>();
             services.AddScoped<IUretimIzleService, UretimIzleService>();

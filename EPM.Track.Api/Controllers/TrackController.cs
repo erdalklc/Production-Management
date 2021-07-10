@@ -1,4 +1,5 @@
 ﻿using EPM.Dto.Base;
+using EPM.Fason.Dto.Fason;
 using EPM.Track.Dto.Extensions;
 using EPM.Track.Dto.Track;
 using EPM.Track.Service.Services; 
@@ -69,5 +70,9 @@ namespace EPM.Track.Api.Controllers
 
         [HttpGet, HttpPost]
         public ActionResult<List<ContractProcessList>> GetContractProcessList(object[] obj) => _trackService.GetContractProcessList(obj[0].IntParse());
+
+
+        [HttpGet, HttpPost]
+        public ActionResult<PRODUCTION_HEADER> GetProductionList(object[] obj) => _trackService.GetProductionList(obj[0].IntParse());
     }
 }
