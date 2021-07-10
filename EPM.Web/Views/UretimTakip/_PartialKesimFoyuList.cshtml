@@ -1,5 +1,5 @@
 ﻿@model object[];
-@(Html.DevExtreme().DataGrid<EPM.Core.FormModels.UretimTakip.KesimFoyleri>().ID("edKesimFoyuList")
+@(Html.DevExtreme().DataGrid<EPM.Track.Dto.Track.KesimFoyleri>().ID("edKesimFoyuList")
     .ShowBorders(false)
     .DataSource(
         ob => ob.Mvc().Controller("UretimTakip")

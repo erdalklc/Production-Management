@@ -155,8 +155,8 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
                             FROM po.po_vendor_sites_all pos, hr_locations hr, 
                             po.po_vendors pov, apps.org_organization_definitions ood 
                             WHERE hr.location_id = pos.bill_to_location_id 
-                            AND pos.vendor_id = pov.vendor_id and pov.END_DATE_ACTIVE is null 
-                            and pos.INACTIVE_DATE is null
+                            AND pos.vendor_id = pov.vendor_id --and pov.END_DATE_ACTIVE is null 
+                            --and pos.INACTIVE_DATE is null
                             AND ood.organization_id = hr.inventory_organization_id 
                             AND ood.operating_unit = pos.org_id 
                             AND pos.vendor_site_id =PH.VENDOR_SITE_ID) FIRMA,

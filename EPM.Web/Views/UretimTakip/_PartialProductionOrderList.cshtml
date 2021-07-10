@@ -2,7 +2,7 @@
 @using EPM.Core.Models;
 
 <div class="dx-card wide-card">
-    @(Html.DevExtreme().DataGrid<EPM.Core.Nesneler.EPM_MASTER_PRODUCTION_ORDERS> ().ID("edgridOrderList")
+    @(Html.DevExtreme().DataGrid<EPM.Dto.Base.EPM_MASTER_PRODUCTION_ORDERS> ().ID("edgridOrderList")
     .ShowBorders(false)
     .DataSource(
         ob=>ob.Mvc().Controller("UretimTakip")

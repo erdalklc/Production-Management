@@ -6,7 +6,18 @@ namespace EPM.Track.Dto.Track
 {
     public class EgemenOrmeSiparis
     {
-        public string GUID { get{ return Guid.NewGuid().ToString(); } set { GUID = value; } }
+        private string _GUID;
+        public string GUID
+        {
+            get
+            {
+                if (_GUID == null)
+                    _GUID = Guid.NewGuid().ToString(); 
+                return _GUID;
+            }
+            set { _GUID = value; }
+        }
+        
         public string URUN_TIPI_ADI { get; set; }
         public string URUN_ADI { get; set; }
         public string RENK_ADI { get; set; }

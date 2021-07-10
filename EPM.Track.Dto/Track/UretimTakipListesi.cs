@@ -13,51 +13,40 @@ namespace EPM.Track.Dto.Track
         public string PROCESS_INFO { get; set; }
         public string MUSTBE_STATE { get; set; }
         public bool SATIN_ALMA_BAGLANTI { get; set; }
-        public string TAKIP_NO { get; set; }
-        public string BACKGROUND_COLOR { get; set; }
-        //public string BACKGROUND_COLOR
-        //{
-        //    get
-        //    {
-        //        if (SATIN_ALMA_BAGLANTI)
-        //        {
-        //            if (PROCESS_INFO == "TAMAMLANDI" || PROCESS_INFO == "TAKIP BASLATILMADI")
-        //            {
-        //                return "lawngreen";
-        //            }
-        //            else if (PROCESS_INFO == "YOK")
-        //            {
+        public string TAKIP_NO { get; set; } 
+        private string _BACKGROUND_COLOR;
+        public string BACKGROUND_COLOR
+        {
+            get
+            {
+                if (_BACKGROUND_COLOR == null)
+                {
+                    if (SATIN_ALMA_BAGLANTI)
+                    {
+                        if (PROCESS_INFO == "TAMAMLANDI" || PROCESS_INFO == "TAKIP BASLATILMADI") 
+                            _BACKGROUND_COLOR = "lawngreen"; 
+                        else if (PROCESS_INFO == "YOK") 
+                            _BACKGROUND_COLOR = "yellow"; 
+                        else
+                        {
+                            if (END_DATE < DateTime.Now.Date) 
+                                _BACKGROUND_COLOR = "IndianRed"; 
+                            else if (END_DATE == DateTime.Now.Date) 
+                                _BACKGROUND_COLOR = "Orange"; 
+                            else 
+                                _BACKGROUND_COLOR = "lawngreen";  
+                        }
+                    }
+                    else 
+                        _BACKGROUND_COLOR = "aqua"; 
+                } 
+                return _BACKGROUND_COLOR; 
+            }
+            set
+            {
+                _BACKGROUND_COLOR = value;
 
-        //                return "yellow";
-        //            }
-        //            else
-        //            {
-        //                if (END_DATE < DateTime.Now.Date)
-        //                {
-        //                    return "IndianRed";
-        //                }
-        //                else if (END_DATE == DateTime.Now.Date)
-        //                {
-        //                    return "Orange";
-        //                }
-        //                else
-        //                {
-        //                    return "lawngreen";
-        //                }
-
-        //            }
-        //        }
-        //        else
-        //        {
-        //            return "aqua";
-        //        } 
-
-        //    }
-        //    set
-        //    {
-        //        BACKGROUND_COLOR = value;
-
-        //    }
-        //}
+            }
+        }
     }
 }

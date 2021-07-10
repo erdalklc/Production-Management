@@ -11,43 +11,59 @@ namespace EPM.Track.Dto.Track
         public DateTime START_DATE { get; set; }
         public DateTime END_DATE { get; set; }
         public int STATUS { get; set; }
-        public string STATUS_TEXT { get { return TrackExtensions.GetDescription((SURECDURUMLARI)STATUS); } set { STATUS_TEXT = value; } }
+        private string _STATUS_TEXT;
+        public string STATUS_TEXT
+        {
+            get
+            {
+                if (_STATUS_TEXT == null) 
+                    _STATUS_TEXT= TrackExtensions.GetDescription((SURECDURUMLARI)STATUS); 
+                return _STATUS_TEXT;
+            }
+            set { _STATUS_TEXT = value; }
+        } 
+        private string _COLOR;
         public string COLOR
         {
             get
             {
-                if (STATUS == (int)SURECDURUMLARI.BASLADI)
+                if (_COLOR == null)
                 {
-                    if (END_DATE > DateTime.Now.Date)
+                    if (STATUS == (int)SURECDURUMLARI.BASLADI)
                     {
-                        return "lawngreen";
+                        if (END_DATE > DateTime.Now.Date)
+                        {
+                            _COLOR= "lawngreen";
+                        }
+                        else if (END_DATE == DateTime.Now.Date)
+                        {
+                            _COLOR= "Orange";
+                        }
+                        else
+                        {
+                            _COLOR= "Red";
+                        }
+
                     }
-                    else if (END_DATE == DateTime.Now.Date)
+                    else if (STATUS == (int)SURECDURUMLARI.TAMAMLANDI)
                     {
-                        return "Orange";
+                        _COLOR= "Yellow";
                     }
-                    else
+                    else if (STATUS == (int)SURECDURUMLARI.BEKLEMEDE)
                     {
-                        return "Red";
+                        _COLOR= "LightGray";
+                    }
+                    else if (STATUS == (int)SURECDURUMLARI.EKSIKTAMAMLANAN)
+                    {
+                        _COLOR= "yellowgreen";
                     }
 
+                    else _COLOR= "White";
                 }
-                else if (STATUS == (int)SURECDURUMLARI.TAMAMLANDI)
-                {
-                    return "Yellow";
-                }
-                else if (STATUS == (int)SURECDURUMLARI.BEKLEMEDE)
-                {
-                    return "LightGray";
-                }
-                else if (STATUS == (int)SURECDURUMLARI.EKSIKTAMAMLANAN)
-                {
-                    return "yellowgreen";
-                }
-
-                else return "White";
+                return _COLOR;
+                
             }
-            set { COLOR = value; }
+            set { _COLOR = value; }
         }
         public string PROCESS_NAME { get; set; }
     }

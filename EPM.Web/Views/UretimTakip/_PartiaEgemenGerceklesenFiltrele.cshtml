@@ -1,9 +1,9 @@
 ﻿
-@model EPM.Core.FormModels.UretimTakip.KaliteGerceklesenFilter
+@model EPM.Track.Dto.Track.KaliteGerceklesenFilter
 @using EPM.Core.Models;
 
 <div class="dx-card wide-card">
-    @(Html.DevExtreme().PivotGrid<EPM.Core.FormModels.UretimTakip.KaliteGerceklesen>().ID("edgridHeader")
+    @(Html.DevExtreme().PivotGrid<EPM.Track.Dto.Track.KaliteGerceklesen>().ID("edgridHeader")
     .ShowBorders(false)
     .DataSource(ob => ob.Store(s => s.Mvc().Controller("UretimTakip").LoadParams(Model).LoadAction("EgemenGerceklesenLoad").Key("ID"))
     .Fields(f =>

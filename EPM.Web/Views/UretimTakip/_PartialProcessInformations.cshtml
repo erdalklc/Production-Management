@@ -1,7 +1,7 @@
 ﻿@model int[];
 
  
-@(Html.DevExtreme().DataGrid<EPM.Core.FormModels.UretimTakip.SurecBilgileri> ().ID("edgridProcessInformations")
+@(Html.DevExtreme().DataGrid<EPM.Track.Dto.Track.SurecBilgileri> ().ID("edgridProcessInformations")
     .ShowBorders(false)
     .DataSource(
         ob=>ob.Mvc().Controller("UretimTakip")

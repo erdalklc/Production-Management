@@ -2,7 +2,7 @@
 
 @{ 
     bool ormeVisible = true;
-    EPM.Core.Nesneler.EPM_MASTER_PRODUCTION_H header = EPM.Core.Managers.OracleServer.Deserialize<EPM.Core.Nesneler.EPM_MASTER_PRODUCTION_H>(Model);
+    EPM.Dto.Base.EPM_MASTER_PRODUCTION_H header = EPM.Core.Managers.OracleServer.Deserialize<EPM.Dto.Base.EPM_MASTER_PRODUCTION_H>(Model);
     if (header.PRODUCTION_TYPE == 1 && header.FABRIC_TYPE == 1)
         ormeVisible = true;
     else ormeVisible = false;
@@ -10,7 +10,7 @@
 
 <div class="dx-card wide-card">
     <div style="width:calc(100% - 305px);display:inline-block;float:left">
-        @(Html.DevExtreme().DataGrid<EPM.Core.FormModels.UretimTakip.SatinAlmaDetay> ().ID("edgridSatinAlmaDetay")
+        @(Html.DevExtreme().DataGrid<EPM.Track.Dto.Track.SatinAlmaDetay> ().ID("edgridSatinAlmaDetay")
     .ShowBorders(false)
     .DataSource(
         ob=>ob.Mvc().Controller("UretimTakip")
