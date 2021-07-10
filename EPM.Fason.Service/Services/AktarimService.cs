@@ -70,10 +70,18 @@ namespace EPM.Fason.Service.Services
                 sql = "DELETE PRODUCTION_DETAIL WHERE ENTEGRATION_HEADER_ID=" + header.ENTEGRATION_ID;
                 _fasonRepository.ExecSql(sql);
 
+                sql = "DELETE PRODUCTION_LIST_L WHERE HEADER_ID=(SELECT ID FROM PRODUCTION_LIST_H WHERE ENTEGRATION_ID=" + header.ENTEGRATION_ID + " )";
+                _fasonRepository.ExecSql(sql);
+
+                sql = "DELETE PRODUCTION_LIST_H WHERE ENTEGRATION_ID=" + header.ENTEGRATION_ID;
+                _fasonRepository.ExecSql(sql);
+
                 _fasonRepository.Serialize(header);
 
                 foreach (var item in header.DETAIL)
                     _fasonRepository.Serialize(item);
+
+               
 
 
                 PRODUCTION_LIST_H h = new PRODUCTION_LIST_H();

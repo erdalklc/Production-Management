@@ -43,6 +43,12 @@ namespace EPM.Fason.Service.Services
             return menu;
         }
 
+        public IEnumerable<SIPARIS_LISTESI_DETAIL> GetSiparisDetailList(int ENTEGRASYON_ID)
+        {
+            string sql = "SELECT * FROM  PRODUCTION_DETAIL_LIST_V WHERE 0=0 AND  ENTEGRATION_HEADER_ID="+ENTEGRASYON_ID;
+            return _fasonRepository.DeserializeList<SIPARIS_LISTESI_DETAIL>(sql);
+        }
+
         public IEnumerable<SIPARIS_LISTESI> GetSiparisList(SIPARIS_FILTER liste)
         {
             string sql = "SELECT * FROM  PRODUCTION_LIST_V WHERE 0=0";

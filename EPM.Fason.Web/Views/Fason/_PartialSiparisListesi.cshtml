@@ -1,11 +1,11 @@
 ﻿@model EPM.Fason.Dto.Fason.SIPARIS_FILTER
- 
+
 <div class="dx-card wide-card">
     @(Html.DevExtreme().DataGrid<EPM.Fason.Dto.Fason.SIPARIS_LISTESI>().ID("edUretimTakipGrid")
     .ShowBorders(false)
     .DataSource(
         ob => ob.Mvc().Controller("Fason")
-        .LoadParams(Model)
+        .LoadParams(new { BASLANGIC_TARIHI = Model.BASLANGIC_TARIHI.ToString("dd.MM.yyyy"), BITIS_TARIHI = Model.BITIS_TARIHI.ToString("dd.MM.yyyy"), MODEL = Model.MODEL, COLOR = Model.COLOR })
         .LoadAction("SiparisListesiLoad")
         .Key("ENTEGRATION_ID")
     )
@@ -22,6 +22,7 @@
     .ShowColumnLines(true)
     .ShowColumnHeaders(true)
     .ColumnMinWidth(60)
+    .OnFocusedRowChanged("gridFocusedRowChanged")
     .AllowColumnResizing(true)
     .Columns(columns => {
         columns.AddFor(m => m.ENTEGRATION_ID).Visible(false).Width(110);
@@ -35,17 +36,16 @@
         columns.AddFor(m => m.PRODUCTION_TYPE);
         columns.AddFor(m => m.ORDER_TYPE);
         columns.AddFor(m => m.RECIPE);
-        columns.AddFor(m => m.DEADLINE);
-        columns.AddFor(m => m.ATTRIBUTE1);
-        columns.AddFor(m => m.ATTRIBUTE2);
-        columns.AddFor(m => m.ATTRIBUTE3);
-        columns.AddFor(m => m.ATTRIBUTE4);
-        columns.AddFor(m => m.ATTRIBUTE5);
-        columns.AddFor(m => m.ATTRIBUTE6);
-        columns.AddFor(m => m.ATTRIBUTE7);
-        columns.AddFor(m => m.ATTRIBUTE8);
-        columns.AddFor(m => m.ATTRIBUTE9);
-        columns.AddFor(m => m.ATTRIBUTE10);
+        columns.AddFor(m => m.ATTRIBUTE1).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE2).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE3).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE4).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE5).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE6).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE7).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE8).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE9).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE10).Visible(false);
         columns.AddFor(m => m.TEMA);
         columns.AddFor(m => m.ANA_TEMA);
         columns.AddFor(m => m.ROYALTY);
@@ -53,8 +53,8 @@
         columns.AddFor(m => m.QUANTITY);
         columns.AddFor(m => m.PROCESS_NAME);
         columns.AddFor(m => m.STATUSEX);
-        columns.AddFor(m => m.START_DATE);
-        columns.AddFor(m => m.END_DATE);
+        columns.AddFor(m => m.START_DATE).Format("dd.MM.yyyy");
+        columns.AddFor(m => m.END_DATE).Format("dd.MM.yyyy");
     })
     .Summary(sm =>
     {
@@ -67,3 +67,4 @@
     //.OnCellPrepared("edUretimTakipGridCellPrepared")
     )
 </div>
+ 
