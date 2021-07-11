@@ -11,6 +11,7 @@ namespace EPM.Fason.Dto.Fason
         public int ID { get; set; }
         public int ENTEGRATION_ID { get; set; }
         public int FIRMA_ID { get; set; }
+        public int STATUS { get; set; }
         public DateTime END_DATE { get; set; }
     }
 }

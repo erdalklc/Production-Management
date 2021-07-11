@@ -194,8 +194,10 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
         }
 
         public List<UretimTakipListesi> GetUretimTakipListesi(string USER_CODE, TrackList_Filter liste)
-        { 
-            string sql = @" SELECT A.*,
+        {
+            if (liste.PRODUCTION_TYPE == 1)
+            {
+                string sql = @" SELECT A.*,
        CASE
           WHEN SATIN_ALMA_BAGLANTI > 0
           THEN
@@ -328,28 +330,71 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
           FROM FDEIT005.EPM_MASTER_PRODUCTION_H H
          WHERE     0 = 0 ";
 
-            if (liste.BRAND != 0)
-                sql += " AND H.BRAND=" + liste.BRAND;
-            if (liste.ORDER_TYPE != 0)
-                sql += " AND H.ORDER_TYPE=" + liste.ORDER_TYPE;
-            if (liste.FABRIC_TYPE != 0)
-                sql += " AND H.FABRIC_TYPE=" + liste.FABRIC_TYPE;
-            else sql += " AND H.FABRIC_TYPE IN (SELECT FABRIC_TYPE_ID FROM FDEIT005.EPM_USER_FABRIC_TYPES WHERE USER_CODE='" + USER_CODE + "')";
-            if (liste.PRODUCTION_TYPE != 0)
-                sql += " AND H.PRODUCTION_TYPE=" + liste.PRODUCTION_TYPE;
-            else sql += " AND H.PRODUCTION_TYPE IN (SELECT PRODUCTION_TYPE_ID FROM FDEIT005.EPM_USER_PRODUCTION_TYPES WHERE USER_CODE='" + USER_CODE + "')";
-            if (liste.COLOR != null && liste.COLOR != "")
-                sql += " AND H.COLOR='" + liste.COLOR + "'";
-            if (liste.MODEL != null && liste.MODEL != "")
-                sql += " AND H.MODEL='" + liste.MODEL + "'";
-            sql += " AND H.SEASON=" + liste.SEASON;
+                if (liste.BRAND != 0)
+                    sql += " AND H.BRAND=" + liste.BRAND;
+                if (liste.ORDER_TYPE != 0)
+                    sql += " AND H.ORDER_TYPE=" + liste.ORDER_TYPE;
+                if (liste.FABRIC_TYPE != 0)
+                    sql += " AND H.FABRIC_TYPE=" + liste.FABRIC_TYPE;
+                else sql += " AND H.FABRIC_TYPE IN (SELECT FABRIC_TYPE_ID FROM FDEIT005.EPM_USER_FABRIC_TYPES WHERE USER_CODE='" + USER_CODE + "')";
+                if (liste.PRODUCTION_TYPE != 0)
+                    sql += " AND H.PRODUCTION_TYPE=" + liste.PRODUCTION_TYPE;
+                else sql += " AND H.PRODUCTION_TYPE IN (SELECT PRODUCTION_TYPE_ID FROM FDEIT005.EPM_USER_PRODUCTION_TYPES WHERE USER_CODE='" + USER_CODE + "')";
+                if (liste.COLOR != null && liste.COLOR != "")
+                    sql += " AND H.COLOR='" + liste.COLOR + "'";
+                if (liste.MODEL != null && liste.MODEL != "")
+                    sql += " AND H.MODEL='" + liste.MODEL + "'";
+                sql += " AND H.SEASON=" + liste.SEASON;
 
-            if (liste.RECIPE != 0)
-                sql += " AND H.RECIPE=" + liste.RECIPE;
+                if (liste.RECIPE != 0)
+                    sql += " AND H.RECIPE=" + liste.RECIPE;
 
-            sql += " ) A";
+                sql += " ) A";
 
-            return _trackRepository.DeserializeList<UretimTakipListesi>(sql);
+                return _trackRepository.DeserializeList<UretimTakipListesi>(sql);
+            }
+            else
+            {
+                string sql = @" SELECT A.*,
+       '' PROCESS_INFO,
+       '' TAKIP_NO
+  FROM (SELECT H.*,
+               (SELECT SUM (D.QUANTITY)
+                  FROM FDEIT005.EPM_MASTER_PRODUCTION_D D
+                 WHERE D.HEADER_ID = H.ID)
+                  AS QUANTITY,
+               SYSDATE  END_DATE,
+               '' LAST_STATE,
+               '' MUSTBE_STATE,
+               0 AS TAMAMLANAN,
+              0 TANIMLANAN,
+                null KUMAS_START,
+               0 AS SATIN_ALMA_BAGLANTI
+          FROM FDEIT005.EPM_MASTER_PRODUCTION_H H
+         WHERE     0 = 0";
+                if (liste.BRAND != 0)
+                    sql += " AND H.BRAND=" + liste.BRAND;
+                if (liste.ORDER_TYPE != 0)
+                    sql += " AND H.ORDER_TYPE=" + liste.ORDER_TYPE;
+                if (liste.FABRIC_TYPE != 0)
+                    sql += " AND H.FABRIC_TYPE=" + liste.FABRIC_TYPE;
+                else sql += " AND H.FABRIC_TYPE IN (SELECT FABRIC_TYPE_ID FROM FDEIT005.EPM_USER_FABRIC_TYPES WHERE USER_CODE='" + USER_CODE + "')";
+                if (liste.PRODUCTION_TYPE != 0)
+                    sql += " AND H.PRODUCTION_TYPE=" + liste.PRODUCTION_TYPE;
+                else sql += " AND H.PRODUCTION_TYPE IN (SELECT PRODUCTION_TYPE_ID FROM FDEIT005.EPM_USER_PRODUCTION_TYPES WHERE USER_CODE='" + USER_CODE + "')";
+                if (liste.COLOR != null && liste.COLOR != "")
+                    sql += " AND H.COLOR='" + liste.COLOR + "'";
+                if (liste.MODEL != null && liste.MODEL != "")
+                    sql += " AND H.MODEL='" + liste.MODEL + "'";
+                sql += " AND H.SEASON=" + liste.SEASON;
+
+                if (liste.RECIPE != 0)
+                    sql += " AND H.RECIPE=" + liste.RECIPE;
+
+                sql += " ) A";
+                return _trackRepository.DeserializeList<UretimTakipListesi>(sql);
+            }
+            
 
         }
 

@@ -24,13 +24,17 @@ namespace EPM.Web.Controllers
         { 
         }
 
-        public IActionResult Takip()
+        public IActionResult Takip(int TYPE=1)
         {
-            return View(new TrackList_Filter());
+            if (TYPE == 1)
+                ViewBag.Page = "İÇ ÜRETİM TAKİP";
+            else ViewBag.Page = "FASON ÜRETİM TAKİP";
+            return View(new TrackList_Filter(TYPE));
         }
 
         public IActionResult EgemenGerceklesen()
         {
+            ViewBag.Page = "EGEMEN ÜRETİM GERÇEKLEŞENLER";
             return View(new KaliteGerceklesenFilter());
         }
         [HttpGet]

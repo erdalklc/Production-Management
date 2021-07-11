@@ -1,4 +1,5 @@
 ﻿using EPM.Dto.Base;
+using EPM.Fason.Dto.Fason;
 using EPM.Tools.Helpers;
 using EPM.Track.Dto.Track;
 using System;
@@ -77,6 +78,19 @@ namespace EPM.Web.ServiceHelper
         {
             string apiUrl = "GetUretimTakipListesi";
             var list = PostRequest<object[], List<UretimTakipListesi>>(EPMServiceType.Track, apiUrl, new object[] { USER_CODE, liste });
+            if (liste.PRODUCTION_TYPE == 2)
+            { 
+                var listFason = PostRequest<int[], List<PRODUCTION_STATUS>>(EPMServiceType.FasonTakip, "SendProductionsStatues", list.Select(ob=>ob.ID).ToArray());
+                foreach (var item in listFason)
+                {
+                    var takip = list.Find(ob => ob.ID == item.ENTEGRATION_ID);
+                    if (takip != null)
+                    {
+                        takip.PROCESS_INFO = item.PROCESS_NAME + " " + item.STATUSEX;
+                        takip.COMPANY_NAME = item.COMPANY_NAME; 
+                    }
+                }
+            }
             return list;
         }
 

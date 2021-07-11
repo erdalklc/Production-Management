@@ -48,10 +48,28 @@ namespace EPM.Fason.Web.Controllers
 
         }
 
+        [HttpGet]
+        public object SiparisListesiProcessLoad(DataSourceLoadOptions loadOptions, int ENTEGRATION_HEADER_ID)
+        {
+            return DataSourceLoader.Load(_fasonService.GetSiparisProcessList(ENTEGRATION_HEADER_ID), loadOptions);
+
+        }
+
         [HttpPost, HttpGet]
         public IActionResult _PartialSiparisListesi(SIPARIS_FILTER liste) => PartialView(liste);
 
         [HttpPost, HttpGet]
-        public IActionResult _PartialSiparisListesiDetail(int ENTEGRATION_HEADER_ID) => PartialView(ENTEGRATION_HEADER_ID);
+        public IActionResult _PartialSiparisListesiDetail(int ENTEGRATION_HEADER_ID) => PartialView(ENTEGRATION_HEADER_ID); 
+
+        [HttpPost, HttpGet]
+        public IActionResult _PartialSiparisProcessList(int ENTEGRATION_HEADER_ID) => PartialView(ENTEGRATION_HEADER_ID);
+
+
+        [HttpPost, HttpGet]
+        public IActionResult SurecIlerlet(PRODUCTION_LIST_V list)
+        {
+            return Ok(_fasonService.SurecIlerlet(list));
+        }
+
     }
 }

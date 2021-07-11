@@ -1,7 +1,7 @@
 ﻿
 @functions{
     string GetUrl(string action) => Url.Action(action);
-    string GetCurrentUrl() => Url.Action(ViewContext.RouteData.Values["action"].ToString());
+    string GetCurrentUrl() => Url.Action(ViewContext.RouteData.Values["action"].ToString()+""+ Context.Request.QueryString.Value.ToString());
     bool IsCurrentUrl(string pageName) => GetUrl(pageName) == GetCurrentUrl();
 }
 @{ 
@@ -11,7 +11,6 @@
     {
         if (item.ACTION != null)
         {
-
             item.SELECTED = IsCurrentUrl(item.ACTION);
             if (item.SELECTED)
             {
@@ -20,8 +19,9 @@
 
                     EPM.Core.Models.Menu menu = menuData.Find(ob => ob.ID == item.CATEGORY_ID);
                     menu.ISEXPANDED = true;
-                } 
+                }
             }
+
         }
         else item.SELECTED = false;
     }

@@ -13,5 +13,12 @@ namespace EPM.Fason.Dto.Extensions
             STARTED=2,
             FINISHED=3
         }
+
+        public enum HEADERSTATUS
+        { 
+            WAITINGFORSTART = 1,
+            STARTED = 2,
+            FINISHED = 3
+        }
     }
 }

@@ -40,12 +40,24 @@ namespace EPM.Web.Controllers
 
         public IActionResult _PartialLeftMenu() => PartialView("~/Views/Shared/_PartialLeftMenu.cshtml");
 
-        public IActionResult UretimListesiAktarim() => View();
+        public IActionResult UretimListesiAktarim()
+        {
+            ViewBag.Page = "ÜRETİM LİSTESİ AKTARIM";
+            return View();
+        }
 
-        public IActionResult UretimOnayliListe() => View(new UretimOnayliListe());
+        public IActionResult UretimOnayliListe()
+        {
+            ViewBag.Page = "ONAYLI ÜRETİM LİSTESİ";
+            return View(new UretimOnayliListe());
+        }
 
 
-        public IActionResult UretimListesiDikey() => View(new UretimOnayliListe());
+        public IActionResult UretimListesiDikey()
+        {
+            ViewBag.Page = "ÜRETİM LİSTESİ DİKEY";
+            return View(new UretimOnayliListe());
+        }
 
         [HttpPost, HttpGet]
         public IActionResult _PartialUretimOnayliListeFiltrele(UretimOnayliListe liste) => PartialView(liste);
@@ -139,6 +151,8 @@ namespace EPM.Web.Controllers
         public object GetProductGroupList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_uretimRepository.GetProductGroupList(hepsi), loadOptions);
         [HttpGet]
         public object GetRecipeList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_uretimRepository.GetRecipeList(hepsi), loadOptions);
+        [HttpGet]
+        public object GetRecipeListByType(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi, [FromQuery(Name = "TYPE")] int TYPE) => DataSourceLoader.Load(_uretimRepository.GetRecipeListByType(hepsi, TYPE), loadOptions);
         [HttpGet]
         public object GetCollectionTypes(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_uretimRepository.GetCollectionTypes(hepsi), loadOptions);
         [HttpGet]

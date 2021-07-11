@@ -43,11 +43,7 @@ namespace EPM.Fason.Service.Services
 
             return obj;
         } 
-
-        public PRODUCTION_STATUS GetProductionStatus(int _HEADER_ID)
-        { 
-            return new PRODUCTION_STATUS() { HEADER_ID = _HEADER_ID, LAST_STATE = "BEKLENİYOR", MUST_STATE = "AYARLANIYOR" };
-        }
+         
 
         public List<PRODUCTION_PROCESS> GetProcessList()
         {
@@ -86,6 +82,7 @@ namespace EPM.Fason.Service.Services
 
                 PRODUCTION_LIST_H h = new PRODUCTION_LIST_H();
                 h.ENTEGRATION_ID = header.ENTEGRATION_ID;
+                h.STATUS = (int)HEADERSTATUS.WAITINGFORSTART;
                 h.FIRMA_ID = firmaBilgi;
                 h.END_DATE = terminTarihi;
                 _fasonRepository.Serialize(h);
@@ -118,6 +115,20 @@ namespace EPM.Fason.Service.Services
 
             return obj;
         }
-         
+
+        public List<PRODUCTION_STATUS> GetProductionStatus(int[] ids)
+        {
+            string sql = string.Format(@"
+
+SELECT        PRL.STATUS, dbo.SENDSTATUSEX(PRL.STATUS) AS STATUSEX, PRC.NAME PROCESS_NAME, PRH.ENTEGRATION_ID, PRL.END_DATE, PRL.START_DATE, PRH.END_DATE AS DEADLINE_CUSTOMER,USR.NAME as COMPANY_NAME
+                               FROM            dbo.PRODUCTION_LIST_L AS PRL 
+							   INNER JOIN dbo.PRODUCTION_LIST_H AS PRH ON PRH.ID = PRL.HEADER_ID 
+														 INNER JOIN dbo.PRODUCTION_PROCESS AS PRC ON PRC.ID = PRL.PROCESS_ID
+														 INNER JOIN dbo.PRODUCTION_FASON_USERS USR ON USR.ID=PRH.FIRMA_ID
+                               WHERE        (PRL.STATUS NOT IN (0, 3)) AND PRH.ENTEGRATION_ID IN ({0})
+                ", string.Join(',', ids));
+
+           return _fasonRepository.DeserializeList<PRODUCTION_STATUS>(sql);
+        }
     }
 }

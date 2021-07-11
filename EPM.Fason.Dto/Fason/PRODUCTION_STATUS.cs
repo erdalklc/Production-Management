@@ -6,9 +6,13 @@ namespace EPM.Fason.Dto.Fason
 {
     public class PRODUCTION_STATUS
     {
-        public int HEADER_ID { get; set; }
-        public string LAST_STATE { get; set; }
-        public DateTime MUST_STATE_DATE { get; set; }
-        public string MUST_STATE { get; set; }
+        public int STATUS { get; set; }
+        public string STATUSEX { get; set; }
+        public string PROCESS_NAME { get; set; }
+        public int ENTEGRATION_ID { get; set; }
+        public string COMPANY_NAME { get; set; }
+        public DateTime DEADLINE_CUSTOMER { get; set; }
+        public DateTime START_DATE { get; set; }
+        public DateTime END_DATE { get; set; } 
     }
 }

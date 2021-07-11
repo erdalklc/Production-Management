@@ -46,6 +46,8 @@ namespace EPM.Core.Services
 
         public IEnumerable<EPM_PRODUCTION_RECIPE> GetRecipeList(bool hepsi = true);
 
+        public IEnumerable<EPM_PRODUCTION_RECIPE> GetRecipeListByType(bool hepsi = true, int TYPE = 1);
+
         public IEnumerable<EPM_PRODUCTION_CURRENCY_UNITS> GetCurrencyUnits();
 
         public IEnumerable<MasterList> OnayliUretimListesi(HttpContext context, UretimOnayliListe liste);

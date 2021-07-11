@@ -24,9 +24,7 @@ namespace EPM.Fason.Web.Controllers
                 return Ok(obj);
             else return BadRequest(obj[1].ToString());
         }
-
-        [HttpGet]
-        public ActionResult<PRODUCTION_STATUS> GetProductionStatus(int HEADER_ID) => _aktarimService.GetProductionStatus(HEADER_ID);
+         
 
         [HttpGet]
         public ActionResult<IEnumerable<PRODUCTION_PROCESS>> GetProcessList() =>  _aktarimService.GetProcessList();
@@ -44,5 +42,8 @@ namespace EPM.Fason.Web.Controllers
                 return Ok(obj);
             else return BadRequest(obj);
         }
+
+        [HttpPost]
+        public ActionResult<IEnumerable<PRODUCTION_STATUS>> SendProductionsStatues(int[] ids)  => _aktarimService.GetProductionStatus(ids); 
     }
 }

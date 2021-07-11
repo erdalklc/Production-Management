@@ -17,6 +17,7 @@
     })
     .RemoteOperations(true)
     .FilterRow(f => f.Visible(true))
+    .AllowColumnReordering(false)
     .FocusedRowEnabled(true)
     .FocusedRowIndex(0)
     .ColumnAutoWidth(true)
@@ -25,7 +26,7 @@
     .ShowColumnLines(true)
     .ColumnHidingEnabled(false)
     .Scrolling(ob => ob.Mode(GridScrollingMode.Virtual))
-    .Height("calc(100vh - 200px)")
+    .Height("300px")
     .ShowBorders(true)
     .Summary(ob=>ob.TotalItems(items=> {
         items.AddFor(m => m.QUANTITY).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System; 
+using System.ComponentModel.DataAnnotations; 
 
 namespace EPM.Track.Dto.Track
 {
@@ -31,5 +29,25 @@ namespace EPM.Track.Dto.Track
         public int APPROVAL_STATUS { get; set; } = 0;
         [Display(Name = "PRODUCT GROUP")]
         public int PRODUCT_GROUP { get; set; } = 0;
+
+        public TrackList_Filter()
+        {
+
+        }
+        public TrackList_Filter(int TYPE = 1)
+        {
+            if (TYPE == 1)
+            {
+                PRODUCTION_TYPE = 1;
+                RECIPE = 1;
+            }
+            else if (TYPE == 2)
+            {
+                PRODUCTION_TYPE = 2;
+                RECIPE = 5;
+            }
+
+            BRAND = 1;
+        }
     }
 }

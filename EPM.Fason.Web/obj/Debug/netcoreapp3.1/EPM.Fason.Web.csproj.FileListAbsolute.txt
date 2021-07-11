@@ -831,3 +831,4 @@ E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fas
 E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.dll
 E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.pdb
 E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.genruntimeconfig.cache
+E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Fason\_PartialSiparisProcessList.cshtml.g.cs

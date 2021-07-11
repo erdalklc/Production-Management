@@ -2,7 +2,9 @@
 using EPM.Fason.Repository.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using static EPM.Fason.Dto.Extensions.Enums;
 
 namespace EPM.Fason.Service.Services
 {
@@ -59,6 +61,65 @@ namespace EPM.Fason.Service.Services
 
             return _fasonRepository.DeserializeList<SIPARIS_LISTESI>(sql);
         }
-         
+
+
+        List<PRODUCTION_LIST_V> GetProcessList(int ENTEGRASYON_ID)
+        {
+            string sql = string.Format(@"SELECT PL.ID DETAIL_ID,PL.HEADER_ID,PH.ENTEGRATION_ID,PR.NAME PROCESS_NAME,PL.START_DATE,PL.END_DATE,PL.STATUS,dbo.SENDSTATUSEX(PL.STATUS) STATUS_EX,PL.QUEUE FROM PRODUCTION_LIST_L PL
+INNER JOIN PRODUCTION_LIST_H PH ON PH.ID=PL.HEADER_ID
+INNER JOIN PRODUCTION_PROCESS PR ON PR.ID=PL.PROCESS_ID WHERE PH.ENTEGRATION_ID={0} ORDER BY PL.QUEUE", ENTEGRASYON_ID);
+            var list = _fasonRepository.DeserializeList<PRODUCTION_LIST_V>(sql);
+            return list;
+        }
+        public IEnumerable<PRODUCTION_LIST_V> GetSiparisProcessList(int ENTEGRASYON_ID)
+        {
+            return GetProcessList(ENTEGRASYON_ID); 
+        }
+
+        public object[] SurecIlerlet(PRODUCTION_LIST_V surec)
+        {
+            object[] ok = { true, "" };
+            var list = GetProcessList(surec.ENTEGRATION_ID);
+
+            try
+            {
+                if (surec.STATUS == (int)LINESTATUS.WAITINGFORSTART)
+                {
+                    PRODUCTION_LIST_L line = _fasonRepository.Deserialize<PRODUCTION_LIST_L>(surec.DETAIL_ID);
+                    line.STATUS = (int)LINESTATUS.STARTED;
+                    _fasonRepository.Serialize(line);
+                    PRODUCTION_LIST_H header = _fasonRepository.Deserialize<PRODUCTION_LIST_H>(surec.HEADER_ID);
+                    header.STATUS = (int)HEADERSTATUS.STARTED; 
+                    _fasonRepository.Serialize(header);
+                }
+                else if (surec.STATUS == (int)LINESTATUS.STARTED)
+                {
+
+                    PRODUCTION_LIST_L line = _fasonRepository.Deserialize<PRODUCTION_LIST_L>(surec.DETAIL_ID);
+                    line.STATUS = (int)LINESTATUS.FINISHED;
+                    _fasonRepository.Serialize(line);
+                    var tt = list.FindAll(ob => ob.QUEUE > line.QUEUE);
+                    if (tt.Count > 0)
+                    {
+                        tt = tt.OrderBy(ob => ob.QUEUE).ToList();
+                        line = _fasonRepository.Deserialize<PRODUCTION_LIST_L>(tt[0].DETAIL_ID);
+                        line.STATUS = (int)LINESTATUS.WAITINGFORSTART;
+                        _fasonRepository.Serialize(line);
+                    }
+                    else
+                    {
+                        PRODUCTION_LIST_H header = _fasonRepository.Deserialize<PRODUCTION_LIST_H>(surec.HEADER_ID);
+                        header.STATUS = (int)HEADERSTATUS.FINISHED;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ok[0] = false;
+                ok[1] = ex.Message;
+            }
+
+            return ok;
+        }
     }
 }

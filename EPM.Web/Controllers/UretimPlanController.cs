@@ -23,16 +23,19 @@ namespace EPM.Web.Controllers
          
         public IActionResult PlanOlustur()
         {
+            ViewBag.Page = "ÜRETİM PLAN GİRİŞİ";
             UretimOnayliListe model = new UretimOnayliListe();
             return View(model);
         }
 
         public IActionResult KapasitePlan()
-        { 
+        {
+            ViewBag.Page = "KAPASİTE PLANI GİRİŞİ";
             return View();
         }
         public IActionResult KapasiteUyum()
         {
+            ViewBag.Page = "KAPASİTE UYUM";
             return View();
         }
 
