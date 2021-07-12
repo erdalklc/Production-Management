@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EPM.Tools.Helpers
 {
-    class EPMServiceConfiguration
+    public class EPMServiceConfiguration
     {
         public static IConfiguration GetConfig()
         {
@@ -13,6 +13,11 @@ namespace EPM.Tools.Helpers
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             return builder.Build();
         }
-         
+        public static bool IsDevelopment()
+        {
+            var settings = GetConfig();
+
+            return (settings["Environment"] != null && settings["Environment"] == "Development") ? true : false;
+        }
     }
 }

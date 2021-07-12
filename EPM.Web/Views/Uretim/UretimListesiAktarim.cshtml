@@ -1,4 +1,6 @@
 ﻿<div class="dx-card wide-card" id="fileuploader">
+
+
     <div class="widget-container">
         @(Html.DevExtreme().FileUploader()
             .ID("file-uploader")
@@ -15,11 +17,15 @@
             .OnUploadAborted("uploadError")
         )
         <div class="content" id="selected-files">
-            <div> 
+            <div>
             </div>
         </div>
     </div>
-    
+    <div style="margin:20px 10px">
+        <a class="fas fa-file-excel fa-lg" style="border:none;text-decoration:none" href='@Url.Action("SablonDownload","Uretim")' download>
+            AKTARIM ŞABLON ÖRNEĞİ
+        </a>
+    </div>
 </div>
 
 <script> 

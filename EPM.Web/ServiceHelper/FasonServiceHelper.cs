@@ -9,15 +9,14 @@ namespace EPM.Web.ServiceHelper
 {
     public class FasonServiceHelper : EPMHttpCaller
     {
-        public static Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>> FasonTakipListeAyarla(int HEADER_ID)
+        public static Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>, List<PRODUCTION_LIST_V>> FasonTakipListeAyarla(int HEADER_ID)
         {
-
-            Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>> responce = new Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>(null, null, null);
             PRODUCTION_HEADER header = PostRequest<object[], PRODUCTION_HEADER>(EPMServiceType.Track, "GetProductionList", new object[] { HEADER_ID });
             List<PRODUCTION_PROCESS> processList = GetRequest<List<PRODUCTION_PROCESS>>(EPMServiceType.FasonTakip, "GetProcessList");
             List<PRODUCTION_FASON_USERS> fasonUsers = GetRequest<List<PRODUCTION_FASON_USERS>>(EPMServiceType.FasonTakip, "GetFasonUsers");
+            List<PRODUCTION_LIST_V> processStatus = PostRequest<object[],List<PRODUCTION_LIST_V>>(EPMServiceType.FasonTakip, "GetProcessStatusList", new object[] { HEADER_ID });
 
-            return new Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>(header, processList, fasonUsers);
+            return new Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>, List<PRODUCTION_LIST_V>>(header, processList, fasonUsers, processStatus);
 
         }
         public static object[] FasonSiparisOlustur(PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan, int firmaBilgi, DateTime terminTarihi)

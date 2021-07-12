@@ -36,7 +36,7 @@
             columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn => btn.Add().Icon("fa fa-edit").OnClick("EditClicked"));
         }
         columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn => btn.Add().Icon("fa fa-search").OnClick("DetailSearch"));
-        columns.AddFor(m => m.ID).Width(100).AllowEditing(false); 
+        columns.AddFor(m => m.ID).Width(100).AllowEditing(false);
         if (Model.PRODUCTION_TYPE == 1)
         {
             columns.AddFor(m => m.TAKIP_NO).Width(120).AllowEditing(false);
@@ -64,6 +64,13 @@
         columns.AddFor(m => m.DEADLINE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy");
         columns.AddFor(m => m.SHIPMENT_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Visible(false);
         columns.AddFor(m => m.QUANTITY);
+        if (Model.PRODUCTION_TYPE == 1)
+        {
+            columns.AddFor(m => m.KESIM_ADET);
+            columns.AddFor(m => m.TASNIF_ADET);
+            columns.AddFor(m => m.BANT_ADET);
+            columns.AddFor(m => m.KALITE_ADET);
+        }
         columns.AddFor(m => m.PROCESS_INFO).Caption("SÜREÇ DURUMU");
         if (Model.PRODUCTION_TYPE == 1)
         {
@@ -74,8 +81,15 @@
     {
         sm.TotalItems(t =>
         {
-        t.AddFor(ob => ob.MODEL).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
-            t.AddFor(ob => ob.QUANTITY).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+            t.AddFor(ob => ob.MODEL).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
+                t.AddFor(ob => ob.QUANTITY).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+            if (Model.PRODUCTION_TYPE == 1)
+            {
+                t.AddFor(ob => ob.KESIM_ADET).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+                t.AddFor(ob => ob.TASNIF_ADET).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+                t.AddFor(ob => ob.BANT_ADET).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+                t.AddFor(ob => ob.KALITE_ADET).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+            }
         });
     })
     .OnCellPrepared("edUretimTakipGridCellPrepared")

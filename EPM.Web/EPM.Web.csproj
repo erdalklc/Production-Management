@@ -23,6 +23,10 @@
       <ProjectReference Include="..\EPM.Track.Dto\EPM.Track.Dto.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="wwwroot\AppData\EPM AKTARIM SABLON.xlsx" />
+    </ItemGroup>
+
     <ProjectExtensions><VisualStudio><UserProperties TemplateFeatures="NETCORE" /></VisualStudio></ProjectExtensions>
 
 </Project>

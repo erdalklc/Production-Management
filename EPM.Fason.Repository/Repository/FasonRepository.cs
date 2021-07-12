@@ -8,13 +8,20 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using EPM.Fason.Repository.Extensions;
+using EPM.Tools.Helpers;
 
 namespace EPM.Fason.Repository.Repository
 {
     public class FasonRepository : IFasonRepository
     {
-        public const string connectionString = @"Data Source=192.168.2.7;Persist Security Info=True;User ID=sa;password=Eren5959++;Initial Catalog=EPMFASON;MultipleActiveResultSets=true;Application Name=1";
+         string connectionString = @"";
 
+        public FasonRepository()
+        {
+            if (EPMServiceConfiguration.IsDevelopment())
+                connectionString = EPM.Tools.Helpers.EPMServiceConfiguration.GetConfig().GetSection("SQLSERVERDEV").Value;
+            else connectionString = EPM.Tools.Helpers.EPMServiceConfiguration.GetConfig().GetSection("SQLSERVERAPP").Value;
+        }
         public T Deserialize<T>(int id) where T : class
         {
             using (var sqlConnection = new SqlConnection(connectionString))

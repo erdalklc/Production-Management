@@ -19,5 +19,7 @@ namespace EPM.Fason.Service.Services
 
         public List<PRODUCTION_STATUS> GetProductionStatus(int[] ids);
 
+        public List<PRODUCTION_LIST_V> SurecDurumuGetir(int ENTEGRATION_ID);
+
     }
 }

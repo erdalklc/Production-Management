@@ -8,6 +8,10 @@ namespace EPM.Track.Dto.Track
     public class UretimTakipListesi: EPM_MASTER_PRODUCTION_H
     {
         public int QUANTITY { get; set; }
+        public int BANT_ADET { get; set; }
+        public int KALITE_ADET { get; set; }
+        public int KESIM_ADET { get; set; }
+        public int TASNIF_ADET { get; set; }
         public DateTime END_DATE { get; set; }
         public string LAST_STATE { get; set; }
         public string PROCESS_INFO { get; set; }

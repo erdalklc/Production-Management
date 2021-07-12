@@ -232,6 +232,10 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
        END
           TAKIP_NO
   FROM (SELECT H.*,
+ VL.BANT AS BANT_ADET
+                ,VL.KESIM AS KESIM_ADET
+                ,VL.TASNIF AS TASNIF_ADET
+                ,VL.KALITE AS KALITE_ADET,
                (SELECT SUM (D.QUANTITY)
                   FROM FDEIT005.EPM_MASTER_PRODUCTION_D D
                  WHERE D.HEADER_ID = H.ID)
@@ -328,6 +332,7 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
                END
                   AS SATIN_ALMA_BAGLANTI
           FROM FDEIT005.EPM_MASTER_PRODUCTION_H H
+          LEFT JOIN FDEIT005.EPM_TRACKING_PROCESS_VALUES VL ON VL.HEADER_ID = H.ID 
          WHERE     0 = 0 ";
 
                 if (liste.BRAND != 0)

@@ -10,19 +10,25 @@
             .OnValueChanged("fileUploader_valueChanged")
             .SelectButtonText("DOSTA SEÇİNİZ")
             .UploadButtonText("Yükle")
-            .UploadedMessage("Dosys Başarıyla Yüklendi. İşlemler Tamamlandığında Tarafınıza Mail Bilgilendirmesi Yapılacaktır.") 
+            .UploadedMessage("Dosys Başarıyla Yüklendi. İşlemler Tamamlandığında Tarafınıza Mail Bilgilendirmesi Yapılacaktır.")
             .OnUploadError("uploadError")
-            .OnUploadAborted("uploadError") 
+            .OnUploadAborted("uploadError")
         )
         <div class="content" id="selected-files">
             <div>
                 <h4>Selected Files</h4>
             </div>
         </div>
+
+
     </div>
 
 </div>
+<div>
+    <button>
 
+    </button>
+</div>
 <script>
     function uploadError(e) { 
         setTimeout(function () {

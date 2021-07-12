@@ -90,6 +90,11 @@ namespace EPM.Web.ServiceHelper
                         takip.COMPANY_NAME = item.COMPANY_NAME; 
                     }
                 }
+                foreach (var item in list)
+                {
+                    if (item.PROCESS_INFO == null)
+                        item.PROCESS_INFO = "TANIMLAMA BEKLİYOR";
+                }
             }
             return list;
         }

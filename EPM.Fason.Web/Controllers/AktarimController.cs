@@ -44,6 +44,10 @@ namespace EPM.Fason.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult<IEnumerable<PRODUCTION_STATUS>> SendProductionsStatues(int[] ids)  => _aktarimService.GetProductionStatus(ids); 
+        public ActionResult<IEnumerable<PRODUCTION_STATUS>> SendProductionsStatues(int[] ids)  => _aktarimService.GetProductionStatus(ids);
+
+
+        [HttpPost]
+        public ActionResult<IEnumerable<PRODUCTION_LIST_V>> GetProcessStatusList(object[] obj) => _aktarimService.SurecDurumuGetir(Convert.ToInt32(obj[0]));
     }
 }

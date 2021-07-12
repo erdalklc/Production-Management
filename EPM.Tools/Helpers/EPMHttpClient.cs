@@ -20,15 +20,31 @@ namespace EPM.Tools.Helpers
 
             client = new HttpClient();
             string apiUrl = string.Empty;
-            switch (serviceType)
+            if (EPMServiceConfiguration.IsDevelopment())
             {
-                case EPMServiceType.FasonTakip:
-                    apiUrl = config.GetSection("AppServices:FasonTakip").Value;
-                    break;
-                case EPMServiceType.Track:
-                    apiUrl = config.GetSection("AppServices:Track").Value;
-                    break;
+                switch (serviceType)
+                {
+                    case EPMServiceType.FasonTakip:
+                        apiUrl = config.GetSection("AppServicesDev:FasonTakip").Value;
+                        break;
+                    case EPMServiceType.Track:
+                        apiUrl = config.GetSection("AppServicesDev:Track").Value;
+                        break;
+                }
             }
+            else
+            {
+                switch (serviceType)
+                {
+                    case EPMServiceType.FasonTakip:
+                        apiUrl = config.GetSection("AppServicesApp:FasonTakip").Value;
+                        break;
+                    case EPMServiceType.Track:
+                        apiUrl = config.GetSection("AppServicesApp:Track").Value;
+                        break;
+                }
+            }
+            
             apiUrl = apiUrl == null ? string.Empty : apiUrl.Trim();
             if (apiUrl.Length > 0 && !apiUrl.EndsWith("/"))
             {

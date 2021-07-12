@@ -7,3 +7,8 @@ D:\Projects\Eren Production Management\EPM.Core\obj\Release\netcoreapp3.1\EPM.Co
 D:\Projects\Eren Production Management\EPM.Core\obj\Release\netcoreapp3.1\EPM.Core.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.Core\obj\Release\netcoreapp3.1\EPM.Core.dll
 D:\Projects\Eren Production Management\EPM.Core\obj\Release\netcoreapp3.1\EPM.Core.pdb
+D:\Projects\Eren Production Management\EPM.Core\bin\Release\netcoreapp3.1\EPM.Fason.Dto.dll
+D:\Projects\Eren Production Management\EPM.Core\bin\Release\netcoreapp3.1\EPM.Tools.dll
+D:\Projects\Eren Production Management\EPM.Core\bin\Release\netcoreapp3.1\EPM.Fason.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Core\bin\Release\netcoreapp3.1\EPM.Tools.pdb
+D:\Projects\Eren Production Management\EPM.Core\obj\Release\netcoreapp3.1\EPM.Core.csproj.CopyComplete

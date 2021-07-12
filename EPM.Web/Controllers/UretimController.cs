@@ -7,6 +7,7 @@ using EPM.Core.Models;
 using EPM.Core.Services;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -22,12 +23,14 @@ namespace EPM.Web.Controllers
     [ServiceFilter(typeof(AppFilterAttribute), Order = 1)]
     public class UretimController : Controller
     {
+        private readonly IWebHostEnvironment _appEnvironment;
         private readonly IUretimService _uretimRepository;
         private readonly ILogService _logRepository;
-        public UretimController(IUretimService uretimRepository, ILogService logRepository)
+        public UretimController(IUretimService uretimRepository, ILogService logRepository, IWebHostEnvironment appEnvironment)
         {
             _uretimRepository = uretimRepository;
             _logRepository = logRepository;
+            _appEnvironment = appEnvironment;
         }
          
         public IActionResult UretimListesiAktarExcelYukle()
@@ -178,7 +181,13 @@ namespace EPM.Web.Controllers
         {
             return DataSourceLoader.Load(_uretimRepository.OnayliUretimListesiLogDetail(DETAIL_ID, _logRepository), loadOptions);
         }
-
+        [HttpGet]
+        public IActionResult SablonDownload()
+        { 
+            var path = Path.Combine(_appEnvironment.WebRootPath, "AppData\\EPM AKTARIM SABLON.xlsx");
+            var fs = new FileStream(path, FileMode.Open); 
+            return File(fs, "application/octet-stream", "EPM AKTARIM SABLON.xlsx");
+        }
 
     }
 }

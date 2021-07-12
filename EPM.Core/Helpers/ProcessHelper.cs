@@ -104,6 +104,7 @@ namespace EPM.Core.Helpers
                     for (int i = 0; i < uretimList.Count; i++)
                     {
                         EPM_PRODUCTION_TRACKING_LIST uretim = uretimList[i];
+                        EPM_TRACKING_PROCESS_VALUES values = OracleServer.Deserialize<EPM_TRACKING_PROCESS_VALUES>("SELECT * FROM FDEIT005.EPM_TRACKING_PROCESS_VALUES WHERE HEADER_ID=" + uretim.HEADER_ID);
                         SURECLER surec = (SURECLER)m.Find(ob => ob.PROCESS_ID == uretim.PROCESS_ID).PROCESS_ID;
 
                         int planlanan = dtKesimTasnif.Compute("SUM(PLANLANAN_KESIM)", string.Empty).IntParse();
@@ -112,6 +113,15 @@ namespace EPM.Core.Helpers
                         int bant = 0;
                         if (dtBant.Rows.Count > 0)
                             bant = dtBant.Compute("SUM(MIKTAR)", string.Empty).IntParse();
+                        int kaliteMiktar = 0;
+                        if (dtKalite.Rows.Count > 0)
+                            kaliteMiktar = dtKalite.Compute("SUM(MIKTAR)", string.Empty).IntParse();
+                        values.BANT = bant;
+                        values.KALITE = kaliteMiktar;
+                        values.KESIM = kesilen;
+                        values.TASNIF = tasnif;
+                        values.HEADER_ID = uretimList[i].HEADER_ID;
+                        OracleServer.Serialize(values);
                         switch (surec)
                         {
                             case SURECLER.IPLIK: //İPLİK
@@ -298,10 +308,7 @@ namespace EPM.Core.Helpers
                                 }
                                 OracleServer.Serialize(uretim);
                                 break;
-                            case SURECLER.KALITE://KALİTE
-                                int kaliteMiktar = 0;
-                                if (dtKalite.Rows.Count > 0)
-                                    kaliteMiktar = dtKalite.Compute("SUM(MIKTAR)", string.Empty).IntParse();
+                            case SURECLER.KALITE://KALİTE 
                                 uretim.BEKLENEN_MIKTAR = URETIM_ADET;
                                 uretim.GERCEKLESEN_MIKTAR = kaliteMiktar;
                                 if (dtKalite.Rows.Count > 0)
