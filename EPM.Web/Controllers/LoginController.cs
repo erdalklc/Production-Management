@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace EPM.Web.Controllers
 {
-    [ServiceFilter(typeof(AppFilterAttribute), Order = 1)]
+    //[ServiceFilter(typeof(AppFilterAttribute), Order = 1)]
 
     public class LoginController : Controller
     {
@@ -29,9 +29,7 @@ namespace EPM.Web.Controllers
             _logRepository = logRepository;
         }
         public IActionResult Login(Login model)
-        {
-            //
-            //UretimTakipServiceHelper.GetUretimTakipListesi("ERDAL",new Track.Dto.Track.TrackList_Filter());
+        { 
             if (ModelState.IsValid && model.EMail != null && model.Password != null)
             {
                

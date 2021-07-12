@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EPM.Web.ServiceHelper
 {
-    public class UretimTakipServiceHelper : EPMHttpCaller
+    public class TrackServiceHelper : EPMHttpCaller
     {
         public static List<SatinAlmaDetay> GetSatinAlmaDetay(int HEADER_ID)
         {
@@ -80,7 +80,7 @@ namespace EPM.Web.ServiceHelper
             var list = PostRequest<object[], List<UretimTakipListesi>>(EPMServiceType.Track, apiUrl, new object[] { USER_CODE, liste });
             if (liste.PRODUCTION_TYPE == 2)
             { 
-                var listFason = PostRequest<int[], List<PRODUCTION_STATUS>>(EPMServiceType.FasonTakip, "SendProductionsStatues", list.Select(ob=>ob.ID).ToArray());
+                var listFason = PostRequest<int[], List<PRODUCTION_STATUS>>(EPMServiceType.Fason, "SendProductionsStatues", list.Select(ob=>ob.ID).ToArray());
                 foreach (var item in listFason)
                 {
                     var takip = list.Find(ob => ob.ID == item.ENTEGRATION_ID);

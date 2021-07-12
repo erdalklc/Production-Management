@@ -6,7 +6,8 @@ namespace EPM.Tools.Helpers
 {
     public enum EPMServiceType
     {
-        FasonTakip=1,
+        Fason=1,
         Track=2,
+        Plan=3
     }
 }

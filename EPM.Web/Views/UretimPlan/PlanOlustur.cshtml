@@ -1,11 +1,11 @@
 ﻿
-@using EPM.Core.FormModels.Uretim; 
-@model UretimOnayliListe
+@using EPM.Plan.Dto.Plan; 
+@model Plan_Filter
 
  
 <div id="form-container">
     <div class="dx-card wide-card">
-        @(Html.DevExtreme().Form<EPM.Core.FormModels.Uretim.UretimOnayliListe>()
+        @(Html.DevExtreme().Form<Plan_Filter>()
         .ID("edOnayliListe").ShowValidationSummary(true)
         .ColCount(8)
         .Items(items =>
@@ -78,6 +78,8 @@
                     },
                     sorting: {
                         mode: "multiple"
+                    }, export: {
+                        enabled: true
                     },
                     filterRow: {
                         visible: true,
@@ -111,6 +113,7 @@
                                     columns[a].dataType = "date";
                                 }
                                 else if (columns[a].dataField == "PLANSIZ_ADET" || columns[a].dataField == "URETIM_ADET" || columns[a].dataField == "PLANLANAN_ADET") {
+                                    columns[a].width = 130;
                                     columns[a].dataType = "number";
                                 }
                                 if (columns[a].dataField == "PLANLANAN_ADET") {

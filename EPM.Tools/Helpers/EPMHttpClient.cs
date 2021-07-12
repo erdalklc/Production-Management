@@ -24,11 +24,14 @@ namespace EPM.Tools.Helpers
             {
                 switch (serviceType)
                 {
-                    case EPMServiceType.FasonTakip:
-                        apiUrl = config.GetSection("AppServicesDev:FasonTakip").Value;
+                    case EPMServiceType.Fason:
+                        apiUrl = config.GetSection("AppServicesDev:Fason").Value;
                         break;
                     case EPMServiceType.Track:
                         apiUrl = config.GetSection("AppServicesDev:Track").Value;
+                        break;
+                    case EPMServiceType.Plan:
+                        apiUrl = config.GetSection("AppServicesDev:Plan").Value;
                         break;
                 }
             }
@@ -36,11 +39,14 @@ namespace EPM.Tools.Helpers
             {
                 switch (serviceType)
                 {
-                    case EPMServiceType.FasonTakip:
-                        apiUrl = config.GetSection("AppServicesApp:FasonTakip").Value;
+                    case EPMServiceType.Fason:
+                        apiUrl = config.GetSection("AppServicesApp:Fason").Value;
                         break;
                     case EPMServiceType.Track:
                         apiUrl = config.GetSection("AppServicesApp:Track").Value;
+                        break;
+                    case EPMServiceType.Plan:
+                        apiUrl = config.GetSection("AppServicesApp:Plan").Value;
                         break;
                 }
             }

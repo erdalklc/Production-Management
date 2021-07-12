@@ -40,6 +40,10 @@ namespace EPM.Web.Controllers
         [HttpGet]
         public IActionResult _PartialProductionOrderList(int HEADER_ID) => PartialView(HEADER_ID);
 
+
+        [HttpGet]
+        public IActionResult _PartialProductionFason(int HEADER_ID) => PartialView(FasonServiceHelper.SiparisListesiGetir(HEADER_ID));
+
         [HttpPost, HttpGet]
         public IActionResult _PartiaEgemenGerceklesenFiltrele(KaliteGerceklesenFilter liste) => PartialView(liste);
 
@@ -52,8 +56,8 @@ namespace EPM.Web.Controllers
             {
                 case 1:
                 case 2:
-                case 3:
                     return PartialView("_PartialUretimTakipSatinAlmaDetayi", HEADER_ID);
+                case 3:
                 case 4:
                 case 5:
                     return PartialView("_PartialUretimTakipFason", FasonServiceHelper.FasonTakipListeAyarla( HEADER_ID));
@@ -110,69 +114,69 @@ namespace EPM.Web.Controllers
         [HttpGet]
         public object TabPanelListLoad(DataSourceLoadOptions loadOptions)
         {
-            return DataSourceLoader.Load(UretimTakipServiceHelper.GetTabList(), loadOptions);
+            return DataSourceLoader.Load(TrackServiceHelper.GetTabList(), loadOptions);
         }
 
         [HttpGet]
         public object EgemenOrmeListLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "TAKIP_NO")] string TAKIP_NO, [FromQuery(Name = "DETAIL_TAKIP_NO")] int DETAIL_TAKIP_NO)
         {
-            return DataSourceLoader.Load(UretimTakipServiceHelper.GetEgemenOrmeList(TAKIP_NO, DETAIL_TAKIP_NO), loadOptions);
+            return DataSourceLoader.Load(TrackServiceHelper.GetEgemenOrmeList(TAKIP_NO, DETAIL_TAKIP_NO), loadOptions);
         }
         [HttpGet]
         public object KumasDepoListLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "ITEM_ID")] int ITEM_ID, [FromQuery(Name = "PO_HEADER_ID")] int PO_HEADER_ID)
         {
-            return DataSourceLoader.Load(UretimTakipServiceHelper.GetKumasDepoList(ITEM_ID, PO_HEADER_ID), loadOptions);
+            return DataSourceLoader.Load(TrackServiceHelper.GetKumasDepoList(ITEM_ID, PO_HEADER_ID), loadOptions);
         }
         [HttpGet]
         public object KesimFoyuListLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "ITEM_ID")] int ITEM_ID, [FromQuery(Name = "PO_HEADER_ID")] int PO_HEADER_ID, [FromQuery(Name = "RENK_DETAY")] string RENK_DETAY)
         {
-            return DataSourceLoader.Load(UretimTakipServiceHelper.GetKesimFoyuList(ITEM_ID, PO_HEADER_ID, RENK_DETAY), loadOptions);
+            return DataSourceLoader.Load(TrackServiceHelper.GetKesimFoyuList(ITEM_ID, PO_HEADER_ID, RENK_DETAY), loadOptions);
         }
 
         [HttpGet]
         public object BantBitisListLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "ITEM_ID")] int ITEM_ID, [FromQuery(Name = "PO_HEADER_ID")] int PO_HEADER_ID, [FromQuery(Name = "RENK_DETAY")] string RENK_DETAY)
         {
-            return DataSourceLoader.Load(UretimTakipServiceHelper.GetBantList(ITEM_ID, PO_HEADER_ID, RENK_DETAY), loadOptions);
+            return DataSourceLoader.Load(TrackServiceHelper.GetBantList(ITEM_ID, PO_HEADER_ID, RENK_DETAY), loadOptions);
         }
         [HttpGet]
         public object KaliteBitisListLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "ITEM_ID")] int ITEM_ID, [FromQuery(Name = "PO_HEADER_ID")] int PO_HEADER_ID, [FromQuery(Name = "RENK_DETAY")] string RENK_DETAY)
         {
-            return DataSourceLoader.Load(UretimTakipServiceHelper.GetKaliteList(ITEM_ID, PO_HEADER_ID, RENK_DETAY), loadOptions);
+            return DataSourceLoader.Load(TrackServiceHelper.GetKaliteList(ITEM_ID, PO_HEADER_ID, RENK_DETAY), loadOptions);
         }
 
         [HttpGet]
         public object EgemenGerceklesenLoad(DataSourceLoadOptions loadOptions, KaliteGerceklesenFilter liste)
         {
-            return DataSourceLoader.Load(UretimTakipServiceHelper.GetKaliteGerceklesenler(liste), loadOptions);
+            return DataSourceLoader.Load(TrackServiceHelper.GetKaliteGerceklesenler(liste), loadOptions);
         }
         [HttpGet]
         public object UretimTakiplLoad(DataSourceLoadOptions loadOptions, TrackList_Filter liste)
         {
-            return DataSourceLoader.Load(UretimTakipServiceHelper.GetUretimTakipListesi(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, liste), loadOptions);
+            return DataSourceLoader.Load(TrackServiceHelper.GetUretimTakipListesi(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, liste), loadOptions);
         }
 
         [HttpGet]
         public object SatinAlmaDetayGetir(DataSourceLoadOptions loadOptions, [FromQuery(Name = "HEADER_ID")] int HEADER_ID)
         {
-            return DataSourceLoader.Load(UretimTakipServiceHelper.GetSatinAlmaDetay(HEADER_ID), loadOptions);
+            return DataSourceLoader.Load(TrackServiceHelper.GetSatinAlmaDetay(HEADER_ID), loadOptions);
         }
 
         [HttpGet]
         public object GetProcessInformations(DataSourceLoadOptions loadOptions, [FromQuery(Name = "PO_HEADER_ID")] int PO_HEADER_ID, [FromQuery(Name = "DETAIL_ID")] int DETAIL_ID, [FromQuery(Name = "HEADER_ID")] int HEADER_ID)
         {
-            return DataSourceLoader.Load(UretimTakipServiceHelper.GetProcessInformations(PO_HEADER_ID, DETAIL_ID, HEADER_ID), loadOptions);
+            return DataSourceLoader.Load(TrackServiceHelper.GetProcessInformations(PO_HEADER_ID, DETAIL_ID, HEADER_ID), loadOptions);
         }
 
         [HttpGet]
         public object ProductionOrderslLoad(DataSourceLoadOptions loadOptions, int HEADER_ID)
         {
-            return DataSourceLoader.Load(UretimTakipServiceHelper.GetProductionOrderList(HEADER_ID), loadOptions);
+            return DataSourceLoader.Load(TrackServiceHelper.GetProductionOrderList(HEADER_ID), loadOptions);
         }
 
         [HttpPost]
         public IActionResult ProductionOrdersInsert(string values)
         {
-            object[] islem = UretimTakipServiceHelper.ProductionOrdersInsert(values);
+            object[] islem = TrackServiceHelper.ProductionOrdersInsert(values);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
@@ -180,7 +184,7 @@ namespace EPM.Web.Controllers
         [HttpPut]
         public IActionResult ProductionOrdersUpdate(int key, string values)
         {
-            object[] islem = UretimTakipServiceHelper.ProductionOrdersUpdate(key, values);
+            object[] islem = TrackServiceHelper.ProductionOrdersUpdate(key, values);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
@@ -189,14 +193,14 @@ namespace EPM.Web.Controllers
         [HttpDelete]
         public IActionResult ProductionOrdersDelete(int key)
         {
-            object[] islem = UretimTakipServiceHelper.ProductionOrdersDelete(key);
+            object[] islem = TrackServiceHelper.ProductionOrdersDelete(key);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
         } 
 
         [HttpGet]
-        public object GetContractList(DataSourceLoadOptions loadOptions) => DataSourceLoader.Load(UretimTakipServiceHelper.GetContractList(), loadOptions);
+        public object GetContractList(DataSourceLoadOptions loadOptions) => DataSourceLoader.Load(TrackServiceHelper.GetContractList(), loadOptions);
 
 
 

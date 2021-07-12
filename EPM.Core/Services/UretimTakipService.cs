@@ -498,8 +498,8 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
 
             Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>> responce = new Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>(null, null, null);  
             PRODUCTION_HEADER header = PostRequest<object[], PRODUCTION_HEADER>(EPMServiceType.Track, "GetProductionList", new object[] { HEADER_ID }); 
-            List<PRODUCTION_PROCESS> processList =  GetRequest<List<PRODUCTION_PROCESS>>(EPMServiceType.FasonTakip, "GetProcessList");
-            List<PRODUCTION_FASON_USERS> fasonUsers =  GetRequest<List<PRODUCTION_FASON_USERS>>(EPMServiceType.FasonTakip, "GetFasonUsers");
+            List<PRODUCTION_PROCESS> processList =  GetRequest<List<PRODUCTION_PROCESS>>(EPMServiceType.Fason, "GetProcessList");
+            List<PRODUCTION_FASON_USERS> fasonUsers =  GetRequest<List<PRODUCTION_FASON_USERS>>(EPMServiceType.Fason, "GetFasonUsers");
 
             return new Tuple<PRODUCTION_HEADER, List<PRODUCTION_PROCESS>, List<PRODUCTION_FASON_USERS>>(header, processList, fasonUsers);
 
@@ -513,7 +513,7 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
             order.firma = firmaBilgi;
             order.termin = terminTarihi;
 
-            object[] sonuc =  PostRequest<CREATEORDER, object[]>(EPMServiceType.FasonTakip, "CreateOrder", order);
+            object[] sonuc =  PostRequest<CREATEORDER, object[]>(EPMServiceType.Fason, "CreateOrder", order);
             return sonuc;
         }
     }

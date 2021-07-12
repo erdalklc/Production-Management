@@ -1500,3 +1500,6 @@ E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.cspro
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.dll
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.pdb
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.genruntimeconfig.cache
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimTakip\_PartialProductionFason.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Plan.Dto.dll
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Plan.Dto.pdb
