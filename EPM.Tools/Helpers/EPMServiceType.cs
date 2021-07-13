@@ -8,6 +8,7 @@ namespace EPM.Tools.Helpers
     {
         Fason=1,
         Track=2,
-        Plan=3
+        Plan=3,
+        Admin=4,
     }
 }

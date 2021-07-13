@@ -1506,3 +1506,5 @@ E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Plan.Dto.
 D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Plan.Dto.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Plan.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimTakip\_PartialProductionFason.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Admin.Dto.dll
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Admin.Dto.pdb

@@ -17,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\EPM.Admin.Dto\EPM.Admin.Dto.csproj" />
       <ProjectReference Include="..\EPM.Core\EPM.Core.csproj" />
       <ProjectReference Include="..\EPM.Fason.Dto\EPM.Fason.Dto.csproj" />
       <ProjectReference Include="..\EPM.Plan.Dto\EPM.Plan.Dto.csproj" />

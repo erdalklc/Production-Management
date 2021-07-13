@@ -22,8 +22,7 @@ namespace EPM.Web.ServiceHelper
         public static object UpdateInsertPlan(string USER_CODE, JObject obj)
         {
             string apiUrl = "UpdateInsertPlan";
-            var list = PostRequest<object[], object>(EPMServiceType.Plan, apiUrl, new object[] { USER_CODE
-                , obj });
+            var list = PostRequest<object[], object>(EPMServiceType.Plan, apiUrl, new object[] { USER_CODE , obj });
             return list;
         }
 

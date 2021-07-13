@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.DirectoryServices;
-using System.DirectoryServices.AccountManagement;
-using System.Linq;
-using System.Threading.Tasks;
-using DevExtreme.AspNet.Data;
+ using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using EPM.Core.Helpers;
 using EPM.Core.Managers;
 using EPM.Core.Services;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using EPM.Web.ServiceHelper;
+using Microsoft.AspNetCore.Mvc; 
 
 namespace EPM_Web.Controllers
 {
@@ -85,18 +79,18 @@ namespace EPM_Web.Controllers
         [HttpGet]
         public object GetUserList(DataSourceLoadOptions loadOptions)
         {
-            return DataSourceLoader.Load(_aDARepository.GetAccounts(), loadOptions);
+            return DataSourceLoader.Load(AdminServiceHelper.GetUserList(), loadOptions);
         }
 
         [HttpGet]
         public object GetUserResponsibiity(DataSourceLoadOptions loadOptions, [FromQuery(Name = "USER_CODE")] string USER_CODE)
         {
-            return DataSourceLoader.Load(_ayarlarRepository.GetUserResponsibiity(USER_CODE), loadOptions);
+            return DataSourceLoader.Load(AdminServiceHelper.GetUserResponsibiity(USER_CODE), loadOptions);
         } 
         [HttpPut]
         public IActionResult UserResponsibilityUpdate(int key, string values, string USER_CODE)
         {
-            object[] islem = _ayarlarRepository.UserResponsibilityUpdate(key, values, USER_CODE);
+            object[] islem = AdminServiceHelper.UserResponsibilityUpdate(key, values, USER_CODE);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
@@ -106,20 +100,20 @@ namespace EPM_Web.Controllers
         [HttpGet]
         public object GetUserFabricTypes(DataSourceLoadOptions loadOptions, [FromQuery(Name = "USER_CODE")] string USER_CODE)
         {
-            return DataSourceLoader.Load(_ayarlarRepository.GetUserFabricTypes(USER_CODE), loadOptions);
+            return DataSourceLoader.Load(AdminServiceHelper.GetUserFabricTypes(USER_CODE), loadOptions);
         }
 
 
         [HttpGet]
         public object GetUserBrands(DataSourceLoadOptions loadOptions, [FromQuery(Name = "USER_CODE")] string USER_CODE)
         {
-            return DataSourceLoader.Load(_ayarlarRepository.GetUserBrands(USER_CODE), loadOptions);
+            return DataSourceLoader.Load(AdminServiceHelper.GetUserBrands(USER_CODE), loadOptions);
         }
 
         [HttpPut]
         public IActionResult UserBrandsUpdate(int key, string values, string USER_CODE)
         {
-            object[] islem = _ayarlarRepository.UserBrandsUpdate(key, values, USER_CODE);
+            object[] islem = AdminServiceHelper.UserBrandsUpdate(key, values, USER_CODE);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
@@ -129,7 +123,7 @@ namespace EPM_Web.Controllers
         [HttpPut]
         public IActionResult UserFabricTypeUpdate(int key, string values, string USER_CODE)
         {
-            object[] islem = _ayarlarRepository.UserFabricTypeUpdate(key, values, USER_CODE);
+            object[] islem = AdminServiceHelper.UserFabricTypeUpdate(key, values, USER_CODE);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
@@ -139,13 +133,13 @@ namespace EPM_Web.Controllers
         [HttpGet]
         public object GetUserProductionTypes(DataSourceLoadOptions loadOptions, [FromQuery(Name = "USER_CODE")] string USER_CODE)
         {
-            return DataSourceLoader.Load(_ayarlarRepository.GetUserProductionTypes(USER_CODE), loadOptions);
+            return DataSourceLoader.Load(AdminServiceHelper.GetUserProductionTypes(USER_CODE), loadOptions);
         }
 
         [HttpPut]
         public IActionResult UserProductionTypeUpdate(int key, string values, string USER_CODE)
         {
-            object[] islem = _ayarlarRepository.UserProductionTypeUpdate(key, values, USER_CODE);
+            object[] islem = AdminServiceHelper.UserProductionTypeUpdate(key, values, USER_CODE);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);

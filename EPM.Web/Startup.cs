@@ -39,7 +39,7 @@ namespace EPM_Web
             services.AddScoped<AppFilterAttribute>(); 
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IUretimService, UretimService>();
-            services.AddScoped<IUretimPlanService, UretimPlanService>();
+            //services.AddScoped<IUretimPlanService, UretimPlanService>();
             //services.AddScoped<IUretimTakipService, UretimTakipService>();
             services.AddScoped<ISatinAlmaService, SatinAlmaService>();
             services.AddScoped<IAyarlarService, AyarlarService>();

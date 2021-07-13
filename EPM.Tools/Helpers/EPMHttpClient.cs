@@ -33,6 +33,9 @@ namespace EPM.Tools.Helpers
                     case EPMServiceType.Plan:
                         apiUrl = config.GetSection("AppServicesDev:Plan").Value;
                         break;
+                    case EPMServiceType.Admin:
+                        apiUrl = config.GetSection("AppServicesDev:Admin").Value;
+                        break;
                 }
             }
             else
@@ -47,6 +50,9 @@ namespace EPM.Tools.Helpers
                         break;
                     case EPMServiceType.Plan:
                         apiUrl = config.GetSection("AppServicesApp:Plan").Value;
+                        break;
+                    case EPMServiceType.Admin:
+                        apiUrl = config.GetSection("AppServicesApp:Admin").Value;
                         break;
                 }
             }
