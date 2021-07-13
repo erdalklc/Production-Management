@@ -32,11 +32,11 @@
     .ShowColumnLines(true)
     .ColumnHidingEnabled(false)
     .Editing(ob=>ob.Mode(GridEditMode.Cell).StartEditAction(GridStartEditAction.DblClick).AllowUpdating(editable).AllowDeleting(editable).AllowAdding(editable))
-    .Scrolling(ob => ob.Mode(GridScrollingMode.Virtual))
+    .Paging(ob => ob.PageSize(50).Enabled(true))
     .Height("calc(100vh - 200px)")
     .ShowBorders(true)
     .Summary(ob=>ob.TotalItems(items=> {
-        items.AddFor(m => m.QUANTITY).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+    items.AddFor(m => m.QUANTITY).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
         items.AddFor(m => m.EXPECTED_COST).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Avg).CustomizeText(@<text>function(data){return "ORT:" +data.value}</text>);
         items.AddFor(m => m.REALESED_COST).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Avg).CustomizeText(@<text>function(data){return "ORT:" +data.value}</text>);
     }))

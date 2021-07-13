@@ -36,6 +36,7 @@
           "DevExtreme.AspNet.Data": "2.7.1",
           "EPM.Core": "1.0.0",
           "EPM.Fason.Dto": "1.0.0",
+          "EPM.Plan.Dto": "1.0.0",
           "EPM.Tools": "1.0.0",
           "EPM.Track.Dto": "1.0.0",
           "Microsoft.AspNetCore.Authentication.Negotiate": "3.1.14",
@@ -2752,6 +2753,14 @@
         },
         "compile": {
           "EPM.Fason.Dto.dll": {}
+        }
+      },
+      "EPM.Plan.Dto/1.0.0": {
+        "runtime": {
+          "EPM.Plan.Dto.dll": {}
+        },
+        "compile": {
+          "EPM.Plan.Dto.dll": {}
         }
       },
       "EPM.Tools/1.0.0": {
@@ -5837,6 +5846,11 @@
       "sha512": ""
     },
     "EPM.Fason.Dto/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EPM.Plan.Dto/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

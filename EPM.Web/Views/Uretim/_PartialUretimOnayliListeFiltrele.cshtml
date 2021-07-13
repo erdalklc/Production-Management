@@ -25,12 +25,12 @@
     })
     .FilterRow(f => f.Visible(true))
     .FocusedRowEnabled(true)
-    .FocusedRowIndex(0)
-
+    .FocusedRowIndex(0) 
     .Selection(s => s.Mode(SelectionMode.Single))
+    //.Sorting(ob=>ob.Mode(GridSortingMode.None))
     .ColumnAutoWidth(true)
     .ShowBorders(true)
-    .Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
+    .Paging(ob=>ob.PageSize(50).Enabled(true)) 
     .Editing(ob => ob.Mode(GridEditMode.Cell).AllowUpdating(editable).AllowDeleting(editable).AllowAdding(editable).StartEditAction(GridStartEditAction.DblClick))
     .Height("calc(100vh - 200px)")
     .ShowColumnLines(true)
@@ -43,7 +43,6 @@
         items.AddFor(m => m.EXPECTED_COST).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
         items.AddFor(m => m.MODEL).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
     }))
-    .Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
     .Columns(columns =>
     {
         columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn => {

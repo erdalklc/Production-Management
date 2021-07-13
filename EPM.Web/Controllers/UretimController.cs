@@ -181,11 +181,13 @@ namespace EPM.Web.Controllers
         {
             return DataSourceLoader.Load(_uretimRepository.OnayliUretimListesiLogDetail(DETAIL_ID, _logRepository), loadOptions);
         }
+
+
         [HttpGet]
         public IActionResult SablonDownload()
         { 
             var path = Path.Combine(_appEnvironment.WebRootPath, "AppData\\EPM AKTARIM SABLON.xlsx");
-            var fs = new FileStream(path, FileMode.Open); 
+            var fs = new FileStream(path, FileMode.Open,FileAccess.Read); 
             return File(fs, "application/octet-stream", "EPM AKTARIM SABLON.xlsx");
         }
 

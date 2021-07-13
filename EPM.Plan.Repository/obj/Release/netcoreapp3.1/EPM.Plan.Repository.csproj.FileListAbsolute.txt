@@ -1,0 +1,12 @@
+D:\Projects\Eren Production Management\EPM.Plan.Repository\bin\Release\netcoreapp3.1\EPM.Plan.Repository.deps.json
+D:\Projects\Eren Production Management\EPM.Plan.Repository\bin\Release\netcoreapp3.1\EPM.Plan.Repository.dll
+D:\Projects\Eren Production Management\EPM.Plan.Repository\bin\Release\netcoreapp3.1\EPM.Plan.Repository.pdb
+D:\Projects\Eren Production Management\EPM.Plan.Repository\bin\Release\netcoreapp3.1\EPM.Plan.Dto.dll
+D:\Projects\Eren Production Management\EPM.Plan.Repository\bin\Release\netcoreapp3.1\EPM.Plan.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Plan.Repository\obj\Release\netcoreapp3.1\EPM.Plan.Repository.csprojAssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Plan.Repository\obj\Release\netcoreapp3.1\EPM.Plan.Repository.AssemblyInfoInputs.cache
+D:\Projects\Eren Production Management\EPM.Plan.Repository\obj\Release\netcoreapp3.1\EPM.Plan.Repository.AssemblyInfo.cs
+D:\Projects\Eren Production Management\EPM.Plan.Repository\obj\Release\netcoreapp3.1\EPM.Plan.Repository.csproj.CoreCompileInputs.cache
+D:\Projects\Eren Production Management\EPM.Plan.Repository\obj\Release\netcoreapp3.1\EPM.Plan.Repository.csproj.CopyComplete
+D:\Projects\Eren Production Management\EPM.Plan.Repository\obj\Release\netcoreapp3.1\EPM.Plan.Repository.dll
+D:\Projects\Eren Production Management\EPM.Plan.Repository\obj\Release\netcoreapp3.1\EPM.Plan.Repository.pdb
