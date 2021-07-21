@@ -392,7 +392,6 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\scopedc
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.TagHelpers.input.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.TagHelpers.output.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.RazorCoreGenerate.cache
-D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Home\About.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Login\Login.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
@@ -434,12 +433,6 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\V
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\UretimTakip\_PartialProcessInformations.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\UretimTakip\_PartialUretimTakipFiltrele.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\UretimTakip\_PartialUretimTakipSatinAlmaDetayi.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Home\_PartialAyarlar.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciYetki.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciYetkiListesi.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciFabricTypes.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciProductionTypes.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciBrands.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\Dapper.Oracle.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\DnsClient.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Negotiate.dll
@@ -505,3 +498,11 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\V
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Plan.Dto.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Plan.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\UretimTakip\_PartialProductionFason.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Admin.Dto.dll
+D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Admin.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Admin\_PartialAyarlar.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciBrands.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciFabricTypes.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciProductionTypes.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciYetki.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciYetkiListesi.cshtml.g.cs

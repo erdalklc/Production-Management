@@ -1,0 +1,42 @@
+﻿<div class="dx-card wide-card">
+    <div style="width:470px;display:inline-block;float:left">
+        @(Html.DevExtreme().DataGrid<EPM.Admin.Dto.Admin.KullaniciListe> ().ID("edGridKullaniciListe")
+    .ShowBorders(false)
+    .DataSource(
+        ob=>ob.Mvc().Controller("Admin")
+        .LoadAction("GetUserList")
+        .Key("USER_CODE")
+    )
+    .FilterRow(f => f.Visible(true))
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .ShowBorders(true)
+    .Height(450)
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(30)
+    .Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
+    .Columns(columns => {
+        columns.AddFor(m => m.USER_CODE).Width(80);
+        columns.AddFor(m => m.USER_NAME).Caption("DESCIRIPTION").Width(120);
+        columns.AddFor(m => m.USER_EMAIL).Caption("E-MAIL").Width(250);
+    })
+    .OnFocusedRowChanged("gridKullaniciFocusedRowChanged")
+    )
+    </div>
+    <div style="width:400px;display:inline-block;float:left" id="edKullaniciYetki">
+
+    </div>
+
+    <div style="width:220px;display:inline-block;float:left" id="edKullaniciFabricTypes">
+
+    </div>
+    <div style="width:220px;display:inline-block;float:left" id="edKullaniciProductionTypes">
+
+    </div>
+    <div style="width:220px;display:inline-block;float:left" id="edKullaniciBrands">
+
+    </div>
+</div>

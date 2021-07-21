@@ -943,12 +943,6 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.R
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\EtiketYazdir\EtiketYazdir.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\About.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\_PartialAyarlar.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciBrands.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciFabricTypes.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciProductionTypes.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciYetki.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciYetkiListesi.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Login\Login.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\SatinAlma\SatinAlmaOlustur.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\SatinAlma\_PartialSatinAlmaForm.cshtml.g.cs
@@ -1508,3 +1502,11 @@ D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Plan.
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimTakip\_PartialProductionFason.cshtml.g.cs
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Admin.Dto.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Admin.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Admin.Dto.dll
+D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Admin.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_PartialAyarlar.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciYetki.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciYetkiListesi.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciFabricTypes.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciProductionTypes.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciBrands.cshtml.g.cs

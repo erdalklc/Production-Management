@@ -34,6 +34,7 @@
           "BuildBundlerMinifier": "2.9.406",
           "DevExtreme.AspNet.Core": "20.2.3",
           "DevExtreme.AspNet.Data": "2.7.1",
+          "EPM.Admin.Dto": "1.0.0",
           "EPM.Core": "1.0.0",
           "EPM.Fason.Dto": "1.0.0",
           "EPM.Plan.Dto": "1.0.0",
@@ -2703,6 +2704,14 @@
           "System.Text.Encoding": "4.3.0",
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
+        }
+      },
+      "EPM.Admin.Dto/1.0.0": {
+        "runtime": {
+          "EPM.Admin.Dto.dll": {}
+        },
+        "compile": {
+          "EPM.Admin.Dto.dll": {}
         }
       },
       "EPM.Core/1.0.0": {
@@ -5834,6 +5843,11 @@
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ==",
       "path": "system.xml.xdocument/4.3.0",
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
+    },
+    "EPM.Admin.Dto/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "EPM.Core/1.0.0": {
       "type": "project",

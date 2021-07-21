@@ -131,7 +131,7 @@
                     contentTemplate: function () {
                         return $.ajax({
                             type: "GET",
-                            url: '@Url.Action("_PartialAyarlar", "Home")',
+                            url: '@Url.Action("_PartialAyarlar", "Admin")',
                             data: "",
                             async: false,
                             success: function (status) {
@@ -144,7 +144,7 @@
                     title: "AYARLAR",
                     dragEnabled: true,
                     onShown: function () {
-                        $("#edKullaniciYetkiTab").load('@Url.Action("_PartialKullaniciYetki", "Home")');
+                        $("#edKullaniciYetkiTab").load('@Url.Action("_PartialKullaniciYetki", "Admin")');
                     },
                     closeOnOutsideClick: true
                 };
@@ -158,20 +158,20 @@
                     USER_CODE: e.row.data.USER_CODE
                 }
 
-                $.get('@Url.Action("_PartialKullaniciYetkiListesi", "Home")', data, function (data) {
+                $.get('@Url.Action("_PartialKullaniciYetkiListesi", "Admin")', data, function (data) {
                     $("#edKullaniciYetki").html(data);
                 });
 
-                $.get('@Url.Action("_PartialKullaniciFabricTypes", "Home")', data, function (data) {
+                $.get('@Url.Action("_PartialKullaniciFabricTypes", "Admin")', data, function (data) {
                     $("#edKullaniciFabricTypes").html(data);
                 });
 
 
-                $.get('@Url.Action("_PartialKullaniciProductionTypes", "Home")', data, function (data) {
+                $.get('@Url.Action("_PartialKullaniciProductionTypes", "Admin")', data, function (data) {
                     $("#edKullaniciProductionTypes").html(data);
                 });
 
-                $.get('@Url.Action("_PartialKullaniciBrands", "Home")', data, function (data) {
+                $.get('@Url.Action("_PartialKullaniciBrands", "Admin")', data, function (data) {
                     $("#edKullaniciBrands").html(data);
                 });
             }

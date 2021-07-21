@@ -561,12 +561,14 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Admin.Dto.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Core.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Dto.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Fason.Dto.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Plan.Dto.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Tools.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Track.Dto.dll
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Admin.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Core.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Fason.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Plan.Dto.pdb
