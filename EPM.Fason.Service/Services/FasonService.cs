@@ -51,11 +51,12 @@ namespace EPM.Fason.Service.Services
             return _fasonRepository.DeserializeList<SIPARIS_LISTESI_DETAIL>(sql);
         }
 
-        public IEnumerable<SIPARIS_LISTESI> GetSiparisList(SIPARIS_FILTER liste)
+        public IEnumerable<SIPARIS_LISTESI> GetSiparisList(SIPARIS_FILTER liste, int FIRMA_ID)
         {
             string sql = "SELECT * FROM  PRODUCTION_LIST_V WHERE 0=0";
 
-            sql += string.Format(" AND DEADLINE_CUSTOMER BETWEEN {0} AND {1}",_fasonRepository.DateTimeString(liste.BASLANGIC_TARIHI), _fasonRepository.DateTimeString(liste.BITIS_TARIHI));
+            sql += string.Format(" AND DEADLINE_CUSTOMER BETWEEN {0} AND {1}",_fasonRepository.DateTimeString(liste.BASLANGIC_TARIHI.Value), _fasonRepository.DateTimeString(liste.BITIS_TARIHI.Value));
+            sql += " AND FIRMA_ID=" + FIRMA_ID;
             if (liste.MODEL != null && liste.MODEL != null) sql += string.Format(" AND MODEL='{0}'", liste.MODEL);
             if (liste.COLOR != null && liste.COLOR != null) sql += string.Format(" AND COLOR='{0}'", liste.COLOR); 
 

@@ -34,15 +34,11 @@ namespace EPM_Web
             });
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();
-
-            //services.Configure<AppServices>(Configuration.GetSection("AppServices"));
+             
             services.AddScoped<AppFilterAttribute>(); 
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IUretimService, UretimService>();
-            //services.AddScoped<IUretimPlanService, UretimPlanService>();
-            //services.AddScoped<IUretimTakipService, UretimTakipService>();
-            services.AddScoped<ISatinAlmaService, SatinAlmaService>();
-            services.AddScoped<IAyarlarService, AyarlarService>();
+            services.AddScoped<ISatinAlmaService, SatinAlmaService>(); 
             services.AddScoped<IUretimIzleService, UretimIzleService>();
             services.AddSingleton<IADAccountService, ADAccountService>();
             services.AddSingleton<ILogService, LogService>();

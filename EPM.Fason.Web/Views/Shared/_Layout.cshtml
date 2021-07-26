@@ -43,7 +43,7 @@
         .Location(ToolbarItemLocation.Before)
         .CssClass("menu-button");
     items.Add()
-        .Html("<div>EPM - FASON SİPARİŞ YÖNETİMİ</div>")
+        .Html("<div>EPM - FASON SİPARİŞ YÖNETİMİ - "+new EPM.Fason.Dto.Helpers.CookieHelper().GetUserFromCookie(this.Context).USER_NAME+"</div>")
         .Location(ToolbarItemLocation.Before)
         .CssClass("header-title"); 
     items.Add()

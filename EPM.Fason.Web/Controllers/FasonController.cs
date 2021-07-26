@@ -1,6 +1,7 @@
 ﻿using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using EPM.Fason.Dto.Fason;
+using EPM.Fason.Dto.Helpers;
 using EPM.Fason.Service.Services;
 using EPM.Fason.Web.Attributes;
 using Microsoft.AspNetCore.Mvc;
@@ -36,8 +37,9 @@ namespace EPM.Fason.Web.Controllers
 
         [HttpGet]
         public object SiparisListesiLoad(DataSourceLoadOptions loadOptions, SIPARIS_FILTER liste)
-        { 
-            return DataSourceLoader.Load(_fasonService.GetSiparisList(liste), loadOptions);
+        {
+            var user = new CookieHelper().GetUserFromCookie(Request.HttpContext);
+            return DataSourceLoader.Load(_fasonService.GetSiparisList(liste, user.USER_ID), loadOptions);
 
         }
 
@@ -56,7 +58,12 @@ namespace EPM.Fason.Web.Controllers
         }
 
         [HttpPost, HttpGet]
-        public IActionResult _PartialSiparisListesi(SIPARIS_FILTER liste) => PartialView(liste);
+        public IActionResult _PartialSiparisListesi(SIPARIS_FILTER liste)
+        {
+
+            var user = new CookieHelper().GetUserFromCookie(Request.HttpContext);
+            return PartialView(_fasonService.GetSiparisList(liste, user.USER_ID));
+        }
 
         [HttpPost, HttpGet]
         public IActionResult _PartialSiparisListesiDetail(int ENTEGRATION_HEADER_ID) => PartialView(ENTEGRATION_HEADER_ID); 

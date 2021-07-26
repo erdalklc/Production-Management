@@ -14,8 +14,8 @@
         .MinColWidth(150)
         .Items(items =>
         {
-            items.AddSimpleFor(m => m.BASLANGIC_TARIHI).Editor(ob => ob.DateBox()).IsRequired(false);
-            items.AddSimpleFor(m => m.BITIS_TARIHI).Editor(ob => ob.DateBox()).IsRequired(false);
+            items.AddSimpleFor(m => m.BASLANGIC_TARIHI).Editor(ob => ob.DateBox().DisplayFormat("dd.MM.yyyy")).IsRequired(false);
+            items.AddSimpleFor(m => m.BITIS_TARIHI).Editor(ob => ob.DateBox().DisplayFormat("dd.MM.yyyy")).IsRequired(false);
             items.AddSimpleFor(m => m.MODEL).Editor(ob=>ob.TextBox().ID("edModel")).IsRequired(false);
             items.AddSimpleFor(m => m.COLOR).Editor(ob=>ob.TextBox().ID("edColor")).IsRequired(false);
             items.AddEmpty();
@@ -49,6 +49,7 @@
             MODEL: jQuery("[name=MODEL]").val(),
             COLOR: jQuery("[name=COLOR]").val(),
         };
+        console.log(data);
         $.ajax({
             type: "POST",
             url: '@Url.Action("_PartialSiparisListesi", "Fason")',

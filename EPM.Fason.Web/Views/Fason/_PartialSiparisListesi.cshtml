@@ -1,14 +1,8 @@
-﻿@model EPM.Fason.Dto.Fason.SIPARIS_FILTER
+﻿@model List<EPM.Fason.Dto.Fason.SIPARIS_LISTESI>
 
 <div class="dx-card wide-card">
     @(Html.DevExtreme().DataGrid<EPM.Fason.Dto.Fason.SIPARIS_LISTESI>().ID("edUretimTakipGrid")
-    .ShowBorders(false)
-    .DataSource(
-        ob => ob.Mvc().Controller("Fason")
-        .LoadParams(new { BASLANGIC_TARIHI = Model.BASLANGIC_TARIHI.ToString("dd.MM.yyyy"), BITIS_TARIHI = Model.BITIS_TARIHI.ToString("dd.MM.yyyy"), MODEL = Model.MODEL, COLOR = Model.COLOR })
-        .LoadAction("SiparisListesiLoad")
-        .Key("ENTEGRATION_ID")
-    )
+    .ShowBorders(false) 
     .FilterRow(f => f.Visible(true))
     .FocusedRowEnabled(true)
     .FocusedRowIndex(0)
@@ -63,7 +57,7 @@
             t.AddFor(ob => ob.MODEL).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
             t.AddFor(ob => ob.QUANTITY).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
         });
-    })
+    }).DataSource(Model)
     //.OnCellPrepared("edUretimTakipGridCellPrepared")
     )
 </div>
