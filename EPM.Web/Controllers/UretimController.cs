@@ -190,6 +190,12 @@ namespace EPM.Web.Controllers
             var fs = new FileStream(path, FileMode.Open,FileAccess.Read); 
             return File(fs, "application/octet-stream", "EPM AKTARIM SABLON.xlsx");
         }
-
+        [HttpGet]
+        public IActionResult SablonBilgileriDownload()
+        {
+            var path = Path.Combine(_appEnvironment.WebRootPath, "AppData\\AKTARIM ŞABLON ALAN BİLGİLERİ.xlsx");
+            var fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            return File(fs, "application/octet-stream", "EPM AKTARIM SABLON.xlsx");
+        }
     }
 }

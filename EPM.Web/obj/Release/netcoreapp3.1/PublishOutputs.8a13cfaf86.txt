@@ -1,4 +1,5 @@
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Web.exe
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\AppData\AKTARIM ŞABLON ALAN BİLGİLERİ.xlsx
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\AppData\EPM AKTARIM SABLON.xlsx
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\css\devextreme\dx-diagram.css
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\css\devextreme\dx-diagram.min.css

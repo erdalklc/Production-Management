@@ -415,7 +415,7 @@ namespace EPM.Core.Services
                 if (!(bool)kontrol[0])
                 {
                     obj[0] = false;
-                    obj[1] = kontrol[1];  
+                    obj[1] = "Aktarım Tamamlanamadı<br>"+kontrol[1];  
                     request.HttpContext.Response.StatusCode = 400;
                     new MailHelper().SendEMail(user.EMAIL, "Üretim Listesi Aktarımı HK.","Aktarım Tamamlanamadı\n" +obj[1].ToString());
                     return obj;
