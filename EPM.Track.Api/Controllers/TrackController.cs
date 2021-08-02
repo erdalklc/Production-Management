@@ -4,6 +4,7 @@ using EPM.Track.Dto.Extensions;
 using EPM.Track.Dto.Track;
 using EPM.Track.Service.Services; 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic; 
@@ -14,10 +15,12 @@ namespace EPM.Track.Api.Controllers
     [ApiController]
     public class TrackController : ControllerBase
     {
+        private readonly ILogger<TrackController> _logger;
         private readonly ITrackService _trackService;
-        public TrackController(ITrackService trackService)
+        public TrackController(ITrackService trackService, ILogger<TrackController> logger)
         {
             _trackService = trackService;
+            _logger = logger;
         }
 
         [HttpGet, HttpPost]
@@ -63,7 +66,11 @@ namespace EPM.Track.Api.Controllers
         public ActionResult<object[]> ProductionOrdersDelete(object[] obj) => _trackService.ProductionOrdersDelete(obj[0].IntParse());
 
         [HttpGet, HttpPost]
-        public ActionResult<List<TabPanel>> GetTabList() => _trackService.GetTabList();
+        public ActionResult<List<TabPanel>> GetTabList()
+        {
+            _logger.LogInformation("Test");
+            return _trackService.GetTabList();
+        }
 
         [HttpGet, HttpPost]
         public ActionResult<List<EPM_CONTRACT_WEB_USERS>> GetContractList() => _trackService.GetContractList();

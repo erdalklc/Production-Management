@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using EPM.Fason.Dto.Fason;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace EPM.Track.Service.Services
 {
@@ -584,5 +586,445 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
             return header;
 
         }
+
+
+        #region PROCESS ANALİZLERİ
+
+        public async Task PROCESSLERIANALIZET(CancellationToken stoppingToken)
+        {
+
+            List<EPM_MASTER_PRODUCTION_ORDERS> orders = _trackRepository.DeserializeList<EPM_MASTER_PRODUCTION_ORDERS>("SELECT * FROM FDEIT005.EPM_MASTER_PRODUCTION_ORDERS ORDER BY ID DESC");
+
+            foreach (var item in orders)
+            {
+                try
+                {
+
+                    //Console.WriteLine("Process Analiz Ediliyor.... HEADER_ID = " + item.HEADER_ID);
+                    SETPROCESS(item);
+                    await Task.Delay(1000, stoppingToken);
+                }
+                catch (Exception ex)
+                { 
+                }
+            }
+        }
+
+        void SETPROCESS(EPM_MASTER_PRODUCTION_ORDERS order)
+        {
+            _trackRepository.ExecSql("DELETE FDEIT005.EPM_PRODUCTION_TRACKING_LIST WHERE PO_HEADER_ID=" + order.PO_HEADER_ID + " AND HEADER_ID=" + order.HEADER_ID + "");
+            EPM_MASTER_PRODUCTION_H master = _trackRepository.Deserialize<EPM_MASTER_PRODUCTION_H>("SELECT * FROM FDEIT005.EPM_MASTER_PRODUCTION_H WHERE ID=" + order.HEADER_ID);
+            List<EPM_MASTER_PRODUCTION_D> detaiList = _trackRepository.DeserializeList<EPM_MASTER_PRODUCTION_D>("SELECT * FROM FDEIT005.EPM_MASTER_PRODUCTION_D WHERE HEADER_ID=" + master.ID);
+            DataTable dtDetail = _trackRepository.QueryFill(DetailSQL() + " AND PO_HEADER_ID=" + order.PO_HEADER_ID + " ORDER BY DETAIL_TAKIP_NO");
+            CREATELIST(order);
+            foreach (DataRow rowDetail in dtDetail.Rows)
+            {
+
+                int DETAIL_ID = rowDetail["DETAIL_TAKIP_NO"].IntParse();
+                string TAKIP_NO = rowDetail["TAKIP_NO"].ToString();
+                int ITEM_ID = rowDetail["ITEM_ID"].IntParse();
+                string RENKDETAY = rowDetail["RENKDETAY"].ToString();
+                string ANAMODEL = master.MODEL;
+                int HEADER_ID = master.ID;
+                int URETIM_ADET = detaiList.Sum(ob => ob.QUANTITY).IntParse();
+                int TEDARIK = rowDetail["TEDARIK"].IntParse();
+                DateTime URETIMTARIHI = master.DEADLINE;
+                string KesimFoyleri = "";
+
+                List<ReceteProcessModel> m = _trackRepository.DeserializeList<ReceteProcessModel>(@"
+                                SELECT RH.ADI,
+                                     PI.PROCESS_NAME,
+                                     PI.PROCESS_TIME, 
+                                     RD.PROCESS_ID,
+                                     RD.QUEUE,
+                                     RH.ID AS RECETEHEADERID
+                                FROM FDEIT005.EPM_PRODUCTION_RECIPE RH
+                                     INNER JOIN FDEIT005.EPM_PRODUCTION_RECIPE_DETAIL RD ON RD.HEADER_ID = RH.ID
+                                     INNER JOIN FDEIT005.EPM_PRODUCTION_PROCESS_INFO PI ON PI.ID = RD.PROCESS_ID
+                            ORDER BY RECETEHEADERID, QUEUE").FindAll(ob => ob.RECETEHEADERID == master.RECIPE).OrderByDescending(ob => ob.QUEUE).ToList();
+                List<EPM_PRODUCTION_TRACKING_LIST> uretimList = GETLISTMODEL(order.PO_HEADER_ID, DETAIL_ID, master.RECIPE, order.HEADER_ID);
+                DataRow[] rows;
+                if (uretimList.Count > 0)
+                {
+
+                    DataTable dtOrme = _egemenRepository.QueryFill(new EgemenOrmeHelper().ORMEALINANSIPARISSATIRTAKIP(TAKIP_NO.ToString(), DETAIL_ID.ToString()), FirebirdConnectionDB.ORME);
+                    DataTable dtKumasDepo = _trackRepository.QueryFill(new KumasDepoHelper().KumasDepoHareketleri(ITEM_ID, order.PO_HEADER_ID));
+                    DataTable dtKesimTasnif = _trackRepository.QueryFill(new KesimFoyuHelper().KesimFoyleri(ITEM_ID, order.PO_HEADER_ID, RENKDETAY, ANAMODEL));
+                    DataTable dtBant = new DataTable();
+                    DataTable dtKalite = new DataTable();
+                    if (dtKesimTasnif.Rows.Count > 0)
+                    {
+                        KesimFoyleri = "";
+                        List<string> kFoy = new DataView(dtKesimTasnif).ToTable(true, "WIP_ENTITY_NAME").AsEnumerable().Select(ob => ob.Field<string>("WIP_ENTITY_NAME")).ToList();
+                        foreach (string s in kFoy)
+                            KesimFoyleri += "'" + s + "',";
+                        KesimFoyleri = KesimFoyleri.TrimEnd(',');
+                        dtBant = _egemenRepository.QueryFill(new EgemenDevanlayHelper().BantBitisleriSQL(master.COLOR, KesimFoyleri), FirebirdConnectionDB.DEVANLAY);
+                        dtKalite = _egemenRepository.QueryFill(new EgemenDevanlayHelper().KaliteBitisleriSQL(master.COLOR, KesimFoyleri), FirebirdConnectionDB.DEVANLAY);
+                    }
+                    else
+                        KesimFoyleri = "";
+
+                    for (int i = 0; i < uretimList.Count; i++)
+                    {
+                        EPM_PRODUCTION_TRACKING_LIST uretim = uretimList[i];
+                        EPM_TRACKING_PROCESS_VALUES values = _trackRepository.Deserialize<EPM_TRACKING_PROCESS_VALUES>("SELECT * FROM FDEIT005.EPM_TRACKING_PROCESS_VALUES WHERE HEADER_ID=" + uretim.HEADER_ID);
+                        SURECLER surec = (SURECLER)m.Find(ob => ob.PROCESS_ID == uretim.PROCESS_ID).PROCESS_ID;
+
+                        int planlanan = dtKesimTasnif.Compute("SUM(PLANLANAN_KESIM)", string.Empty).IntParse();
+                        int kesilen = dtKesimTasnif.Compute("SUM(FIILI_KESIM)", string.Empty).IntParse();
+                        int tasnif = dtKesimTasnif.Compute("SUM(TASNIF_MIKTARI)", string.Empty).IntParse();
+                        int bant = 0;
+                        if (dtBant.Rows.Count > 0)
+                            bant = dtBant.Compute("SUM(MIKTAR)", string.Empty).IntParse();
+                        int kaliteMiktar = 0;
+                        if (dtKalite.Rows.Count > 0)
+                            kaliteMiktar = dtKalite.Compute("SUM(MIKTAR)", string.Empty).IntParse();
+                        values.BANT = bant;
+                        values.KALITE = kaliteMiktar;
+                        values.KESIM = kesilen;
+                        values.TASNIF = tasnif;
+                        values.HEADER_ID = uretimList[i].HEADER_ID;
+                        _trackRepository.Serialize(values);
+                        switch (surec)
+                        {
+                            case SURECLER.IPLIK: //İPLİK
+                                rows = dtOrme.Select("(HAREKET_ADI='Alış' AND URUN_TIPI_ADI='İplik') OR (HAREKET_ADI='Stok Kaydırma (Giriş)' AND URUN_TIPI_ADI='İplik')");
+                                uretim.BEKLENEN_MIKTAR = TEDARIK;
+                                if (rows != null && rows.Length > 0)
+                                {
+                                    decimal adetIplik = rows.CopyToDataTable<DataRow>().Compute("SUM(MIKTAR)", string.Empty).DecimalParse();
+                                    if (adetIplik < TEDARIK)
+                                    {
+                                        uretim.STATUS = (int)SURECDURUMLARI.EKSIKTAMAMLANAN;
+                                        uretim.GERCEKLESEN_MIKTAR = adetIplik;
+                                    }
+                                    else
+                                    {
+                                        uretim.STATUS = (int)SURECDURUMLARI.TAMAMLANDI;
+                                        uretim.GERCEKLESEN_MIKTAR = adetIplik;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                }
+                                else
+                                {
+                                    if (uretim.STATUS != (int)SURECDURUMLARI.BASLADI && !ONCEKILERDEBASLAMISVARMI(uretimList, i))
+                                        uretim.STATUS = (int)SURECDURUMLARI.VERIBULUNAMADI;
+                                }
+                                _trackRepository.Serialize(uretim);
+                                break;
+                            case SURECLER.ORGU: //ÖRGÜ
+                                rows = dtOrme.Select("(HAREKET_ADI='Alış' AND URUN_TIPI_ADI='Kumaş') OR (HAREKET_ADI='Stok Kaydırma (Giriş)' AND URUN_TIPI_ADI='Kumaş')");
+                                uretim.BEKLENEN_MIKTAR = TEDARIK;
+                                if (rows != null && rows.Length > 0)
+                                {
+                                    decimal adetKumas = rows.CopyToDataTable<DataRow>().Compute("SUM(MIKTAR)", string.Empty).DecimalParse();
+                                    if (adetKumas < TEDARIK)
+                                    {
+                                        ONCEKILERITAMAMLA(uretimList, i);
+                                        uretim.STATUS = (int)SURECDURUMLARI.EKSIKTAMAMLANAN;
+                                        uretim.GERCEKLESEN_MIKTAR = adetKumas;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                    else
+                                    {
+                                        ONCEKILERITAMAMLA(uretimList, i);
+                                        uretim.STATUS = (int)SURECDURUMLARI.TAMAMLANDI;
+                                        uretim.GERCEKLESEN_MIKTAR = adetKumas;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                }
+                                else
+                                {
+                                    if (uretim.STATUS != (int)SURECDURUMLARI.BASLADI && !ONCEKILERDEBASLAMISVARMI(uretimList, i))
+                                        uretim.STATUS = (int)SURECDURUMLARI.VERIBULUNAMADI;
+                                }
+                                _trackRepository.Serialize(uretim);
+                                break;
+                            case SURECLER.KUMASBOYA://KUMAŞ BOYA
+                                rows = dtOrme.Select("HAREKET_ADI='Fason Üretime Çıkış' AND FIRMAID='F005'");
+                                uretim.BEKLENEN_MIKTAR = TEDARIK;
+                                if (rows != null && rows.Length > 0)
+                                {
+                                    decimal adetKumasBoya = rows.CopyToDataTable<DataRow>().Compute("SUM(MIKTAR)", string.Empty).DecimalParse();
+                                    if (adetKumasBoya < TEDARIK)
+                                    {
+                                        ONCEKILERITAMAMLA(uretimList, i);
+                                        uretim.STATUS = (int)SURECDURUMLARI.EKSIKTAMAMLANAN;
+                                        uretim.GERCEKLESEN_MIKTAR = adetKumasBoya;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                    else
+                                    {
+                                        ONCEKILERITAMAMLA(uretimList, i);
+                                        uretim.STATUS = (int)SURECDURUMLARI.TAMAMLANDI;
+                                        uretim.GERCEKLESEN_MIKTAR = adetKumasBoya;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                }
+                                else
+                                {
+                                    if (uretim.STATUS != (int)SURECDURUMLARI.BASLADI && !ONCEKILERDEBASLAMISVARMI(uretimList, i))
+                                        uretim.STATUS = (int)SURECDURUMLARI.VERIBULUNAMADI;
+                                }
+                                _trackRepository.Serialize(uretim);
+                                break;
+                            case SURECLER.KUMASDEPO://KUMAŞ DEPO
+                                uretim.BEKLENEN_MIKTAR = TEDARIK;
+                                if (dtKumasDepo.Rows.Count > 0)
+                                {
+                                    decimal adetKumasDepo = dtKumasDepo.Select("TRANSACTION_TYPE_ID=18").CopyToDataTable<DataRow>().Compute("SUM(ISLEM_MIKTARI)", string.Empty).DecimalParse();
+                                    if (adetKumasDepo < TEDARIK)
+                                    {
+                                        ONCEKILERITAMAMLA(uretimList, i);
+                                        uretim.STATUS = (int)SURECDURUMLARI.EKSIKTAMAMLANAN;
+                                        uretim.GERCEKLESEN_MIKTAR = adetKumasDepo;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                    else
+                                    {
+                                        ONCEKILERITAMAMLA(uretimList, i);
+                                        uretim.STATUS = (int)SURECDURUMLARI.TAMAMLANDI;
+                                        uretim.GERCEKLESEN_MIKTAR = adetKumasDepo;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                }
+                                else
+                                {
+                                    if (uretim.STATUS != (int)SURECDURUMLARI.BASLADI && !ONCEKILERDEBASLAMISVARMI(uretimList, i))
+                                        uretim.STATUS = (int)SURECDURUMLARI.VERIBULUNAMADI;
+                                }
+                                _trackRepository.Serialize(uretim);
+                                break;
+                            case SURECLER.KESIM://KESİM 
+                                uretim.BEKLENEN_MIKTAR = planlanan;
+                                uretim.GERCEKLESEN_MIKTAR = kesilen;
+                                if (planlanan > 0 & kesilen > 0)
+                                {
+                                    ONCEKILERITAMAMLA(uretimList, i);
+                                    if (kesilen >= planlanan)
+                                    {
+                                        uretim.STATUS = (int)SURECDURUMLARI.TAMAMLANDI;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                    else if (kesilen < planlanan)
+                                    {
+                                        uretim.STATUS = (int)SURECDURUMLARI.EKSIKTAMAMLANAN;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                    else uretim.STATUS = (int)SURECDURUMLARI.VERIBULUNAMADI;
+                                }
+                                else
+                                {
+                                    if (uretim.STATUS != (int)SURECDURUMLARI.BASLADI && !ONCEKILERDEBASLAMISVARMI(uretimList, i))
+                                        uretim.STATUS = (int)SURECDURUMLARI.VERIBULUNAMADI;
+                                }
+                                _trackRepository.Serialize(uretim);
+
+                                break;
+                            case SURECLER.TASNIF://TASNİF
+                                uretim.BEKLENEN_MIKTAR = kesilen;
+                                uretim.GERCEKLESEN_MIKTAR = tasnif;
+                                if (planlanan > 0 & tasnif > 0)
+                                {
+                                    ONCEKILERITAMAMLA(uretimList, i);
+                                    if (tasnif >= kesilen && tasnif > 0)
+                                    {
+                                        uretim.STATUS = (int)SURECDURUMLARI.TAMAMLANDI;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                    else if (tasnif < kesilen)
+                                    {
+                                        uretim.STATUS = (int)SURECDURUMLARI.EKSIKTAMAMLANAN;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                    else
+                                        uretim.STATUS = (int)SURECDURUMLARI.VERIBULUNAMADI;
+                                }
+                                else
+                                {
+                                    if (uretim.STATUS != (int)SURECDURUMLARI.BASLADI && !ONCEKILERDEBASLAMISVARMI(uretimList, i))
+                                        uretim.STATUS = (int)SURECDURUMLARI.VERIBULUNAMADI;
+                                }
+                                _trackRepository.Serialize(uretim);
+                                break;
+                            case SURECLER.BANT://BANT
+                                uretim.BEKLENEN_MIKTAR = URETIM_ADET;
+                                uretim.GERCEKLESEN_MIKTAR = bant;
+                                if (dtBant.Rows.Count > 0)
+                                {
+                                    ONCEKILERITAMAMLA(uretimList, i);
+                                    if (bant >= URETIM_ADET)
+                                    {
+                                        uretim.STATUS = (int)SURECDURUMLARI.TAMAMLANDI;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                    else
+                                    {
+                                        uretim.STATUS = (int)SURECDURUMLARI.EKSIKTAMAMLANAN;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                }
+                                else
+                                {
+                                    if (uretim.STATUS != (int)SURECDURUMLARI.BASLADI && !ONCEKILERDEBASLAMISVARMI(uretimList, i))
+                                        uretim.STATUS = (int)SURECDURUMLARI.VERIBULUNAMADI;
+                                }
+                                _trackRepository.Serialize(uretim);
+                                break;
+                            case SURECLER.KALITE://KALİTE 
+                                uretim.BEKLENEN_MIKTAR = URETIM_ADET;
+                                uretim.GERCEKLESEN_MIKTAR = kaliteMiktar;
+                                if (dtKalite.Rows.Count > 0)
+                                {
+                                    ONCEKILERITAMAMLA(uretimList, i);
+                                    if (kaliteMiktar >= URETIM_ADET)
+                                    {
+                                        uretim.STATUS = (int)SURECDURUMLARI.TAMAMLANDI;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                    if (kaliteMiktar < URETIM_ADET)
+                                    {
+                                        uretim.STATUS = (int)SURECDURUMLARI.EKSIKTAMAMLANAN;
+                                        SONRAKINEILERLET(uretimList, i);
+                                    }
+                                }
+                                else
+                                {
+                                    if (uretim.STATUS != (int)SURECDURUMLARI.BASLADI && !ONCEKILERDEBASLAMISVARMI(uretimList, i))
+                                        uretim.STATUS = (int)SURECDURUMLARI.VERIBULUNAMADI;
+                                }
+                                _trackRepository.Serialize(uretim);
+                                break;
+                            default: break;
+                        }
+                    }
+                }
+                else
+                    _trackRepository.ExecSql("DELETE FDEIT005.EPM_PRODUCTION_TRACKING_LIST WHERE PO_HEADER_ID=" + order.PO_HEADER_ID + " AND HEADER_ID=" + order.HEADER_ID + "");
+            }
+        }
+
+        List<EPM_PRODUCTION_TRACKING_LIST> GETLISTMODEL(int PO_HEADER_ID, int DETAIL_ID, int RECIPE, int HEADER_ID)
+        {
+            string sql = string.Format(@"
+                           SELECT PL.*,RD.QUEUE
+  FROM FDEIT005.EPM_PRODUCTION_TRACKING_LIST PL
+       INNER JOIN FDEIT005.EPM_PRODUCTION_PROCESS_INFO PI ON PI.ID = PL.PROCESS_ID
+       INNER JOIN FDEIT005.EPM_PRODUCTION_RECIPE RH ON RH.ID={2}
+       INNER JOIN FDEIT005.EPM_PRODUCTION_RECIPE_DETAIL RD ON RD.HEADER_ID=RH.ID AND RD.PROCESS_ID=PI.ID
+ WHERE PL.PO_HEADER_ID = {0} AND PL.DETAIL_ID = {1} AND PL.HEADER_ID={3} ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, RECIPE, HEADER_ID);
+            return _trackRepository.DeserializeList<EPM_PRODUCTION_TRACKING_LIST>(sql);
+        }
+
+        bool ISTHERELIST(int PO_HEADER_ID, int DETAIL_ID, int HEADER_ID)
+        {
+            bool var = false;
+
+            if (_trackRepository.ReadInteger(string.Format(@"SELECT Count(*) From FDEIT005.EPM_PRODUCTION_TRACKING_LIST WHERE PO_HEADER_ID={0} AND  DETAIL_ID={1} AND HEADER_ID={2}", PO_HEADER_ID, DETAIL_ID, HEADER_ID)) > 0)
+                var = true;
+            return var;
+        }
+
+        void CREATELIST(EPM_MASTER_PRODUCTION_ORDERS order)
+        {
+            DataTable dtDetail = _trackRepository.QueryFill(DetailSQL() + " AND PO_HEADER_ID=" + order.PO_HEADER_ID + " ORDER BY DETAIL_TAKIP_NO");
+            EPM_MASTER_PRODUCTION_H master = _trackRepository.Deserialize<EPM_MASTER_PRODUCTION_H>("SELECT * FROM FDEIT005.EPM_MASTER_PRODUCTION_H WHERE ID=" + order.HEADER_ID);
+            List<EPM_MASTER_PRODUCTION_D> detaiList = _trackRepository.DeserializeList<EPM_MASTER_PRODUCTION_D>("SELECT * FROM FDEIT005.EPM_MASTER_PRODUCTION_D WHERE HEADER_ID=" + master.ID);
+            List<EPM_PRODUCTION_TRACKING_LIST> uretimList = new List<EPM_PRODUCTION_TRACKING_LIST>();
+            foreach (DataRow row in dtDetail.Rows)
+            {
+                string HEADER_ID = row["TAKIP_NO"].ToString();
+                int DETAIL_ID = row["DETAIL_TAKIP_NO"].IntParse();
+                int ADET = detaiList.Sum(ob => ob.QUANTITY);
+                DateTime URETIMTARIHI = master.DEADLINE;
+
+                if (ISTHERELIST(order.PO_HEADER_ID, DETAIL_ID, order.HEADER_ID)) return;
+                List<ReceteProcessModel> m = _trackRepository.DeserializeList<ReceteProcessModel>(@"
+                                SELECT RH.ADI,
+                                     PI.PROCESS_NAME,
+                                     PI.PROCESS_TIME, 
+                                     RD.PROCESS_ID,
+                                     RD.QUEUE,
+                                     RH.ID AS RECETEHEADERID
+                                FROM FDEIT005.EPM_PRODUCTION_RECIPE RH
+                                     INNER JOIN FDEIT005.EPM_PRODUCTION_RECIPE_DETAIL RD ON RD.HEADER_ID = RH.ID
+                                     INNER JOIN FDEIT005.EPM_PRODUCTION_PROCESS_INFO PI ON PI.ID = RD.PROCESS_ID
+                            ORDER BY RECETEHEADERID, QUEUE").FindAll(ob => ob.RECETEHEADERID == master.RECIPE).OrderByDescending(ob => ob.QUEUE).ToList();
+                int i = 0;
+                foreach (ReceteProcessModel RECETE in m)
+                {
+                    i++;
+                    EPM_PRODUCTION_TRACKING_LIST uret = new EPM_PRODUCTION_TRACKING_LIST();
+                    uret.PO_HEADER_ID = order.PO_HEADER_ID;
+                    uret.HEADER_ID = order.HEADER_ID;
+                    uret.DETAIL_ID = DETAIL_ID;
+                    if (i == m.Count) uret.STATUS = 1;
+                    uret.PROCESS_ID = RECETE.PROCESS_ID;
+                    switch (RECETE.QUEUE)
+                    {
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 7:
+                        case 8:
+                            uret.END_DATE = URETIMTARIHI;
+                            URETIMTARIHI = URETIMTARIHI.AddBusinessDays(-RECETE.PROCESS_TIME);
+                            uret.START_DATE = URETIMTARIHI;
+                            break;
+                        case 6:
+                            uret.END_DATE = URETIMTARIHI;
+                            URETIMTARIHI = URETIMTARIHI.AddBusinessDays(-Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(Convert.ToDecimal(ADET) / Convert.ToDecimal(1000)))));
+                            uret.START_DATE = URETIMTARIHI;
+                            break;
+                        default: break;
+                    }
+                    uretimList.Add(uret);
+                }
+
+            }
+            if (uretimList.Count > 0)
+                _trackRepository.BulkInsert(uretimList);
+        }
+
+        void ONCEKILERITAMAMLA(List<EPM_PRODUCTION_TRACKING_LIST> uretimList, int a)
+        {
+            for (int i = 0; i < a; i++)
+            {
+                EPM_PRODUCTION_TRACKING_LIST uretim = uretimList[i];
+                uretim.STATUS = (int)SURECDURUMLARI.TAMAMLANDI;
+                uretim = _trackRepository.Serialize(uretim);
+            }
+        }
+
+        void SONRAKINEILERLET(List<EPM_PRODUCTION_TRACKING_LIST> uretimList, int i)
+        {
+            if (uretimList.Count - 1 >= i + 1)
+            {
+                uretimList[i + 1].STATUS = (int)SURECDURUMLARI.BASLADI;
+                uretimList[i + 1] = _trackRepository.Serialize(uretimList[i + 1]);
+            }
+        }
+
+        bool ONCEKILERDEBASLAMISVARMI(List<EPM_PRODUCTION_TRACKING_LIST> uretimList, int i)
+        {
+            bool evet = false;
+
+            for (int a = 0; a < i; a++)
+            {
+                if (uretimList[a].STATUS == (int)SURECDURUMLARI.BASLADI)
+                {
+                    evet = true;
+                    break;
+                }
+            }
+
+            return evet;
+        }
+
+
+        #endregion
     }
 }

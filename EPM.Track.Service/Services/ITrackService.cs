@@ -4,6 +4,8 @@ using EPM.Track.Dto.Track;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace EPM.Track.Service.Services
 {
@@ -44,6 +46,8 @@ namespace EPM.Track.Service.Services
         public List<ContractProcessList> GetContractProcessList(int HEADER_ID);
 
         public PRODUCTION_HEADER GetProductionList(int HEADER_ID);
+
+        public Task PROCESSLERIANALIZET(CancellationToken stoppingToken);
 
     }
 }

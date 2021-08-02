@@ -1,0 +1,9 @@
+Log Level : Information | Event ID : 0 | Event Name :  | Formatter : Now listening on: http://localhost:1859
+Log Level : Information | Event ID : 0 | Event Name :  | Formatter : Application started. Press Ctrl+C to shut down.
+Log Level : Information | Event ID : 0 | Event Name :  | Formatter : Hosting environment: Development
+Log Level : Information | Event ID : 0 | Event Name :  | Formatter : Content root path: D:\Projects\Eren Production Management\EPM.Track.Api
+Log Level : Warning | Event ID : 3 | Event Name : FailedToDeterminePort | Formatter : Failed to determine the https port for redirect.
+Log Level : Information | Event ID : 0 | Event Name :  | Formatter : Now listening on: http://localhost:1859
+Log Level : Information | Event ID : 0 | Event Name :  | Formatter : Application started. Press Ctrl+C to shut down.
+Log Level : Information | Event ID : 0 | Event Name :  | Formatter : Hosting environment: Development
+Log Level : Information | Event ID : 0 | Event Name :  | Formatter : Content root path: D:\Projects\Eren Production Management\EPM.Track.Api
