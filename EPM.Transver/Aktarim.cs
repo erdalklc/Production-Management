@@ -11,8 +11,8 @@ namespace EPM.Transver
     {
 
         public void AktarKaliteGerceklesen()
-        { 
-            //OracleServer.ExecSql("TRUNCATE TABLE FDEIT005.EPM_PRODUCTION_EGEMEN");
+        {
+            OracleServer.ExecSql("CALL FDEIT005.EGEMEN_GERCEKLESENLER_SIFIRLA()"); 
             List<EPM_PRODUCTION_MARKET> marketList = OracleServer.DeserializeList<EPM_PRODUCTION_MARKET>("SELECT * FROM FDEIT005.EPM_PRODUCTION_MARKET");
             List<EPM_PRODUCTION_ORDER_TYPES> orderTypes = OracleServer.DeserializeList<EPM_PRODUCTION_ORDER_TYPES>("SELECT * FROM FDEIT005.EPM_PRODUCTION_ORDER_TYPES");
             List<EPM_PRODUCTION_SEASON> seasonList = OracleServer.DeserializeList<EPM_PRODUCTION_SEASON>("SELECT * FROM FDEIT005.EPM_PRODUCTION_SEASON");

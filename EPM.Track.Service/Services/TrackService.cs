@@ -11,6 +11,7 @@ using System.Linq;
 using EPM.Fason.Dto.Fason;
 using System.Threading.Tasks;
 using System.Threading;
+using Microsoft.Extensions.Logging;
 
 namespace EPM.Track.Service.Services
 {
@@ -18,10 +19,12 @@ namespace EPM.Track.Service.Services
     {
         private readonly ITrackRepository _trackRepository;
         private readonly IEgemenRepository _egemenRepository;
-        public TrackService(ITrackRepository trackRepository, IEgemenRepository egemenRepository)
+        private readonly ILogger<TrackService> _logger;
+        public TrackService(ITrackRepository trackRepository, IEgemenRepository egemenRepository, ILogger<TrackService> logger)
         {
             _trackRepository = trackRepository;
             _egemenRepository = egemenRepository;
+            _logger = logger;
         }
 
         public List<SatinAlmaDetay> SatinAlmaDetay(int HEADER_ID)
@@ -599,8 +602,7 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
             {
                 try
                 {
-
-                    //Console.WriteLine("Process Analiz Ediliyor.... HEADER_ID = " + item.HEADER_ID);
+                    _logger.LogInformation($"Operasyon yapılıyor HeaderId={item.HEADER_ID}");
                     SETPROCESS(item);
                     await Task.Delay(1000, stoppingToken);
                 }

@@ -29,8 +29,7 @@ namespace EPM.Track.Api
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddScoped<ITrackService, TrackService>(); 
             services.AddSingleton<ITrackRepository, TrackRepository>();
-            services.AddSingleton<IEgemenRepository, EgemenRepository>(); 
-            services.AddHostedService<TrackBackgroundService>();
+            services.AddSingleton<IEgemenRepository, EgemenRepository>();  
             services.AddControllers();
             services.AddControllersWithViews()
               .AddNewtonsoftJson(options => {
@@ -46,8 +45,7 @@ namespace EPM.Track.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            loggerFactory.AddProvider(new LoggerProvider(_hostingEnvironment)); 
+            } 
             app.UseHttpsRedirection();
 
             app.UseRouting();
