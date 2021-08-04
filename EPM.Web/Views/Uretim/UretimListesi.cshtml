@@ -1,0 +1,201 @@
+﻿
+@model EPM.Production.Dto.Production.UretimOnayliListe
+
+@{ 
+    var status = Model.STATUS;
+}
+
+<div id="form-container">
+    <div class="dx-card wide-card">
+        @(Html.DevExtreme().Form<EPM.Production.Dto.Production.UretimOnayliListe>()
+        .ID("edOnayliListe").ShowValidationSummary(true)
+        .Items(items =>
+        {
+            items.AddGroup().ColCount(7).Items(groupItems =>
+            {
+                groupItems.AddSimpleFor(m => m.BRAND).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.SEASON).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.MODEL).Editor(ob => ob.TextBox().ID("edModel")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.COLOR).Editor(ob => ob.TextBox().ID("edColor")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.ORDER_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetOrderList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.PRODUCTION_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetProductionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.FABRIC_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetFabricList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.STATUS).Visible(false);
+
+            });
+
+            items.AddGroup().ColCount(7).Items(groupItems =>
+            {
+                groupItems.AddSimpleFor(m => m.BAND_ID).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.RECIPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetRecipeList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.PRODUCT_GROUP).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetProductGroupList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddEmpty();
+                groupItems.AddEmpty();
+                groupItems.AddEmpty();
+                groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Left).VerticalAlignment(VerticalAlignment.Center)
+                   .ButtonOptions(b => b.Text("FİLTRELE")
+                       .Type(ButtonType.Default)
+                       .Icon("fas fa-sign-in-alt")
+                       .Width("100%")
+                       .OnClick("UretimOnayliFiltrele")
+                       .UseSubmitBehavior(true)
+               );
+
+            });
+
+
+        })
+        .FormData(Model).ShowValidationSummary(false)
+    )
+
+
+        <div id="popupDetay"></div>
+    </div>
+</div>
+
+<div id="edReport" style="width:69.5%;display:inline-block;float:left">
+
+</div>
+
+<div id="edReportDetail" style="width:29.5%;display:inline-block;float:right">
+
+</div>
+<script>
+    function gridFocusedRowChanged(e) {
+        var data = {
+                ID: e.row.data.ID
+            };
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("_PartialUretimOnayliListeFiltreleDetail", "Uretim")',
+                data: data,
+                contentType: 'application/x-www-form-urlencoded',
+                timeout: 180000,
+                success: function (income, status, xmlRequest) {
+                    $("#edReportDetail").html(income);
+
+                }, beforeSend: function () {
+                }
+
+
+            }).always(function () {
+            });
+    }
+    function exportingHeader(e) {
+        var workbook = new ExcelJS.Workbook();
+        var worksheet = workbook.addWorksheet('Employees');
+
+        DevExpress.excelExporter.exportDataGrid({
+            component: e.component,
+            worksheet: worksheet,
+            autoFilterEnabled: true
+        }).then(function () {
+            workbook.xlsx.writeBuffer().then(function (buffer) {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'EPM_PRODUCTION_HEADER.xlsx');
+            });
+        });
+        e.cancel = true;
+    }
+    function exportingDetail(e) {
+        var workbook = new ExcelJS.Workbook();
+        var worksheet = workbook.addWorksheet('Employees');
+
+        DevExpress.excelExporter.exportDataGrid({
+            component: e.component,
+            worksheet: worksheet,
+            autoFilterEnabled: true
+        }).then(function () {
+            workbook.xlsx.writeBuffer().then(function (buffer) {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'EPM_PRODUCTION_DETAIL.xlsx');
+            });
+        });
+        e.cancel = true;
+    }
+    function LogSearchHeader(e) {
+        var header_id = e.row.data.ID;
+        var popupOptions = {
+            contentTemplate: function () {
+                var data = {
+                    HEADER_ID: header_id
+                };
+                return $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("_PartialUretimLog", "Uretim")',
+                    data: data,
+                    async: false,
+                    success: function (status) {
+                    }
+                }).responseText;
+            },
+            width: function () { return "950px"; },
+            height: function () { return "calc(100% - 350px)"; },
+            showTitle: true,
+            title: "SATIR TARİHÇESİ",
+            dragEnabled: true,
+            closeOnOutsideClick: true
+        };
+
+        $("#popupDetay").dxPopup(popupOptions).dxPopup("instance").show();
+
+    }
+    function LogSearchDetail(e) {
+         var detail_id = e.row.data.ID;
+        var popupOptions = {
+            contentTemplate: function () {
+                var data = {
+                    DETAIL_ID: detail_id
+                };
+                return $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("_PartialUretimDetailLog", "Uretim")',
+                    data: data,
+                    async: false,
+                    success: function (status) {
+                    }
+                }).responseText;
+            },
+            width: function () { return "calc(100% / 2)"; },
+            height: function () { return "calc(100% - 350px)"; },
+            showTitle: true,
+            title: "SATIR TARİHÇESİ",
+            dragEnabled: true,
+            closeOnOutsideClick: true
+        };
+
+        $("#popupDetay").dxPopup(popupOptions).dxPopup("instance").show();
+    }
+    function UretimOnayliFiltrele() {
+        $("#edReportDetail").html("");
+        var data = {
+            BRAND: jQuery("[name=BRAND]").val(),
+            SEASON: jQuery("[name=SEASON]").val(),
+            MODEL: jQuery("[name=MODEL]").val(),
+            COLOR: jQuery("[name=COLOR]").val(),
+            ORDER_TYPE: jQuery("[name=ORDER_TYPE]").val(),
+            PRODUCTION_TYPE: jQuery("[name=PRODUCTION_TYPE]").val(),
+            FABRIC_TYPE: jQuery("[name=FABRIC_TYPE]").val(),
+            RECIPE: jQuery("[name=RECIPE]").val(),
+            PRODUCT_GROUP: jQuery("[name=PRODUCT_GROUP]").val(),
+            BAND_ID: jQuery("[name=BAND_ID]").val(),
+            STATUS: @status,
+        };
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("_PartialUretimOnayliListeFiltrele", "Uretim")',
+            data: data,
+            contentType: 'application/x-www-form-urlencoded',
+            timeout: 180000,
+            success: function (income, status, xmlRequest) {
+                $("#edReport").html(income);
+
+            }, beforeSend: function () {
+                getLoadPanelInstance().show();
+            }
+
+
+        }).always(function () {
+            getLoadPanelInstance().hide();
+        });
+    }
+</script>

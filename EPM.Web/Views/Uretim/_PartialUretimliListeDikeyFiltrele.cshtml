@@ -1,5 +1,5 @@
 ﻿
-@model EPM.Core.FormModels.Uretim.UretimOnayliListe
+@model EPM.Production.Dto.Production.UretimOnayliListe
 @using EPM.Core.Models;
 @{
     var editable = new EPM.Core.Helpers.MenuHelper().CanUserEditUretim(this.Context);
@@ -7,7 +7,7 @@
 
 
 <div class="dx-card wide-card">
-    @(Html.DevExtreme().DataGrid<EPM.Core.FormModels.Uretim.VerticalList> ().ID("edgridHeader")
+    @(Html.DevExtreme().DataGrid<EPM.Production.Dto.Production.VerticalList> ().ID("edgridHeader")
     .ShowBorders(false)
     .DataSource(
         ob=>ob.Mvc().Controller("Uretim")

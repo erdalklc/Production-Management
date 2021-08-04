@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Dapper.Contrib.Extensions;
 using Dapper.Oracle;
+using EPM.Production.Dto.Extensions;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;

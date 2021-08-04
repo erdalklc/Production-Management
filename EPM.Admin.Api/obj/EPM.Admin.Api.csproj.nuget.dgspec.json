@@ -351,6 +351,10 @@
             "Dapper.Contrib": {
               "target": "Package",
               "version": "[2.0.78, )"
+            },
+            "MongoDB.Bson": {
+              "target": "Package",
+              "version": "[2.13.0, )"
             }
           },
           "imports": [

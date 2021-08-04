@@ -5,6 +5,7 @@ using EPM.Core.Helpers;
 using EPM.Core.Managers;
 using EPM.Core.Models;
 using EPM.Core.Services;
+using EPM.Web.ServiceHelper;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
@@ -52,32 +53,42 @@ namespace EPM.Web.Controllers
         public IActionResult UretimOnayliListe()
         {
             ViewBag.Page = "ONAYLI ÜRETİM LİSTESİ";
-            return View(new UretimOnayliListe());
+            return View(new EPM.Production.Dto.Production.UretimOnayliListe());
         }
 
+
+        public IActionResult UretimListesi(int TYPE)
+        {
+            if(TYPE==0)
+            ViewBag.Page = "ÜRETİM LİSTESİ";
+            else ViewBag.Page = "İPTAL ÜRETİM LİSTESİ";
+            EPM.Production.Dto.Production.UretimOnayliListe liste = new EPM.Production.Dto.Production.UretimOnayliListe();
+            liste.STATUS = TYPE;
+            return View(liste);
+        }
 
         public IActionResult UretimListesiDikey()
         {
             ViewBag.Page = "ÜRETİM LİSTESİ DİKEY";
-            return View(new UretimOnayliListe());
+            return View(new EPM.Production.Dto.Production.UretimOnayliListe());
         }
 
         [HttpPost, HttpGet]
-        public IActionResult _PartialUretimOnayliListeFiltrele(UretimOnayliListe liste) => PartialView(liste);
+        public IActionResult _PartialUretimOnayliListeFiltrele(EPM.Production.Dto.Production.UretimOnayliListe liste) => PartialView(liste);
 
         [HttpPost, HttpGet]
-        public IActionResult _PartialUretimliListeDikeyFiltrele(UretimOnayliListe liste) => PartialView(liste);
+        public IActionResult _PartialUretimliListeDikeyFiltrele(EPM.Production.Dto.Production.UretimOnayliListe liste) => PartialView(liste);
 
         [HttpGet]
-        public object UretimOnaylilLoad(DataSourceLoadOptions loadOptions, UretimOnayliListe liste)
+        public object UretimOnaylilLoad(DataSourceLoadOptions loadOptions, EPM.Production.Dto.Production.UretimOnayliListe liste)
         {
-            return DataSourceLoader.Load(_uretimRepository.OnayliUretimListesi(Request.HttpContext, liste), loadOptions);
+            return DataSourceLoader.Load(ProductionServiceHelper.OnayliUretimListesi(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, liste), loadOptions);
         }
 
         [HttpGet]
-        public object UretimListeDikeyLoad(DataSourceLoadOptions loadOptions, UretimOnayliListe liste)
+        public object UretimListeDikeyLoad(DataSourceLoadOptions loadOptions, EPM.Production.Dto.Production.UretimOnayliListe liste)
         {
-            return DataSourceLoader.Load(_uretimRepository.UretimListesiDikey(Request.HttpContext, liste), loadOptions);
+            return DataSourceLoader.Load(ProductionServiceHelper.UretimListesiDikey(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, liste), loadOptions);
         }
 
         public IActionResult _PartialUretimOnayliListeFiltreleDetail(int ID)=> PartialView(ID);
@@ -91,7 +102,7 @@ namespace EPM.Web.Controllers
         [HttpPut]
         public IActionResult UretimOnayliDetailUpdate(int key, string values)
         {
-            object[] islem=_uretimRepository.UretimOnayliDetailUpdate(Request.HttpContext, key, values, _logRepository);
+            object[] islem= ProductionServiceHelper.UretimOnayliDetailUpdate(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, key, values);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
@@ -100,7 +111,7 @@ namespace EPM.Web.Controllers
         [HttpDelete]
         public IActionResult UretimOnayliDetailDelete(int key)
         {
-            object[] islem = _uretimRepository.UretimOnayliDetailDelete(key);
+            object[] islem = ProductionServiceHelper.UretimOnayliDetailDelete(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, key);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]); 
@@ -109,13 +120,13 @@ namespace EPM.Web.Controllers
         [HttpPost]
         public IActionResult UretimOnayliDetailInsert( string values)
         { 
-            return Ok(_uretimRepository.UretimOnayliDetailInsert(values));
+            return Ok(ProductionServiceHelper.UretimOnayliDetailInsert(values));
         }
 
         [HttpPut]
         public IActionResult UretimOnayliUpdate(int key, string values)
         {
-            object[] islem = _uretimRepository.UretimOnayliUpdate(Request.HttpContext, key, values,_logRepository);
+            object[] islem = ProductionServiceHelper.UretimOnayliUpdate(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, key, values);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
@@ -124,7 +135,7 @@ namespace EPM.Web.Controllers
         [HttpDelete]
         public IActionResult UretimOnayliDelete(int key)
         {
-            object[] islem = _uretimRepository.UretimOnayliDelete(key);
+            object[] islem = ProductionServiceHelper.UretimOnayliDelete(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE,key);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
@@ -133,37 +144,37 @@ namespace EPM.Web.Controllers
         [HttpPost]
         public IActionResult UretimOnayliInsert(string values)
         {
-            return Ok(_uretimRepository.UretimOnayliInsert(values));
+            return Ok(ProductionServiceHelper.UretimOnayliInsert(values));
         }
 
         [HttpGet]
-        public object GetMarkets(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_uretimRepository.GetMarketList(hepsi), loadOptions);
+        public object GetMarkets(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetMarketList(hepsi), loadOptions);
         [HttpGet]
-        public object GetProductionTypes(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_uretimRepository.GetProductionTypes(Request.HttpContext, hepsi), loadOptions);
+        public object GetProductionTypes(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetProductionTypes(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, hepsi), loadOptions);
         [HttpGet]
-        public object GetOrderList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_uretimRepository.GetOrderList(hepsi), loadOptions);
+        public object GetOrderList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetOrderList(hepsi), loadOptions);
         [HttpGet]
-        public object GetFabricList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_uretimRepository.GetFabricTypes(Request.HttpContext,hepsi), loadOptions);
+        public object GetFabricList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetFabricTypes(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, hepsi), loadOptions);
         [HttpGet]
-        public object GetBrandList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_uretimRepository.GetBrandList(Request.HttpContext, hepsi), loadOptions);
+        public object GetBrandList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetBrandList(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, hepsi), loadOptions);
         [HttpGet]
-        public object GetSubBrandList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_uretimRepository.GetSubBrandList(Request.HttpContext, hepsi), loadOptions);
+        public object GetSubBrandList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetSubBrandList(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, hepsi), loadOptions);
         [HttpGet]
-        public object GetSeasonList(DataSourceLoadOptions loadOptions) => DataSourceLoader.Load(_uretimRepository.GetSeasonList(), loadOptions);
+        public object GetSeasonList(DataSourceLoadOptions loadOptions) => DataSourceLoader.Load(ProductionServiceHelper.GetSeasonList(), loadOptions);
         [HttpGet]
-        public object GetProductGroupList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_uretimRepository.GetProductGroupList(hepsi), loadOptions);
+        public object GetProductGroupList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetProductGroupList(hepsi), loadOptions);
         [HttpGet]
-        public object GetRecipeList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_uretimRepository.GetRecipeList(hepsi), loadOptions);
+        public object GetRecipeList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetRecipeList(hepsi), loadOptions);
         [HttpGet]
-        public object GetRecipeListByType(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi, [FromQuery(Name = "TYPE")] int TYPE) => DataSourceLoader.Load(_uretimRepository.GetRecipeListByType(hepsi, TYPE), loadOptions);
+        public object GetRecipeListByType(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi, [FromQuery(Name = "TYPE")] int TYPE) => DataSourceLoader.Load(ProductionServiceHelper.GetRecipeListByType(hepsi, TYPE), loadOptions);
         [HttpGet]
-        public object GetCollectionTypes(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_uretimRepository.GetCollectionTypes(hepsi), loadOptions);
+        public object GetCollectionTypes(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetCollectionTypes(hepsi), loadOptions);
         [HttpGet]
-        public object GetBandList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_uretimRepository.GetBandList(hepsi), loadOptions);
+        public object GetBandList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetBandList(hepsi), loadOptions);
         [HttpGet]
-        public object GetApprovalStatusList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_uretimRepository.GetApprovalStatueList(), loadOptions);
+        public object GetApprovalStatusList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetApprovalStatueList(), loadOptions);
         [HttpGet]
-        public object GetCurrencyUnits(DataSourceLoadOptions loadOptions) => DataSourceLoader.Load(_uretimRepository.GetCurrencyUnits(), loadOptions);
+        public object GetCurrencyUnits(DataSourceLoadOptions loadOptions) => DataSourceLoader.Load(ProductionServiceHelper.GetCurrencyUnits(), loadOptions);
 
         public IActionResult _PartialUretimListesiAktarimExcel() => PartialView();
 
@@ -174,12 +185,12 @@ namespace EPM.Web.Controllers
         [HttpGet]
         public object UretimOnayliLogLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "HEADER_ID")] int HEADER_ID)
         {
-            return DataSourceLoader.Load(_uretimRepository.OnayliUretimListesiLog(HEADER_ID, _logRepository), loadOptions);
+            return DataSourceLoader.Load(ProductionServiceHelper.OnayliUretimListesiLog(HEADER_ID), loadOptions);
         }
         [HttpGet]
         public object UretimOnayliDetailLogLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "DETAIL_ID")] int DETAIL_ID)
         {
-            return DataSourceLoader.Load(_uretimRepository.OnayliUretimListesiLogDetail(DETAIL_ID, _logRepository), loadOptions);
+            return DataSourceLoader.Load(ProductionServiceHelper.OnayliUretimListesiLogDetail(DETAIL_ID), loadOptions);
         }
 
 

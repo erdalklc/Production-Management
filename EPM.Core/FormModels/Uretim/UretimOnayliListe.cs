@@ -32,6 +32,7 @@ namespace EPM.Core.FormModels.Uretim
         public int APPROVAL_STATUS { get; set; } = 0;
         [Display(Name = "PRODUCT GROUP")]
         public int PRODUCT_GROUP { get; set; } = 0;
+        public int STATUS { get; set; } = 0;
 
 
     }

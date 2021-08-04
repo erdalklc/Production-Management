@@ -506,3 +506,6 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\V
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciProductionTypes.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciYetki.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciYetkiListesi.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Production.Dto.dll
+D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Production.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Uretim\UretimListesi.cshtml.g.cs

@@ -338,7 +338,7 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
                   AS SATIN_ALMA_BAGLANTI
           FROM FDEIT005.EPM_MASTER_PRODUCTION_H H
           LEFT JOIN FDEIT005.EPM_TRACKING_PROCESS_VALUES VL ON VL.HEADER_ID = H.ID 
-         WHERE     0 = 0 ";
+         WHERE     0 = 0 AND H.STATUS=0 ";
 
                 if (liste.BRAND != 0)
                     sql += " AND H.BRAND=" + liste.BRAND;

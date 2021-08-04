@@ -780,6 +780,7 @@ namespace EPM.Core.Services
             dynamicParameters.Add(":P_APPROVAL_STATUS", liste.APPROVAL_STATUS, OracleMappingType.Int32, ParameterDirection.Input);
             dynamicParameters.Add(":P_BAND_ID", liste.BAND_ID, OracleMappingType.Int32, ParameterDirection.Input);
             dynamicParameters.Add(":P_USER_CODE", user.USER_CODE, OracleMappingType.Varchar2, ParameterDirection.Input);
+            dynamicParameters.Add(":P_STATUS", liste.STATUS, OracleMappingType.Int32, ParameterDirection.Input);
             dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
             IEnumerable<MasterList> productionTypes = OracleServer.DeserializeListPROC<MasterList>("FDEIT005.GET_EPM_PRODUCTION_MASTER", dynamicParameters);
             return productionTypes; 
@@ -805,6 +806,7 @@ namespace EPM.Core.Services
             dynamicParameters.Add(":P_APPROVAL_STATUS", liste.APPROVAL_STATUS, OracleMappingType.Int32, ParameterDirection.Input);
             dynamicParameters.Add(":P_BAND_ID", liste.BAND_ID, OracleMappingType.Int32, ParameterDirection.Input);
             dynamicParameters.Add(":P_USER_CODE", user.USER_CODE, OracleMappingType.Varchar2, ParameterDirection.Input);
+            dynamicParameters.Add(":P_STATUS", liste.STATUS, OracleMappingType.Int32, ParameterDirection.Input);
             dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
             IEnumerable<VerticalList> productionTypes = OracleServer.DeserializeListPROC<VerticalList>("FDEIT005.GET_EPM_PRODUCTION_VERTICAL_M", dynamicParameters);
             return productionTypes; 
@@ -855,7 +857,7 @@ WHERE HEADER_ID=" + ID);
             {
                 EPM_MASTER_PRODUCTION_D detail = OracleServer.Deserialize<EPM_MASTER_PRODUCTION_D>(@"SELECT * FROM FDEIT005.EPM_MASTER_PRODUCTION_D D  WHERE D.ID=" + Key);
 
-                OracleServer.ExecSql("DELETE FROM FDEIT005.EPM_MASTER_PRODUCTION_D WHERE ID=" + detail.ID);
+                OracleServer.ExecSql("UPDATE FDEIT005.EPM_MASTER_PRODUCTION_D SET STATUS=1 WHERE ID=" + detail.ID);
                 OracleServer.ExecSql("DELETE FROM FDEIT005.EPM_PRODUCTION_PLAN WHERE HEADER_ID=" + detail.HEADER_ID + " AND MARKET_ID=" + detail.MARKET);
             }
             catch (Exception ex)
@@ -907,8 +909,8 @@ WHERE HEADER_ID=" + ID);
             try
             {
 
-                OracleServer.ExecSql("DELETE FROM FDEIT005.EPM_MASTER_PRODUCTION_H WHERE ID=" + Key);
-                OracleServer.ExecSql("DELETE FROM FDEIT005.EPM_MASTER_PRODUCTION_D WHERE HEADER_ID=" + Key);
+                OracleServer.ExecSql("UPDATE FDEIT005.EPM_MASTER_PRODUCTION_H SET STATUS=1 WHERE ID=" + Key);
+                OracleServer.ExecSql("UPDATE FDEIT005.EPM_MASTER_PRODUCTION_D SET STATUS=1 WHERE HEADER_ID=" + Key);
                 OracleServer.ExecSql("DELETE FROM FDEIT005.EPM_PRODUCTION_PLAN WHERE HEADER_ID=" + Key);
             }
             catch (Exception ex)

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2fAuX6Xyrea/GzpFl/6yVK+uTeyjCUdtCP+E/5bQeHhpyX2ek3crutmpJPNvT6HRjyBvnSwAaPo+f4/UszdXaA==",
+  "dgSpecHash": "mxNeFeOGJDCj/RQGw719duEd8ixky1yQRsOQEbgvMbLjRb0N2/2gIlIGajBgET/jawcvw5yCxxhk19zG62yKVw==",
   "success": true,
   "projectFilePath": "D:\\Projects\\Eren Production Management\\EPM.Track.Api\\EPM.Track.Api.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,7 @@
     "C:\\Users\\FDEIT005\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\FDEIT005\\.nuget\\packages\\mongodb.bson\\2.13.0\\mongodb.bson.2.13.0.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\oracle.manageddataaccess.core\\3.21.1\\oracle.manageddataaccess.core.3.21.1.nupkg.sha512",

@@ -38,6 +38,7 @@
           "EPM.Core": "1.0.0",
           "EPM.Fason.Dto": "1.0.0",
           "EPM.Plan.Dto": "1.0.0",
+          "EPM.Production.Dto": "1.0.0",
           "EPM.Tools": "1.0.0",
           "EPM.Track.Dto": "1.0.0",
           "Microsoft.AspNetCore.Authentication.Negotiate": "3.1.14",
@@ -1413,14 +1414,14 @@
           }
         }
       },
-      "MongoDB.Bson/2.12.2": {
+      "MongoDB.Bson/2.13.0": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "5.0.0"
         },
         "runtime": {
           "lib/netstandard2.1/MongoDB.Bson.dll": {
-            "assemblyVersion": "2.12.2.0",
-            "fileVersion": "2.12.2.0"
+            "assemblyVersion": "2.13.0.0",
+            "fileVersion": "2.13.0.0"
           }
         },
         "compile": {
@@ -1429,7 +1430,7 @@
       },
       "MongoDB.Driver/2.12.2": {
         "dependencies": {
-          "MongoDB.Bson": "2.12.2",
+          "MongoDB.Bson": "2.13.0",
           "MongoDB.Driver.Core": "2.12.2",
           "MongoDB.Libmongocrypt": "1.2.1"
         },
@@ -1446,7 +1447,7 @@
       "MongoDB.Driver.Core/2.12.2": {
         "dependencies": {
           "DnsClient": "1.4.0",
-          "MongoDB.Bson": "2.12.2",
+          "MongoDB.Bson": "2.13.0",
           "MongoDB.Libmongocrypt": "1.2.1",
           "SharpCompress": "0.23.0",
           "System.Buffers": "4.5.1"
@@ -2741,7 +2742,8 @@
       },
       "EPM.Dto/1.0.0": {
         "dependencies": {
-          "Dapper.Contrib": "2.0.78"
+          "Dapper.Contrib": "2.0.78",
+          "MongoDB.Bson": "2.13.0"
         },
         "runtime": {
           "EPM.Dto.dll": {}
@@ -2770,6 +2772,17 @@
         },
         "compile": {
           "EPM.Plan.Dto.dll": {}
+        }
+      },
+      "EPM.Production.Dto/1.0.0": {
+        "dependencies": {
+          "EPM.Dto": "1.0.0"
+        },
+        "runtime": {
+          "EPM.Production.Dto.dll": {}
+        },
+        "compile": {
+          "EPM.Production.Dto.dll": {}
         }
       },
       "EPM.Tools/1.0.0": {
@@ -5060,12 +5073,12 @@
       "path": "microsoft.win32.systemevents/5.0.0",
       "hashPath": "microsoft.win32.systemevents.5.0.0.nupkg.sha512"
     },
-    "MongoDB.Bson/2.12.2": {
+    "MongoDB.Bson/2.13.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-J6BuU4N9mD780KUI964zQbwuOMPpeRcsx4Lj98LaYd+l6pEEogin+BNFqnandwCqYjPlQGnmuDkqZXoIumAYTQ==",
-      "path": "mongodb.bson/2.12.2",
-      "hashPath": "mongodb.bson.2.12.2.nupkg.sha512"
+      "sha512": "sha512-voNakTxq2NV3n5lM+HpJXcd4UgLk7dtkzaPyqHMDtiBqKJauqFJ0XQIM6l9v2LTqP/GPiDCxf3XCTJHphxamZA==",
+      "path": "mongodb.bson/2.13.0",
+      "hashPath": "mongodb.bson.2.13.0.nupkg.sha512"
     },
     "MongoDB.Driver/2.12.2": {
       "type": "package",
@@ -5865,6 +5878,11 @@
       "sha512": ""
     },
     "EPM.Plan.Dto/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EPM.Production.Dto/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

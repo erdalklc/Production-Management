@@ -1,13 +1,13 @@
 ﻿
-@using EPM.Core.FormModels.Uretim; 
-@model UretimOnayliListe
+
+@model EPM.Production.Dto.Production.UretimOnayliListe
 
 
 
 <div id="form-container">
     <div class="dx-card wide-card">
-        @(Html.DevExtreme().Form<EPM.Core.FormModels.Uretim.UretimOnayliListe>()
-        .ID("edOnayliListe").ShowValidationSummary(true) 
+        @(Html.DevExtreme().Form<EPM.Production.Dto.Production.UretimOnayliListe>()
+        .ID("edOnayliListe").ShowValidationSummary(true)
         .Items(items =>
         {
             items.AddGroup().ColCount(7).Items(groupItems =>
@@ -41,7 +41,7 @@
 
             });
 
-             
+
 
         })
         .FormData(Model).ShowValidationSummary(false)
@@ -55,8 +55,9 @@
 <div id="edReport" style="width:100%;">
 
 </div>
- 
-<script> 
+
+<script>
+
 
     function exportingDikeyListe(e) {
         var workbook = new ExcelJS.Workbook();

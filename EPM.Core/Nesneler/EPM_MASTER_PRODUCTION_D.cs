@@ -19,6 +19,7 @@ namespace EPM.Core.Nesneler
         [Required(ErrorMessage = "Beden Bilgisi Gereklidir")]
         public string PRODUCT_SIZE { get; set; }
         [Required(ErrorMessage = "Adet Bilgisi Gereklidir")]
-        public int QUANTITY { get; set; } 
+        public int QUANTITY { get; set; }
+        public int STATUS { get; set; } = 1;
     }
 }

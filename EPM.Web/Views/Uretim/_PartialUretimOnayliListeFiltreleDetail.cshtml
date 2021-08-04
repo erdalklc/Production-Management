@@ -1,11 +1,10 @@
 ﻿
-@model int
-@using EPM.Core.Models;
+@model int 
 @{
     var editable = new EPM.Core.Helpers.MenuHelper().CanUserEditUretim(this.Context);
 }
 <div class="dx-card wide-card">
-    @(Html.DevExtreme().DataGrid<EPM.Core.FormModels.Uretim.DetailList> ().ID("edgridDetail")
+    @(Html.DevExtreme().DataGrid<EPM.Production.Dto.Production.DetailList> ().ID("edgridDetail")
     .ShowBorders(false)
     //.DataSource(ob=>ob.Array().Data(Model).Key("ID"))
     .DataSource(

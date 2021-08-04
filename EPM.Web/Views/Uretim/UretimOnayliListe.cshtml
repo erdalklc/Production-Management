@@ -1,12 +1,10 @@
 ﻿
-@using EPM.Core.FormModels.Uretim; 
-@model UretimOnayliListe
+@model EPM.Production.Dto.Production.UretimOnayliListe
 
 
- 
 <div id="form-container">
     <div class="dx-card wide-card">
-        @(Html.DevExtreme().Form<EPM.Core.FormModels.Uretim.UretimOnayliListe>()
+        @(Html.DevExtreme().Form<EPM.Production.Dto.Production.UretimOnayliListe>()
         .ID("edOnayliListe").ShowValidationSummary(true)
         .Items(items =>
         {
@@ -19,6 +17,7 @@
                 groupItems.AddSimpleFor(m => m.ORDER_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetOrderList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
                 groupItems.AddSimpleFor(m => m.PRODUCTION_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetProductionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
                 groupItems.AddSimpleFor(m => m.FABRIC_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetFabricList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.STATUS).Visible(false);
 
             });
 
@@ -26,7 +25,7 @@
             {
                 groupItems.AddSimpleFor(m => m.BAND_ID).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
                 groupItems.AddSimpleFor(m => m.RECIPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetRecipeList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
-                groupItems.AddSimpleFor(m => m.PRODUCT_GROUP).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetProductGroupList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false); 
+                groupItems.AddSimpleFor(m => m.PRODUCT_GROUP).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetProductGroupList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
                 groupItems.AddEmpty();
                 groupItems.AddEmpty();
                 groupItems.AddEmpty();
@@ -175,7 +174,9 @@
             RECIPE: jQuery("[name=RECIPE]").val(),
             PRODUCT_GROUP: jQuery("[name=PRODUCT_GROUP]").val(),
             BAND_ID: jQuery("[name=BAND_ID]").val(),
+            STATUS: jQuery("[name=STATUS]").val(),
         };
+        console.log(data);
         $.ajax({
             type: "POST",
             url: '@Url.Action("_PartialUretimOnayliListeFiltrele", "Uretim")',
