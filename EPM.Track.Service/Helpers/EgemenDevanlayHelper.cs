@@ -74,9 +74,7 @@ Select IsEmriOperasyonDetay.IsEmriKayitId, IsEmri.IsEmriYil, IsEmri.IsEmriId, Is
  SELECT BR.ADI AS BRAND_NAME,
        S.ADI AS SEASON_NAME,
        M.ADI AS MARKET_NAME,
-       O.ADI AS ORDER_TYPE,
-       NVL(EG.FASON_FIRMA,'İÇ ÜRETİM') AS EXTERNAL_COMPANY,
-       EG.KESIM_FOYU_NO,
+       O.ADI AS ORDER_TYPE,  
        PG.ADI AS PRODUCT_GROUP,
        FT.ADI AS FABRIC_TYPE,
        CT.ADI AS COLLECTION,
@@ -89,7 +87,25 @@ Select IsEmriOperasyonDetay.IsEmriKayitId, IsEmri.IsEmriYil, IsEmri.IsEmriId, Is
        D.PRODUCT_SIZE,
        D.QUANTITY PLANNED,
        EG.BIRINCI_KALITE RELEASED
-  FROM FDEIT005.EPM_PRODUCTION_EGEMEN EG
+  FROM (SELECT TYPE,
+         SEASON,
+         MARKET,
+         SIPARIS_TIPI,
+         MODEL,
+         COLOR,
+         PRODUCT_SIZE,
+         SUM (DEMET) DEMET,
+         SUM (KAYIP) KAYIP,
+         SUM (BIRINCI_KALITE) BIRINCI_KALITE,
+         SUM (IKINCI_KALITE) IKINCI_KALITE
+    FROM FDEIT005.EPM_PRODUCTION_EGEMEN
+GROUP BY TYPE,
+         SEASON,
+         MARKET,
+         SIPARIS_TIPI,
+         MODEL,
+         COLOR,
+         PRODUCT_SIZE) EG
         LEFT JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON   0=0  
             AND EG.SEASON = H.SEASON
              AND EG.SIPARIS_TIPI = H.ORDER_TYPE
@@ -104,7 +120,7 @@ Select IsEmriOperasyonDetay.IsEmriKayitId, IsEmri.IsEmriYil, IsEmri.IsEmriId, Is
        LEFT JOIN  FDEIT005.EPM_PRODUCT_GROUP PG ON PG.ID = H.PRODUCT_GROUP
        LEFT JOIN  FDEIT005.EPM_PRODUCTION_FABRIC_TYPES FT ON FT.ID = H.FABRIC_TYPE
        LEFT JOIN  FDEIT005.EPM_PRODUCTION_BRANDS BR ON BR.ID = H.BRAND 
- WHERE 0=0
+ WHERE 0=0  
   ";
             if (MODEL.ToStringParse() != "")
                 sql += " AND H.MODEL='" + MODEL + "'";

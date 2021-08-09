@@ -81,5 +81,8 @@ namespace EPM.Track.Api.Controllers
 
         [HttpGet, HttpPost]
         public ActionResult<PRODUCTION_HEADER> GetProductionList(object[] obj) => _trackService.GetProductionList(obj[0].IntParse());
+
+        [HttpGet, HttpPost]
+        public ActionResult<List<NOS_TRACK>> GetNosTrack() => _trackService.GetNosTrack();
     }
 }

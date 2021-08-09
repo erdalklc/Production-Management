@@ -37,6 +37,12 @@ namespace EPM.Web.Controllers
             ViewBag.Page = "EGEMEN ÜRETİM GERÇEKLEŞENLER";
             return View(new KaliteGerceklesenFilter());
         }
+
+        public IActionResult NosTakip()
+        {
+            ViewBag.Page = "NOS TAKİP";
+            return View();
+        }
         [HttpGet]
         public IActionResult _PartialProductionOrderList(int HEADER_ID) => PartialView(HEADER_ID);
 
@@ -165,6 +171,12 @@ namespace EPM.Web.Controllers
         public object GetProcessInformations(DataSourceLoadOptions loadOptions, [FromQuery(Name = "PO_HEADER_ID")] int PO_HEADER_ID, [FromQuery(Name = "DETAIL_ID")] int DETAIL_ID, [FromQuery(Name = "HEADER_ID")] int HEADER_ID)
         {
             return DataSourceLoader.Load(TrackServiceHelper.GetProcessInformations(PO_HEADER_ID, DETAIL_ID, HEADER_ID), loadOptions);
+        }
+
+        [HttpGet]
+        public object GetNosTrack(DataSourceLoadOptions loadOptions)
+        {
+            return DataSourceLoader.Load(TrackServiceHelper.GetNosTrack(), loadOptions);
         }
 
         [HttpGet]

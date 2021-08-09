@@ -362,5 +362,9 @@ namespace EPM.Track.Repository.Repository
             else
                 return (DateTime)obj;
         }
+        public string ToOracleTime(DateTime time)
+        {
+            return "TO_DATE('" + time.ToString("dd/MM/yyyy HH:mm:ss") + "','dd/mm/yyyy hh24:mi:ss')";
+        }
     }
 }

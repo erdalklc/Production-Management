@@ -15,3 +15,4 @@ D:\Projects\Eren Production Management\EPM.Fason.Dto\obj\Debug\netcoreapp3.1\EPM
 D:\Projects\Eren Production Management\EPM.Fason.Dto\obj\Debug\netcoreapp3.1\EPM.Fason.Dto.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.Fason.Dto\obj\Debug\netcoreapp3.1\EPM.Fason.Dto.dll
 D:\Projects\Eren Production Management\EPM.Fason.Dto\obj\Debug\netcoreapp3.1\EPM.Fason.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Fason.Dto\obj\Debug\netcoreapp3.1\EPM.Fason.Dto.csprojAssemblyReference.cache

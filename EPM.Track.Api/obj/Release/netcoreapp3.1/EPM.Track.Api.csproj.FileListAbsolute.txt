@@ -364,3 +364,4 @@ D:\Projects\Eren Production Management\EPM.Track.Api\bin\Release\netcoreapp3.1\M
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Release\netcoreapp3.1\Microsoft.Extensions.Hosting.Abstractions.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Release\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Release\netcoreapp3.1\Serilog.dll
+D:\Projects\Eren Production Management\EPM.Track.Api\bin\Release\netcoreapp3.1\MongoDB.Bson.dll

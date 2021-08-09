@@ -223,7 +223,6 @@ D:\Projects\Eren Production Management\EPM.Admin.Api\bin\Release\netcoreapp3.1\r
 D:\Projects\Eren Production Management\EPM.Admin.Api\bin\Release\netcoreapp3.1\refs\System.Resources.Reader.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\bin\Release\netcoreapp3.1\refs\System.Resources.ResourceManager.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\bin\Release\netcoreapp3.1\refs\System.Resources.Writer.dll
-D:\Projects\Eren Production Management\EPM.Admin.Api\bin\Release\netcoreapp3.1\refs\System.Runtime.CompilerServices.Unsafe.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\bin\Release\netcoreapp3.1\refs\System.Runtime.CompilerServices.VisualC.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\bin\Release\netcoreapp3.1\refs\System.Runtime.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\bin\Release\netcoreapp3.1\refs\System.Runtime.Extensions.dll
@@ -375,3 +374,5 @@ D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\E
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\EPM.Admin.Api.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\EPM.Admin.Api.pdb
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\EPM.Admin.Api.genruntimeconfig.cache
+D:\Projects\Eren Production Management\EPM.Admin.Api\bin\Release\netcoreapp3.1\MongoDB.Bson.dll
+D:\Projects\Eren Production Management\EPM.Admin.Api\bin\Release\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll

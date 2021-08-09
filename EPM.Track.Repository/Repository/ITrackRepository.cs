@@ -27,5 +27,6 @@ namespace EPM.Track.Repository.Repository
         public double ReadDouble(string sqlText); 
         public decimal ReadDecimal(string sqlText); 
         public DateTime ReadDateTime(string sqlText);
+        public string ToOracleTime(DateTime time);
     }
 }

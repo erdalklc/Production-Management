@@ -49,5 +49,7 @@ namespace EPM.Track.Service.Services
 
         public Task PROCESSLERIANALIZET(CancellationToken stoppingToken);
 
+        public List<NOS_TRACK> GetNosTrack();
+
     }
 }

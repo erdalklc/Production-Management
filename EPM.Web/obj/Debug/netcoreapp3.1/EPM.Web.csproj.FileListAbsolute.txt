@@ -1512,3 +1512,4 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.g
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Uretim\UretimListesi.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Production.Dto.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Production.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimTakip\NosTakip.cshtml.g.cs

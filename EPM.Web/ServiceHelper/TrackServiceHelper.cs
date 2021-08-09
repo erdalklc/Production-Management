@@ -147,5 +147,13 @@ namespace EPM.Web.ServiceHelper
             var list = PostRequest<object[], List<ContractProcessList>>(EPMServiceType.Track, apiUrl, new object[] { HEADER_ID });
             return list;
         }
+
+        public static List<NOS_TRACK> GetNosTrack()
+        {
+            string apiUrl = "GetNosTrack";
+            var list = GetRequest<List<NOS_TRACK>>(EPMServiceType.Track, apiUrl);
+            return list;
+        }
+
     }
 }

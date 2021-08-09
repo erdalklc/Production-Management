@@ -303,6 +303,7 @@ D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\P
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Hosting.Abstractions.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Logging.Abstractions.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Primitives.dll
+D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\PubTmp\Out\MongoDB.Bson.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.Bson.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Oracle.ManagedDataAccess.dll

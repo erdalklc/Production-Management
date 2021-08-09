@@ -1,0 +1,50 @@
+﻿
+@model EPM.Track.Dto.Track.KaliteGerceklesenFilter
+
+<div class="dx-card wide-card">
+    @(Html.DevExtreme().PivotGrid<EPM.Track.Dto.Track.NOS_TRACK>().ID("edgridHeader")
+    .ShowBorders(false)
+    .DataSource(ob => ob.Store(s => s.Mvc().Controller("UretimTakip").LoadParams(Model).LoadAction("GetNosTrack"))
+    .Fields(f =>
+    {
+
+        f.AddFor(ff => ff.YEAR).Area(PivotGridArea.Column).Expanded(true);
+        f.AddFor(ff => ff.MODEL).Area(PivotGridArea.Row).Expanded(true);
+        f.AddFor(ff => ff.RENK).Area(PivotGridArea.Row).Expanded(true);
+        f.AddFor(ff => ff.BEDEN).Area(PivotGridArea.Row).Expanded(true);
+        f.AddFor(ff => ff.LOJ_ADET).Caption("LOJİSTİK ADET").Area(PivotGridArea.Data)
+                   .SummaryType(SummaryType.Sum)
+                   .Format(Format.FixedPoint);
+        f.AddFor(ff => ff.SATIS_ADET_AY).Caption("SONRAKİ AY TAHMİNİ SATIŞ ADEDİ").Area(PivotGridArea.Data)
+                   .SummaryType(SummaryType.Sum)
+                   .Format(Format.FixedPoint);
+        f.AddFor(ff => ff.NOS_ADET).Caption("NOS STOK ADET").Area(PivotGridArea.Data)
+                    .SummaryType(SummaryType.Sum)
+                    .Format(Format.FixedPoint);
+        f.AddFor(ff => ff.MIN_ADET).Caption("SİPARİŞ ADET").Area(PivotGridArea.Data)
+                    .SummaryType(SummaryType.Sum)
+                    .Format(Format.FixedPoint);
+
+        f.AddFor(ff => ff.PLANLANAN_URETIM_ADET).Caption("PLANLANAN ÜRETİM ADET").Area(PivotGridArea.Data)
+                   .SummaryType(SummaryType.Sum)
+                   .Format(Format.FixedPoint);
+
+    }
+    ))
+    .ShowBorders(true)
+    .Scrolling(ob=>ob.Mode(PivotGridScrollingMode.Virtual))
+    .Height("calc(100vh - 70px)")
+    .AllowSortingBySummary(true)
+        .AllowFiltering(true)
+        .ShowBorders(true)
+        .ShowColumnGrandTotals(false)
+        .ShowRowGrandTotals(true)
+        .ShowRowTotals(false)
+        .ShowColumnTotals(false)
+        .AllowExpandAll(true)
+        .FieldPanel(p => p.Visible(true))
+        .FieldChooser(c => c.Enabled(true).Height(400))
+    .Export(ob => ob.Enabled(true))
+    )
+</div>
+
