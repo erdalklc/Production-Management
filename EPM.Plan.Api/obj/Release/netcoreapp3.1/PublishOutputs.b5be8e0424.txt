@@ -302,6 +302,7 @@ D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\Pu
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.CodeAnalysis.CSharp.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.CodeAnalysis.Razor.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.DependencyModel.dll
+D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\PubTmp\Out\MongoDB.Bson.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.Bson.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Oracle.ManagedDataAccess.dll
@@ -309,6 +310,7 @@ D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\Pu
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\PubTmp\Out\System.Diagnostics.PerformanceCounter.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\PubTmp\Out\System.DirectoryServices.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\PubTmp\Out\System.DirectoryServices.Protocols.dll
+D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\PubTmp\Out\System.Runtime.CompilerServices.Unsafe.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\PubTmp\Out\System.Text.Json.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Release\netcoreapp3.1\PubTmp\Out\cs\Microsoft.CodeAnalysis.resources.dll

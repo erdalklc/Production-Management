@@ -505,6 +505,13 @@ WHERE HEADER_ID=" + ID);
             return logRepository.GetDetail().ToList().FindAll(ob => ob.DETAIL_ID == DETAIL_ID);
         }
 
-       
+        public List<EPM_PRODUCTION_FLAGS> GetFlagList(bool hepsi)
+        {
+            OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
+            dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32, ParameterDirection.Input);
+            dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
+            List<EPM_PRODUCTION_FLAGS> list = _productionRepository.DeserializeListPROC<EPM_PRODUCTION_FLAGS>("FDEIT005.GET_EPM_PRODUCTION_FLAGS", dynamicParameters);
+            return list;
+        }
     }
 }

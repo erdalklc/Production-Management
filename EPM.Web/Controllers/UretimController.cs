@@ -174,6 +174,8 @@ namespace EPM.Web.Controllers
         [HttpGet]
         public object GetApprovalStatusList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetApprovalStatueList(), loadOptions);
         [HttpGet]
+        public object GetFlagList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetFlagList(hepsi), loadOptions);
+        [HttpGet]
         public object GetCurrencyUnits(DataSourceLoadOptions loadOptions) => DataSourceLoader.Load(ProductionServiceHelper.GetCurrencyUnits(), loadOptions);
 
         public IActionResult _PartialUretimListesiAktarimExcel() => PartialView();

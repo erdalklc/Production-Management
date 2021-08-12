@@ -68,6 +68,8 @@ namespace EPM.Production.Api.Controllers
 
         [HttpGet, HttpPost]
         public ActionResult<List<ENUMMODEL>> GetApprovalStatueList() => _productionService.GetApprovalStatueList();
+        [HttpGet, HttpPost]
+        public ActionResult<List<EPM_PRODUCTION_FLAGS>> GetFlagList(object[] obj) => _productionService.GetFlagList(obj[0].BooleanParse());
 
         [HttpGet, HttpPost]
         public ActionResult<List<MasterList>> OnayliUretimListesi(object[] obj) => _productionService.OnayliUretimListesi(obj[0].ToString(), JsonConvert.DeserializeObject<UretimOnayliListe>(obj[1].ToStringParse()));

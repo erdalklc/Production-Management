@@ -39,6 +39,8 @@ namespace EPM.Production.Service.Services
 
         public List<ENUMMODEL> GetApprovalStatueList();
 
+        public List<EPM_PRODUCTION_FLAGS> GetFlagList(bool hepsi);
+
         public List<MasterList> OnayliUretimListesi(string USER_CODE, UretimOnayliListe liste);
 
         public List<VerticalList> UretimListesiDikey(string USER_CODE, UretimOnayliListe liste);

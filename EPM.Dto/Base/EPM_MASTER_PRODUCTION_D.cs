@@ -20,6 +20,6 @@ namespace EPM.Dto.Base
         public string PRODUCT_SIZE { get; set; }
         [Required(ErrorMessage = "Adet Bilgisi Gereklidir")]
         public int QUANTITY { get; set; }
-        public int STATUS { get; set; } = 1;
+        public int STATUS { get; set; } = 0;
     }
 }

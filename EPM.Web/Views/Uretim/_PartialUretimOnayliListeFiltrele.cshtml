@@ -27,9 +27,11 @@
     .FocusedRowEnabled(true)
     .FocusedRowIndex(0)
     .Selection(s => s.Mode(SelectionMode.Single))
-    //.Sorting(ob=>ob.Mode(GridSortingMode.None))
     .ColumnAutoWidth(true)
     .ShowBorders(true)
+    .ColumnResizingMode(ColumnResizingMode.Widget)
+    .AllowColumnResizing(true)
+    .AllowColumnReordering(true)
     .Paging(ob=>ob.PageSize(50).Enabled(true))
     .Editing(ob => ob.Mode(GridEditMode.Cell).AllowUpdating(editable).AllowDeleting(editable).AllowAdding(editable).StartEditAction(GridStartEditAction.DblClick))
     .Height("calc(100vh - 200px)")
@@ -38,8 +40,10 @@
     .ShowColumnHeaders(true)
     .OnFocusedRowChanged("gridFocusedRowChanged")
     .ColumnMinWidth(60)
-    .Summary(ob=>ob.TotalItems(items=> {
-    items.AddFor(m => m.QUANTITY).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+    .Summary(
+    ob=>ob.TotalItems(
+        items=> {
+        items.AddFor(m => m.QUANTITY).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
         items.AddFor(m => m.EXPECTED_COST).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
         items.AddFor(m => m.MODEL).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
     }))
@@ -53,6 +57,7 @@
         });
         columns.AddFor(m => m.ID).Width(60).AllowEditing(false);
         columns.AddFor(m => m.APPROVAL_STATUS).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetApprovalStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.FLAG_ID).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetFlagList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.BRAND).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.SUB_BRAND).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetSubBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.SEASON).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
@@ -88,6 +93,23 @@
         }
         if(e.column.name=="DEADLINE_4" && (e.data.DEADLINE_2==null || e.data.DEADLINE_3==null || e.data.DEADLINE_4!=null)){
             e.cancel=true;
+        }
+    }
+
+    </text>)
+    .OnCellPrepared(@<text>
+    function(e){
+         if(e.rowType=="data" && e.column.dataField=="FLAG_ID"){
+            if(e.data.FLAG_ID==1){
+                e.cellElement.css("background-color", "indianred");
+                e.cellElement.css("color", "white");
+            }else if(e.data.FLAG_ID==3){
+                e.cellElement.css("background-color", "yellow");
+            }else{
+
+                e.cellElement.css("background-color", "green");
+                e.cellElement.css("color", "white");
+            }
         }
     }
 

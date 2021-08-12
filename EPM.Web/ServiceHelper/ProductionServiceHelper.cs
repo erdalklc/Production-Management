@@ -96,6 +96,13 @@ namespace EPM.Web.ServiceHelper
             return list;
         }
 
+        public static List<EPM_PRODUCTION_FLAGS> GetFlagList(bool hepsi = true)
+        {
+            string apiUrl = "GetFlagList";
+            var list = PostRequest<object[], List<EPM_PRODUCTION_FLAGS>>(EPMServiceType.Production, apiUrl, new object[] { hepsi });
+            return list;
+        }
+
         public static List<EPM_PRODUCT_GROUP> GetProductGroupList(bool hepsi = true)
         {
             string apiUrl = "GetProductGroupList";

@@ -249,7 +249,7 @@ namespace EPM.Core.Services
             , List<EPM_PRODUCTION_TYPES> productionTypes
             , List<EPM_PRODUCT_GROUP> productGroups
             , List<EPM_PRODUCTION_RECIPE> productionRecipe
-            , List<EPM_PRODUCTION_BAND_GROUP> productionBandGroup)
+            , List<EPM_PRODUCTION_BAND_GROUP> productionBandGroup, List<EPM_PRODUCTION_SEASON_WEEKS> weeks)
         {
             object[] err = { true, "" };
             var myFile = request.Form.Files["myFile"];
@@ -338,49 +338,88 @@ namespace EPM.Core.Services
                         if (seasonList.Count(ob => ob.ADI == reader.GetValue(2).ToStringParse()) == 0)
                         {
                             err[0] = false;
-                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(2).ToStringParse() + " Bilgisi SEASON Alanında Bulunamadı<br>";
+                            err[1] += (i + 1) + " Satırındaki " + reader.GetValue(2).ToStringParse() + " Bilgisi SEASON Alanında Bulunamadı<br>";
                         }
                         if (brandList.Count(ob => ob.ADI == reader.GetValue(0).ToStringParse()) == 0)
                         {
                             err[0] = false;
-                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(0).ToStringParse() + " Bilgisi BRAND Alanında Bulunamadı<br>";
+                            err[1] += (i + 1) + " Satırındaki " + reader.GetValue(0).ToStringParse() + " Bilgisi BRAND Alanında Bulunamadı<br>";
                         }
                         if (subBrandList.Count(ob => ob.ADI == reader.GetValue(1).ToStringParse()) == 0)
                         {
                             err[0] = false;
-                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(1).ToStringParse() + " Bilgisi SUB_BRAND Alanında Bulunamadı<br>";
+                            err[1] += (i + 1) + " Satırındaki " + reader.GetValue(1).ToStringParse() + " Bilgisi SUB_BRAND Alanında Bulunamadı<br>";
                         }
                         if (productGroups.Count(ob => ob.ADI == reader.GetValue(4).ToStringParse()) == 0)
                         {
                             err[0] = false;
-                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(4).ToStringParse() + " Bilgisi PRODUCT_GROUP Alanında Bulunamadı<br>";
+                            err[1] += (i + 1) + " Satırındaki " + reader.GetValue(4).ToStringParse() + " Bilgisi PRODUCT_GROUP Alanında Bulunamadı<br>";
                         }
                         if (fabricTypes.Count(ob => ob.ADI == reader.GetValue(18).ToStringParse()) == 0)
                         {
                             err[0] = false;
-                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(18).ToStringParse() + " Bilgisi FABRIC_TYPE Alanında Bulunamadı<br>";
+                            err[1] += (i + 1) + " Satırındaki " + reader.GetValue(18).ToStringParse() + " Bilgisi FABRIC_TYPE Alanında Bulunamadı<br>";
                         }
                         if (productionTypes.Count(ob => ob.ADI == reader.GetValue(16).ToStringParse()) == 0)
                         {
                             err[0] = false;
-                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(16).ToStringParse() + " Bilgisi PRODUCTION_TYPE Alanında Bulunamadı<br>";
+                            err[1] += (i + 1) + " Satırındaki " + reader.GetValue(16).ToStringParse() + " Bilgisi PRODUCTION_TYPE Alanında Bulunamadı<br>";
                         }
                         if (orderTypes.Count(ob => ob.ADI == reader.GetValue(3).ToStringParse()) == 0)
                         {
                             err[0] = false;
-                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(3).ToStringParse() + " Bilgisi ORDER_TYPE Alanında Bulunamadı<br>";
+                            err[1] += (i + 1) + " Satırındaki " + reader.GetValue(3).ToStringParse() + " Bilgisi ORDER_TYPE Alanında Bulunamadı<br>";
                         }
                         if (productionRecipe.Count(ob => ob.ADI == reader.GetValue(17).ToStringParse()) == 0)
                         {
                             err[0] = false;
-                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(17).ToStringParse() + " Bilgisi RECIPE Alanında Bulunamadı<br>";
+                            err[1] += (i + 1) + " Satırındaki " + reader.GetValue(17).ToStringParse() + " Bilgisi RECIPE Alanında Bulunamadı<br>";
                         }
                         if (marketList.Count(ob => ob.ADI == reader.GetValue(9).ToStringParse()) == 0)
                         {
                             err[0] = false;
-                            err[1] = (i + 1) + " Satırındaki " + reader.GetValue(9).ToStringParse() + " Bilgisi MARKET Alanında Bulunamadı<br>";
+                            err[1] += (i + 1) + " Satırındaki " + reader.GetValue(9).ToStringParse() + " Bilgisi MARKET Alanında Bulunamadı<br>";
                         }
-                        
+                        if((bool)err[0])
+                        {
+                            EPM_PRODUCTION_SEASON_WEEKS week = weeks.Find(ob => ob.SEASON_ID == seasonList.Find(ob => ob.ADI == reader.GetValue(2).ToStringParse()).ID);
+                            if (week != null)
+                            {
+                                if(week.START_YEAR <= reader.GetValue(30).IntParse() && week.END_YEAR>= reader.GetValue(30).IntParse())
+                                {
+                                    
+                                    if(week.START_YEAR == reader.GetValue(30).IntParse())
+                                    {
+                                        if(!(week.START_WEEK<= reader.GetValue(31).IntParse()) )
+                                        {
+                                            err[0] = false;
+                                            err[1] += (i + 1) + " Satırında girilen Plan haftası Sezon sınırlarında değil<br>";
+                                        }
+                                    }
+
+                                    if (week.END_YEAR == reader.GetValue(30).IntParse())
+                                    {
+                                        if (!(week.END_WEEK >= reader.GetValue(31).IntParse()))
+                                        {
+                                            err[0] = false;
+                                            err[1] += (i + 1) + " Satırında girilen Plan haftası Sezon sınırlarında değil<br>";
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    err[0] = false;
+                                    err[1] += (i + 1) + " Satırında girilen Plan Yılı Sezon sınırlarında değil<br>";
+                                }
+                            }
+                            else
+                            {
+
+                                err[0] = false;
+                                err[1] += (i + 1) + " Satırında Sezon bilgisine ait hafta-yıl bilgisi bulunamadı<br>";
+                            }
+                        }
 
                     }
                     
@@ -409,8 +448,9 @@ namespace EPM.Core.Services
                 List<EPM_PRODUCT_GROUP> productGroups = OracleServer.DeserializeList<EPM_PRODUCT_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCT_GROUP");
                 List<EPM_PRODUCTION_RECIPE> productionRecipe = OracleServer.DeserializeList<EPM_PRODUCTION_RECIPE>("SELECT * FROM FDEIT005.EPM_PRODUCTION_RECIPE");
                 List<EPM_PRODUCTION_BAND_GROUP> productionBandGroup = OracleServer.DeserializeList<EPM_PRODUCTION_BAND_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCTION_BAND_GROUP");
+                List<EPM_PRODUCTION_SEASON_WEEKS> weeks = OracleServer.DeserializeList<EPM_PRODUCTION_SEASON_WEEKS>("SELECT * FROM FDEIT005.EPM_PRODUCTION_SEASON_WEEKS");
 
-                object[] kontrol = CheckForErrors(request, brandList, subBrandList, fabricTypes, marketList, orderTypes, seasonList, productionTypes, productGroups, productionRecipe, productionBandGroup);
+                object[] kontrol = CheckForErrors(request, brandList, subBrandList, fabricTypes, marketList, orderTypes, seasonList, productionTypes, productGroups, productionRecipe, productionBandGroup, weeks);
 
                 if (!(bool)kontrol[0])
                 {

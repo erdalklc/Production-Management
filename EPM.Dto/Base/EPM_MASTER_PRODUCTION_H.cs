@@ -53,6 +53,7 @@ namespace EPM.Dto.Base
         public string ROYALTY { get; set; } = "";
         public int COLLECTION_TYPE { get; set; }
         public int APPROVAL_STATUS { get; set; } = 1;
+        public int FLAG_ID { get; set; } = 2;
         public string CREATED_BY { get; set; } = "";
         public DateTime CREATE_DATE { get; set; } = DateTime.Now;
         public int STATUS { get; set; } = 0;
