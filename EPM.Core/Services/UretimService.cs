@@ -433,6 +433,7 @@ namespace EPM.Core.Services
         {
             object[] obj = { true, "" };
             WebLogin user = new CookieHelper().GetUserFromCookie(request.HttpContext);
+            var OnayliBelge = new MenuHelper().OnayliKullanici(request.HttpContext);
             try
             {
                 var myFile = request.Form.Files["myFile"];
@@ -504,7 +505,9 @@ namespace EPM.Core.Services
                             aktarim.PLAN_YEAR = reader.GetValue(30).IntParse();
                             aktarim.PLAN_WEEK = reader.GetValue(31).IntParse(); 
                             aktarim.CREATED_BY = user.USER_CODE;
-                            aktarim.APPROVAL_STATUS = true;
+                            if (OnayliBelge)
+                                aktarim.APPROVAL_STATUS = true;
+                            else aktarim.APPROVAL_STATUS = false;
                             aktarim.STATUS = 0;
                             aktarimList.Add(aktarim);
                         }

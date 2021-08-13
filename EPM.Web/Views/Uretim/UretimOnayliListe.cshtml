@@ -8,8 +8,8 @@
         .ID("edOnayliListe").ShowValidationSummary(true)
         .Items(items =>
         {
-            items.AddGroup().ColCount(7).Items(groupItems =>
-            {
+            items.AddGroup().ColCount(8).Items(groupItems =>
+            { 
                 groupItems.AddSimpleFor(m => m.BRAND).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
                 groupItems.AddSimpleFor(m => m.SEASON).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
                 groupItems.AddSimpleFor(m => m.MODEL).Editor(ob => ob.TextBox().ID("edModel")).IsRequired(false);
@@ -21,7 +21,7 @@
 
             });
 
-            items.AddGroup().ColCount(7).Items(groupItems =>
+            items.AddGroup().ColCount(8).Items(groupItems =>
             {
                 groupItems.AddSimpleFor(m => m.BAND_ID).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
                 groupItems.AddSimpleFor(m => m.RECIPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetRecipeList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
@@ -58,6 +58,7 @@
 
 </div>
 <script>
+       
     function gridFocusedRowChanged(e) {
         var data = {
                 ID: e.row.data.ID

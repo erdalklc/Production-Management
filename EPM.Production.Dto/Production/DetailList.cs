@@ -7,8 +7,5 @@ namespace EPM.Production.Dto.Production
 {
     public class DetailList : EPM_MASTER_PRODUCTION_D
     {
-        public decimal EXPECTED_COST { get; set; } = 0;
-        public int CURRENCY_UNIT { get; set; } = 2;
-        public decimal REALESED_COST { get; set; } = 0;
     }
 }

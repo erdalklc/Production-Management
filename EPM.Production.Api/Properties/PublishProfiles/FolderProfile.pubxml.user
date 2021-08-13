@@ -5,6 +5,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>\\10.1.1.159\c$\inetpub\wwwroot\production.erenperakende.com</_PublishTargetUrl>
-    <History>True|2021-08-12T14:23:35.2062811Z;True|2021-08-04T14:17:57.1159959+03:00;True|2021-08-04T14:14:45.0506361+03:00;True|2021-08-04T13:43:03.9458474+03:00;</History>
+    <History>True|2021-08-13T14:19:15.3279316Z;True|2021-08-13T17:15:54.9553716+03:00;True|2021-08-13T15:33:26.9621686+03:00;True|2021-08-12T17:23:35.2062811+03:00;True|2021-08-04T14:17:57.1159959+03:00;True|2021-08-04T14:14:45.0506361+03:00;True|2021-08-04T13:43:03.9458474+03:00;</History>
   </PropertyGroup>
 </Project>

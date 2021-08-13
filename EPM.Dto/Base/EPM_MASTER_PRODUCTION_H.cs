@@ -56,9 +56,7 @@ namespace EPM.Dto.Base
         public int FLAG_ID { get; set; } = 2;
         public string CREATED_BY { get; set; } = "";
         public DateTime CREATE_DATE { get; set; } = DateTime.Now;
-        public int STATUS { get; set; } = 0;
-        public decimal EXPECTED_COST { get; set; } = 0;
-        public int CURRENCY_UNIT { get; set; } = 2;
+        public int STATUS { get; set; } = 0; 
         public List<EPM_MASTER_PRODUCTION_D> DETAIL=new List<EPM_MASTER_PRODUCTION_D>();
         public List<EPM_PRODUCTION_PLAN> PLAN=new List<EPM_PRODUCTION_PLAN>();
     }

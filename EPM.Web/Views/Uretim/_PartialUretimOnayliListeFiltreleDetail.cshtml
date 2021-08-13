@@ -22,7 +22,9 @@
         e.Enabled(true);
     })
     .RemoteOperations(true)
+    .HeaderFilter(x => x.Visible(true))
     .FilterRow(f => f.Visible(true))
+    .Editing(ob => ob.Mode(GridEditMode.Cell).StartEditAction(GridStartEditAction.DblClick).AllowUpdating(editable).AllowDeleting(editable).AllowAdding(true))
     .FocusedRowEnabled(true)
     .FocusedRowIndex(0)
     .ColumnAutoWidth(true)
@@ -30,14 +32,11 @@
     .ShowRowLines(true)
     .ShowColumnLines(true)
     .ColumnHidingEnabled(false)
-    .Editing(ob=>ob.Mode(GridEditMode.Cell).StartEditAction(GridStartEditAction.DblClick).AllowUpdating(editable).AllowDeleting(editable).AllowAdding(editable))
     .Paging(ob => ob.PageSize(50).Enabled(true))
     .Height("calc(100vh - 200px)")
     .ShowBorders(true)
     .Summary(ob=>ob.TotalItems(items=> {
-    items.AddFor(m => m.QUANTITY).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
-        items.AddFor(m => m.EXPECTED_COST).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Avg).CustomizeText(@<text>function(data){return "ORT:" +data.value}</text>);
-        items.AddFor(m => m.REALESED_COST).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Avg).CustomizeText(@<text>function(data){return "ORT:" +data.value}</text>);
+    items.AddFor(m => m.QUANTITY).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>); 
     }))
     .Columns(columns => {
 
@@ -49,10 +48,7 @@
         columns.AddFor(m => m.HEADER_ID).SetCellValue(@<text> function(e){ return @Model}</text>).Visible(false).AllowExporting(true);
         columns.AddFor(m => m.MARKET).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetMarkets").Key("ID").LoadParams(new { all = false })).DisplayExpr("ADI").ValueExpr("ID")).AllowExporting(true);
         columns.AddFor(m => m.PRODUCT_SIZE).AllowExporting(true);
-        columns.AddFor(m => m.QUANTITY).AllowEditing(true).AllowExporting(true);
-        columns.AddFor(m => m.EXPECTED_COST).Visible(false).AllowExporting(true);
-        columns.AddFor(m => m.REALESED_COST).Visible(false).AllowExporting(true);
-        columns.AddFor(m => m.CURRENCY_UNIT).Width(80).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetCurrencyUnits").Key("ID")).DisplayExpr("CURRENCY_UNIT").ValueExpr("ID")).Visible(false).AllowExporting(true);
+        columns.AddFor(m => m.QUANTITY).AllowEditing(true).AllowExporting(true); 
     }).OnInitNewRow(@<text> function(e) { e.data.HEADER_ID =@Model ; }</text>)
     )
 </div>

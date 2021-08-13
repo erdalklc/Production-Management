@@ -22,8 +22,8 @@
     })
     .FilterRow(f => f.Visible(true))
     .FocusedRowEnabled(true)
-    .FocusedRowIndex(0)
-    .AllowColumnResizing(true)
+    .FocusedRowIndex(0) 
+    .AllowColumnResizing(true) 
     .Selection(s => s.Mode(SelectionMode.Single))
     .ColumnAutoWidth(true)
     .Pager(p=>p.Visible(true).ShowInfo(true).ShowPageSizeSelector(true).ShowNavigationButtons(true))
@@ -39,8 +39,7 @@
     .ShowColumnHeaders(true)
     .ColumnMinWidth(60)
     .Summary(ob=>ob.TotalItems(items=> {
-    items.AddFor(m => m.QUANTITY).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
-        items.AddFor(m => m.EXPECTED_COST).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+    items.AddFor(m => m.QUANTITY).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>); 
         items.AddFor(m => m.MODEL).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
     }))
     //.Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
@@ -69,8 +68,6 @@
         columns.AddFor(m => m.DEADLINE_3).Caption("3. DEADLINE").Visible(true).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
         columns.AddFor(m => m.DEADLINE_4).Caption("4. DEADLINE").Visible(true).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
         columns.AddFor(m => m.SHIPMENT_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
-        columns.AddFor(m => m.EXPECTED_COST);
-        columns.AddFor(m => m.CURRENCY_UNIT).Width(80).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetCurrencyUnits").Key("ID")).DisplayExpr("CURRENCY_UNIT").ValueExpr("ID"));
         columns.AddFor(m => m.MARKET).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetMarkets").Key("ID").LoadParams(new { all = false })).DisplayExpr("ADI").ValueExpr("ID")).AllowExporting(true);
         columns.AddFor(m => m.PRODUCT_SIZE);
         columns.AddFor(m => m.QUANTITY);

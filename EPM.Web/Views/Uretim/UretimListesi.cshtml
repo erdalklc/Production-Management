@@ -11,8 +11,9 @@
         .ID("edOnayliListe").ShowValidationSummary(true)
         .Items(items =>
         {
-            items.AddGroup().ColCount(7).Items(groupItems =>
+            items.AddGroup().ColCount(8).Items(groupItems =>
             {
+                groupItems.AddSimpleFor(m => m.APPROVAL_STATUS).Editor(ob => ob.Lookup().Disabled(true).DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetApprovalStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
                 groupItems.AddSimpleFor(m => m.BRAND).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
                 groupItems.AddSimpleFor(m => m.SEASON).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
                 groupItems.AddSimpleFor(m => m.MODEL).Editor(ob => ob.TextBox().ID("edModel")).IsRequired(false);
@@ -24,11 +25,12 @@
 
             });
 
-            items.AddGroup().ColCount(7).Items(groupItems =>
+            items.AddGroup().ColCount(8).Items(groupItems =>
             {
                 groupItems.AddSimpleFor(m => m.BAND_ID).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
                 groupItems.AddSimpleFor(m => m.RECIPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetRecipeList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
                 groupItems.AddSimpleFor(m => m.PRODUCT_GROUP).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetProductGroupList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddEmpty();
                 groupItems.AddEmpty();
                 groupItems.AddEmpty();
                 groupItems.AddEmpty();
@@ -61,6 +63,52 @@
 
 </div>
 <script>
+    function UpdateMasterRow(e) {
+
+        var data = {
+            "key": e.key,
+            "values": JSON.stringify(e.newData)
+        };
+        res = $.ajax({
+            url: '@Url.Action("UretimOnayliUpdate","Uretim")',
+            method: "PUT",
+            data: data,
+            success: function (data) {
+
+            },
+            error: function (textStatus, errorThrown) {
+                //d.reject(textStatus.statusText +" "+errorThrown);
+            }
+        })
+        e.cancel = res.promise();
+
+    }
+
+     function InsertMasterRow(e){
+
+
+        //console.log(e);
+
+    }
+
+    function DeleteMasterRow(e) {
+        var data = {
+            "key": e.key
+        };
+        res = $.ajax({
+            url: '@Url.Action("UretimOnayliDelete", "Uretim")',
+            method: "DELETE",
+            data: data,
+            success: function (data) {
+
+            },
+            error: function (textStatus, errorThrown) {
+                //d.reject(textStatus.statusText +" "+errorThrown);
+            }
+        })
+        e.cancel = res.promise();
+
+    }
     function gridFocusedRowChanged(e) {
         var data = {
                 ID: e.row.data.ID
@@ -177,6 +225,7 @@
             RECIPE: jQuery("[name=RECIPE]").val(),
             PRODUCT_GROUP: jQuery("[name=PRODUCT_GROUP]").val(),
             BAND_ID: jQuery("[name=BAND_ID]").val(),
+            APPROVAL_STATUS: jQuery("[name=APPROVAL_STATUS]").val(),
             STATUS: @status,
         };
         console.log(data);

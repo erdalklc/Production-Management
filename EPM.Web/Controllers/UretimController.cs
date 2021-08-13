@@ -57,13 +57,18 @@ namespace EPM.Web.Controllers
         }
 
 
-        public IActionResult UretimListesi(int TYPE)
+        public IActionResult UretimListesi(int TYPE,int STATUS=1)
         {
             if(TYPE==0)
             ViewBag.Page = "ÜRETİM LİSTESİ";
             else ViewBag.Page = "İPTAL ÜRETİM LİSTESİ";
+
+            if(STATUS==0)
+                ViewBag.Page = "ONAYSIZ ÜRETİM LİSTESİ";
+
             EPM.Production.Dto.Production.UretimOnayliListe liste = new EPM.Production.Dto.Production.UretimOnayliListe();
             liste.STATUS = TYPE;
+            liste.APPROVAL_STATUS = STATUS;
             return View(liste);
         }
 
@@ -74,17 +79,16 @@ namespace EPM.Web.Controllers
         }
 
         [HttpPost, HttpGet]
-        public IActionResult _PartialUretimOnayliListeFiltrele(EPM.Production.Dto.Production.UretimOnayliListe liste) => PartialView(liste);
+        public IActionResult _PartialUretimOnayliListeFiltrele(EPM.Production.Dto.Production.UretimOnayliListe liste) => PartialView(ProductionServiceHelper.OnayliUretimListesi(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, liste));
 
         [HttpPost, HttpGet]
         public IActionResult _PartialUretimliListeDikeyFiltrele(EPM.Production.Dto.Production.UretimOnayliListe liste) => PartialView(liste);
 
         [HttpGet]
-        public object UretimOnaylilLoad(DataSourceLoadOptions loadOptions, EPM.Production.Dto.Production.UretimOnayliListe liste)
+        public object UretimOnaylilLoad2( EPM.Production.Dto.Production.UretimOnayliListe liste)
         {
-            return DataSourceLoader.Load(ProductionServiceHelper.OnayliUretimListesi(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, liste), loadOptions);
+            return ProductionServiceHelper.OnayliUretimListesi(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, liste);
         }
-
         [HttpGet]
         public object UretimListeDikeyLoad(DataSourceLoadOptions loadOptions, EPM.Production.Dto.Production.UretimOnayliListe liste)
         {

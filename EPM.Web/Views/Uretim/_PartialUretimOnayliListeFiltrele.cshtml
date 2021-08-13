@@ -1,39 +1,46 @@
 ﻿
-@model EPM.Production.Dto.Production.UretimOnayliListe
+@model List<EPM.Production.Dto.Production.MasterList>
 @using EPM.Core.Models;
 @{
     var editable = new EPM.Core.Helpers.MenuHelper().CanUserEditUretim(this.Context);
+    var onayDegistirir = new EPM.Core.Helpers.MenuHelper().OnayliKullanici(this.Context);
 }
 
 
 <div class="dx-card wide-card">
-    @(Html.DevExtreme().DataGrid<EPM.Production.Dto.Production.MasterList> ().ID("edgridHeader")
-    .ShowBorders(false)
-    .DataSource(
-        ob=>ob.Mvc().Controller("Uretim")
-        .LoadParams(Model)
-        .LoadAction("UretimOnaylilLoad")
-        .InsertAction("UretimOnayliInsert")
-        .UpdateAction("UretimOnayliUpdate")
-        .DeleteAction("UretimOnayliDelete")
-        .Key("ID")
-    )
-    .OnExporting("exportingHeader")
-    .Export(e =>
-    {
-        e.Enabled(true);
-    })
-    .FilterRow(f => f.Visible(true))
+    @(Html.DevExtreme().DataGrid<EPM.Production.Dto.Production.MasterList>().ID("edgridHeader")
+                    .ShowBorders(false)
+                    .DataSource(
+                        ob => ob.Mvc().Controller("Uretim")
+                        .InsertAction("UretimOnayliInsert")
+                        .UpdateAction("UretimOnayliUpdate")
+                        .DeleteAction("UretimOnayliDelete")
+                        .Key("ID")
+                    )
+                    .DataSource(Model,"ID" )
+                    .OnExporting("exportingHeader")
+                    .Export(e =>
+                    {
+                        e.Enabled(true);
+                    })
+                    .DataSourceOptions(ob=>ob.ReshapeOnPush(false))
+
+
+     .OnRowUpdating("UpdateMasterRow")
+     .OnRowInserting("InsertMasterRow")
+     .OnRowRemoving("DeleteMasterRow")
     .FocusedRowEnabled(true)
+    .FilterRow(x=>x.Visible(true))
     .FocusedRowIndex(0)
     .Selection(s => s.Mode(SelectionMode.Single))
     .ColumnAutoWidth(true)
     .ShowBorders(true)
+    .HeaderFilter(x=>x.Visible(true))
+    .Editing(ob => ob.Mode(GridEditMode.Cell).StartEditAction(GridStartEditAction.DblClick).AllowUpdating(editable).AllowDeleting(editable).AllowAdding(false))
     .ColumnResizingMode(ColumnResizingMode.Widget)
     .AllowColumnResizing(true)
     .AllowColumnReordering(true)
-    .Paging(ob=>ob.PageSize(50).Enabled(true))
-    .Editing(ob => ob.Mode(GridEditMode.Cell).AllowUpdating(editable).AllowDeleting(editable).AllowAdding(editable).StartEditAction(GridStartEditAction.DblClick))
+    //.Paging(ob=>ob.PageSize(25).Enabled(true))
     .Height("calc(100vh - 200px)")
     .ShowColumnLines(true)
     .ColumnChooser(ch => { ch.Mode(GridColumnChooserMode.Select);ch.Enabled(true); })
@@ -44,9 +51,8 @@
     ob=>ob.TotalItems(
         items=> {
         items.AddFor(m => m.QUANTITY).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
-        items.AddFor(m => m.EXPECTED_COST).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
         items.AddFor(m => m.MODEL).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
-    }))
+        }))
     .Columns(columns =>
     {
         columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn => {
@@ -55,8 +61,8 @@
         {
             btn.Add().Name(GridColumnButtonName.Delete);
         });
-        columns.AddFor(m => m.ID).Width(60).AllowEditing(false);
-        columns.AddFor(m => m.APPROVAL_STATUS).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetApprovalStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.ID).SortOrder(SortOrder.Asc).Width(60).AllowEditing(false);
+        columns.AddFor(m => m.APPROVAL_STATUS).Width(110).AllowEditing(onayDegistirir).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetApprovalStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.FLAG_ID).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetFlagList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.BRAND).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.SUB_BRAND).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetSubBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
@@ -78,24 +84,39 @@
         columns.AddFor(m => m.DEADLINE_3).Caption("3. DEADLINE").Visible(false).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
         columns.AddFor(m => m.DEADLINE_4).Caption("4. DEADLINE").Visible(false).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
         columns.AddFor(m => m.SHIPMENT_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
-        columns.AddFor(m => m.EXPECTED_COST).Visible(false);
-        columns.AddFor(m => m.CURRENCY_UNIT).Width(80).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetCurrencyUnits").Key("ID")).DisplayExpr("CURRENCY_UNIT").ValueExpr("ID")).Visible(false);
         columns.AddFor(m => m.QUANTITY);
     })
     .OnEditingStart(@<text>
 
     function(e){
-        if(e.column.name=="DEADLINE_2" && e.data.DEADLINE_2!=null){
-            e.cancel=true;
+        if(e.data.ID && e.data.ID>0){
+            if(e.column.name=="DEADLINE_2" && e.data.DEADLINE_2!=null){
+                e.cancel=true;
+            }
+            if(e.column.name=="DEADLINE_3" && (e.data.DEADLINE_2==null || e.data.DEADLINE_3!=null)){
+                e.cancel=true;
+            }
+            if(e.column.name=="DEADLINE_4" && (e.data.DEADLINE_2==null || e.data.DEADLINE_3==null || e.data.DEADLINE_4!=null)){
+                e.cancel=true;
+            }
+        }else{
+             if(e.column.name=="DEADLINE_2"){
+                e.cancel=true;
+            }
+            if(e.column.name=="DEADLINE_3"){
+                e.cancel=true;
+            }
+            if(e.column.name=="DEADLINE_4"){
+                e.cancel=true;
+            }
         }
-        if(e.column.name=="DEADLINE_3" && (e.data.DEADLINE_2==null || e.data.DEADLINE_3!=null)){
-            e.cancel=true;
-        }
-        if(e.column.name=="DEADLINE_4" && (e.data.DEADLINE_2==null || e.data.DEADLINE_3==null || e.data.DEADLINE_4!=null)){
-            e.cancel=true;
-        }
+
     }
 
+    </text>)
+    .OnInitNewRow(@<text>
+    function(e){
+    console.log(e);}
     </text>)
     .OnCellPrepared(@<text>
     function(e){
@@ -112,6 +133,7 @@
             }
         }
     }
+
 
     </text>)
     )

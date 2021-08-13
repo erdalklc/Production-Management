@@ -82,6 +82,17 @@ namespace EPM.Core.Helpers
 
             return yes;
         }
+        public bool OnayliKullanici(HttpContext context)
+        {
+            bool yes = true;
+            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+
+            if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == 81).Count > 0)
+                yes = true;
+            else yes = false;
+
+            return yes;
+        }
         public bool CanUserEnterTools(HttpContext context)
         {
             bool yes = true;
