@@ -472,6 +472,7 @@ WHERE HEADER_ID=" + ID);
                 _productionRepository.ExecSql("UPDATE FDEIT005.EPM_MASTER_PRODUCTION_H SET STATUS=1 WHERE ID=" + Key);
                 _productionRepository.ExecSql("UPDATE FDEIT005.EPM_MASTER_PRODUCTION_D SET STATUS=1 WHERE HEADER_ID=" + Key);
                 _productionRepository.ExecSql("DELETE FROM FDEIT005.EPM_PRODUCTION_PLAN WHERE HEADER_ID=" + Key);
+                _productionRepository.ExecSql("DELETE FROM FDEIT005.EPM_MASTER_PRODUCTION_ORDERS WHERE HEADER_ID=" + Key);
             }
             catch (Exception ex)
             {
