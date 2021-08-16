@@ -119,44 +119,50 @@
             } else if (e.data.STATUS == 2) {
                 //e.cellElement[0].innerHTML = e.cellElement[0].innerHTML.replace("video", "todo");
             } else {
-                 e.cellElement[0].innerHTML = "";
+                e.cellElement[0].innerHTML = "";
             }
         }
 
     }
     function cellClicked(e) {
         var soru = "";
-        if (e.row.data.STATUS == 1)
-            soru = "SÜREÇ BAŞLATILACAK<br>Devam edilsin mi?";
-        else if (e.row.data.STATUS == 2)
-            soru = "SÜREÇ SONLANDIRILACAK<br>Devam edilsin mi?";
-        var result = DevExpress.ui.dialog.confirm("<i>" + soru + "</i>", "ONAY");
-        result.done(function (dialogResult) {
-            if (dialogResult) {
-                var dataProcess = {
-                    list: e.row.data
-                };
-                $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("SurecIlerlet", "Fason")',
-                    data: dataProcess,
-                    contentType: 'application/x-www-form-urlencoded',
-                    timeout: 180000,
-                    success: function (income, status, xmlRequest) {
-                        console.log(income);
-                        if (income[0]) {
-                            ProcessListGetir(e.row.data.ENTEGRATION_ID);
-                        } else {
-                            DevExpress.ui.dialog.confirm("İŞLEMLER YAPILIRKEN HATAYLA KARŞILAŞILDI<br>" + income[1], "HATA");
+
+        if (e.data.HANDLE_SIDE == 0) {
+            if (e.row.data.STATUS == 1)
+                soru = "SÜREÇ BAŞLATILACAK<br>Devam edilsin mi?";
+            else if (e.row.data.STATUS == 2)
+                soru = "SÜREÇ SONLANDIRILACAK<br>Devam edilsin mi?";
+            var result = DevExpress.ui.dialog.confirm("<i>" + soru + "</i>", "ONAY");
+            result.done(function (dialogResult) {
+                if (dialogResult) {
+                    var dataProcess = {
+                        list: e.row.data
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("SurecIlerlet", "Fason")',
+                        data: dataProcess,
+                        contentType: 'application/x-www-form-urlencoded',
+                        timeout: 180000,
+                        success: function (income, status, xmlRequest) {
+                            console.log(income);
+                            if (income[0]) {
+                                ProcessListGetir(e.row.data.ENTEGRATION_ID);
+                            } else {
+                                DevExpress.ui.dialog.confirm("İŞLEMLER YAPILIRKEN HATAYLA KARŞILAŞILDI<br>" + income[1], "HATA");
+                            }
+                        }, beforeSend: function () {
                         }
-                    }, beforeSend: function () {
-                    }
 
 
-                }).always(function () {
-                });
-            }
-        });
+                    }).always(function () {
+                    });
+                }
+            });
+        } else {
+            DevExpress.ui.dialog.confirm("Bu işlem Çorlu operasyon ekibi tarafından işlenecektir.", "HATA");
+        }
+
 
     }
 </script>

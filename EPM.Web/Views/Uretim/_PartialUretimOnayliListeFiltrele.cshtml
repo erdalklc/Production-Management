@@ -1,23 +1,17 @@
 ﻿
-@model List<EPM.Production.Dto.Production.MasterList>
+@model Tuple<List<EPM.Production.Dto.Production.MasterList>, EPM.Production.Dto.Production.UretimOnayliListe>
 @using EPM.Core.Models;
 @{
     var editable = new EPM.Core.Helpers.MenuHelper().CanUserEditUretim(this.Context);
-    var onayDegistirir = new EPM.Core.Helpers.MenuHelper().OnayliKullanici(this.Context);
+    var onayDegistirir = new EPM.Core.Helpers.MenuHelper().OnayliKullanici(this.Context); 
+ 
 }
 
 
 <div class="dx-card wide-card">
     @(Html.DevExtreme().DataGrid<EPM.Production.Dto.Production.MasterList>().ID("edgridHeader")
-                    .ShowBorders(false)
-                    .DataSource(
-                        ob => ob.Mvc().Controller("Uretim")
-                        .InsertAction("UretimOnayliInsert")
-                        .UpdateAction("UretimOnayliUpdate")
-                        .DeleteAction("UretimOnayliDelete")
-                        .Key("ID")
-                    )
-                    .DataSource(Model,"ID" )
+                    .ShowBorders(false) 
+                    .DataSource(Model.Item1,"ID" )
                     .OnExporting("exportingHeader")
                     .Export(e =>
                     {
@@ -55,12 +49,17 @@
         }))
     .Columns(columns =>
     {
-        columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn => {
-            btn.Add().Icon("fa fa-history").OnClick("LogSearchHeader");
-        }); columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn =>
+        if (Model.Item2.STATUS==0)
         {
-            btn.Add().Name(GridColumnButtonName.Delete);
-        });
+            columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn =>
+            {
+                btn.Add().Icon("fa fa-history").OnClick("LogSearchHeader");
+            }); columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn =>
+            {
+                btn.Add().Name(GridColumnButtonName.Delete);
+            });
+        }
+
         columns.AddFor(m => m.ID).SortOrder(SortOrder.Asc).Width(60).AllowEditing(false);
         columns.AddFor(m => m.APPROVAL_STATUS).Width(110).AllowEditing(onayDegistirir).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetApprovalStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.FLAG_ID).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetFlagList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));

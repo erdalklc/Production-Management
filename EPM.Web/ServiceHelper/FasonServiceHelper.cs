@@ -23,13 +23,12 @@ namespace EPM.Web.ServiceHelper
             return PostRequest<object[], List<PRODUCTION_LIST_V>>(EPMServiceType.Fason, "GetProcessStatusList", new object[] { HEADER_ID });
 
         }
-        public static object[] FasonSiparisOlustur(PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan, int firmaBilgi, DateTime terminTarihi)
+        public static object[] FasonSiparisOlustur(PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan, FormHeader formHeader)
         {
             CREATEORDER order = new CREATEORDER();
             order.header = header;
             order.plan = plan;
-            order.firma = firmaBilgi;
-            order.termin = terminTarihi;
+            order.formHeader = formHeader;
 
             object[] sonuc = PostRequest<CREATEORDER, object[]>(EPMServiceType.Fason, "CreateOrder", order);
             return sonuc;

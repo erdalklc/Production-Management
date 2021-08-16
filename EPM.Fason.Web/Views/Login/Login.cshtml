@@ -7,6 +7,7 @@
 
 
 @model EPM.Fason.Dto.Fason.Login
+ 
 
 @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { id = "edLoginForm" }))
 {
@@ -28,6 +29,7 @@
                         b.Add().Name("btnShowPassword").Location(TextEditorButtonLocation.After).Widget(w => w.Button().Type(ButtonType.Default).Icon("fas fa-eye").OnClick("changePasswordMode"));
                     }) ).IsRequired(true);
                     groupItems.AddSimpleFor(m => m.BeniHatirla).Editor(e => e.CheckBox()).Label(o=>o.Location(FormLabelLocation.Left).Alignment(HorizontalAlignment.Left)).IsRequired(false);
+                    groupItems.AddSimpleFor(m => m.YetkiliGirisi).Editor(e => e.CheckBox()).Label(o=>o.Location(FormLabelLocation.Left).Alignment(HorizontalAlignment.Left)).IsRequired(false);
                 });
 
             items.AddButton().HorizontalAlignment(HorizontalAlignment.Left)

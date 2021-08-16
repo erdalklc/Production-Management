@@ -57,7 +57,7 @@
                     text: "TERMİN TARİHİ"
                 }, editorOptions: {
                     min: new Date(),
-                    displayFormat: "dd.MM.yyyy",
+                    displayFormat: "yyyy.MM.dd",
                     value: new Date(@Model.Item1.DEADLINE.Year+"," +@Model.Item1.DEADLINE.Month+"," +@Model.Item1.DEADLINE.Day)
                 }
             }, {
@@ -80,11 +80,14 @@
                             if (dialogResult) {
                                 var firmaBilgi = $("#formContainer").dxForm("instance").getEditor("firmaBilgi").option("value");
                                 var terminTarihi = $("#formContainer").dxForm("instance").getEditor("terminTarihi").option("text");
+                                var firmaBilgi = {
+                                    FIRMA_ID: firmaBilgi,
+                                    TERMIN_TARIHI: terminTarihi
+                                }
                                 var formData = {
                                     header: @Json.Serialize(Model.Item1),
                                     plan: others,
-                                    firmaBilgi: firmaBilgi,
-                                    terminTarihi: terminTarihi
+                                    formHeader: firmaBilgi
                                 }
                                 console.log(formData);
                                 $.ajax({
@@ -99,6 +102,8 @@
                                         $("#edReportDetail").html(income);
 
                                     }, beforeSend: function () {
+                                    }, error: function (x) {
+                                        DevExpress.ui.dialog.confirm(x, "HATA");
                                     }
 
 

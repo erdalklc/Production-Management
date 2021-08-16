@@ -73,9 +73,9 @@ namespace EPM.Web.Controllers
 
         }
 
-        public IActionResult FasonSiparisOlustur(PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan,int firmaBilgi,DateTime terminTarihi)
+        public IActionResult FasonSiparisOlustur(PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan,FormHeader formHeader)
         {
-            object[] obj =  FasonServiceHelper.FasonSiparisOlustur( header, plan, firmaBilgi, terminTarihi);
+            object[] obj =  FasonServiceHelper.FasonSiparisOlustur( header, plan, formHeader);
             if ((bool)obj[0])
                 return Ok();
             else return BadRequest(obj[1].ToString());

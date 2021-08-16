@@ -21,18 +21,25 @@ namespace EPM.Fason.Web.Controllers
         {
             if (ModelState.IsValid && model.EMail != null && model.Password != null)
             {
-
-                PRODUCTION_USER_LOGINS loginM = _loginService.Login(Request.HttpContext, model);
-                if (loginM.USER_NAME != "")
+                if (model.YetkiliGirisi)
                 {
-                    //_loginRepository.LoginLog(loginM, _logRepository);
-                    return RedirectToAction("SiparisListesi", "Fason");
+
                 }
                 else
                 {
-                    model.Message = "E-Mail veya şifre bilgisi hatalı! Lütfen Kontrol Ediniz";
-                    ModelState.AddModelError("", "EMail veya şifre hatalı!");
+                    PRODUCTION_USER_LOGINS loginM = _loginService.Login(Request.HttpContext, model);
+                    if (loginM.USER_NAME != "")
+                    {
+                        loginM.ISAUTHORIZED = false;
+                        return RedirectToAction("SiparisListesi", "Fason");
+                    }
+                    else
+                    {
+                        model.Message = "E-Mail veya şifre bilgisi hatalı! Lütfen Kontrol Ediniz";
+                        ModelState.AddModelError("", "EMail veya şifre hatalı!");
+                    }
                 }
+                
             }
             else
             {
@@ -40,7 +47,8 @@ namespace EPM.Fason.Web.Controllers
                 string mail = cookieHelper.GetEmailFromCookie(Request.HttpContext);
                 if (mail != "")
                 {
-                    model.BeniHatirla = true; model.EMail = mail;
+                    model.BeniHatirla = true; 
+                    model.EMail = mail;
                 }
             }
             return View(model);

@@ -15,7 +15,7 @@ namespace EPM.Fason.Service.Services
 
         public List<PRODUCTION_FASON_USERS> GetFasonUsers();
 
-        public object[] SiparisOlustur(PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan, int firmaBilgi, DateTime terminTarihi);
+        public object[] SiparisOlustur(CREATEORDER order);
 
         public List<PRODUCTION_STATUS> GetProductionStatus(int[] ids);
 

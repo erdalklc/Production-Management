@@ -37,7 +37,7 @@ namespace EPM.Fason.Web.Controllers
         [HttpPost]
         public ActionResult<object[]> CreateOrder(CREATEORDER order)
         { 
-            object[] obj= _aktarimService.SiparisOlustur(order.header, order.plan, order.firma, order.termin);
+            object[] obj= _aktarimService.SiparisOlustur(order);
             if ((bool)obj[0])
                 return Ok(obj);
             else return BadRequest(obj);

@@ -12,5 +12,6 @@ namespace EPM.Fason.Dto.Fason
         public string NAME { get; set; }
         public int TIME { get; set; }
         public int HANDLE_SIDE { get; set; }
+        public int QUEUE { get; set; }
     }
 }

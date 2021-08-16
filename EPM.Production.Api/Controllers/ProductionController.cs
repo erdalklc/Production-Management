@@ -64,7 +64,7 @@ namespace EPM.Production.Api.Controllers
         public ActionResult<List<EPM_PRODUCTION_RECIPE>> GetRecipeList(object[] obj) => _productionService.GetRecipeList(obj[0].BooleanParse());
 
         [HttpGet, HttpPost]
-        public ActionResult<List<EPM_PRODUCTION_RECIPE>> GetRecipeListByType(object[] obj) => _productionService.GetRecipeListByType(obj[0].BooleanParse());
+        public ActionResult<List<EPM_PRODUCTION_RECIPE>> GetRecipeListByType(object[] obj) => _productionService.GetRecipeListByType(obj[0].BooleanParse(), obj[1].IntParse());
 
         [HttpGet, HttpPost]
         public ActionResult<List<ENUMMODEL>> GetApprovalStatueList() => _productionService.GetApprovalStatueList();

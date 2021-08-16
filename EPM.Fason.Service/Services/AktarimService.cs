@@ -47,7 +47,7 @@ namespace EPM.Fason.Service.Services
 
         public List<PRODUCTION_PROCESS> GetProcessList()
         {
-            return _fasonRepository.DeserializeList<PRODUCTION_PROCESS>("SELECT * FROM PRODUCTION_PROCESS");
+            return _fasonRepository.DeserializeList<PRODUCTION_PROCESS>("SELECT * FROM PRODUCTION_PROCESS ORDER BY QUEUE");
         }
 
         public List<PRODUCTION_FASON_USERS> GetFasonUsers()
@@ -55,41 +55,41 @@ namespace EPM.Fason.Service.Services
             return _fasonRepository.DeserializeList<PRODUCTION_FASON_USERS>("SELECT * FROM PRODUCTION_FASON_USERS");
         }
 
-        public object[] SiparisOlustur(PRODUCTION_HEADER header, List<PRODUCTION_PROCESS> plan, int firmaBilgi, DateTime terminTarihi)
+        public object[] SiparisOlustur(CREATEORDER order)
         {
-            object[] obj = { true, header.ENTEGRATION_ID.ToString() };
+            object[] obj = { true, order.header.ENTEGRATION_ID.ToString() };
             try
             {
-                string sql = "DELETE PRODUCTION_HEADER WHERE ENTEGRATION_ID=" + header.ENTEGRATION_ID;
+                string sql = "DELETE PRODUCTION_HEADER WHERE ENTEGRATION_ID=" + order.header.ENTEGRATION_ID;
                 _fasonRepository.ExecSql(sql);
 
-                sql = "DELETE PRODUCTION_DETAIL WHERE ENTEGRATION_HEADER_ID=" + header.ENTEGRATION_ID;
+                sql = "DELETE PRODUCTION_DETAIL WHERE ENTEGRATION_HEADER_ID=" + order.header.ENTEGRATION_ID;
                 _fasonRepository.ExecSql(sql);
 
-                sql = "DELETE PRODUCTION_LIST_L WHERE HEADER_ID=(SELECT ID FROM PRODUCTION_LIST_H WHERE ENTEGRATION_ID=" + header.ENTEGRATION_ID + " )";
+                sql = "DELETE PRODUCTION_LIST_L WHERE HEADER_ID=(SELECT ID FROM PRODUCTION_LIST_H WHERE ENTEGRATION_ID=" + order.header.ENTEGRATION_ID + " )";
                 _fasonRepository.ExecSql(sql);
 
-                sql = "DELETE PRODUCTION_LIST_H WHERE ENTEGRATION_ID=" + header.ENTEGRATION_ID;
+                sql = "DELETE PRODUCTION_LIST_H WHERE ENTEGRATION_ID=" + order.header.ENTEGRATION_ID;
                 _fasonRepository.ExecSql(sql);
 
-                _fasonRepository.Serialize(header);
+                _fasonRepository.Serialize(order.header);
 
-                foreach (var item in header.DETAIL)
+                foreach (var item in order.header.DETAIL)
                     _fasonRepository.Serialize(item);
 
                
 
 
                 PRODUCTION_LIST_H h = new PRODUCTION_LIST_H();
-                h.ENTEGRATION_ID = header.ENTEGRATION_ID;
+                h.ENTEGRATION_ID = order.header.ENTEGRATION_ID;
                 h.STATUS = (int)HEADERSTATUS.WAITINGFORSTART;
-                h.FIRMA_ID = firmaBilgi;
-                h.END_DATE = terminTarihi;
+                h.FIRMA_ID = order.formHeader.FIRMA_ID;
+                h.END_DATE = order.formHeader.TERMIN_TARIHI;
                 _fasonRepository.Serialize(h);
-                DateTime end_date = terminTarihi;
-                for (int i = plan.Count; i > 0; i--)
+                DateTime end_date = order.formHeader.TERMIN_TARIHI;
+                for (int i = order.plan.Count; i > 0; i--)
                 {
-                    PRODUCTION_PROCESS p = plan[i - 1];
+                    PRODUCTION_PROCESS p = order.plan[i - 1];
                     PRODUCTION_LIST_L l = new PRODUCTION_LIST_L();
                     l.HEADER_ID = h.ID;
                     l.PROCESS_ID = p.ID;

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "DTOucg4anck5ioAdjr2YmL5cV7l+iT7RlAgO6acJQF+X0xfthPJeEzFwFTjUclGl+vRqw7uCbCjxtXrBX2UMYA==",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\Eren Production Management\\EPM.WMS.Dto\\EPM.WMS.Dto.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\FDEIT005\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

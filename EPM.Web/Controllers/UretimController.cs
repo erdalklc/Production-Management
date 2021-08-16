@@ -79,7 +79,11 @@ namespace EPM.Web.Controllers
         }
 
         [HttpPost, HttpGet]
-        public IActionResult _PartialUretimOnayliListeFiltrele(EPM.Production.Dto.Production.UretimOnayliListe liste) => PartialView(ProductionServiceHelper.OnayliUretimListesi(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, liste));
+        public IActionResult _PartialUretimOnayliListeFiltrele(EPM.Production.Dto.Production.UretimOnayliListe liste)
+        {
+            return PartialView(new Tuple<List<EPM.Production.Dto.Production.MasterList>, EPM.Production.Dto.Production.UretimOnayliListe>(ProductionServiceHelper.OnayliUretimListesi(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, liste), liste));
+
+        }
 
         [HttpPost, HttpGet]
         public IActionResult _PartialUretimliListeDikeyFiltrele(EPM.Production.Dto.Production.UretimOnayliListe liste) => PartialView(liste);

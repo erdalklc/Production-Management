@@ -10,5 +10,6 @@ namespace EPM.Fason.Dto.Fason
         public string USER_NAME { get; set; } = "";
         public string EMAIL { get; set; } = "";
         public DateTime ENTERY_DATE { get; set; } = DateTime.Now;
+        public bool ISAUTHORIZED { get; set; }
     }
 }

@@ -106,9 +106,13 @@ namespace EPM.Plan.Service.Services
                 DataRow[] row = dt.Select("ID=" + item.HEADER_ID + " AND MARKET_ID=" + item.MARKET_ID + "");
                 if (row.Length > 0)
                 {
-                    row[0][item.YEAR + "_" + item.WEEK] = item.QUANTITY;
-                    row[0]["PLANLANAN_ADET"] = row[0]["PLANLANAN_ADET"].IntParse() + item.QUANTITY;
-                    row[0]["PLANSIZ_ADET"] = row[0]["URETIM_ADET"].IntParse() + row[0]["PLANLANAN_ADET"].IntParse();
+                    if(dt.Columns.Contains(item.YEAR + "_" + item.WEEK))
+                    {
+                        row[0][item.YEAR + "_" + item.WEEK] = item.QUANTITY;
+                        row[0]["PLANLANAN_ADET"] = row[0]["PLANLANAN_ADET"].IntParse() + item.QUANTITY;
+                        row[0]["PLANSIZ_ADET"] = row[0]["URETIM_ADET"].IntParse() + row[0]["PLANLANAN_ADET"].IntParse();
+
+                    }
                 }
             }
             dt.AcceptChanges();
