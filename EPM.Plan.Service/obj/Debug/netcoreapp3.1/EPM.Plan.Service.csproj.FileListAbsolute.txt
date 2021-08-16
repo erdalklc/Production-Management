@@ -2,7 +2,6 @@ E:\Eren\Eren Production Management\EPM.Plan.Service\bin\Debug\netcoreapp3.1\EPM.
 E:\Eren\Eren Production Management\EPM.Plan.Service\bin\Debug\netcoreapp3.1\EPM.Plan.Dto.dll
 E:\Eren\Eren Production Management\EPM.Plan.Service\bin\Debug\netcoreapp3.1\EPM.Plan.Repository.dll
 E:\Eren\Eren Production Management\EPM.Plan.Service\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
-E:\Eren\Eren Production Management\EPM.Plan.Service\obj\Debug\netcoreapp3.1\EPM.Plan.Service.csprojAssemblyReference.cache
 E:\Eren\Eren Production Management\EPM.Plan.Service\obj\Debug\netcoreapp3.1\EPM.Plan.Service.AssemblyInfoInputs.cache
 E:\Eren\Eren Production Management\EPM.Plan.Service\obj\Debug\netcoreapp3.1\EPM.Plan.Service.AssemblyInfo.cs
 E:\Eren\Eren Production Management\EPM.Plan.Service\bin\Debug\netcoreapp3.1\EPM.Plan.Service.deps.json
@@ -30,3 +29,4 @@ D:\Projects\Eren Production Management\EPM.Plan.Service\obj\Debug\netcoreapp3.1\
 D:\Projects\Eren Production Management\EPM.Plan.Service\obj\Debug\netcoreapp3.1\EPM.Plan.Service.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Plan.Service\obj\Debug\netcoreapp3.1\EPM.Plan.Service.dll
 D:\Projects\Eren Production Management\EPM.Plan.Service\obj\Debug\netcoreapp3.1\EPM.Plan.Service.pdb
+E:\Eren\Eren Production Management\EPM.Plan.Service\obj\Debug\netcoreapp3.1\EPM.Plan.Service.csproj.AssemblyReference.cache

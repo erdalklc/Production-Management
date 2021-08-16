@@ -4,6 +4,13 @@ body, html {
     height: 100%;
     font-size:10px!important;
 }
+.login-header {
+    text-align: center;
+    margin: 5px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #ff5722
+}
 .dx-widget{
     font-size:10px!important;
 }
@@ -61,7 +68,7 @@ body, html {
 }
 
     .dx-toolbar .dx-toolbar-item.menu-button > .dx-toolbar-item-content .dx-icon {
-        color: #35baf6;
+        color: #ff5722;
     }
 
 .dx-card {
@@ -200,7 +207,7 @@ body, html {
 }
 
     .menu-container .dx-treeview .dx-treeview-node-container .dx-treeview-node.dx-state-selected > .dx-treeview-item * {
-        color: #35baf6;
+        color: #ff5722;
     }
 
 .menu-container .dx-treeview .dx-treeview-node-container .dx-treeview-node:not(.dx-state-focused) > .dx-treeview-item.dx-state-hover {
@@ -209,7 +216,7 @@ body, html {
 
 
 .dx-swatch-additional .dx-treeview-item-without-checkbox.dx-state-focused > .dx-treeview-item {
-    background-color: #35baf6;
+    background-color: #ff5722;
     color: #fff;
 }
 .dx-datagrid .dx-row > td {

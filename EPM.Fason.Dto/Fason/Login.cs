@@ -19,9 +19,7 @@ namespace EPM.Fason.Dto.Fason
         [Display(Name = "Beni Hatırla")]
         public bool BeniHatirla { get; set; }
 
-
-        [Display(Name = "Yetkili Girişi")]
-        public bool YetkiliGirisi { get; set; }
+        public bool Inspector { get; set; } 
 
         public string Message { get; set; }
     }

@@ -926,7 +926,6 @@ E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Fason.Dto
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Tools.pdb
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Track.Dto.pdb
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
-E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.csprojAssemblyReference.cache
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.AssemblyInfoInputs.cache
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.AssemblyInfo.cs
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.csproj.CoreCompileInputs.cache
@@ -941,14 +940,7 @@ E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.TagHe
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.TagHelpers.output.cache
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.RazorCoreGenerate.cache
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\EtiketYazdir\EtiketYazdir.cshtml.g.cs
-E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\About.cshtml.g.cs
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\_PartialAyarlar.cshtml.g.cs
-E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciBrands.cshtml.g.cs
-E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciFabricTypes.cshtml.g.cs
-E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciProductionTypes.cshtml.g.cs
-E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciYetki.cshtml.g.cs
-E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\_PartialKullaniciYetkiListesi.cshtml.g.cs
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Login\Login.cshtml.g.cs
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\SatinAlma\SatinAlmaOlustur.cshtml.g.cs
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\SatinAlma\_PartialSatinAlmaForm.cshtml.g.cs
@@ -1513,3 +1505,14 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Vie
 D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Production.Dto.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Production.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimTakip\NosTakip.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.csproj.AssemblyReference.cache
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Production.Dto.dll
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Production.Dto.pdb
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_PartialAyarlar.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciBrands.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciFabricTypes.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciProductionTypes.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciYetki.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciYetkiListesi.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimTakip\NosTakip.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Uretim\UretimListesi.cshtml.g.cs

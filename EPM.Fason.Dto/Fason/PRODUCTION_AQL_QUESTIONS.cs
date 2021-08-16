@@ -10,6 +10,7 @@ namespace EPM.Fason.Dto.Fason
         [Key]
         public int ID { get; set; }
         public int STATUS { get; set; }
+        public string GROUP_NAME { get; set; }
         public string QUESTION { get; set; }
     }
 }

@@ -16,6 +16,6 @@ namespace EPM.Fason.Dto.Fason
         public string STATUS_EX { get; set; }
         public string BUTTON { get; set; }
         public int QUEUE { get; set; }
-        public int HANDLE_SIDE
+        public int HANDLE_SIDE { get; set; }
     }
 }

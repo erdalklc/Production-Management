@@ -12,3 +12,17 @@ D:\Projects\Eren Production Management\EPM.Production.Repository\obj\Debug\netco
 D:\Projects\Eren Production Management\EPM.Production.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Repository.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Production.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Repository.dll
 D:\Projects\Eren Production Management\EPM.Production.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Repository.pdb
+E:\Eren\Eren Production Management\EPM.Production.Repository\bin\Debug\netcoreapp3.1\EPM.Production.Repository.deps.json
+E:\Eren\Eren Production Management\EPM.Production.Repository\bin\Debug\netcoreapp3.1\EPM.Production.Repository.dll
+E:\Eren\Eren Production Management\EPM.Production.Repository\bin\Debug\netcoreapp3.1\EPM.Production.Repository.pdb
+E:\Eren\Eren Production Management\EPM.Production.Repository\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+E:\Eren\Eren Production Management\EPM.Production.Repository\bin\Debug\netcoreapp3.1\EPM.Production.Dto.dll
+E:\Eren\Eren Production Management\EPM.Production.Repository\bin\Debug\netcoreapp3.1\EPM.Production.Dto.pdb
+E:\Eren\Eren Production Management\EPM.Production.Repository\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
+E:\Eren\Eren Production Management\EPM.Production.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Repository.csproj.AssemblyReference.cache
+E:\Eren\Eren Production Management\EPM.Production.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Repository.AssemblyInfoInputs.cache
+E:\Eren\Eren Production Management\EPM.Production.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Repository.AssemblyInfo.cs
+E:\Eren\Eren Production Management\EPM.Production.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Repository.csproj.CoreCompileInputs.cache
+E:\Eren\Eren Production Management\EPM.Production.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Repository.csproj.CopyComplete
+E:\Eren\Eren Production Management\EPM.Production.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Repository.dll
+E:\Eren\Eren Production Management\EPM.Production.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Repository.pdb

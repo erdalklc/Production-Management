@@ -28,6 +28,35 @@ namespace EPM.Fason.Service.Services
                 login.ENTERY_DATE = DateTime.Now;
                 login.USER_NAME = user.NAME;
                 login.USER_ID = user.ID;
+                login.ISINSPECTOR = false;
+
+                CookieHelper cHelper = new CookieHelper();
+                cHelper.AddCookie(context, login, "USER_FASON", CryptHelper.hash);
+
+                if (model.BeniHatirla)
+                {
+
+                    cHelper = new CookieHelper();
+                    cHelper.AddCookie(context, model.EMail, "EMAIL_FASON", CryptHelper.hash2);
+                }
+            }
+
+            return login;
+        }
+        public PRODUCTION_USER_LOGINS LoginInspector(HttpContext context, Login model)
+        {
+            PRODUCTION_USER_LOGINS login = new PRODUCTION_USER_LOGINS();
+            string sql = string.Format("SELECT * FROM  PRODUCTION_FASON_INSPECTORS WHERE EMAIL='{0}' AND PASSWORD='{1}'", model.EMail, model.Password);
+
+            PRODUCTION_FASON_INSPECTORS user = _fasonRepository.Deserialize<PRODUCTION_FASON_INSPECTORS>(sql);
+
+            if (user != null && user.NAME != null)
+            {
+                login.EMAIL = user.EMAIL;
+                login.ENTERY_DATE = DateTime.Now;
+                login.USER_NAME = user.NAME;
+                login.USER_ID = user.ID;
+                login.ISINSPECTOR = true;
 
                 CookieHelper cHelper = new CookieHelper();
                 cHelper.AddCookie(context, login, "USER_FASON", CryptHelper.hash);

@@ -18,7 +18,6 @@ E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\EPM.Plan
 E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\EPM.Plan.Repository.dll
 E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\EPM.Plan.Service.dll
 E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
-E:\Eren\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.Plan.Api.csprojAssemblyReference.cache
 E:\Eren\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.Plan.Api.AssemblyInfoInputs.cache
 E:\Eren\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.Plan.Api.AssemblyInfo.cs
 E:\Eren\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\staticwebassets\EPM.Plan.Api.StaticWebAssets.Manifest.cache
@@ -253,7 +252,6 @@ E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\refs\Sys
 E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\refs\System.Resources.Reader.dll
 E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\refs\System.Resources.ResourceManager.dll
 E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\refs\System.Resources.Writer.dll
-E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\refs\System.Runtime.CompilerServices.Unsafe.dll
 E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\refs\System.Runtime.CompilerServices.VisualC.dll
 E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\refs\System.Runtime.dll
 E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\refs\System.Runtime.Extensions.dll
@@ -723,3 +721,6 @@ D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.Plan.Api.genruntimeconfig.cache
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
+E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+E:\Eren\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.Plan.Api.csproj.AssemblyReference.cache

@@ -5,7 +5,6 @@ E:\Eren\Eren Production Management\EPM.Track.Repository\bin\Debug\netcoreapp3.1\
 E:\Eren\Eren Production Management\EPM.Track.Repository\bin\Debug\netcoreapp3.1\EPM.Track.Dto.dll
 E:\Eren\Eren Production Management\EPM.Track.Repository\bin\Debug\netcoreapp3.1\EPM.Track.Dto.pdb
 E:\Eren\Eren Production Management\EPM.Track.Repository\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
-E:\Eren\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.csprojAssemblyReference.cache
 E:\Eren\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.AssemblyInfoInputs.cache
 E:\Eren\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.AssemblyInfo.cs
 E:\Eren\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.csproj.CoreCompileInputs.cache
@@ -26,3 +25,4 @@ D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp
 D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.dll
 D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.pdb
+E:\Eren\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.csproj.AssemblyReference.cache

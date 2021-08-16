@@ -9,5 +9,6 @@ namespace EPM.Fason.Service.Services
     public interface ILoginService
     {
         public PRODUCTION_USER_LOGINS Login(HttpContext context, Login model);
+        public PRODUCTION_USER_LOGINS LoginInspector(HttpContext context, Login model);
     }
 }

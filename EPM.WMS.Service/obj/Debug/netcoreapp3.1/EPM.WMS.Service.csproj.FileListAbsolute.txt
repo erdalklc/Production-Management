@@ -7,3 +7,12 @@ D:\Projects\Eren Production Management\EPM.WMS.Service\obj\Debug\netcoreapp3.1\E
 D:\Projects\Eren Production Management\EPM.WMS.Service\obj\Debug\netcoreapp3.1\EPM.WMS.Service.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.WMS.Service\obj\Debug\netcoreapp3.1\EPM.WMS.Service.dll
 D:\Projects\Eren Production Management\EPM.WMS.Service\obj\Debug\netcoreapp3.1\EPM.WMS.Service.pdb
+E:\Eren\Eren Production Management\EPM.WMS.Service\bin\Debug\netcoreapp3.1\EPM.WMS.Service.deps.json
+E:\Eren\Eren Production Management\EPM.WMS.Service\bin\Debug\netcoreapp3.1\EPM.WMS.Service.dll
+E:\Eren\Eren Production Management\EPM.WMS.Service\bin\Debug\netcoreapp3.1\EPM.WMS.Service.pdb
+E:\Eren\Eren Production Management\EPM.WMS.Service\obj\Debug\netcoreapp3.1\EPM.WMS.Service.csproj.AssemblyReference.cache
+E:\Eren\Eren Production Management\EPM.WMS.Service\obj\Debug\netcoreapp3.1\EPM.WMS.Service.AssemblyInfoInputs.cache
+E:\Eren\Eren Production Management\EPM.WMS.Service\obj\Debug\netcoreapp3.1\EPM.WMS.Service.AssemblyInfo.cs
+E:\Eren\Eren Production Management\EPM.WMS.Service\obj\Debug\netcoreapp3.1\EPM.WMS.Service.csproj.CoreCompileInputs.cache
+E:\Eren\Eren Production Management\EPM.WMS.Service\obj\Debug\netcoreapp3.1\EPM.WMS.Service.dll
+E:\Eren\Eren Production Management\EPM.WMS.Service\obj\Debug\netcoreapp3.1\EPM.WMS.Service.pdb

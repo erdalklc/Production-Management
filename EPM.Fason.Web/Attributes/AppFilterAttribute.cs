@@ -11,9 +11,9 @@ namespace EPM.Fason.Web.Attributes
         {
             string actionName = ((Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor)filterContext.ActionDescriptor).ActionName;
             var user = new CookieHelper().GetUserFromCookie(filterContext.HttpContext);
-            if (actionName == "Login" || actionName == "LoginKontrol")
+            if (actionName == "Login" || actionName == "LoginInspector" || actionName == "LoginKontrol")
             {
-                if (actionName == "LogOut" || actionName == "Login")
+                if (actionName == "LogOut" || actionName == "Login" || actionName == "LoginInspector")
                     new CookieHelper().DeleteUserCookie(filterContext.HttpContext);
             }
             else

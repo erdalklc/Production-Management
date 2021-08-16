@@ -21,25 +21,17 @@ namespace EPM.Fason.Web.Controllers
         {
             if (ModelState.IsValid && model.EMail != null && model.Password != null)
             {
-                if (model.YetkiliGirisi)
-                {
-
+                PRODUCTION_USER_LOGINS loginM = _loginService.Login(Request.HttpContext, model);
+                if (loginM.USER_NAME != "")
+                { 
+                    return RedirectToAction("SiparisListesi", "Fason");
                 }
                 else
                 {
-                    PRODUCTION_USER_LOGINS loginM = _loginService.Login(Request.HttpContext, model);
-                    if (loginM.USER_NAME != "")
-                    {
-                        loginM.ISAUTHORIZED = false;
-                        return RedirectToAction("SiparisListesi", "Fason");
-                    }
-                    else
-                    {
-                        model.Message = "E-Mail veya şifre bilgisi hatalı! Lütfen Kontrol Ediniz";
-                        ModelState.AddModelError("", "EMail veya şifre hatalı!");
-                    }
+                    model.Message = "E-Mail veya şifre bilgisi hatalı! Lütfen Kontrol Ediniz";
+                    ModelState.AddModelError("", "EMail veya şifre hatalı!");
                 }
-                
+
             }
             else
             {
@@ -53,11 +45,42 @@ namespace EPM.Fason.Web.Controllers
             }
             return View(model);
         }
+        public IActionResult LoginInspector(Login model)
+        {
+            if (ModelState.IsValid && model.EMail != null && model.Password != null)
+            {
+                PRODUCTION_USER_LOGINS loginM = _loginService.LoginInspector(Request.HttpContext, model);
+                if (loginM.USER_NAME != "")
+                { 
+                    return RedirectToAction("SiparisListesi", "Fason");
+                }
+                else
+                {
+                    model.Message = "E-Mail veya şifre bilgisi hatalı! Lütfen Kontrol Ediniz";
+                    ModelState.AddModelError("", "EMail veya şifre hatalı!");
+                }
 
+            }
+            else
+            {
+                CookieHelper cookieHelper = new CookieHelper();
+                string mail = cookieHelper.GetEmailFromCookie(Request.HttpContext);
+                if (mail != "")
+                {
+                    model.BeniHatirla = true;
+                    model.EMail = mail;
+                }
+            }
+            return View(model);
+        }
         public IActionResult LogOut()
         {
+            var user = new CookieHelper().GetUserFromCookie(Request.HttpContext);
             new CookieHelper().DeleteUserCookie(Request.HttpContext);
-            return RedirectToAction("Login");
+            if (user.ISINSPECTOR)
+                return RedirectToAction("LoginInspector");
+            else
+                return RedirectToAction("Login");
         }
     }
 }
