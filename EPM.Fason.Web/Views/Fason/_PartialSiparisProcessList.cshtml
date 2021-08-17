@@ -23,7 +23,7 @@
     .Height("calc(100vh - 450px)")
     .ShowBorders(true)
     .Columns(columns => {
-        columns.Add().Width(50).Caption("#").Type(GridCommandColumnType.Buttons).Buttons(btn => btn.Add().Icon("fa fa-edit").Icon("video").OnClick("cellClicked"));  
+        columns.Add().Width(50).Caption("#").Type(GridCommandColumnType.Buttons).Buttons(btn => btn.Add().Icon("fa fa-edit").Icon("video").OnClick("cellClicked"));
         columns.AddFor(m => m.DETAIL_ID).Width(70).Visible(false).AllowSorting(false).SortIndex(0).SortOrder(SortOrder.Desc).AllowEditing(false).AllowExporting(true);
         columns.AddFor(m => m.HEADER_ID).Width(70).Visible(false).AllowSorting(false).AllowEditing(false).AllowExporting(true);
         columns.AddFor(m => m.ENTEGRATION_ID).Width(70).AllowSorting(false).Visible(false).AllowEditing(false).AllowExporting(true);
@@ -31,8 +31,9 @@
         columns.AddFor(m => m.STATUS_EX).Width(170).AllowSorting(false).AllowExporting(true);
         columns.AddFor(m => m.START_DATE).Width(170).AllowSorting(false).Format("dd.MM.yyyy").AllowExporting(true);
         columns.AddFor(m => m.END_DATE).Width(170).AllowSorting(false).Format("dd.MM.yyyy").AllowExporting(true);
+        columns.AddFor(m => m.HANDLE_SIDE).Visible(false);
     })
-    .OnCellPrepared("cellPrepared") 
+    .OnCellPrepared("cellPrepared")
     )
 </div>
 

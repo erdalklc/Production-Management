@@ -15,3 +15,4 @@ D:\Projects\Eren Production Management\EPM.Dto\obj\Debug\netcoreapp3.1\EPM.Dto.c
 D:\Projects\Eren Production Management\EPM.Dto\obj\Debug\netcoreapp3.1\EPM.Dto.dll
 D:\Projects\Eren Production Management\EPM.Dto\obj\Debug\netcoreapp3.1\EPM.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Dto\obj\Debug\netcoreapp3.1\EPM.Dto.csprojAssemblyReference.cache
+E:\Eren\Eren Production Management\EPM.Dto\obj\Debug\netcoreapp3.1\EPM.Dto.csproj.AssemblyReference.cache

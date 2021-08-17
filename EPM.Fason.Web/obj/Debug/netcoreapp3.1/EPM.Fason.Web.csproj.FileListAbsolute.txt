@@ -848,3 +848,10 @@ D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Raz
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialSiparisListesiDetail.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialSiparisIslemler.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialAQL.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\InspectionListesi.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\SiparisListesi.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialSiparisIslemler.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialSiparisListesi.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialSiparisListesiDetail.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutInspection.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_PartialLeftMenuInspection.cshtml.g.cs

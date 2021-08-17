@@ -126,8 +126,8 @@
     }
     function cellClicked(e) {
         var soru = "";
-
-        if (e.data.HANDLE_SIDE == 0) {
+        console.log(e);
+        if (e.row.data.HANDLE_SIDE == 0) {
             if (e.row.data.STATUS == 1)
                 soru = "SÜREÇ BAŞLATILACAK<br>Devam edilsin mi?";
             else if (e.row.data.STATUS == 2)

@@ -9,6 +9,7 @@ namespace EPM.Fason.Dto.Fason
     {
         [Key]
         public int ID { get; set; }
+        public int TYPE { get; set; }
         public int ENTEGRATION_HEADER_ID { get; set; }
         public DateTime START_DATE { get; set; }
         public DateTime END_DATE { get; set; }
@@ -16,5 +17,8 @@ namespace EPM.Fason.Dto.Fason
         public string DESCRIPTION { get; set; }
         public int USER_ID { get; set; }
         public int STATUS { get; set; }
+        public PRODUCTION_HEADER PRODUCTION_HEADER;
+        public string FIRMA_ADI;
+        public bool CHECKED_INLINE { get; set; } = false;
     }
 }

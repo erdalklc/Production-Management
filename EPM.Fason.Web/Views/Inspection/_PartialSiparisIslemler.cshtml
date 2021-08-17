@@ -1,19 +1,34 @@
 ﻿
-@model int
+@model EPM.Fason.Dto.Fason.SIPARIS_ISLEMLER_KONTROL
 @(Html.DevExtreme().Form()
     .ID("edSiparisIslemler").ShowValidationSummary(true)
     .ColCount(5)
     .MinColWidth(150)
     .Items(items =>
-    { 
-        items.AddButton().HorizontalAlignment(HorizontalAlignment.Right).VerticalAlignment(VerticalAlignment.Center)
-        .ButtonOptions(b => b.Text("AQL YAP")
-        .Type(ButtonType.Default)
-        .Icon("fas fa-sign-in-alt")
-        .Width("100%")
-        .OnClick("function() { AQLYAP("+Model+"); }")
-        .UseSubmitBehavior(true)
-        );
+    {
+        if (Model.CAN_CREATE_AQL_FIRMA)
+        {
+            items.AddButton().HorizontalAlignment(HorizontalAlignment.Right).VerticalAlignment(VerticalAlignment.Center)
+                   .ButtonOptions(b => b.Text("AQL ÜRETİM")
+                   .Type(ButtonType.Default)
+                   .Icon("fas fa-sign-in-alt")
+                   .Width("100%")
+                   .OnClick("function() { AQLYAP(" + Model.ENTEGRATION_HEADER_ID + ",1); }")
+                   .UseSubmitBehavior(true)
+                   );
+        }
+        else if (Model.CAN_CREATE_AQL_CORLU)
+        {
+            items.AddButton().HorizontalAlignment(HorizontalAlignment.Right).VerticalAlignment(VerticalAlignment.Center)
+                   .ButtonOptions(b => b.Text("AQL ÇORLU")
+                   .Type(ButtonType.Default)
+                   .Icon("fas fa-sign-in-alt")
+                   .Width("100%")
+                   .OnClick("function() { AQLYAP(" + Model.ENTEGRATION_HEADER_ID + ",2); }")
+                   .UseSubmitBehavior(true)
+                   );
+        }
+
         items.AddEmpty();
         items.AddEmpty();
         items.AddEmpty();

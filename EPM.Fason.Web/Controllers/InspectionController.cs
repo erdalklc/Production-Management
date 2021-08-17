@@ -4,6 +4,7 @@ using EPM.Fason.Dto.Fason;
 using EPM.Fason.Dto.Helpers;
 using EPM.Fason.Service.Services;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace EPM.Fason.Web.Controllers
 {
@@ -39,15 +40,22 @@ namespace EPM.Fason.Web.Controllers
 
         }
 
-        [HttpPost, HttpGet]
-        public IActionResult _PartialAQL(int ENTEGRATION_HEADER_ID)
+
+        [HttpPut, HttpGet, HttpPost]
+        public object UpdateAQL([FromBody] JObject elem) => _inspectionService.UpdateAQL(elem);
+        [HttpPut, HttpGet, HttpPost]
+        public object UpdateNumbers([FromBody] JObject elem) => _inspectionService.UpdateNumbers(elem);
+        public IActionResult CreateAQL(int ENTEGRATION_HEADER_ID,int TYPE)
         {
             var user = new CookieHelper().GetUserFromCookie(Request.HttpContext);
-            return PartialView(_inspectionService.GetAQL(user.USER_ID,ENTEGRATION_HEADER_ID));
+            return Json(_inspectionService.GetAQL(user.USER_ID, ENTEGRATION_HEADER_ID,TYPE));
         }
 
         [HttpPost, HttpGet]
-        public IActionResult _PartialSiparisIslemler(int ENTEGRATION_HEADER_ID) => PartialView(ENTEGRATION_HEADER_ID);
+        public IActionResult _PartialSiparisIslemler(int ENTEGRATION_HEADER_ID)
+        {
+            return PartialView(_inspectionService.SiparisIslemlerKontrol(ENTEGRATION_HEADER_ID));
+        }
 
         [HttpPost, HttpGet]
         public IActionResult _PartialSiparisListesiDetail(int ENTEGRATION_HEADER_ID) => PartialView(ENTEGRATION_HEADER_ID);
