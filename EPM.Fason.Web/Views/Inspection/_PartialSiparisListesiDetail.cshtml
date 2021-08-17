@@ -1,0 +1,42 @@
+﻿
+@model int
+
+
+<div class="dx-card wide-card">
+    @(Html.DevExtreme().DataGrid<EPM.Fason.Dto.Fason.SIPARIS_LISTESI_DETAIL> ().ID("edgridDetail")
+    .ShowBorders(false)
+    .DataSource(
+        ob=>ob.Mvc()
+        .Controller("Inspection").LoadParams(new { ENTEGRATION_HEADER_ID = Model})
+        .LoadAction("SiparisListesiDetailLoad")
+        .Key("ID")
+    )
+    .Export(e =>
+    {
+        e.Enabled(true);
+    })
+    .RemoteOperations(true)
+    .FilterRow(f => f.Visible(true))
+    .AllowColumnReordering(false)
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .ColumnAutoWidth(true)
+    .ColumnChooser(ch => { ch.Mode(GridColumnChooserMode.Select); ch.Enabled(true); })
+    .ShowRowLines(true)
+    .ShowColumnLines(true)
+    .ColumnHidingEnabled(false)
+    .Scrolling(ob => ob.Mode(GridScrollingMode.Virtual))
+    .Height("calc(100vh - 200px)")
+    .ShowBorders(true)
+    .Sorting(x=>x.Mode(GridSortingMode.None))
+    .Summary(ob=>ob.TotalItems(items=> {
+        items.AddFor(m => m.QUANTITY).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+    }))
+    .Columns(columns => {
+
+        columns.AddFor(m => m.ID).Visible(false).AllowEditing(false).AllowExporting(true);
+        columns.AddFor(m => m.PRODUCT_SIZE).AllowExporting(true);
+        columns.AddFor(m => m.QUANTITY).AllowEditing(true).AllowExporting(true);
+    }).OnInitNewRow(@<text> function(e) { e.data.HEADER_ID =@Model ; }</text>)
+    )
+</div>

@@ -47,7 +47,7 @@ namespace EPM.Fason.Service.Services
 
         public IEnumerable<SIPARIS_LISTESI_DETAIL> GetSiparisDetailList(int ENTEGRASYON_ID)
         {
-            string sql = "SELECT * FROM  PRODUCTION_DETAIL_LIST_V WHERE 0=0 AND  ENTEGRATION_HEADER_ID="+ENTEGRASYON_ID;
+            string sql = "SELECT PRODUCT_SIZE,SUM(QUANTITY)QUANTITY FROM PRODUCTION_DETAIL WHERE 0=0 AND  ENTEGRATION_HEADER_ID=" + ENTEGRASYON_ID + " GROUP BY PRODUCT_SIZE  order by PRODUCT_SIZE";
             return _fasonRepository.DeserializeList<SIPARIS_LISTESI_DETAIL>(sql);
         }
 

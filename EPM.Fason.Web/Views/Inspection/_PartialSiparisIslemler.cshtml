@@ -1,0 +1,24 @@
+﻿
+@model int
+@(Html.DevExtreme().Form()
+    .ID("edSiparisIslemler").ShowValidationSummary(true)
+    .ColCount(5)
+    .MinColWidth(150)
+    .Items(items =>
+    { 
+        items.AddButton().HorizontalAlignment(HorizontalAlignment.Right).VerticalAlignment(VerticalAlignment.Center)
+        .ButtonOptions(b => b.Text("AQL YAP")
+        .Type(ButtonType.Default)
+        .Icon("fas fa-sign-in-alt")
+        .Width("100%")
+        .OnClick("function() { AQLYAP("+Model+"); }")
+        .UseSubmitBehavior(true)
+        );
+        items.AddEmpty();
+        items.AddEmpty();
+        items.AddEmpty();
+        items.AddEmpty();
+        items.AddEmpty();
+
+    })
+    .FormData(Model).ShowValidationSummary(false))

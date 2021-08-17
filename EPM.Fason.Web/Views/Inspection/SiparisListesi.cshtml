@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewData["Title"] = "SiparisListesi";
+    Layout = "~/Views/Shared/_LayoutInspection.cshtml";
+}
+@model EPM.Fason.Dto.Fason.INSPECTION_FILTER
+<div id="form-container">
+    <div class="dx-card wide-card">
+        @(Html.DevExtreme().Form<EPM.Fason.Dto.Fason.INSPECTION_FILTER>()
+        .ID("edOnayliListe").ShowValidationSummary(true)
+        .ColCount(Mode.Auto)
+        .MinColWidth(150)
+        .Items(items =>
+        {
+            items.AddSimpleFor(m => m.FIRMA_ID).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Inspection").LoadAction("GetFasonUsers").Key("ID")).DisplayExpr("NAME").ValueExpr("ID")).IsRequired(false);
+            items.AddSimpleFor(m => m.SEASON).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Inspection").LoadAction("GetSeasonList").Key("ADI")).DisplayExpr("ADI").ValueExpr("ADI")).IsRequired(false);
+            items.AddSimpleFor(m => m.MODEL).Editor(ob=>ob.TextBox().ID("edModel")).IsRequired(false);
+            items.AddSimpleFor(m => m.COLOR).Editor(ob=>ob.TextBox().ID("edColor")).IsRequired(false);
+            items.AddEmpty();
+            items.AddButton().HorizontalAlignment(HorizontalAlignment.Right).VerticalAlignment(VerticalAlignment.Center)
+                   .ButtonOptions(b => b.Text("FİLTRELE")
+                       .Type(ButtonType.Default)
+                       .Icon("fas fa-sign-in-alt")
+                       .Width("100%")
+                       .OnClick("FasonSiparisFiltrele")
+                       .UseSubmitBehavior(true)
+               );
+
+        })
+        .FormData(Model).ShowValidationSummary(false)
+    )
+        <div id="popup"></div>
+        <div id="popupDetay"></div>
+        <div id="edListe" style="display:inline-block;float:left; width:70%"> </div>
+        <div id="edListeDetail" style="display: inline-block; float: right; width: 29%"> </div>
+        <div id="edListeProcess"></div>
+    </div>
+</div>
+<script>
+     function FasonSiparisFiltrele() {
+        $("#edListe").html("");
+        var data = {
+            BASLANGIC_TARIHI: jQuery("[name=BASLANGIC_TARIHI]").val(),
+            BITIS_TARIHI: jQuery("[name=BITIS_TARIHI]").val(),
+            MODEL: jQuery("[name=MODEL]").val(),
+            COLOR: jQuery("[name=COLOR]").val(),
+            SEASON: jQuery("[name=SEASON]").val(),
+            FIRMA_ID: jQuery("[name=FIRMA_ID]").val(),
+        };
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("_PartialSiparisListesi", "Inspection")',
+            data: data,
+            contentType: 'application/x-www-form-urlencoded',
+            timeout: 180000,
+            success: function (income, status, xmlRequest) {
+                $("#edListe").html(income);
+
+            }, beforeSend: function () {
+                getLoadPanelInstance().show();
+            }
+
+
+        }).always(function () {
+            getLoadPanelInstance().hide();
+        });
+    }
+
+    function gridFocusedRowChanged(e) {
+        var data = {
+            ENTEGRATION_HEADER_ID: e.row.data.ENTEGRATION_ID
+        };
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("_PartialSiparisListesiDetail", "Inspection")',
+            data: data,
+            contentType: 'application/x-www-form-urlencoded',
+            timeout: 180000,
+            success: function (income, status, xmlRequest) {
+                $("#edListeDetail").html(income);
+
+            }, beforeSend: function () {
+            }
+
+
+        }).always(function () {
+        });
+        SiparisIslemleri(e.row.data.ENTEGRATION_ID);
+
+    }
+    function SiparisIslemleri(ENTEGRATION_ID) {
+        var data = {
+            ENTEGRATION_HEADER_ID: ENTEGRATION_ID
+        };
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("_PartialSiparisIslemler", "Inspection")',
+            data: data,
+            contentType: 'application/x-www-form-urlencoded',
+            timeout: 180000,
+            success: function (income, status, xmlRequest) {
+                $("#edListeProcess").html(income);
+
+            }, beforeSend: function () {
+            }
+
+
+        }).always(function () {
+        });
+    }
+
+    function AQLYAP(ENTEGRATION_ID) {
+
+        var popupOptions = {
+            contentTemplate: function () {
+                var data = {
+                    ENTEGRATION_HEADER_ID: ENTEGRATION_ID
+                };
+                var resText=$.ajax({
+                    type: "POST",
+                    url: '@Url.Action("_PartialAQL", "Inspection")',
+                    data: data,
+                    async: false,
+                    contentType: 'application/x-www-form-urlencoded',
+                    timeout: 180000,
+                    success: function (income, status, xmlRequest) { 
+                    }, beforeSend: function () {
+                    }
+
+
+                }).responseText; 
+                return resText;
+            },
+            width: function () { return "950px"; },
+            height: function () { return "calc(100% - 350px)"; },
+            showTitle: true,
+            title: "SATIR TARİHÇESİ",
+            dragEnabled: true,
+            closeOnOutsideClick: true
+        };
+
+        $("#popupDetay").dxPopup(popupOptions).dxPopup("instance").show();
+
+
+    }
+</script>

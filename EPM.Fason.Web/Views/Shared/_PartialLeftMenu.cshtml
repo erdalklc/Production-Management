@@ -1,12 +1,33 @@
-﻿
-@functions{
+﻿@functions{
     string GetUrl(string action) => Url.Action(action);
-    string GetCurrentUrl() => Url.Action(ViewContext.RouteData.Values["action"].ToString());
+    string GetCurrentUrl() => Url.Action(ViewContext.RouteData.Values["action"].ToString() + "" + Context.Request.QueryString.Value.ToString());
     bool IsCurrentUrl(string pageName) => GetUrl(pageName) == GetCurrentUrl();
-} 
- 
-@(Html.DevExtreme().TreeView() 
-                .DataSource(s=>s.Mvc().Controller("Fason").LoadAction("MenuList"))
+}
+@{
+    List<EPM.Fason.Dto.Fason.PRODUCTION_FASON_MENU> menuData = new EPM.Fason.Web.Helpers.MenuHelper().GetFasonMenuList();
+
+    foreach (var item in menuData)
+    {
+        if (item.ACTION != null)
+        {
+            item.SELECTED = IsCurrentUrl(item.ACTION);
+            if (item.SELECTED)
+            {
+                if (item.CATEGORY_ID != 0)
+                {
+
+                    EPM.Fason.Dto.Fason.PRODUCTION_FASON_MENU menu = menuData.Find(ob => ob.ID == item.CATEGORY_ID);
+                    menu.ISEXPANDED = true;
+                }
+            }
+
+        }
+        else item.SELECTED = false;
+    }
+}
+
+@(Html.DevExtreme().TreeView()
+                .DataSource(menuData)
                 .DataSourceOptions(ob=>ob.Map("mapTreeView"))
                 .ExpandEvent(TreeViewExpandEvent.Click)
                 .SelectionMode(NavSelectionMode.Single)

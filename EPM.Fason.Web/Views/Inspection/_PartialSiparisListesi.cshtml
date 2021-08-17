@@ -1,0 +1,63 @@
+﻿@model List<EPM.Fason.Dto.Fason.SIPARIS_LISTESI>
+
+<div class="dx-card wide-card">
+    @(Html.DevExtreme().DataGrid<EPM.Fason.Dto.Fason.SIPARIS_LISTESI>().ID("edUretimTakipGrid")
+    .ShowBorders(false)
+    .FilterRow(f => f.Visible(true))
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .ShowBorders(true)
+    .HeaderFilter(a=>a.Visible(true))
+    .Scrolling(ob => ob.Mode(GridScrollingMode.Virtual))
+    .Height("calc(100vh - 200px)")
+    .ColumnChooser(ch=>ch.Enabled(true).Mode(GridColumnChooserMode.Select))
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(60)
+    .OnFocusedRowChanged("gridFocusedRowChanged")
+    .AllowColumnResizing(true)
+    .Columns(columns => {
+        columns.AddFor(m => m.ENTEGRATION_ID).Visible(false).Width(110);
+        columns.AddFor(m => m.BRAND).Visible(true).Width(110);
+        columns.AddFor(m => m.SUB_BRAND).Visible(false).Width(110);
+        columns.AddFor(m => m.SEASON);
+        columns.AddFor(m => m.MODEL);
+        columns.AddFor(m => m.COLOR);
+        columns.AddFor(m => m.PRODUCT_GROUP);
+        columns.AddFor(m => m.FABRIC_TYPE);
+        columns.AddFor(m => m.PRODUCTION_TYPE);
+        columns.AddFor(m => m.ORDER_TYPE);
+        columns.AddFor(m => m.RECIPE);
+        columns.AddFor(m => m.ATTRIBUTE1).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE2).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE3).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE4).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE5).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE6).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE7).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE8).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE9).Visible(false);
+        columns.AddFor(m => m.ATTRIBUTE10).Visible(false);
+        columns.AddFor(m => m.TEMA);
+        columns.AddFor(m => m.ANA_TEMA);
+        columns.AddFor(m => m.ROYALTY);
+        columns.AddFor(m => m.COLLECTION_TYPE);
+        columns.AddFor(m => m.QUANTITY);
+        columns.AddFor(m => m.PROCESS_NAME);
+        columns.AddFor(m => m.STATUSEX);
+        columns.AddFor(m => m.START_DATE).Format("dd.MM.yyyy");
+        columns.AddFor(m => m.END_DATE).Format("dd.MM.yyyy");
+    })
+    .Summary(sm =>
+    {
+        sm.TotalItems(t =>
+        {
+            t.AddFor(ob => ob.MODEL).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
+            t.AddFor(ob => ob.QUANTITY).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+        });
+    }).DataSource(Model)
+    //.OnCellPrepared("edUretimTakipGridCellPrepared")
+    )
+</div>

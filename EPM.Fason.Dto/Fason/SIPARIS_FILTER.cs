@@ -30,5 +30,6 @@ namespace EPM.Fason.Dto.Fason
         } 
         public string MODEL { get; set; }
         public string COLOR { get; set; }
+        public string SEASON { get; set; }
     }
 }

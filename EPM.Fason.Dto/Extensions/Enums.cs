@@ -20,5 +20,12 @@ namespace EPM.Fason.Dto.Extensions
             STARTED = 2,
             FINISHED = 3
         }
+        public enum AQLHEADERSTATUS
+        {
+            FIRST_INIT=5,
+            FINISHED=0,
+            DELETED=1
+            
+        }
     }
 }

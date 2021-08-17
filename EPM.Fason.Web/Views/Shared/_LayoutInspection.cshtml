@@ -90,7 +90,7 @@
             {
                 <div class="menu-container dx-swatch-additional">
                     <div id="edLeftMenu">
-                        @{Html.RenderPartial("_PartialLeftMenu");
+                        @{Html.RenderPartial("_PartialLeftMenuInspection");
                         }
                     </div>
 
@@ -115,29 +115,6 @@
                 window.location.href = '@Url.Action("LogOut","Login")';
             }
 
-
-            function gridKullaniciFocusedRowChanged(e) {
-                var data = {
-                    USER_CODE: e.row.data.USER_CODE
-                }
-
-                $.get('@Url.Action("_PartialKullaniciYetkiListesi", "Home")', data, function (data) {
-                    $("#edKullaniciYetki").html(data);
-                });
-
-                $.get('@Url.Action("_PartialKullaniciFabricTypes", "Home")', data, function (data) {
-                    $("#edKullaniciFabricTypes").html(data);
-                });
-
-
-                $.get('@Url.Action("_PartialKullaniciProductionTypes", "Home")', data, function (data) {
-                    $("#edKullaniciProductionTypes").html(data);
-                });
-
-                $.get('@Url.Action("_PartialKullaniciBrands", "Home")', data, function (data) {
-                    $("#edKullaniciBrands").html(data);
-                });
-            }
 
 
             var EPM_Web = (function () {

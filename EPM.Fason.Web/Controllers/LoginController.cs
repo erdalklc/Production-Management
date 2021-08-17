@@ -52,7 +52,7 @@ namespace EPM.Fason.Web.Controllers
                 PRODUCTION_USER_LOGINS loginM = _loginService.LoginInspector(Request.HttpContext, model);
                 if (loginM.USER_NAME != "")
                 { 
-                    return RedirectToAction("SiparisListesi", "Fason");
+                    return RedirectToAction("SiparisListesi", "Inspection");
                 }
                 else
                 {
