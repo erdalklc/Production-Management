@@ -5,6 +5,7 @@ using EPM.Fason.Repository.Repository;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using static EPM.Fason.Dto.Extensions.Enums;
 
@@ -43,7 +44,6 @@ namespace EPM.Fason.Service.Services
 
             return obj;
         } 
-         
 
         public List<PRODUCTION_PROCESS> GetProcessList()
         {
@@ -70,6 +70,15 @@ namespace EPM.Fason.Service.Services
                 _fasonRepository.ExecSql(sql);
 
                 sql = "DELETE PRODUCTION_LIST_H WHERE ENTEGRATION_ID=" + order.header.ENTEGRATION_ID;
+                _fasonRepository.ExecSql(sql);
+
+                sql = "DELETE PRODUCTION_AQL_LINE WHERE HEADER_ID=(SELECT ID FROM PRODUCTION_AQL_HEADER WHERE ENTEGRATION_HEADER_ID=" + order.header.ENTEGRATION_ID + " )";
+                _fasonRepository.ExecSql(sql);
+
+                sql = "DELETE PRODUCTION_AQL_QUANTITYS WHERE HEADER_ID=(SELECT ID FROM PRODUCTION_AQL_HEADER WHERE ENTEGRATION_HEADER_ID=" + order.header.ENTEGRATION_ID + " )";
+                _fasonRepository.ExecSql(sql);
+
+                sql = "DELETE PRODUCTION_AQL_HEADER WHERE ENTEGRATION_HEADER_ID=" + order.header.ENTEGRATION_ID;
                 _fasonRepository.ExecSql(sql);
 
                 _fasonRepository.Serialize(order.header);
@@ -115,6 +124,7 @@ namespace EPM.Fason.Service.Services
 
             return obj;
         }
+
         List<PRODUCTION_LIST_V> GetProcessList(int ENTEGRASYON_ID)
         {
             string sql = string.Format(@"SELECT PL.ID DETAIL_ID,PL.HEADER_ID,PH.ENTEGRATION_ID,PR.NAME PROCESS_NAME,PL.START_DATE,PL.END_DATE,PL.STATUS,dbo.SENDSTATUSEX(PL.STATUS) STATUS_EX,PL.QUEUE FROM PRODUCTION_LIST_L PL
@@ -123,6 +133,7 @@ INNER JOIN PRODUCTION_PROCESS PR ON PR.ID=PL.PROCESS_ID WHERE PH.ENTEGRATION_ID=
             var list = _fasonRepository.DeserializeList<PRODUCTION_LIST_V>(sql);
             return list;
         }
+
         public List<PRODUCTION_STATUS> GetProductionStatus(int[] ids)
         {
             string sql = string.Format(@"
@@ -135,7 +146,21 @@ SELECT        PRL.STATUS, dbo.SENDSTATUSEX(PRL.STATUS) AS STATUSEX, PRC.NAME PRO
                                WHERE        (PRL.STATUS NOT IN (0, 3)) AND PRH.ENTEGRATION_ID IN ({0})
                 ", string.Join(',', ids));
 
-           return _fasonRepository.DeserializeList<PRODUCTION_STATUS>(sql);
+
+            DataTable dt = _fasonRepository.QueryFill(string.Format(@"SELECT ENTEGRATION_ID,USR.NAME as COMPANY_NAME FROM dbo.PRODUCTION_LIST_H  PRH
+                                                         INNER JOIN dbo.PRODUCTION_FASON_USERS USR ON USR.ID = PRH.FIRMA_ID WHERE PRH.ENTEGRATION_ID IN ({0}) AND PRH.STATUS=3", string.Join(',', ids)));
+            var list = _fasonRepository.DeserializeList<PRODUCTION_STATUS>(sql);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                PRODUCTION_STATUS status = new PRODUCTION_STATUS(); 
+                status.STATUSEX = "SÜREÇ TAMAMLANDI";
+                status.PROCESS_NAME = "DEVAM EDEN SÜREÇ YOK";
+                status.COMPANY_NAME = row["COMPANY_NAME"].ToString();
+                status.ENTEGRATION_ID = row["ENTEGRATION_ID"].IntParse();
+                list.Add(status);
+            }
+           return list;
         }
 
         public List<PRODUCTION_LIST_V> SurecDurumuGetir(int ENTEGRATION_ID)

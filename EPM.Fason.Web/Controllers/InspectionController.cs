@@ -31,7 +31,7 @@ namespace EPM.Fason.Web.Controllers
         }
         public IActionResult InspectionListesi()
         {
-            return View();
+            return View(new INSPECTION_FILTER());
         }
         [HttpGet]
         public object SiparisListesiDetailLoad(DataSourceLoadOptions loadOptions, int ENTEGRATION_HEADER_ID)
@@ -58,15 +58,37 @@ namespace EPM.Fason.Web.Controllers
         }
 
         [HttpPost, HttpGet]
+        public IActionResult _PartialInspectionInlineAQL(int ENTEGRATION_HEADER_ID)
+        {
+            var user = new CookieHelper().GetUserFromCookie(Request.HttpContext);
+            return PartialView(_inspectionService.GetInspectionInlineAQL(user.USER_ID,ENTEGRATION_HEADER_ID));
+        }
+
+        [HttpPost, HttpGet]
         public IActionResult _PartialSiparisListesiDetail(int ENTEGRATION_HEADER_ID) => PartialView(ENTEGRATION_HEADER_ID);
 
         [HttpPost, HttpGet]
         public IActionResult _PartialSiparisListesi(INSPECTION_FILTER liste) => PartialView(_inspectionService.GetSiparisList(liste));
 
+
+
+        [HttpPost, HttpGet]
+        public IActionResult _PartialInspectionList(INSPECTION_FILTER liste) => PartialView(_inspectionService.GetInspectionList(liste));
+
         [HttpGet]
-        public object GetFasonUsers(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_inspectionService.GetFasonUsers(hepsi), loadOptions);
+        public object GetFasonUsers(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_inspectionService.GetFasonUsers(hepsi), loadOptions); 
+
+        [HttpGet]
+        public object GetInspectorList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_inspectionService.GetInspectorList(hepsi), loadOptions);
 
         [HttpGet]
         public object GetSeasonList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_inspectionService.GetSeasonList(hepsi), loadOptions);
+
+
+        [HttpGet]
+        public object GetProcessList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_inspectionService.GetProcessList(hepsi), loadOptions);
+
+        [HttpPost]
+        public IActionResult SaveAQL([FromBody] JObject elem) => Json(_inspectionService.SaveAQL(elem));
     }
 }

@@ -13,6 +13,7 @@ namespace EPM.Fason.Service.Services
         IEnumerable<SIPARIS_LISTESI_DETAIL> GetSiparisDetailList(int ENTEGRASYON_ID);
         IEnumerable<PRODUCTION_LIST_V> GetSiparisProcessList(int ENTEGRASYON_ID);
         object[] SurecIlerlet(PRODUCTION_LIST_V surec);
+        public List<PRODUCTION_LIST_V> GetProcessList(int ENTEGRASYON_ID);
 
     }
 }

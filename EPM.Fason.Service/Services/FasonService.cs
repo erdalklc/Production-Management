@@ -64,7 +64,7 @@ namespace EPM.Fason.Service.Services
         }
 
 
-        List<PRODUCTION_LIST_V> GetProcessList(int ENTEGRASYON_ID)
+        public List<PRODUCTION_LIST_V> GetProcessList(int ENTEGRASYON_ID)
         {
             string sql = string.Format(@"SELECT PL.ID DETAIL_ID,PL.HEADER_ID,PH.ENTEGRATION_ID,PR.NAME PROCESS_NAME,PL.START_DATE,PL.END_DATE,PL.STATUS,dbo.SENDSTATUSEX(PL.STATUS) STATUS_EX,PL.QUEUE,PR.HANDLE_SIDE FROM PRODUCTION_LIST_L PL
 INNER JOIN PRODUCTION_LIST_H PH ON PH.ID=PL.HEADER_ID
@@ -72,6 +72,7 @@ INNER JOIN PRODUCTION_PROCESS PR ON PR.ID=PL.PROCESS_ID WHERE PH.ENTEGRATION_ID=
             var list = _fasonRepository.DeserializeList<PRODUCTION_LIST_V>(sql);
             return list;
         }
+
         public IEnumerable<PRODUCTION_LIST_V> GetSiparisProcessList(int ENTEGRASYON_ID)
         {
             return GetProcessList(ENTEGRASYON_ID); 
@@ -111,6 +112,7 @@ INNER JOIN PRODUCTION_PROCESS PR ON PR.ID=PL.PROCESS_ID WHERE PH.ENTEGRATION_ID=
                     {
                         PRODUCTION_LIST_H header = _fasonRepository.Deserialize<PRODUCTION_LIST_H>(surec.HEADER_ID);
                         header.STATUS = (int)HEADERSTATUS.FINISHED;
+                        _fasonRepository.Serialize(header);
                     }
                 }
             }

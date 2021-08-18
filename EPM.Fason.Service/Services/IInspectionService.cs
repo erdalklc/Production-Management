@@ -15,6 +15,8 @@ namespace EPM.Fason.Service.Services
 
         public List<PRODUCTION_FASON_USERS> GetFasonUsers(bool hepsi);
 
+        public List<PRODUCTION_FASON_INSPECTORS> GetInspectorList(bool hepsi);
+
         public IEnumerable<SIPARIS_LISTESI> GetSiparisList(INSPECTION_FILTER liste);
 
         IEnumerable<SIPARIS_LISTESI_DETAIL> GetSiparisDetailList(int ENTEGRASYON_ID);
@@ -26,5 +28,13 @@ namespace EPM.Fason.Service.Services
         public TaskResponse UpdateNumbers(JObject elem);
 
         public SIPARIS_ISLEMLER_KONTROL SiparisIslemlerKontrol(int ENTEGRATION_HEADER_ID);
+
+        public TaskResponse SaveAQL(JObject elem);
+
+        public List<INSPECTION_LIST> GetInspectionList(INSPECTION_FILTER filter);
+
+        public List<PRODUCTION_AQL_INLINE> GetInspectionInlineAQL(int USER_ID, int ENTEGRATION_HEADER_ID);
+
+        public List<PRODUCTION_PROCESS> GetProcessList(bool hepsi);
     }
 }

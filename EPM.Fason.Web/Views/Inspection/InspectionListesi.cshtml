@@ -1,8 +1,71 @@
 ﻿
 @{
-    ViewData["Title"] = "InspectionListesi";
+    ViewData["Title"] = "SiparisListesi";
     Layout = "~/Views/Shared/_LayoutInspection.cshtml";
 }
+@model EPM.Fason.Dto.Fason.INSPECTION_FILTER
+<div id="form-container">
+    <div class="dx-card wide-card">
+        @(Html.DevExtreme().Form<EPM.Fason.Dto.Fason.INSPECTION_FILTER>()
+        .ID("edOnayliListe").ShowValidationSummary(true)
+        .ColCount(Mode.Auto)
+        .MinColWidth(150)
+        .Items(items =>
+        {
+            items.AddSimpleFor(m => m.FIRMA_ID).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Inspection").LoadAction("GetFasonUsers").Key("ID")).DisplayExpr("NAME").ValueExpr("ID")).IsRequired(false);
+            items.AddSimpleFor(m => m.INSPECTOR_ID).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Inspection").LoadAction("GetInspectorList").Key("ID")).DisplayExpr("NAME").ValueExpr("ID")).IsRequired(false);
+            items.AddSimpleFor(m => m.SEASON).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Inspection").LoadAction("GetSeasonList").Key("ADI")).DisplayExpr("ADI").ValueExpr("ADI")).IsRequired(false);
+            items.AddSimpleFor(m => m.MODEL).Editor(ob=>ob.TextBox().ID("edModel")).IsRequired(false);
+            items.AddSimpleFor(m => m.COLOR).Editor(ob=>ob.TextBox().ID("edColor")).IsRequired(false);
+            items.AddEmpty();
+            items.AddButton().HorizontalAlignment(HorizontalAlignment.Right).VerticalAlignment(VerticalAlignment.Center)
+                   .ButtonOptions(b => b.Text("FİLTRELE")
+                       .Type(ButtonType.Default)
+                       .Icon("fas fa-sign-in-alt")
+                       .Width("100%")
+                       .OnClick("InspectionLisFilter")
+                       .UseSubmitBehavior(true)
+               );
 
-<h1>InspectionListesi</h1>
+        })
+        .FormData(Model).ShowValidationSummary(false)
+    )
+        <div id="popup"></div>
+        <div id="popupDetay"></div>
+        <div id="edListe" style="display:inline-block;float:left; width:70%"> </div>
+        <div id="edListeDetail" style="display: inline-block; float: right; width: 29%"> </div>
+        <div id="edListeProcess"></div>
+    </div>
+</div> 
+<script>
+    function InspectionLisFilter() {
+    $("#edListe").html("");
+    var data = {
+        BASLANGIC_TARIHI: jQuery("[name=BASLANGIC_TARIHI]").val(),
+        BITIS_TARIHI: jQuery("[name=BITIS_TARIHI]").val(),
+        MODEL: jQuery("[name=MODEL]").val(),
+        COLOR: jQuery("[name=COLOR]").val(),
+        SEASON: jQuery("[name=SEASON]").val(),
+        FIRMA_ID: jQuery("[name=FIRMA_ID]").val(),
+        INSPECTOR_ID: jQuery("[name=INSPECTOR_ID]").val(),
+    };
+    $.ajax({
+        type: "POST",
+        url: '@Url.Action("_PartialInspectionList", "Inspection")',
+        data: data,
+        contentType: 'application/x-www-form-urlencoded',
+        timeout: 180000,
+        success: function (income, status, xmlRequest) {
+            $("#edListe").html(income);
 
+        }, beforeSend: function () {
+            getLoadPanelInstance().show();
+        }
+
+
+    }).always(function () {
+        getLoadPanelInstance().hide();
+    });
+}
+
+</script>

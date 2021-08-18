@@ -15,9 +15,11 @@ namespace EPM.Fason.Service.Services
     public class InspectionService : IInspectionService
     {
         private readonly IFasonRepository _fasonRepository;
-        public InspectionService(IFasonRepository fasonRepository)
+        private readonly IFasonService _fasonService;
+        public InspectionService(IFasonRepository fasonRepository,IFasonService fasonService)
         {
             _fasonRepository = fasonRepository;
+            _fasonService = fasonService;
         }
 
         public List<PRODUCTION_FASON_USERS> GetFasonUsers(bool hepsi)
@@ -70,14 +72,14 @@ namespace EPM.Fason.Service.Services
 
             });
             return menu;
-        }
-
+        } 
 
         public IEnumerable<SIPARIS_LISTESI_DETAIL> GetSiparisDetailList(int ENTEGRASYON_ID)
         {
             string sql = "SELECT PRODUCT_SIZE,SUM(QUANTITY)QUANTITY FROM PRODUCTION_DETAIL WHERE 0=0 AND  ENTEGRATION_HEADER_ID=" + ENTEGRASYON_ID+ "  GROUP BY PRODUCT_SIZE order by PRODUCT_SIZE";
             return _fasonRepository.DeserializeList<SIPARIS_LISTESI_DETAIL>(sql);
         }
+
         public IEnumerable<SIPARIS_LISTESI> GetSiparisList(INSPECTION_FILTER liste)
         {
             string sql = "SELECT * FROM  PRODUCTION_LIST_V WHERE 0=0";
@@ -102,6 +104,8 @@ namespace EPM.Fason.Service.Services
 
         public Tuple<PRODUCTION_AQL_HEADER,DataTable, List<PRODUCTION_AQL_QUANTITYS>, AQL_ANALIZER> GetAQL(int USER_ID,int ENTEGRATION_HEADER_ID, int TYPE)
         {
+
+            
             IEnumerable<SIPARIS_LISTESI_DETAIL> detail = GetSiparisDetailList(ENTEGRATION_HEADER_ID);
             IEnumerable<PRODUCTION_AQL_QUESTIONS> questions = _fasonRepository.DeserializeList<PRODUCTION_AQL_QUESTIONS>("SELECT * FROM PRODUCTION_AQL_QUESTIONS");
             string mjBottom = "", mjBottomSecond = "", mnBottom = "", mnBottomSecond = "",mjSum="",mnSum="";
@@ -195,7 +199,7 @@ SELECT 'MJ_'+L.BEDEN PRODUCT_SIZE
 ,Q.ID AS QUESTION_ID
 FROM PRODUCTION_AQL_QUESTIONS Q 
 LEFT JOIN PRODUCTION_AQL_LINE L ON Q.ID=L.QUESTION_ID 
-LEFT JOIN PRODUCTION_AQL_HEADER H ON H.ID=L.HEADER_ID
+LEFT JOIN PRODUCTION_AQL_HEADER H ON H.ID=L.HEADER_ID AND TYPE={8}
 WHERE H.ENTEGRATION_HEADER_ID={0}
  ) A PIVOT  
 (  
@@ -221,6 +225,19 @@ WHERE H.ENTEGRATION_HEADER_ID={0}
 ", ENTEGRATION_HEADER_ID, mjBottom, mnBottomSecond, mnBottom, mjBottomSecond, mjSum, mnSum, header.ID, TYPE);
             DataTable dt = _fasonRepository.QueryFill(sql);
             List<PRODUCTION_AQL_QUANTITYS> quantitys = _fasonRepository.DeserializeList<PRODUCTION_AQL_QUANTITYS>("SELECT * FROM PRODUCTION_AQL_QUANTITYS WHERE HEADER_ID=" + header.ID + "");
+
+            var list = _fasonService.GetProcessList(ENTEGRATION_HEADER_ID);
+            PRODUCTION_LIST_V pr = new PRODUCTION_LIST_V();
+            if (TYPE == 1)
+                pr = list.Find(ob => ob.PROCESS_NAME == "AQL - ÜRETIM");
+            else if (TYPE == 2)
+                pr = list.Find(ob => ob.PROCESS_NAME == "AQL - ÇORLU");
+
+            if (pr.DETAIL_ID > 0)
+            {
+                if(pr.STATUS== (int)LINESTATUS.WAITINGFORSTART)
+                    _fasonService.SurecIlerlet(pr);
+            }
             return new Tuple<PRODUCTION_AQL_HEADER, DataTable, List<PRODUCTION_AQL_QUANTITYS>, AQL_ANALIZER>(header, dt, quantitys, AQL_ANALIZER);
         }
 
@@ -303,6 +320,94 @@ WHERE H.ENTEGRATION_HEADER_ID={0}
             }
             kontrol.ENTEGRATION_HEADER_ID = ENTEGRATION_HEADER_ID;
             return kontrol;
+        }
+
+        public TaskResponse SaveAQL(JObject elem)
+        {
+            TaskResponse response = new TaskResponse() { isOK = true, errorText = "" };
+            try
+            {
+                dynamic value = elem;
+                int ENTEGRATION_ID = value.ENTEGRATION_ID;
+                int TYPE = value.TYPE;
+                int STATUS = value.STATUS;
+                bool CHECKED_INLINE = value.CHECKED_INLINE;
+                string DESCRIPTION = value.DESCRIPTION;
+                PRODUCTION_AQL_HEADER header = _fasonRepository.Deserialize<PRODUCTION_AQL_HEADER>("SELECT * FROM PRODUCTION_AQL_HEADER WHERE ENTEGRATION_HEADER_ID=" + ENTEGRATION_ID + " AND TYPE=" + TYPE + "");
+                header.CHECKED_INLINE = CHECKED_INLINE;
+                if (STATUS == 1)
+                    header.STATUS = (int)AQLHEADERSTATUS.FINISHED;
+                header.DESCRIPTION = DESCRIPTION;
+                _fasonRepository.Serialize(header);
+                var list = _fasonService.GetProcessList(ENTEGRATION_ID);
+                PRODUCTION_LIST_V pr = new PRODUCTION_LIST_V();
+                if (TYPE == 1)
+                    pr = list.Find(ob => ob.PROCESS_NAME == "AQL - ÜRETIM");
+                else if (TYPE == 2)
+                    pr = list.Find(ob => ob.PROCESS_NAME == "AQL - ÇORLU");
+
+                if (pr.DETAIL_ID > 0)
+                {
+                    _fasonService.SurecIlerlet(pr);
+                }
+            }
+            catch (Exception ex)
+            {
+                response.isOK = false;
+                response.errorText = ex.Message;
+            }
+            return response;
+
+        }
+
+        public List<INSPECTION_LIST> GetInspectionList(INSPECTION_FILTER filter)
+        {
+            string sql = @"SELECT PH.MODEL,PH.COLOR,PH.SEASON,PAH.STATUS,USR.NAME AS FIRMA,CASE WHEN PAH.TYPE=1 THEN 'AQL-ÜRETİM' ELSE 'AQL-ÇORLU' END TYPEEX,PAH.TYPE,INC.NAME +' '+INC.SURNAME AS INSPECTOR
+,(SELECT SUM(QUANTITY) FROM PRODUCTION_AQL_QUANTITYS QYS WHERE QYS.HEADER_ID=PAH.ID) AS QUANTITY
+,(SELECT SUM(QUANTITY_RELEASE) FROM PRODUCTION_AQL_QUANTITYS QYS WHERE QYS.HEADER_ID=PAH.ID) AS QUANTITY_RELEASE
+,(SELECT SUM(QUANTITY_SAMPLE) FROM PRODUCTION_AQL_QUANTITYS QYS WHERE QYS.HEADER_ID=PAH.ID) AS QUANTITY_SAMPLE
+,PAH.START_DATE
+,PAH.ENTEGRATION_HEADER_ID
+FROM PRODUCTION_AQL_HEADER PAH
+INNER JOIN PRODUCTION_HEADER PH ON PH.ENTEGRATION_ID=PAH.ENTEGRATION_HEADER_ID
+INNER JOIN PRODUCTION_LIST_H LH ON LH.ENTEGRATION_ID=PAH.ENTEGRATION_HEADER_ID
+INNER JOIN PRODUCTION_FASON_INSPECTORS INC ON INC.ID=PAH.USER_ID
+INNER JOIN PRODUCTION_FASON_USERS USR ON USR.ID=LH.FIRMA_ID WHERE 0=0";
+            if (filter.SEASON.ToStringParse() != "HEPSİ")
+                sql += " AND PH.SEASON ='" + filter.SEASON + "'";
+            if (filter.MODEL.ToStringParse() != "")
+                sql += " AND PH.MODEL ='" + filter.MODEL + "'";
+            if (filter.COLOR.ToStringParse() != "")
+                sql += " AND PH.COLOR ='" + filter.COLOR + "'";
+            if (filter.INSPECTOR_ID !=0)
+                sql += " AND INC.ID =" + filter.INSPECTOR_ID + "";
+            if (filter.FIRMA_ID != 0)
+                sql += " AND USR.ID =" + filter.FIRMA_ID + "";
+            return _fasonRepository.DeserializeList<INSPECTION_LIST>(sql);
+        }
+
+        public List<PRODUCTION_FASON_INSPECTORS> GetInspectorList(bool hepsi)
+        {
+            string sql = "";
+            if (hepsi)
+                sql = "SELECT 0 ID,'HEPSİ' NAME   UNION ALL SELECT ID,NAME+'' +SURNAME FROM PRODUCTION_FASON_INSPECTORS";
+            else sql = "SELECT ID,NAME+'' +SURNAME FROM PRODUCTION_FASON_INSPECTORS";
+            return _fasonRepository.DeserializeList<PRODUCTION_FASON_INSPECTORS>(sql);
+        }
+
+        public List<PRODUCTION_AQL_INLINE> GetInspectionInlineAQL(int USER_ID, int ENTEGRATION_HEADER_ID)
+        {
+            string sql = "SELECT * FROM PRODUCTION_AQL_INLINE WHERE HEADER_ID=" + ENTEGRATION_HEADER_ID;
+            return _fasonRepository.DeserializeList<PRODUCTION_AQL_INLINE>(sql);
+        }
+
+        public List<PRODUCTION_PROCESS> GetProcessList(bool hepsi)
+        {
+            string sql = "";
+            if (hepsi)
+                sql = "SELECT 0 ID,'HEPSİ' NAME   UNION ALL SELECT ID,NAME FROM PRODUCTION_PROCESS";
+            else sql = "SELECT ID,NAME FROM PRODUCTION_PROCESS";
+            return _fasonRepository.DeserializeList<PRODUCTION_PROCESS>(sql);
         }
     }
 }

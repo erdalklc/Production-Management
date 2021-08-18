@@ -77,7 +77,7 @@ namespace EPM.Web.Controllers
         {
             object[] obj =  FasonServiceHelper.FasonSiparisOlustur( header, plan, formHeader);
             if ((bool)obj[0])
-                return Ok();
+                return Ok(obj);
             else return BadRequest(obj[1].ToString());
         } 
          

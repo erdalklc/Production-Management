@@ -34,6 +34,7 @@
 <body class="dx-viewport">
     <div id="app-side-nav-outer-toolbar">
         <div class="layout-header">
+
             @(Html.DevExtreme().Toolbar()
 .Items(items => {
     items.Add()
@@ -79,7 +80,7 @@
                     <div id="layout-drawer-scrollview" class="with-footer">
                         <div class="content" >
                             <div id="mainContent"></div>
-
+                             <div class="loadpanel"></div>
                              <div id="popupMain"></div>
                             @RenderBody()
                         </div>
@@ -235,8 +236,22 @@
             document.addEventListener("DOMContentLoaded", function documentReady() {
                 this.removeEventListener("DOMContentLoaded", documentReady);
                 EPM_Web.init();
+               
 
             });
+
+        var loadPanel = null;
+
+        $(function () {
+            loadPanel = $(".loadpanel").dxLoadPanel({
+                shadingColor: "rgba(0,0,0,0.4)",
+                visible: false,
+                showIndicator: true,
+                showPane: true,
+                shading: true,
+                closeOnOutsideClick: false
+            }).dxLoadPanel("instance");
+        });
     </script>
 
 </body>

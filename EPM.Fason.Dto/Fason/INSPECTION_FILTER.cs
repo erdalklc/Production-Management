@@ -32,5 +32,6 @@ namespace EPM.Fason.Dto.Fason
         public string COLOR { get; set; }
         public string SEASON { get; set; } = "HEPSİ";
         public int FIRMA_ID { get; set; } = 0;
+        public int INSPECTOR_ID { get; set; } = 0;
     }
 }

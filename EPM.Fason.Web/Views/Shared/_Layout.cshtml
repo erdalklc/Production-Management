@@ -27,6 +27,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.1.1/exceljs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.2/FileSaver.min.js"></script>
+    <script src="~/js/inspectionForm.js"></script>
 </head>
 
 <body class="dx-viewport">
@@ -69,6 +70,7 @@
                         <div class="content" >
                             <div id="mainContent"></div>
 
+                             <div class="loadpanel"></div>
                              <div id="popupMain"></div>
                             @RenderBody()
                         </div>
@@ -108,6 +110,25 @@
         </div>
     </div>
     <script>
+        var urlPartialSiparisListesi = '@Url.Action("_PartialSiparisListesi", "Inspection")';
+        var urlPartialSiparisListesiDetail = '@Url.Action("_PartialSiparisListesiDetail", "Inspection")';
+        var urlPartialSiparisIslemler = '@Url.Action("_PartialSiparisIslemler", "Inspection")';
+        var urlCreateAQL = '@Url.Action("CreateAQL", "Inspection")';
+        var urlUpdateNumbers = "@Url.Action("UpdateNumbers", "Inspection")";
+        var urlUpdateAQL = "@Url.Action("UpdateAQL", "Inspection")";
+        var urlSaveAQL = "@Url.Action("SaveAQL", "Inspection")";
+        var loadPanel = null;
+
+        $(function () {
+            loadPanel = $(".loadpanel").dxLoadPanel({
+                shadingColor: "rgba(0,0,0,0.4)",
+                visible: false,
+                showIndicator: true,
+                showPane: true,
+                shading: true,
+                closeOnOutsideClick: false
+            }).dxLoadPanel("instance");
+        });
             function getLoadPanelInstance() {
                 return $("#loadPanel").dxLoadPanel("instance");
             }
@@ -115,7 +136,7 @@
                 window.location.href = '@Url.Action("LogOut","Login")';
             }
 
- 
+
             function gridKullaniciFocusedRowChanged(e) {
                 var data = {
                     USER_CODE: e.row.data.USER_CODE

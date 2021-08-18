@@ -89,25 +89,27 @@
                                     plan: others,
                                     formHeader: firmaBilgi
                                 }
-                                console.log(formData);
+
+                                loadPanel.show();
                                 $.ajax({
                                     type: "POST",
                                     url: '@Url.Action("FasonSiparisOlustur", "UretimTakip")',
                                     data: formData,
-                                    async: false,
+                                    async: true,
                                     dataType: "json",
                                     //contentType: 'application/json',
                                     timeout: 180000,
-                                    success: function (income, status, xmlRequest) {
-                                        $("#edReportDetail").html(income);
+                                    success: function (income, status, xmlRequest) { 
+                                        $("#popup").dxPopup("hide");
+                                        loadPanel.hide(); 
+                                    }, error: function (xhr, status, error) {
 
-                                    }, beforeSend: function () {
-                                    }, error: function (x) {
-                                        DevExpress.ui.dialog.confirm(x, "HATA");
+                                        DevExpress.ui.dialog.custom({ messageHtml: "HATA : " + xhr.status + ': ' + xhr.statusText, title: "HATA", buttons: [{ text: "TAMAM", }] }).show();
+                                        $("#popup").dxPopup("hide");
+                                        loadPanel.hide();
                                     }
-
-
                                 }).always(function () {
+                                    loadPanel.hide();
                                 });
                             }
                         });

@@ -149,7 +149,8 @@
                             if (income[0]) {
                                 ProcessListGetir(e.row.data.ENTEGRATION_ID);
                             } else {
-                                DevExpress.ui.dialog.confirm("İŞLEMLER YAPILIRKEN HATAYLA KARŞILAŞILDI<br>" + income[1], "HATA");
+                                DevExpress.ui.dialog.custom({ messageHtml: "İŞLEMLER YAPILIRKEN HATAYLA KARŞILAŞILDI<br>" + income[1], title: "HATA", buttons: [{ text: "TAMAM", }] }).show();
+
                             }
                         }, beforeSend: function () {
                         }
@@ -160,7 +161,7 @@
                 }
             });
         } else {
-            DevExpress.ui.dialog.confirm("Bu işlem Çorlu operasyon ekibi tarafından işlenecektir.", "HATA");
+            DevExpress.ui.dialog.custom({ messageHtml: "Bu işlem Çorlu operasyon ekibi tarafından işlenecektir", title: "HATA", buttons: [{ text: "TAMAM", }] }).show();
         }
 
 

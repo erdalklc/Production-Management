@@ -1,0 +1,53 @@
+﻿@model List<EPM.Fason.Dto.Fason.INSPECTION_LIST>
+
+<div class="dx-card wide-card">
+    @(Html.DevExtreme().DataGrid<EPM.Fason.Dto.Fason.INSPECTION_LIST>().ID("edInspectionList")
+    .ShowBorders(false)
+    .KeyExpr("ID")
+    .FilterRow(f => f.Visible(true))
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .ShowBorders(true)
+    .HeaderFilter(a=>a.Visible(true))
+    .Scrolling(ob => ob.Mode(GridScrollingMode.Virtual))
+    .Height("calc(100vh - 200px)")
+    .ColumnChooser(ch=>ch.Enabled(true).Mode(GridColumnChooserMode.Select))
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(60)
+    .AllowColumnResizing(true)
+    .Columns(columns =>
+    {
+        columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn =>
+        {
+            btn.Add().Icon("fa fa-history").OnClick("InspectionListSearch");
+        });
+        columns.AddFor(m => m.START_DATE).Format("dd.MM.yyyy");
+        columns.AddFor(m => m.BRAND);
+        columns.AddFor(m => m.SEASON);
+        columns.AddFor(m => m.MODEL);
+        columns.AddFor(m => m.COLOR);
+        columns.AddFor(m => m.STATUS);
+        columns.AddFor(m => m.INSPECTOR);
+        columns.AddFor(m => m.FIRMA);
+        columns.AddFor(m => m.TYPEEX);
+        columns.AddFor(m => m.TYPE).Visible(false);
+        columns.AddFor(m => m.QUANTITY);
+        columns.AddFor(m => m.QUANTITY_RELEASE);
+        columns.AddFor(m => m.QUANTITY_SAMPLE);
+        columns.AddFor(m => m.ENTEGRATION_HEADER_ID).Visible(false);
+    })
+    .Summary(sm =>
+    {
+        sm.TotalItems(t =>
+        {
+            t.AddFor(ob => ob.MODEL).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
+            t.AddFor(ob => ob.QUANTITY).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+            t.AddFor(ob => ob.QUANTITY_RELEASE).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+            t.AddFor(ob => ob.QUANTITY_SAMPLE).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+        });
+    }).DataSource(Model) 
+    )
+</div>

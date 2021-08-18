@@ -855,3 +855,5 @@ E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\V
 E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialSiparisListesiDetail.cshtml.g.cs
 E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutInspection.cshtml.g.cs
 E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_PartialLeftMenuInspection.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialInspectionList.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialInspectionInlineAQL.cshtml.g.cs
