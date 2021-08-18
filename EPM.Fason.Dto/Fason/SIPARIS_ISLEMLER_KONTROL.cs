@@ -8,7 +8,7 @@ namespace EPM.Fason.Dto.Fason
     {
         public bool CAN_CREATE_AQL_FIRMA { get; set; } = false;
         public bool CAN_CREATE_AQL_CORLU { get; set; } = false;
-        public bool CAN_CREATE_AQL_INLINE { get; set; } = false;
+        public bool CAN_CREATE_AQL_INLINE { get; set; } = true;
         public int ENTEGRATION_HEADER_ID { get; set; }
     }
 }

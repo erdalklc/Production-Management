@@ -17,7 +17,7 @@
                    .UseSubmitBehavior(true)
                    );
         }
-        else if (Model.CAN_CREATE_AQL_CORLU)
+        if (Model.CAN_CREATE_AQL_CORLU)
         {
             items.AddButton().HorizontalAlignment(HorizontalAlignment.Right).VerticalAlignment(VerticalAlignment.Center)
                    .ButtonOptions(b => b.Text("AQL ÇORLU")
@@ -25,6 +25,17 @@
                    .Icon("fas fa-sign-in-alt")
                    .Width("100%")
                    .OnClick("function() { AQLYAP(" + Model.ENTEGRATION_HEADER_ID + ",2); }")
+                   .UseSubmitBehavior(true)
+                   );
+        }
+        if (Model.CAN_CREATE_AQL_INLINE)
+        {
+            items.AddButton().HorizontalAlignment(HorizontalAlignment.Right).VerticalAlignment(VerticalAlignment.Center)
+                   .ButtonOptions(b => b.Text("INLINE KONTROL")
+                   .Type(ButtonType.Default)
+                   .Icon("fas fa-sign-in-alt")
+                   .Width("100%")
+                   .OnClick("function() { INLINEAQLYAP(" + Model.ENTEGRATION_HEADER_ID + ",2); }")
                    .UseSubmitBehavior(true)
                    );
         }

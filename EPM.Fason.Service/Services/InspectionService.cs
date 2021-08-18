@@ -318,6 +318,9 @@ WHERE H.ENTEGRATION_HEADER_ID={0}
             {
                 kontrol.CAN_CREATE_AQL_CORLU = true;
             }
+
+            if (kontrol.CAN_CREATE_AQL_CORLU || kontrol.CAN_CREATE_AQL_FIRMA)
+                kontrol.CAN_CREATE_AQL_INLINE = false;
             kontrol.ENTEGRATION_HEADER_ID = ENTEGRATION_HEADER_ID;
             return kontrol;
         }
@@ -408,6 +411,52 @@ INNER JOIN PRODUCTION_FASON_USERS USR ON USR.ID=LH.FIRMA_ID WHERE 0=0";
                 sql = "SELECT 0 ID,'HEPSİ' NAME   UNION ALL SELECT ID,NAME FROM PRODUCTION_PROCESS";
             else sql = "SELECT ID,NAME FROM PRODUCTION_PROCESS";
             return _fasonRepository.DeserializeList<PRODUCTION_PROCESS>(sql);
+        }
+
+        public PRODUCTION_AQL_INLINE InsertInspection(int USER_ID, string values)
+        {
+            PRODUCTION_AQL_INLINE detail = new PRODUCTION_AQL_INLINE();
+            JsonConvert.PopulateObject(values, detail); 
+            detail.USER_ID = USER_ID;
+            _fasonRepository.Serialize<PRODUCTION_AQL_INLINE>(detail);
+            return detail;
+        }
+
+        public Tuple<TaskResponse, PRODUCTION_AQL_INLINE> UpdateInspection(int Key, string Values)
+        {
+            TaskResponse response = new TaskResponse() { isOK = true, errorText = "" };
+
+            PRODUCTION_AQL_INLINE detail = _fasonRepository.Deserialize<PRODUCTION_AQL_INLINE>(Key);
+            try
+            {
+                JsonConvert.PopulateObject(Values, detail);
+                _fasonRepository.Serialize(detail);
+            }
+            catch (Exception ex)
+            {
+                response.isOK =false;
+                response.errorText = ex.Message;
+            }
+
+            return new Tuple<TaskResponse, PRODUCTION_AQL_INLINE>(response,detail);
+        }
+
+        public TaskResponse DeleteInspection(int Key)
+        {
+            TaskResponse response = new TaskResponse() { isOK = true, errorText = "" };
+
+            try
+            {
+                string sql = "DELETE FROM PRODUCTION_AQL_INLINE WHERE ID=" + Key;
+                _fasonRepository.ExecSql(sql);
+            }
+            catch (Exception ex)
+            {
+                response.isOK = false;
+                response.errorText = ex.Message;
+            }
+
+            return response;
         }
     }
 }

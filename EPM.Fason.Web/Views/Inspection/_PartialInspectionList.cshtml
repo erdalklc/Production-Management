@@ -22,21 +22,25 @@
     {
         columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn =>
         {
-            btn.Add().Icon("fa fa-history").OnClick("InspectionListSearch");
+            btn.Add().Icon("fa fa-history").OnClick("InspectionListAQLSearch");
+        });
+        columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn =>
+        {
+            btn.Add().Icon("fa fa-comments").OnClick("InspectionListInlineAQLSearch");
         });
         columns.AddFor(m => m.START_DATE).Format("dd.MM.yyyy");
-        columns.AddFor(m => m.BRAND);
-        columns.AddFor(m => m.SEASON);
-        columns.AddFor(m => m.MODEL);
-        columns.AddFor(m => m.COLOR);
-        columns.AddFor(m => m.STATUS);
-        columns.AddFor(m => m.INSPECTOR);
-        columns.AddFor(m => m.FIRMA);
-        columns.AddFor(m => m.TYPEEX);
+        columns.AddFor(m => m.BRAND).Caption("MARKA");
+        columns.AddFor(m => m.SEASON).Caption("SEZON");
+        columns.AddFor(m => m.MODEL).Caption("MODEL");
+        columns.AddFor(m => m.COLOR).Caption("RENK");
+        columns.AddFor(m => m.STATUS).Caption("DURUM");
+        columns.AddFor(m => m.INSPECTOR).Caption("KONTROL EDEN");
+        columns.AddFor(m => m.FIRMA).Caption("FİRMA");
+        columns.AddFor(m => m.TYPEEX).Caption("İŞLEM TİPİ");
         columns.AddFor(m => m.TYPE).Visible(false);
-        columns.AddFor(m => m.QUANTITY);
-        columns.AddFor(m => m.QUANTITY_RELEASE);
-        columns.AddFor(m => m.QUANTITY_SAMPLE);
+        columns.AddFor(m => m.QUANTITY).Caption("SİPARİŞ ADET");
+        columns.AddFor(m => m.QUANTITY_RELEASE).Caption("ÜRETİLEN ADET");
+        columns.AddFor(m => m.QUANTITY_SAMPLE).Caption("NUMUNE ADET");
         columns.AddFor(m => m.ENTEGRATION_HEADER_ID).Visible(false);
     })
     .Summary(sm =>

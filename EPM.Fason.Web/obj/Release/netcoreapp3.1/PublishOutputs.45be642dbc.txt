@@ -160,6 +160,7 @@ D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\P
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\devextreme\vectormap-utils\dx.vectormaputils.debug.js
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\devextreme\vectormap-utils\dx.vectormaputils.js
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\devextreme\vectormap-utils\dx.vectormaputils.node.js
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\inspectionForm.js
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\jquery-3.5.1.min.js
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\site.js
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\vendor.js

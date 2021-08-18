@@ -9,6 +9,7 @@ E:\Eren\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\
 E:\Eren\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.csproj.CopyComplete
 E:\Eren\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.dll
 E:\Eren\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.pdb
+E:\Eren\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Admin.Repository\bin\Debug\netcoreapp3.1\EPM.Admin.Repository.deps.json
 D:\Projects\Eren Production Management\EPM.Admin.Repository\bin\Debug\netcoreapp3.1\EPM.Admin.Repository.dll
 D:\Projects\Eren Production Management\EPM.Admin.Repository\bin\Debug\netcoreapp3.1\EPM.Admin.Repository.pdb
@@ -21,4 +22,3 @@ D:\Projects\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp
 D:\Projects\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.dll
 D:\Projects\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.pdb
-E:\Eren\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.csproj.AssemblyReference.cache

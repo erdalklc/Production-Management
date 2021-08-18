@@ -358,6 +358,9 @@ E:\Eren\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.Plan
 E:\Eren\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.Plan.Api.dll
 E:\Eren\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.Plan.Api.pdb
 E:\Eren\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.Plan.Api.genruntimeconfig.cache
+E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
+E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+E:\Eren\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.Plan.Api.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\appsettings.Development.json
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\appsettings.json
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\EPM.Plan.Api.exe
@@ -658,6 +661,7 @@ D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\Micr
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.Razor.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\Oracle.ManagedDataAccess.dll
@@ -665,6 +669,7 @@ D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\Syst
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\System.Diagnostics.PerformanceCounter.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\System.DirectoryServices.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\System.DirectoryServices.Protocols.dll
+D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\System.Text.Json.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.resources.dll
@@ -719,8 +724,3 @@ D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.Plan.Api.dll
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.Plan.Api.pdb
 D:\Projects\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.Plan.Api.genruntimeconfig.cache
-D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
-D:\Projects\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
-E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
-E:\Eren\Eren Production Management\EPM.Plan.Api\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
-E:\Eren\Eren Production Management\EPM.Plan.Api\obj\Debug\netcoreapp3.1\EPM.Plan.Api.csproj.AssemblyReference.cache

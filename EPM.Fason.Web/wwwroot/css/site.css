@@ -19,7 +19,7 @@ body, html {
     font-weight: 200;
     font-size: 80px;
     text-align:center!important;
-    background: radial-gradient(black, transparent);
+    /*background: radial-gradient(black, transparent);*/
     padding-left: 15px;
     padding-right: 15px;
 }

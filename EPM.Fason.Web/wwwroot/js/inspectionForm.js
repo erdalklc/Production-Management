@@ -83,7 +83,18 @@ function AQLYAP(ENTEGRATION_ID, TYPE) {
     var popupOptions = {
         contentTemplate: function () {
 
-            return "<div  style='width:65%;display:inline-block;float:left'><div id='gridForm'></div><div id='values1' ><div id='aqlStandart' class='gauge-manuel' style='float:left;text-align: right;color:green'></div><div id='aqlValidation' class='gauge-manuel' style='float:right;text-align: left;color:indianred'></div><div id='formInformation'>....</div></div></div><div id='gridNumbers' style='width:35%;display:inline-block;float:right'></div ><div style='clear:both'><div  id='gridAQL'></div></div><div id='saveButton' style='margin-top:10px'></div>";
+            //return "<div  style='width:65%;display:inline-block;float:left'><div id='gridForm'></div><div id='values1' ><div id='aqlStandart' class='gauge-manuel' style='float:left;text-align: right;color:green'></div><div id='aqlValidation' class='gauge-manuel' style='float:right;text-align: left;color:indianred'></div><div id='formInformation'>....</div></div></div><div id='gridNumbers' style='width:35%;display:inline-block;float:right'></div ><div style='clear:both'><div  id='gridAQL'></div></div><div id='saveButton' style='margin-top:10px'></div>";
+            return $.ajax({
+                type: "POST",
+                url: urlPopupHtml,
+                data: "",
+                async: false,
+                contentType: 'application/x-www-form-urlencoded',
+                timeout: 180000,
+                success: function (income, status, xmlRequest) {
+                }, beforeSend: function () {
+                }
+            }).responseText;
         },
         width: function () { return "1210px"; },
         height: function () { return "100vh"; },
@@ -231,7 +242,7 @@ function AQLYAP(ENTEGRATION_ID, TYPE) {
                 focusedColumnIndex: 0,
                 showColumnLines: true,
                 showRowLines: true,
-                height: "500px",
+                height: "470px",
                 width: "100%",
                 loadPanel: {
                     enabled: true
@@ -386,8 +397,8 @@ function AQLYAP(ENTEGRATION_ID, TYPE) {
             $("#saveButton").dxButton({
                 stylingMode: "contained",
                 text: "KAYDET",
-                type: "success",
-                width: "100%",
+                type: "danger",
+                width: "47%",
                 onClick: function () {
                     var result = DevExpress.ui.dialog.confirm("İşlemler Kaydedilecektir. Devam Edilsin mi ?", "ONAY");
                     result.done(function (dialogResult) {
@@ -398,60 +409,113 @@ function AQLYAP(ENTEGRATION_ID, TYPE) {
                             if (formData.Item4.ACCEPT_QUANTITY >= minorCount / 2 + majorCount)
                                 status = 1;
                         }
+                        if (jQuery("[name=CHECKED_INLINE]").val()=="true") {
+                            var package = {
+                                CHECKED_INLINE: jQuery("[name=CHECKED_INLINE]").val(),
+                                DESCRIPTION: jQuery("[name=DESCRIPTION]").val(),
+                                ENTEGRATION_ID: ENTEGRATION_ID,
+                                STATUS: status,
+                                TYPE: TYPE
+                            };
 
-                        var package = {
-                            CHECKED_INLINE: jQuery("[name=CHECKED_INLINE]").val(),
-                            DESCRIPTION: jQuery("[name=DESCRIPTION]").val(),
-                            ENTEGRATION_ID: ENTEGRATION_ID,
-                            STATUS: status,
-                            TYPE: TYPE
-                        };
+                            loadPanel.show();
+                            var settings = {
+                                "async": true,
+                                "url": urlSaveAQL,
+                                "method": "POST",
+                                "timeout": 0,
+                                "headers": {
+                                    "Content-Type": "application/json"
+                                },
+                                "data": JSON.stringify(package),
+                            };
+                            $.ajax(settings).done(function (response) {
 
-                        loadPanel.show();
-                        var settings = {
-                            "async": true,
-                            "url": urlSaveAQL,
-                            "method": "POST",
-                            "timeout": 0,
-                            "headers": {
-                                "Content-Type": "application/json"
-                            },
-                            "data": JSON.stringify(package),
-                        };
-                        $.ajax(settings).done(function (response) {
-
-                            $("#popupDetay").dxPopup("hide");
-                            loadPanel.hide();
-                            try {
-                                var parsedIncome = response;
-                                if (parsedIncome.isOK) {
-                                    $("#popupDetay").dxPopup("hide");
-                                    loadPanel.hide();
-                                    DevExpress.ui.dialog.custom({ messageHtml: "AQL başarıyla kaydedildi", title: "BİLGİ", buttons: [{ text: "TAMAM", }] }).show();
-                                    SiparisIslemleri(ENTEGRATION_ID);
-                                } else {
-                                    $("#popupDetay").dxPopup("hide");
-                                    loadPanel.hide();
-                                    DevExpress.ui.dialog.custom({ messageHtml: "İşlemler yapılırken hatayla karşılaşıldı : " + parsedIncome.errorText, title: "HATA", buttons: [{ text: "TAMAM", }] }).show();
+                                $("#popupDetay").dxPopup("hide");
+                                loadPanel.hide();
+                                try {
+                                    var parsedIncome = response;
+                                    if (parsedIncome.isOK) {
+                                        $("#popupDetay").dxPopup("hide");
+                                        loadPanel.hide();
+                                        DevExpress.ui.dialog.custom({ messageHtml: "AQL başarıyla kaydedildi", title: "BİLGİ", buttons: [{ text: "TAMAM", }] }).show();
+                                        SiparisIslemleri(ENTEGRATION_ID);
+                                    } else {
+                                        $("#popupDetay").dxPopup("hide");
+                                        loadPanel.hide();
+                                        DevExpress.ui.dialog.custom({ messageHtml: "İşlemler yapılırken hatayla karşılaşıldı : " + parsedIncome.errorText, title: "HATA", buttons: [{ text: "TAMAM", }] }).show();
+                                    }
+                                } catch (e) {
                                 }
-                            } catch (e) {
-                            }
 
-                        }).fail(function (jqXHR, textStatus) {
-                            $("#popupDetay").dxPopup("hide");
-                            loadPanel.hide();
-                            DevExpress.ui.dialog.custom({ messageHtml: "İşlemler yapılırken hatayla karşılaşıldı : " + textStatus, title: "HATA", buttons: [{ text: "TAMAM", }] }).show();
-                        });
+                            }).fail(function (jqXHR, textStatus) {
+                                $("#popupDetay").dxPopup("hide");
+                                loadPanel.hide();
+                                DevExpress.ui.dialog.custom({ messageHtml: "İşlemler yapılırken hatayla karşılaşıldı : " + textStatus, title: "HATA", buttons: [{ text: "TAMAM", }] }).show();
+                            });
+                        } else {
+
+                            DevExpress.ui.dialog.custom({ messageHtml: "LÜTFEN <b>'INLINE TEST NOTLARINI KONTROL ETTİM'</b> KUTUCUĞUNUN İŞARETLİ OLDUĞUNDAN EMİN OLUNUZ!", title: "HATA", buttons: [{ text: "TAMAM", }] }).show();
+                        }
+                       
                     });
                 }
+            }); 
+            $("#inlineAQLButton").dxButton({
+                stylingMode: "contained",
+                text: "INLINE KONTROL",
+                type: "success",
+                width: "47%",
+                onClick: function () {
+                    INLINEAQLYAP(ENTEGRATION_ID);
+                }
             });
-
             loadPanel.hide();
         }
 
     };
 
     $("#popupDetay").dxPopup(popupOptions).dxPopup("instance").show();
+
+
+}
+
+function INLINEAQLYAP(ENTEGRATION_ID) {
+    
+
+    loadPanel.show();
+    var popupOptions = {
+        contentTemplate: function () {
+            var data = {
+                ENTEGRATION_HEADER_ID: ENTEGRATION_ID
+            };
+            var resText = $.ajax({
+                type: "POST",
+                url: urlInlineAQL,
+                data: data,
+                async: false,
+                contentType: 'application/x-www-form-urlencoded',
+                timeout: 180000,
+                success: function (income, status, xmlRequest) {
+                }, beforeSend: function () {
+                }
+            }).responseText;
+            loadPanel.hide();
+            return resText;
+        },
+        width: function () { return "800px"; },
+        height: function () { return "600px"; },
+        showTitle: true,
+        title: "INLINE KONTROL",
+        dragEnabled: true,
+        closeOnOutsideClick: true,
+        onShown: function () {
+             
+        }
+
+    };
+
+    $("#popup").dxPopup(popupOptions).dxPopup("instance").show();
 
 
 }
@@ -512,8 +576,13 @@ function CalculateFormStatus() {
 
 }
 
-function InspectionListSearch(e) {
+function InspectionListAQLSearch(e) {
     var type = e.row.data.TYPE;
     var entegration_id = e.row.data.ENTEGRATION_HEADER_ID;
     AQLYAP(entegration_id, type);
+}
+
+function InspectionListInlineAQLSearch(e) { 
+    var entegration_id = e.row.data.ENTEGRATION_HEADER_ID;
+    INLINEAQLYAP(entegration_id);
 }

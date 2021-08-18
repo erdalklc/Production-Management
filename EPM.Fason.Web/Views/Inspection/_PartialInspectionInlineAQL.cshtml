@@ -1,89 +1,51 @@
 ﻿
-@model Tuple<List<EPM.Fason.Dto.Fason.PRODUCTION_AQL_INLINE>,int>
+@model int
 <div class="dx-card wide-card">
     @(Html.DevExtreme().DataGrid<EPM.Fason.Dto.Fason.PRODUCTION_AQL_INLINE>().ID("edgridHeader")
                     .ShowBorders(false)
-                    .DataSource(Model.Item1,"ID" )  
-                    .DataSourceOptions(ob=>ob.ReshapeOnPush(false)) 
-     .OnRowUpdating("UpdateMasterRow")
-     .OnRowInserting("InsertMasterRow")
-     .OnRowRemoving("DeleteMasterRow")
+                    .DataSource(d => d.Mvc()
+        .Controller("Inspection")
+        .LoadAction("GetInspectionInlineAQL")
+        .LoadParams(new { ENTEGRATION_HEADER_ID = Model })
+        .InsertAction("InsertInspectionLine")
+        .UpdateAction("UpdateInspectionLine")
+        .DeleteAction("DeleteInspectionLine")
+        .Key("ID")
+    )
     .FocusedRowEnabled(true)
     .FilterRow(x=>x.Visible(true))
     .FocusedRowIndex(0)
-    .Selection(s => s.Mode(SelectionMode.Single))
+    .Selection(s => s.Mode(SelectionMode.Single)) 
     .ColumnAutoWidth(true)
     .ShowBorders(true)
+    .Height("500px")
+    .Scrolling(sc=>sc.Mode(GridScrollingMode.Virtual))
     .HeaderFilter(x=>x.Visible(true))
-    .Editing(ob => ob.Mode(GridEditMode.Cell).StartEditAction(GridStartEditAction.DblClick).AllowUpdating(true).AllowDeleting(true).AllowAdding(true))
+    .Editing(ob => ob.Mode(GridEditMode.Cell).StartEditAction(GridStartEditAction.Click).AllowUpdating(true).AllowDeleting(true).AllowAdding(true))
     .ColumnResizingMode(ColumnResizingMode.Widget)
     .AllowColumnResizing(true)
-    .AllowColumnReordering(true) 
+    .AllowColumnReordering(true)
     .ShowColumnLines(true)
     .ColumnChooser(ch => { ch.Mode(GridColumnChooserMode.Select);ch.Enabled(true); })
-    .ShowColumnHeaders(true) 
-    .ColumnMinWidth(60) 
-    .Columns(columns =>
-    { 
-              columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn =>
-            {
-                btn.Add().Name(GridColumnButtonName.Delete);
-            });  
-
-        columns.AddFor(m => m.ID).SortOrder(SortOrder.Asc).Width(60).AllowEditing(false); 
-        columns.AddFor(m => m.PROCESS_ID).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Inspection").LoadAction("GetProcessList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")); 
-        columns.AddFor(m => m.DESCRIPTION); 
-    })
-    .OnEditingStart(@<text>
-
-    function(e){
-        if(e.data.ID && e.data.ID>0){
-            if(e.column.name=="DEADLINE_2" && e.data.DEADLINE_2!=null){
-                e.cancel=true;
-            }
-            if(e.column.name=="DEADLINE_3" && (e.data.DEADLINE_2==null || e.data.DEADLINE_3!=null)){
-                e.cancel=true;
-            }
-            if(e.column.name=="DEADLINE_4" && (e.data.DEADLINE_2==null || e.data.DEADLINE_3==null || e.data.DEADLINE_4!=null)){
-                e.cancel=true;
-            }
-        }else{
-             if(e.column.name=="DEADLINE_2"){
-                e.cancel=true;
-            }
-            if(e.column.name=="DEADLINE_3"){
-                e.cancel=true;
-            }
-            if(e.column.name=="DEADLINE_4"){
-                e.cancel=true;
-            }
-        }
-
-    }
-
-    </text>)
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(60)
     .OnInitNewRow(@<text>
     function(e){
-    console.log(e);}
-    </text>)
-    .OnCellPrepared(@<text>
-    function(e){
-         if(e.rowType=="data" && e.column.dataField=="FLAG_ID"){
-            if(e.data.FLAG_ID==1){
-                e.cellElement.css("background-color", "indianred");
-                e.cellElement.css("color", "white");
-            }else if(e.data.FLAG_ID==3){
-                e.cellElement.css("background-color", "yellow");
-            }else{
-
-                e.cellElement.css("background-color", "green");
-                e.cellElement.css("color", "white");
-            }
-        }
+    console.log(e);
+    e.data.HEADER_ID = @Model
     }
-
-
     </text>)
+    .Columns(columns =>
+    {
+        columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn =>
+        {
+            btn.Add().Name(GridColumnButtonName.Delete);
+        });
+
+        columns.AddFor(m => m.ID).Width(60).AllowEditing(false);
+        columns.AddFor(m => m.PROCESS_ID).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Inspection").LoadAction("GetProcessList").Key("ID")).DisplayExpr("NAME").ValueExpr("ID"));
+        columns.AddFor(m => m.DESCRIPTION);
+    })
     )
 </div>
 

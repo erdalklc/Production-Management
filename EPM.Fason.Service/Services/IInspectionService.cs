@@ -36,5 +36,11 @@ namespace EPM.Fason.Service.Services
         public List<PRODUCTION_AQL_INLINE> GetInspectionInlineAQL(int USER_ID, int ENTEGRATION_HEADER_ID);
 
         public List<PRODUCTION_PROCESS> GetProcessList(bool hepsi);
+
+        public PRODUCTION_AQL_INLINE InsertInspection(int USER_ID, string values);
+
+        public Tuple<TaskResponse,PRODUCTION_AQL_INLINE> UpdateInspection(int Key, string Values);
+
+        public TaskResponse DeleteInspection(int Key);
     }
 }

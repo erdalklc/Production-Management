@@ -84,33 +84,40 @@
                                     FIRMA_ID: firmaBilgi,
                                     TERMIN_TARIHI: terminTarihi
                                 }
-                                var formData = {
-                                    header: @Json.Serialize(Model.Item1),
-                                    plan: others,
-                                    formHeader: firmaBilgi
+                                if (firmaBilgi > 0) {
+
+                                    var formData = {
+                                        header: @Json.Serialize(Model.Item1),
+                                        plan: others,
+                                        formHeader: firmaBilgi
+                                    }
+
+                                    loadPanel.show();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: '@Url.Action("FasonSiparisOlustur", "UretimTakip")',
+                                        data: formData,
+                                        async: true,
+                                        dataType: "json",
+                                        //contentType: 'application/json',
+                                        timeout: 180000,
+                                        success: function (income, status, xmlRequest) {
+                                            $("#popup").dxPopup("hide");
+                                            loadPanel.hide();
+                                        }, error: function (xhr, status, error) {
+
+                                            DevExpress.ui.dialog.custom({ messageHtml: "HATA : " + xhr.status + ': ' + xhr.statusText, title: "HATA", buttons: [{ text: "TAMAM", }] }).show();
+                                            $("#popup").dxPopup("hide");
+                                            loadPanel.hide();
+                                        }
+                                    }).always(function () {
+                                        loadPanel.hide();
+                                    });
+                                } else {
+
+                                    DevExpress.ui.dialog.custom({ messageHtml: "Lütfen firma bilgisi seçiniz", title: "HATA", buttons: [{ text: "TAMAM", }] }).show();
                                 }
 
-                                loadPanel.show();
-                                $.ajax({
-                                    type: "POST",
-                                    url: '@Url.Action("FasonSiparisOlustur", "UretimTakip")',
-                                    data: formData,
-                                    async: true,
-                                    dataType: "json",
-                                    //contentType: 'application/json',
-                                    timeout: 180000,
-                                    success: function (income, status, xmlRequest) { 
-                                        $("#popup").dxPopup("hide");
-                                        loadPanel.hide(); 
-                                    }, error: function (xhr, status, error) {
-
-                                        DevExpress.ui.dialog.custom({ messageHtml: "HATA : " + xhr.status + ': ' + xhr.statusText, title: "HATA", buttons: [{ text: "TAMAM", }] }).show();
-                                        $("#popup").dxPopup("hide");
-                                        loadPanel.hide();
-                                    }
-                                }).always(function () {
-                                    loadPanel.hide();
-                                });
                             }
                         });
                     }

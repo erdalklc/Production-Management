@@ -418,3 +418,13 @@ D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Release\netcoreapp3.1\M
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Release\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Release\netcoreapp3.1\EPM.Tools.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Release\netcoreapp3.1\EPM.Tools.pdb
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\Razor\Views\Inspection\InspectionListesi.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\Razor\Views\Inspection\SiparisListesi.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\Razor\Views\Inspection\_PartialInspectionInlineAQL.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\Razor\Views\Inspection\_PartialInspectionList.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\Razor\Views\Inspection\_PartialSiparisIslemler.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\Razor\Views\Inspection\_PartialSiparisListesi.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\Razor\Views\Inspection\_PartialSiparisListesiDetail.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\Razor\Views\Login\LoginInspector.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\Razor\Views\Shared\_LayoutInspection.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\Razor\Views\Shared\_PartialLeftMenuInspection.cshtml.g.cs

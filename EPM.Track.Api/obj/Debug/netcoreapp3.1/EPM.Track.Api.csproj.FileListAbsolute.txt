@@ -357,6 +357,14 @@ E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Tra
 E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.dll
 E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.pdb
 E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.genruntimeconfig.cache
+E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.csproj.AssemblyReference.cache
+E:\Eren\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\Eren\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\Eren\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+E:\Eren\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Hosting.Abstractions.dll
+E:\Eren\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+E:\Eren\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
+E:\Eren\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Serilog.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\appsettings.Development.json
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\appsettings.json
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\EPM.Track.Api.exe
@@ -657,6 +665,7 @@ D:\Projects\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Mic
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Hosting.Abstractions.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+D:\Projects\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Oracle.ManagedDataAccess.dll
@@ -723,12 +732,3 @@ D:\Projects\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.pdb
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.genruntimeconfig.cache
-D:\Projects\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
-E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.csproj.AssemblyReference.cache
-E:\Eren\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
-E:\Eren\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-E:\Eren\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
-E:\Eren\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Hosting.Abstractions.dll
-E:\Eren\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
-E:\Eren\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
-E:\Eren\Eren Production Management\EPM.Track.Api\bin\Debug\netcoreapp3.1\Serilog.dll
