@@ -406,7 +406,7 @@ function AQLYAP(ENTEGRATION_ID, TYPE) {
                             return;
                         var status = 0;
                         if (QuantityRelease > 0) {
-                            if (formData.Item4.ACCEPT_QUANTITY >= minorCount / 2 + majorCount)
+                            if (formData.Item4.ACCEPT_QUANTITY >= minorCount / 4 + majorCount)
                                 status = 1;
                         }
                         if (jQuery("[name=CHECKED_INLINE]").val()=="true") {
@@ -557,9 +557,9 @@ function CalculateFormStatus() {
         }
     }
     $("#aqlStandart").html(formData.Item4.ACCEPT_QUANTITY);
-    $("#aqlValidation").html(minorCount / 2 + majorCount);
+    $("#aqlValidation").html(minorCount / 4 + majorCount);
     if (QuantityRelease > 0) {
-        if (formData.Item4.ACCEPT_QUANTITY >= minorCount / 2 + majorCount) {
+        if (formData.Item4.ACCEPT_QUANTITY >= minorCount / 4 + majorCount) {
             $("#formInformation").html("ONAYLANDI");
             $("#formInformation").css("color", "green");
             $("#aqlValidation").css("color", "green");

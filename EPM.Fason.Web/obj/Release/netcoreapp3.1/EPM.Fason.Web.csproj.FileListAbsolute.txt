@@ -428,3 +428,4 @@ D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\R
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\Razor\Views\Login\LoginInspector.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\Razor\Views\Shared\_LayoutInspection.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\Razor\Views\Shared\_PartialLeftMenuInspection.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Release\netcoreapp3.1\Razor\Views\Inspection\_PartialPopupHtml.cshtml.g.cs
