@@ -5,12 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="ServiceHelper\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\EPM.Tools\EPM.Tools.csproj" />
+    <ProjectReference Include="..\EPM.WMS.Dto\EPM.WMS.Dto.csproj" />
   </ItemGroup>
 
 

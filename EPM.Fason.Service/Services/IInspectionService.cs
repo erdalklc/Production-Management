@@ -42,5 +42,7 @@ namespace EPM.Fason.Service.Services
         public Tuple<TaskResponse,PRODUCTION_AQL_INLINE> UpdateInspection(int Key, string Values);
 
         public TaskResponse DeleteInspection(int Key);
+
+        public List<MODELRENKMODEL> GetModelRenk(bool hepsi);
     }
 }

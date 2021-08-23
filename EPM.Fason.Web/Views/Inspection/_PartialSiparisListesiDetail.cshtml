@@ -35,7 +35,7 @@
     .Columns(columns => {
 
         columns.AddFor(m => m.ID).Visible(false).AllowEditing(false).AllowExporting(true);
-        columns.AddFor(m => m.PRODUCT_SIZE).AllowExporting(true);
+        columns.AddFor(m => m.PRODUCT_SIZE).SortOrder(SortOrder.Asc).AllowExporting(true);
         columns.AddFor(m => m.QUANTITY).AllowEditing(true).AllowExporting(true);
     }).OnInitNewRow(@<text> function(e) { e.data.HEADER_ID =@Model ; }</text>)
     )

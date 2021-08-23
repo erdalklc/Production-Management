@@ -101,6 +101,8 @@ namespace EPM.Fason.Web.Controllers
         [HttpGet]
         public object GetSeasonList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_inspectionService.GetSeasonList(hepsi), loadOptions);
 
+        [HttpGet]
+        public object GetModelRenk(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_inspectionService.GetModelRenk(hepsi), loadOptions);
 
         [HttpGet]
         public object GetProcessList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(_inspectionService.GetProcessList(hepsi), loadOptions);

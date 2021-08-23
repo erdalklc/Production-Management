@@ -87,8 +87,8 @@ namespace EPM.Fason.Service.Services
                 sql += " AND FIRMA_ID=" + liste.FIRMA_ID;
             if (liste.SEASON != "HEPSİ")
                 sql += " AND SEASON='" + liste.SEASON + "'";
-            if (liste.MODEL != null && liste.MODEL != null) sql += string.Format(" AND MODEL='{0}'", liste.MODEL);
-            if (liste.COLOR != null && liste.COLOR != null) sql += string.Format(" AND COLOR='{0}'", liste.COLOR);
+            if (liste.MODEL_RENK != null && liste.MODEL_RENK != "HEPSİ") sql += string.Format(" AND MODEL + COLOR='{0}'", liste.MODEL_RENK);
+            
 
             return _fasonRepository.DeserializeList<SIPARIS_LISTESI>(sql);
         }
@@ -191,7 +191,7 @@ namespace EPM.Fason.Service.Services
             mnSum = mnSum.TrimEnd(',');
 
             string sql = string.Format(@"
-SELECT QUESTION,QUESTION_ID,{5},{6},{7} AS HEADER_ID FROM (
+SELECT UPPER(QUESTION) QUESTION,QUESTION_ID,{5},{6},{7} AS HEADER_ID FROM (
 SELECT QUESTION,QUESTION_ID,{1},{2} FROM (
 SELECT 'MJ_'+L.BEDEN PRODUCT_SIZE  
 ,L.MAJOR_QUANTITY  
@@ -378,10 +378,9 @@ INNER JOIN PRODUCTION_FASON_INSPECTORS INC ON INC.ID=PAH.USER_ID
 INNER JOIN PRODUCTION_FASON_USERS USR ON USR.ID=LH.FIRMA_ID WHERE 0=0";
             if (filter.SEASON.ToStringParse() != "HEPSİ")
                 sql += " AND PH.SEASON ='" + filter.SEASON + "'";
-            if (filter.MODEL.ToStringParse() != "")
-                sql += " AND PH.MODEL ='" + filter.MODEL + "'";
-            if (filter.COLOR.ToStringParse() != "")
-                sql += " AND PH.COLOR ='" + filter.COLOR + "'";
+            if (filter.MODEL_RENK.ToStringParse() != "" &&  filter.MODEL_RENK.ToStringParse() != "HEPSİ")
+                sql += " AND PH.MODEL+PH.COLOR ='" + filter.MODEL_RENK + "'";
+           
             if (filter.INSPECTOR_ID !=0)
                 sql += " AND INC.ID =" + filter.INSPECTOR_ID + "";
             if (filter.FIRMA_ID != 0)
@@ -457,6 +456,15 @@ INNER JOIN PRODUCTION_FASON_USERS USR ON USR.ID=LH.FIRMA_ID WHERE 0=0";
             }
 
             return response;
+        }
+
+        public List<MODELRENKMODEL> GetModelRenk(bool hepsi)
+        {
+            string sql = "SELECT DISTINCT MODEL +''+ COLOR AS ADI FROM PRODUCTION_HEADER";
+            List<MODELRENKMODEL> list = _fasonRepository.DeserializeList<MODELRENKMODEL>(sql);
+            if (hepsi)
+                list.Insert(0, new MODELRENKMODEL() { ADI = "HEPSİ" });
+            return list;
         }
     }
 }

@@ -135,6 +135,19 @@
         "runtime": {
           "bin/placeholder/EPM.Tools.dll": {}
         }
+      },
+      "EPM.WMS.Dto/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "bin/placeholder/EPM.WMS.Dto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EPM.WMS.Dto.dll": {}
+        }
       }
     }
   },
@@ -356,11 +369,17 @@
       "type": "project",
       "path": "../EPM.Tools/EPM.Tools.csproj",
       "msbuildProject": "../EPM.Tools/EPM.Tools.csproj"
+    },
+    "EPM.WMS.Dto/1.0.0": {
+      "type": "project",
+      "path": "../EPM.WMS.Dto/EPM.WMS.Dto.csproj",
+      "msbuildProject": "../EPM.WMS.Dto/EPM.WMS.Dto.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "EPM.Tools >= 1.0.0"
+      "EPM.Tools >= 1.0.0",
+      "EPM.WMS.Dto >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -402,6 +421,9 @@
           "projectReferences": {
             "D:\\Projects\\Eren Production Management\\EPM.Tools\\EPM.Tools.csproj": {
               "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Tools\\EPM.Tools.csproj"
+            },
+            "D:\\Projects\\Eren Production Management\\EPM.WMS.Dto\\EPM.WMS.Dto.csproj": {
+              "projectPath": "D:\\Projects\\Eren Production Management\\EPM.WMS.Dto\\EPM.WMS.Dto.csproj"
             }
           }
         }

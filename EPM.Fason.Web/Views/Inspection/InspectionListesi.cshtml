@@ -15,8 +15,7 @@
             items.AddSimpleFor(m => m.FIRMA_ID).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Inspection").LoadAction("GetFasonUsers").Key("ID")).DisplayExpr("NAME").ValueExpr("ID")).IsRequired(false);
             items.AddSimpleFor(m => m.INSPECTOR_ID).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Inspection").LoadAction("GetInspectorList").Key("ID")).DisplayExpr("NAME").ValueExpr("ID")).IsRequired(false);
             items.AddSimpleFor(m => m.SEASON).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Inspection").LoadAction("GetSeasonList").Key("ADI")).DisplayExpr("ADI").ValueExpr("ADI")).IsRequired(false);
-            items.AddSimpleFor(m => m.MODEL).Editor(ob=>ob.TextBox().ID("edModel")).IsRequired(false);
-            items.AddSimpleFor(m => m.COLOR).Editor(ob=>ob.TextBox().ID("edColor")).IsRequired(false);
+            items.AddSimpleFor(m => m.MODEL_RENK).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Inspection").LoadAction("GetModelRenk").Key("ADI")).DisplayExpr("ADI").ValueExpr("ADI")).IsRequired(false);
             items.AddEmpty();
             items.AddButton().HorizontalAlignment(HorizontalAlignment.Right).VerticalAlignment(VerticalAlignment.Center)
                    .ButtonOptions(b => b.Text("FİLTRELE")
@@ -43,8 +42,7 @@
     var data = {
         BASLANGIC_TARIHI: jQuery("[name=BASLANGIC_TARIHI]").val(),
         BITIS_TARIHI: jQuery("[name=BITIS_TARIHI]").val(),
-        MODEL: jQuery("[name=MODEL]").val(),
-        COLOR: jQuery("[name=COLOR]").val(),
+        MODEL_RENK: jQuery("[name=MODEL_RENK]").val(),
         SEASON: jQuery("[name=SEASON]").val(),
         FIRMA_ID: jQuery("[name=FIRMA_ID]").val(),
         INSPECTOR_ID: jQuery("[name=INSPECTOR_ID]").val(),
