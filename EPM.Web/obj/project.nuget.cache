@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "hrqMLYuPPYx50utLx5LhcDam7DGGgwW7YdpqEWXG1wvrmvJnSaXlsXQ+47FjBN3JcPdREHRiaTrIIKHWe5f6Nw==",
+  "dgSpecHash": "HCXUCXzRmWo6N/jCbMz0Mmvi8DNHNM8asfGLu/zsPnvg6AHBpeOmJlXvC5spnth1PEBF69MlkGcKyjYPogVjiA==",
   "success": true,
   "projectFilePath": "D:\\Projects\\Eren Production Management\\EPM.Web\\EPM.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\FDEIT005\\.nuget\\packages\\buildbundlerminifier\\2.9.406\\buildbundlerminifier.2.9.406.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\dapper\\2.0.78\\dapper.2.0.78.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\dapper.contrib\\2.0.78\\dapper.contrib.2.0.78.nupkg.sha512",
-    "C:\\Users\\FDEIT005\\.nuget\\packages\\dapper.oracle\\2.0.2\\dapper.oracle.2.0.2.nupkg.sha512",
+    "C:\\Users\\FDEIT005\\.nuget\\packages\\dapper.oracle\\2.0.3\\dapper.oracle.2.0.3.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\devextreme.aspnet.core\\20.2.3\\devextreme.aspnet.core.20.2.3.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\devextreme.aspnet.data\\2.7.1\\devextreme.aspnet.data.2.7.1.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",

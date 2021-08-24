@@ -1,0 +1,16 @@
+D:\Projects\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.csprojAssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.AssemblyInfoInputs.cache
+D:\Projects\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.AssemblyInfo.cs
+D:\Projects\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.csproj.CoreCompileInputs.cache
+D:\Projects\Eren Production Management\EPM.Service\bin\Debug\netcoreapp3.1\EPM.Service.deps.json
+D:\Projects\Eren Production Management\EPM.Service\bin\Debug\netcoreapp3.1\EPM.Service.dll
+D:\Projects\Eren Production Management\EPM.Service\bin\Debug\netcoreapp3.1\EPM.Service.pdb
+D:\Projects\Eren Production Management\EPM.Service\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+D:\Projects\Eren Production Management\EPM.Service\bin\Debug\netcoreapp3.1\EPM.Repository.dll
+D:\Projects\Eren Production Management\EPM.Service\bin\Debug\netcoreapp3.1\EPM.Tools.dll
+D:\Projects\Eren Production Management\EPM.Service\bin\Debug\netcoreapp3.1\EPM.Repository.pdb
+D:\Projects\Eren Production Management\EPM.Service\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Service\bin\Debug\netcoreapp3.1\EPM.Tools.pdb
+D:\Projects\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.csproj.CopyComplete
+D:\Projects\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.dll
+D:\Projects\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.pdb

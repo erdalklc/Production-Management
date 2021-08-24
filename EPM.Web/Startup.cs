@@ -1,7 +1,9 @@
  
-using EPM.Core.Managers;
-using EPM.Core.Models;
+using EPM.Core.Managers; 
 using EPM.Core.Services;
+using EPM.Repository.Base;
+using EPM.Service.Base;
+using EPM.Tools.Managers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting; 
 using Microsoft.Extensions.Configuration;
@@ -35,10 +37,12 @@ namespace EPM_Web
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();
              
-            services.AddScoped<AppFilterAttribute>(); 
+            services.AddScoped<AppFilterAttribute>();
+            services.AddScoped<IEPMRepository, EPMRepository>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IUretimService, UretimService>();
             services.AddScoped<ISatinAlmaService, SatinAlmaService>(); 
+            services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IUretimIzleService, UretimIzleService>();
             services.AddSingleton<IADAccountService, ADAccountService>();
             services.AddSingleton<ILogService, LogService>();

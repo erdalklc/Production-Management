@@ -1,6 +1,6 @@
-﻿using EPM.Core.Managers;
-using EPM.Core.Models;
+﻿using EPM.Core.Managers; 
 using EPM.Core.Nesneler;
+using EPM.Dto.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;

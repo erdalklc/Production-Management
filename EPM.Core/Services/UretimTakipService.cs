@@ -1,9 +1,9 @@
 ﻿using EPM.Core.FormModels.Uretim;
 using EPM.Core.FormModels.UretimTakip;
 using EPM.Core.Helpers;
-using EPM.Core.Managers;
-using EPM.Core.Models;
+using EPM.Core.Managers; 
 using EPM.Core.Nesneler;
+using EPM.Dto.Models;
 using EPM.Fason.Dto.Fason;
 using EPM.Tools.Helpers;
 using Microsoft.AspNetCore.Http;
@@ -194,7 +194,7 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
 
         public IEnumerable<UretimTakipListesi> GetUretimTakipListesi(HttpContext context, UretimOnayliListe liste)
         {
-            Models.WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
             string sql = @" SELECT A.*,
        CASE
           WHEN SATIN_ALMA_BAGLANTI > 0
@@ -450,7 +450,7 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
 
         public IEnumerable<ContractProcessList> GetContractProcessList(HttpContext context, int HEADER_ID)
         {
-            Models.WebLogin login = new CookieHelper().GetUserFromCookie(context);
+            WebLogin login = new CookieHelper().GetObjectFromCookie<WebLogin>(context,"USER");
             EPM_MASTER_PRODUCTION_H master = OracleServer.Deserialize<EPM_MASTER_PRODUCTION_H>(HEADER_ID);
             EPM_CONTRACT_TRACK_H header = OracleServer.Deserialize<EPM_CONTRACT_TRACK_H>("SELECT * FROM FDEIT005.EPM_CONTRACT_TRACK_H WHERE HEADER_ID=" + HEADER_ID);
             List<EPM_CONTRACT_TRACK_L> detail = OracleServer.DeserializeList<EPM_CONTRACT_TRACK_L>("SELECT * FROM FDEIT005.EPM_CONTRACT_TRACK_H WHERE HEADER_ID=" + header.ID);

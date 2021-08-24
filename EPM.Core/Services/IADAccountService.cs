@@ -1,5 +1,5 @@
 ﻿using EPM.Core.Managers;
-using EPM.Core.Models;
+using EPM.Dto.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;

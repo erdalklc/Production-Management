@@ -1,8 +1,9 @@
 ﻿using EPM.Core.FormModels.UretimPlan;
 using EPM.Core.Helpers;
-using EPM.Core.Managers;
-using EPM.Core.Models;
+using EPM.Core.Managers; 
 using EPM.Core.Nesneler;
+using EPM.Dto.Models;
+using EPM.Tools.Helpers;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -19,7 +20,7 @@ namespace EPM.Core.Services
     {
         public object GetPlan(HttpContext context,int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE)
         {
-            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context,"USER");
             DataTable dtColumnNames = new DataTable();
             dtColumnNames.TableName = "COLUMNNAMES";
             dtColumnNames.Columns.Add("NAME", typeof(string));
@@ -127,7 +128,7 @@ namespace EPM.Core.Services
             UretimPlanResponse response = new UretimPlanResponse();
             response.isOK = true;
             response.errorText = "";
-            WebLogin login = new CookieHelper().GetUserFromCookie(context);
+            WebLogin login = new CookieHelper().GetObjectFromCookie<WebLogin>(context,"USER");
             dynamic value = obj;
             string newValue = Convert.ToString(value.newValue);
             string oldValues = Convert.ToString(value.oldValue);

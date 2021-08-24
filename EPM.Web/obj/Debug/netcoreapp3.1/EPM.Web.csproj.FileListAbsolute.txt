@@ -1516,3 +1516,7 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.c
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.genruntimeconfig.cache
+D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Repository.dll
+D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Service.dll
+D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Service.pdb
+D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Repository.pdb

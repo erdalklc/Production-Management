@@ -859,3 +859,6 @@ D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.pdb
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.genruntimeconfig.cache
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialPopupHtml.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
+D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Dto.pdb

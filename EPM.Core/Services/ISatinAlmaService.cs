@@ -1,5 +1,5 @@
-﻿using EPM.Core.FormModels.SatinAlma;
-using EPM.Core.Models;
+﻿using EPM.Core.FormModels.SatinAlma; 
+using EPM.Dto.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Linq;
 using System;

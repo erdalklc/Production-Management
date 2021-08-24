@@ -1,25 +1,19 @@
-﻿
-@functions{
-    string GetUrl(string action) => Url.Action(action);
-    string GetCurrentUrl() => Url.Action(ViewContext.RouteData.Values["action"].ToString()+""+ Context.Request.QueryString.Value.ToString());
-    bool IsCurrentUrl(string pageName) => GetUrl(pageName) == GetCurrentUrl();
-}
-@{ 
-    List<EPM.Core.Models.Menu> menuData = new EPM.Core.Helpers.MenuHelper().GetMenuList(this.Context);
-
-    foreach (var item in menuData)
+﻿@model List<EPM.Dto.Models.Menu>
+ 
+ 
+@{   
+    List<EPM.Dto.Models.Menu> menuler = new List<EPM.Dto.Models.Menu>();
+    menuler.AddRange(Model);
+    foreach (var item in menuler)
     {
         if (item.ACTION != null)
         {
-            item.SELECTED = IsCurrentUrl(item.ACTION);
+            if(item.ACTION==ViewData["ACTION"].ToString() && item.CONTROLLER == ViewData["CONTROLLER"].ToString()) 
+                item.SELECTED = true; 
             if (item.SELECTED)
             {
                 if (item.CATEGORY_ID != 0)
-                {
-
-                    EPM.Core.Models.Menu menu = menuData.Find(ob => ob.ID == item.CATEGORY_ID);
-                    menu.ISEXPANDED = true;
-                }
+                    menuler.Find(ob => ob.ID == item.CATEGORY_ID).ISEXPANDED = true;
             }
 
         }
@@ -28,14 +22,14 @@
 }
 @(Html.DevExtreme().TreeView()
                 //.DataSource(ob=>ob.Mvc().LoadAction("GetMenuList").Controller("Home")) 
-                .DataSource(menuData)
-                .DataSourceOptions(ob=>ob.Map("mapTreeView"))
+                .DataSource(menuler)
+                .DataSourceOptions(ob => ob.Map("mapTreeView"))
                 .ExpandEvent(TreeViewExpandEvent.Click)
                 .SelectionMode(NavSelectionMode.Single)
                 .KeyExpr("ID")
                 .ParentIdExpr("CATEGORY_ID")
                 .SelectedExpr("SELECTED")
-                .ExpandedExpr("ISEXPANDED") 
+                .ExpandedExpr("ISEXPANDED")
                 .DisplayExpr("TEXT")
                 .DataStructure(TreeViewDataStructure.Plain)
                 .Width(220)

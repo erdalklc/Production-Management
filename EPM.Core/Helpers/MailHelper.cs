@@ -1,5 +1,6 @@
 ﻿using EPM.Core.Managers;
-using EPM.Core.Models;
+using EPM.Dto.Models;
+using EPM.Tools.Helpers;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace EPM.Core.Helpers
 
         public void SendEMail( HttpContext context,string konu, string mailText)
         {
-            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
             SendEMail(user.EMAIL, konu, mailText);
         }
     }

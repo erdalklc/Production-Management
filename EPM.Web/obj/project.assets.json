@@ -34,7 +34,7 @@
           "lib/netstandard2.0/Dapper.Contrib.dll": {}
         }
       },
-      "Dapper.Oracle/2.0.2": {
+      "Dapper.Oracle/2.0.3": {
         "type": "package",
         "dependencies": {
           "Dapper": "2.0.35"
@@ -3309,10 +3309,43 @@
           "bin/placeholder/EPM.Production.Dto.dll": {}
         }
       },
+      "EPM.Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper.Contrib": "2.0.78",
+          "Dapper.Oracle": "2.0.3",
+          "EPM.Tools": "1.0.0",
+          "Oracle.ManagedDataAccess.Core": "3.21.1"
+        },
+        "compile": {
+          "bin/placeholder/EPM.Repository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EPM.Repository.dll": {}
+        }
+      },
+      "EPM.Service/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "EPM.Repository": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/EPM.Service.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EPM.Service.dll": {}
+        }
+      },
       "EPM.Tools/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "EPM.Dto": "1.0.0",
+          "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
+          "Microsoft.AspNetCore.Http.Features": "5.0.7",
+          "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
           "Microsoft.Extensions.Configuration.Abstractions": "5.0.0",
           "Microsoft.Extensions.Configuration.Json": "5.0.0",
           "Newtonsoft.Json": "13.0.1"
@@ -3397,15 +3430,15 @@
         "lib/netstandard2.0/Dapper.Contrib.xml"
       ]
     },
-    "Dapper.Oracle/2.0.2": {
-      "sha512": "vB1b+fkh1sFQOQcaXtGV48sxnvv9K5ituPWIkeP1jU95u4NnSs+bOgBb+Lfm29GNRIQDQAQougoCbYg7C+hD2Q==",
+    "Dapper.Oracle/2.0.3": {
+      "sha512": "wzjp8qYSBHHaYm3qpKnRJAvDVfjQq43HTl+w+NgLw1VqJSDnoMNOIhjLrOhJBg7ai3eSwnwz/cWd4o9yPY6rnA==",
       "type": "package",
-      "path": "dapper.oracle/2.0.2",
+      "path": "dapper.oracle/2.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE",
-        "dapper.oracle.2.0.2.nupkg.sha512",
+        "dapper.oracle.2.0.3.nupkg.sha512",
         "dapper.oracle.nuspec",
         "dips.png",
         "lib/net461/Dapper.Oracle.dll",
@@ -9765,6 +9798,16 @@
       "path": "../EPM.Production.Dto/EPM.Production.Dto.csproj",
       "msbuildProject": "../EPM.Production.Dto/EPM.Production.Dto.csproj"
     },
+    "EPM.Repository/1.0.0": {
+      "type": "project",
+      "path": "../EPM.Repository/EPM.Repository.csproj",
+      "msbuildProject": "../EPM.Repository/EPM.Repository.csproj"
+    },
+    "EPM.Service/1.0.0": {
+      "type": "project",
+      "path": "../EPM.Service/EPM.Service.csproj",
+      "msbuildProject": "../EPM.Service/EPM.Service.csproj"
+    },
     "EPM.Tools/1.0.0": {
       "type": "project",
       "path": "../EPM.Tools/EPM.Tools.csproj",
@@ -9786,6 +9829,7 @@
       "EPM.Fason.Dto >= 1.0.0",
       "EPM.Plan.Dto >= 1.0.0",
       "EPM.Production.Dto >= 1.0.0",
+      "EPM.Service >= 1.0.0",
       "EPM.Tools >= 1.0.0",
       "EPM.Track.Dto >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.Negotiate >= 3.1.14",
@@ -9846,6 +9890,9 @@
             },
             "D:\\Projects\\Eren Production Management\\EPM.Production.Dto\\EPM.Production.Dto.csproj": {
               "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Production.Dto\\EPM.Production.Dto.csproj"
+            },
+            "D:\\Projects\\Eren Production Management\\EPM.Service\\EPM.Service.csproj": {
+              "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Service\\EPM.Service.csproj"
             },
             "D:\\Projects\\Eren Production Management\\EPM.Tools\\EPM.Tools.csproj": {
               "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Tools\\EPM.Tools.csproj"

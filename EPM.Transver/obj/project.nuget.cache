@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/k3zRWCiGqwBxoWxmDy/M+2uRGFqOzCI1IRphXWxiRgwA6VFPy7kWEh4CPShP2lbe4Jfl7C0udwlYhsXVJLpYQ==",
+  "dgSpecHash": "Tb2uicVlnnNd4OBEyppr0Xqeg7ewbPiFpu2+d3i00Id/npual7lK8NGl1ozOuvYdLgD5oNmLaIJNuEjf4yO6/w==",
   "success": true,
   "projectFilePath": "D:\\Projects\\Eren Production Management\\EPM.Transver\\EPM.Transver.csproj",
   "expectedPackageFiles": [
@@ -50,7 +50,7 @@
     "C:\\Users\\FDEIT005\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
-    "C:\\Users\\FDEIT005\\.nuget\\packages\\mongodb.bson\\2.12.2\\mongodb.bson.2.12.2.nupkg.sha512",
+    "C:\\Users\\FDEIT005\\.nuget\\packages\\mongodb.bson\\2.13.0\\mongodb.bson.2.13.0.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\mongodb.driver\\2.12.2\\mongodb.driver.2.12.2.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\mongodb.driver.core\\2.12.2\\mongodb.driver.core.2.12.2.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\mongodb.libmongocrypt\\1.2.1\\mongodb.libmongocrypt.1.2.1.nupkg.sha512",

@@ -22,6 +22,7 @@
       <ProjectReference Include="..\EPM.Fason.Dto\EPM.Fason.Dto.csproj" />
       <ProjectReference Include="..\EPM.Plan.Dto\EPM.Plan.Dto.csproj" />
       <ProjectReference Include="..\EPM.Production.Dto\EPM.Production.Dto.csproj" />
+      <ProjectReference Include="..\EPM.Service\EPM.Service.csproj" />
       <ProjectReference Include="..\EPM.Tools\EPM.Tools.csproj" />
       <ProjectReference Include="..\EPM.Track.Dto\EPM.Track.Dto.csproj" />
     </ItemGroup>

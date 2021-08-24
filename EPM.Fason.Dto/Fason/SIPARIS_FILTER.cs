@@ -13,7 +13,7 @@ namespace EPM.Fason.Dto.Fason
             get
             {
                 if (_BASLANGIC_TARIHI == null)
-                    _BASLANGIC_TARIHI = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                    _BASLANGIC_TARIHI = new DateTime(DateTime.Now.Year-2, DateTime.Now.Month, 1);
                 return _BASLANGIC_TARIHI;
             }
             set { _BASLANGIC_TARIHI = value; }
@@ -23,7 +23,7 @@ namespace EPM.Fason.Dto.Fason
             get
             {
                 if (_BITIS_TARIHI == null)
-                    _BITIS_TARIHI = new DateTime(DateTime.Now.Year, DateTime.Now.Month + 1, 1).AddSeconds(-1);
+                    _BITIS_TARIHI = new DateTime(DateTime.Now.Year+2, DateTime.Now.Month + 1, 1).AddSeconds(-1);
                 return _BITIS_TARIHI;
             }
             set { _BITIS_TARIHI = value; }

@@ -1,20 +1,12 @@
 ﻿using DevExtreme.AspNet.Data;
-using DevExtreme.AspNet.Mvc;
-using EPM.Core.FormModels.Uretim;
-using EPM.Core.Helpers;
-using EPM.Core.Managers;
-using EPM.Core.Services;
+using DevExtreme.AspNet.Mvc; 
+using EPM.Dto.Models;
 using EPM.Plan.Dto.Plan;
-using EPM.Web.ServiceHelper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc; 
-using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+using EPM.Tools.Helpers;
+using EPM.Tools.Managers;
+using EPM.Web.ServiceHelper; 
+using Microsoft.AspNetCore.Mvc;  
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace EPM.Web.Controllers
 {
@@ -85,13 +77,13 @@ namespace EPM.Web.Controllers
         [HttpGet,HttpPost]
         public object _PartialGetPlanList(int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE)
         {
-            return PlanServiceHelper.GetPlan(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, BRAND, SEASON, MODEL, COLOR, ORDER_TYPE, PRODUCTION_TYPE, FABRIC_TYPE);
+            return PlanServiceHelper.GetPlan(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, BRAND, SEASON, MODEL, COLOR, ORDER_TYPE, PRODUCTION_TYPE, FABRIC_TYPE);
         }
 
         [HttpPut,HttpGet,HttpPost]
         public object UpdateTask( [FromBody] JObject elem)
         {
-            return PlanServiceHelper.UpdateInsertPlan(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, elem);
+            return PlanServiceHelper.UpdateInsertPlan(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, elem);
         }
     }
 }

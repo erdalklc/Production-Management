@@ -612,7 +612,7 @@
           }
         }
       },
-      "MongoDB.Bson/2.12.2": {
+      "MongoDB.Bson/2.13.0": {
         "type": "package",
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "5.0.0"
@@ -2268,6 +2268,20 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
+      "EPM.Dto/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper.Contrib": "2.0.78",
+          "MongoDB.Bson": "2.13.0"
+        },
+        "compile": {
+          "bin/placeholder/EPM.Dto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EPM.Dto.dll": {}
+        }
+      },
       "EPM.Fason.Dto/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -2288,6 +2302,10 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "EPM.Dto": "1.0.0",
+          "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
+          "Microsoft.AspNetCore.Http.Features": "5.0.7",
+          "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
           "Microsoft.Extensions.Configuration.Abstractions": "5.0.0",
           "Microsoft.Extensions.Configuration.Json": "5.0.0",
           "Newtonsoft.Json": "13.0.1"
@@ -3152,10 +3170,10 @@
         "version.txt"
       ]
     },
-    "MongoDB.Bson/2.12.2": {
-      "sha512": "J6BuU4N9mD780KUI964zQbwuOMPpeRcsx4Lj98LaYd+l6pEEogin+BNFqnandwCqYjPlQGnmuDkqZXoIumAYTQ==",
+    "MongoDB.Bson/2.13.0": {
+      "sha512": "voNakTxq2NV3n5lM+HpJXcd4UgLk7dtkzaPyqHMDtiBqKJauqFJ0XQIM6l9v2LTqP/GPiDCxf3XCTJHphxamZA==",
       "type": "package",
-      "path": "mongodb.bson/2.12.2",
+      "path": "mongodb.bson/2.13.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3168,7 +3186,7 @@
         "lib/netstandard2.0/MongoDB.Bson.xml",
         "lib/netstandard2.1/MongoDB.Bson.dll",
         "lib/netstandard2.1/MongoDB.Bson.xml",
-        "mongodb.bson.2.12.2.nupkg.sha512",
+        "mongodb.bson.2.13.0.nupkg.sha512",
         "mongodb.bson.nuspec",
         "packageIcon.png"
       ]
@@ -7479,6 +7497,11 @@
         "system.xml.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "EPM.Dto/1.0.0": {
+      "type": "project",
+      "path": "../EPM.Dto/EPM.Dto.csproj",
+      "msbuildProject": "../EPM.Dto/EPM.Dto.csproj"
     },
     "EPM.Fason.Dto/1.0.0": {
       "type": "project",

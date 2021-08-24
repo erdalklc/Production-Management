@@ -2,8 +2,9 @@
 using EPM.Core.Helpers;
 using EPM.Core.Loglar;
 using EPM.Core.Managers;
-using EPM.Core.Models;
-using EPM.Core.Nesneler;
+using EPM.Dto.Base;
+using EPM.Dto.Models;
+using EPM.Tools.Helpers;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

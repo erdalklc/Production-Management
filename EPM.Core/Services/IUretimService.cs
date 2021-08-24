@@ -1,8 +1,8 @@
 ﻿using EPM.Core.FormModels.Uretim;
 using EPM.Core.Loglar;
-using EPM.Core.Managers;
-using EPM.Core.Models;
+using EPM.Core.Managers; 
 using EPM.Core.Nesneler;
+using EPM.Dto.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;

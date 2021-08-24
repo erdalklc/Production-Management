@@ -1,5 +1,6 @@
 ﻿using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
+using EPM.Service.Base;
 using EPM.Web.ServiceHelper;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,11 @@ namespace EPM.Web.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly IMenuService _menuService;
+        public AdminController(IMenuService menuService)
+        {
+            _menuService = menuService;
+        }
         public IActionResult _PartialAyarlar()
         {
             return PartialView();
@@ -18,6 +24,8 @@ namespace EPM.Web.Controllers
 
         public IActionResult _PartialKullaniciYetki()
         {
+            if (!_menuService.CanUserEnterTools(Request.HttpContext))
+                return BadRequest("Yetki Aşımı");
             return PartialView();
         }
 

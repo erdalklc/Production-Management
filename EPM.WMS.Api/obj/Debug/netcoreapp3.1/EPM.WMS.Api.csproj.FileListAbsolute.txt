@@ -66,3 +66,14 @@ D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.W
 D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.dll
 D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.pdb
 D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.genruntimeconfig.cache
+D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
+D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
+D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\Dapper.dll
+D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\Dapper.Contrib.dll
+D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
+D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
+D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.MvcApplicationPartsAssemblyInfo.cs

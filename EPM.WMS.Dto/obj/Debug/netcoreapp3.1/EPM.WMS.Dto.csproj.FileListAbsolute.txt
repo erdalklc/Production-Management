@@ -10,9 +10,9 @@ E:\Eren\Eren Production Management\EPM.WMS.Dto\obj\Debug\netcoreapp3.1\EPM.WMS.D
 D:\Projects\Eren Production Management\EPM.WMS.Dto\bin\Debug\netcoreapp3.1\EPM.WMS.Dto.deps.json
 D:\Projects\Eren Production Management\EPM.WMS.Dto\bin\Debug\netcoreapp3.1\EPM.WMS.Dto.dll
 D:\Projects\Eren Production Management\EPM.WMS.Dto\bin\Debug\netcoreapp3.1\EPM.WMS.Dto.pdb
-D:\Projects\Eren Production Management\EPM.WMS.Dto\obj\Debug\netcoreapp3.1\EPM.WMS.Dto.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.WMS.Dto\obj\Debug\netcoreapp3.1\EPM.WMS.Dto.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.WMS.Dto\obj\Debug\netcoreapp3.1\EPM.WMS.Dto.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.WMS.Dto\obj\Debug\netcoreapp3.1\EPM.WMS.Dto.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.WMS.Dto\obj\Debug\netcoreapp3.1\EPM.WMS.Dto.dll
 D:\Projects\Eren Production Management\EPM.WMS.Dto\obj\Debug\netcoreapp3.1\EPM.WMS.Dto.pdb
+D:\Projects\Eren Production Management\EPM.WMS.Dto\obj\Debug\netcoreapp3.1\EPM.WMS.Dto.csprojAssemblyReference.cache

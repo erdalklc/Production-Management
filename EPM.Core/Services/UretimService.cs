@@ -2,9 +2,10 @@
 using EPM.Core.FormModels.Uretim;
 using EPM.Core.Helpers;
 using EPM.Core.Loglar;
-using EPM.Core.Managers;
-using EPM.Core.Models;
+using EPM.Core.Managers; 
 using EPM.Core.Nesneler;
+using EPM.Dto.Models;
+using EPM.Tools.Helpers;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Http; 
 using Newtonsoft.Json;
@@ -186,7 +187,7 @@ namespace EPM.Core.Services
 
         void CreateFields(HttpRequest request)
         {
-            WebLogin user = new CookieHelper().GetUserFromCookie(request.HttpContext); 
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(request.HttpContext,"USER"); 
             var myFile = request.Form.Files["myFile"];
 
             using (var reader = ExcelReaderFactory.CreateReader(myFile.OpenReadStream()))
@@ -432,7 +433,7 @@ namespace EPM.Core.Services
         public object[] UretimListesiAktarExcelYukle(HttpRequest request)
         {
             object[] obj = { true, "" };
-            WebLogin user = new CookieHelper().GetUserFromCookie(request.HttpContext);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(request.HttpContext, "USER");
             var OnayliBelge = new MenuHelper().OnayliKullanici(request.HttpContext);
             try
             {
@@ -684,7 +685,7 @@ namespace EPM.Core.Services
 
         public IEnumerable<EPM_PRODUCTION_BRANDS> GetBrandList(HttpContext context, bool hepsi = true)
         {
-            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
             OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
             dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32,ParameterDirection.Input);
             dynamicParameters.Add(":P_USER_CODE", user.USER_CODE, OracleMappingType.Varchar2,ParameterDirection.Input);
@@ -695,7 +696,7 @@ namespace EPM.Core.Services
         }
         public IEnumerable<EPM_PRODUCTION_SUB_BRANDS> GetSubBrandList(HttpContext context, bool hepsi = true)
         {
-            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
             OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
             dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32, ParameterDirection.Input);
             dynamicParameters.Add(":P_USER_CODE", user.USER_CODE, OracleMappingType.Varchar2, ParameterDirection.Input);
@@ -733,7 +734,7 @@ namespace EPM.Core.Services
         public IEnumerable<EPM_PRODUCTION_FABRIC_TYPES> GetFabricTypes(HttpContext context, bool hepsi = true)
         {
 
-            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
             OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
             dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32, ParameterDirection.Input);
             dynamicParameters.Add(":P_USER_CODE", user.USER_CODE, OracleMappingType.Varchar2, ParameterDirection.Input);
@@ -744,7 +745,7 @@ namespace EPM.Core.Services
 
         public IEnumerable<EPM_PRODUCTION_TYPES> GetProductionTypes(HttpContext context, bool hepsi = true)
         {
-            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
             OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
             dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32, ParameterDirection.Input);
             dynamicParameters.Add(":P_USER_CODE", user.USER_CODE, OracleMappingType.Varchar2, ParameterDirection.Input);
@@ -809,7 +810,7 @@ namespace EPM.Core.Services
 
         public IEnumerable<MasterList> OnayliUretimListesi(HttpContext context, UretimOnayliListe liste)
         { 
-            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context,"USER");
             OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
             dynamicParameters.Add(":P_BRAND", liste.BRAND, OracleMappingType.Int32, ParameterDirection.Input);
             dynamicParameters.Add(":P_SEASON", liste.SEASON, OracleMappingType.Int32, ParameterDirection.Input);
@@ -833,7 +834,7 @@ namespace EPM.Core.Services
 
         public IEnumerable<VerticalList> UretimListesiDikey(HttpContext context, UretimOnayliListe liste)
         {
-            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context,"USER");
 
 
             OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
@@ -881,7 +882,7 @@ WHERE HEADER_ID=" + ID);
                 //detail.SaveLog(context);
                 log.CHANGED_COLUMN = dic.Keys.ToList()[0].ToString();
                 log.CREATE_DATE = DateTime.Now;
-                log.CHANGED_BY = new CookieHelper().GetUserFromCookie(context).USER_CODE;
+                log.CHANGED_BY = new CookieHelper().GetObjectFromCookie<WebLogin>(context,"USER").USER_CODE;
                 log.DETAIL_ID = detail.ID;
                 logRepository.SaveDetail(log);
             }
@@ -934,7 +935,7 @@ WHERE HEADER_ID=" + ID);
                 OracleServer.Serialize<EPM_MASTER_PRODUCTION_H>(detail); 
                 log.CHANGED_COLUMN = dic.Keys.ToList()[0].ToString();
                 log.CREATE_DATE = DateTime.Now;
-                log.CHANGED_BY = new CookieHelper().GetUserFromCookie(context).USER_CODE;
+                log.CHANGED_BY = new CookieHelper().GetObjectFromCookie<WebLogin>(context,"USER").USER_CODE;
                 log.HEADER_ID = detail.ID;
                 logRepository.SaveMaster(log);
             }

@@ -1,5 +1,6 @@
-﻿using EPM.Core.Managers;
-using EPM.Core.Models;
+﻿using EPM.Core.Managers; 
+using EPM.Dto.Models;
+using EPM.Tools.Helpers;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace EPM.Core.Helpers
             try
             {
                 menu = OracleServer.DeserializeList<Menu>("SELECT * FROM FDEIT005.EPM_WEB_MENU");
-                WebLogin user = new CookieHelper().GetUserFromCookie(context);
+                WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context,"USER");
 
                 foreach (var item in menu)
                 {
@@ -51,7 +52,7 @@ namespace EPM.Core.Helpers
         public bool CanUserEditPlan(HttpContext context)
         {
             bool yes = true;
-            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
 
             if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == 1).Count > 0)
                 yes = true;
@@ -63,7 +64,7 @@ namespace EPM.Core.Helpers
         public bool CanUserEditUretim(HttpContext context)
         {
             bool yes = true;
-            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
 
             if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == 62).Count > 0)
                 yes = true;
@@ -71,10 +72,11 @@ namespace EPM.Core.Helpers
 
             return yes;
         }
+
         public bool CanUserEditUretimTakip(HttpContext context)
         {
             bool yes = true;
-            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
 
             if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == 4).Count > 0)
                 yes = true;
@@ -82,10 +84,11 @@ namespace EPM.Core.Helpers
 
             return yes;
         }
+
         public bool OnayliKullanici(HttpContext context)
         {
             bool yes = true;
-            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
 
             if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == 81).Count > 0)
                 yes = true;
@@ -93,10 +96,11 @@ namespace EPM.Core.Helpers
 
             return yes;
         }
+
         public bool CanUserEnterTools(HttpContext context)
         {
             bool yes = true;
-            WebLogin user = new CookieHelper().GetUserFromCookie(context);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
 
             if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == 41).Count > 0)
                 yes = true;

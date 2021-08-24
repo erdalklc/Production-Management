@@ -2,10 +2,12 @@
 using DevExtreme.AspNet.Mvc;
 using EPM.Core.FormModels.Uretim;
 using EPM.Core.Helpers;
-using EPM.Core.Managers;
-using EPM.Core.Models;
+using EPM.Core.Managers; 
 using EPM.Core.Services;
+using EPM.Dto.Models;
 using EPM.Fason.Dto.Fason;
+using EPM.Tools.Helpers;
+using EPM.Tools.Managers;
 using EPM.Track.Dto.Track;
 using EPM.Web.ServiceHelper;
 using Microsoft.AspNetCore.Mvc;
@@ -158,7 +160,7 @@ namespace EPM.Web.Controllers
         [HttpGet]
         public object UretimTakiplLoad(DataSourceLoadOptions loadOptions, TrackList_Filter liste)
         {
-            return DataSourceLoader.Load(TrackServiceHelper.GetUretimTakipListesi(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, liste), loadOptions);
+            return DataSourceLoader.Load(TrackServiceHelper.GetUretimTakipListesi(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, liste), loadOptions);
         }
 
         [HttpGet]

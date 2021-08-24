@@ -1,8 +1,8 @@
  using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using EPM.Core.Helpers;
-using EPM.Core.Managers;
-using EPM.Core.Services;
+using EPM.Service.Base;
+using EPM.Tools.Managers;
 using EPM.Web.ServiceHelper;
 using Microsoft.AspNetCore.Mvc; 
 
@@ -11,21 +11,30 @@ namespace EPM_Web.Controllers
     [ServiceFilter(typeof(AppFilterAttribute), Order = 1)]
     public class HomeController : Controller
     {
+        private readonly IMenuService _menuService;
+        public HomeController(IMenuService menuService)
+        {
+            _menuService = menuService;
+        }
         public IActionResult Index()
         { 
             ViewBag.PageTitle = "Ana Sayfa";
             return View();
         }
 
-        public PartialViewResult _PartialLeftMenu()
+        [HttpGet, HttpPost]
+        public PartialViewResult _PartialLeftMenu(string ACTION,string CONTROLLER)
         {
-            return PartialView("~/Views/Shared/_PartialLeftMenu.cshtml");
+            ViewData["CONTROLLER"] = CONTROLLER;
+            ViewData["ACTION"] = ACTION;
+            return PartialView("~/Views/Shared/_PartialLeftMenu.cshtml", _menuService.GetMenuList(Request.HttpContext));
         }
 
         [HttpGet,HttpPost] 
         public object GetMenuList()
         {
-            return  new MenuHelper().GetMenuList(Request.HttpContext);
+            Request.HttpContext.Session.
+            return _menuService.GetMenuList(Request.HttpContext);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

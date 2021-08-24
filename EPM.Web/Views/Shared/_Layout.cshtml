@@ -1,6 +1,8 @@
 ﻿
 @{
-    bool ayarlar = new EPM.Core.Helpers.MenuHelper().CanUserEnterTools(this.Context);
+    var currentUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString() + "" + Context.Request.QueryString.Value.ToString());
+    var currentAction = ViewContext.RouteData.Values["action"].ToString() + "" + Context.Request.QueryString.Value.ToString();
+    var currentController = ViewContext.RouteData.Values["controller"].ToString();
 }
 <!DOCTYPE html>
 
@@ -56,7 +58,7 @@
             .OnClick("Ayarlar")
         )
         .CssClass("menu-button")
-        .Visible(ayarlar)
+        .Visible(true)
     .Location(ToolbarItemLocation.After);
     items.Add()
     .Widget(w => w
@@ -102,8 +104,7 @@
             {
                 <div class="menu-container dx-swatch-additional">
                     <div id="edLeftMenu">
-                        @{Html.RenderPartial("_PartialLeftMenu");
-                        }
+
                     </div>
 
 
@@ -120,6 +121,13 @@
         </div>
     </div>
     <script>
+        window.onload = function (event) {
+
+        };
+        $(document).ready(function () {
+            $("#edLeftMenu").load('@Url.Action("_PartialLeftMenu", "Home")', { ACTION: '@currentAction', CONTROLLER: '@currentController' }, function () {
+            });
+        });
             function getLoadPanelInstance() {
                 return $("#loadPanel").dxLoadPanel("instance");
             }
@@ -236,7 +244,7 @@
             document.addEventListener("DOMContentLoaded", function documentReady() {
                 this.removeEventListener("DOMContentLoaded", documentReady);
                 EPM_Web.init();
-               
+
 
             });
 

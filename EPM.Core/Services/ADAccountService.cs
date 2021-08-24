@@ -1,6 +1,6 @@
 ﻿using EPM.Core.Loglar;
-using EPM.Core.Managers;
-using EPM.Core.Models;
+using EPM.Core.Managers; 
+using EPM.Dto.Models;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;

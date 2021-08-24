@@ -2,9 +2,11 @@
 using DevExtreme.AspNet.Mvc;
 using EPM.Core.FormModels.Uretim;
 using EPM.Core.Helpers;
-using EPM.Core.Managers;
-using EPM.Core.Models;
+using EPM.Core.Managers; 
 using EPM.Core.Services;
+using EPM.Dto.Models;
+using EPM.Tools.Helpers;
+using EPM.Tools.Managers;
 using EPM.Web.ServiceHelper;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Cors;
@@ -81,7 +83,7 @@ namespace EPM.Web.Controllers
         [HttpPost, HttpGet]
         public IActionResult _PartialUretimOnayliListeFiltrele(EPM.Production.Dto.Production.UretimOnayliListe liste)
         {
-            return PartialView(new Tuple<List<EPM.Production.Dto.Production.MasterList>, EPM.Production.Dto.Production.UretimOnayliListe>(ProductionServiceHelper.OnayliUretimListesi(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, liste), liste));
+            return PartialView(new Tuple<List<EPM.Production.Dto.Production.MasterList>, EPM.Production.Dto.Production.UretimOnayliListe>(ProductionServiceHelper.OnayliUretimListesi(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, liste), liste));
 
         }
 
@@ -91,12 +93,12 @@ namespace EPM.Web.Controllers
         [HttpGet]
         public object UretimOnaylilLoad2( EPM.Production.Dto.Production.UretimOnayliListe liste)
         {
-            return ProductionServiceHelper.OnayliUretimListesi(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, liste);
+            return ProductionServiceHelper.OnayliUretimListesi(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext,"USER").USER_CODE, liste);
         }
         [HttpGet]
         public object UretimListeDikeyLoad(DataSourceLoadOptions loadOptions, EPM.Production.Dto.Production.UretimOnayliListe liste)
         {
-            return DataSourceLoader.Load(ProductionServiceHelper.UretimListesiDikey(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, liste), loadOptions);
+            return DataSourceLoader.Load(ProductionServiceHelper.UretimListesiDikey(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, liste), loadOptions);
         }
 
         public IActionResult _PartialUretimOnayliListeFiltreleDetail(int ID)=> PartialView(ID);
@@ -110,7 +112,7 @@ namespace EPM.Web.Controllers
         [HttpPut]
         public IActionResult UretimOnayliDetailUpdate(int key, string values)
         {
-            object[] islem= ProductionServiceHelper.UretimOnayliDetailUpdate(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, key, values);
+            object[] islem= ProductionServiceHelper.UretimOnayliDetailUpdate(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, key, values);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
@@ -119,7 +121,7 @@ namespace EPM.Web.Controllers
         [HttpDelete]
         public IActionResult UretimOnayliDetailDelete(int key)
         {
-            object[] islem = ProductionServiceHelper.UretimOnayliDetailDelete(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, key);
+            object[] islem = ProductionServiceHelper.UretimOnayliDetailDelete(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, key);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]); 
@@ -134,7 +136,7 @@ namespace EPM.Web.Controllers
         [HttpPut]
         public IActionResult UretimOnayliUpdate(int key, string values)
         {
-            object[] islem = ProductionServiceHelper.UretimOnayliUpdate(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, key, values);
+            object[] islem = ProductionServiceHelper.UretimOnayliUpdate(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, key, values);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
@@ -143,7 +145,7 @@ namespace EPM.Web.Controllers
         [HttpDelete]
         public IActionResult UretimOnayliDelete(int key)
         {
-            object[] islem = ProductionServiceHelper.UretimOnayliDelete(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE,key);
+            object[] islem = ProductionServiceHelper.UretimOnayliDelete(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, key);
             if ((bool)islem[0])
                 return Ok();
             else return BadRequest(islem[1]);
@@ -158,15 +160,15 @@ namespace EPM.Web.Controllers
         [HttpGet]
         public object GetMarkets(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetMarketList(hepsi), loadOptions);
         [HttpGet]
-        public object GetProductionTypes(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetProductionTypes(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, hepsi), loadOptions);
+        public object GetProductionTypes(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetProductionTypes(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, hepsi), loadOptions);
         [HttpGet]
         public object GetOrderList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetOrderList(hepsi), loadOptions);
         [HttpGet]
-        public object GetFabricList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetFabricTypes(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, hepsi), loadOptions);
+        public object GetFabricList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetFabricTypes(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, hepsi), loadOptions);
         [HttpGet]
-        public object GetBrandList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetBrandList(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, hepsi), loadOptions);
+        public object GetBrandList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetBrandList(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, hepsi), loadOptions);
         [HttpGet]
-        public object GetSubBrandList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetSubBrandList(new CookieHelper().GetUserFromCookie(Request.HttpContext).USER_CODE, hepsi), loadOptions);
+        public object GetSubBrandList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetSubBrandList(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, hepsi), loadOptions);
         [HttpGet]
         public object GetSeasonList(DataSourceLoadOptions loadOptions) => DataSourceLoader.Load(ProductionServiceHelper.GetSeasonList(), loadOptions);
         [HttpGet]

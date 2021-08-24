@@ -1,8 +1,9 @@
 ﻿using EPM.Core.FormModels.SatinAlma;
 using EPM.Core.Helpers;
-using EPM.Core.Managers;
-using EPM.Core.Models;
+using EPM.Core.Managers; 
 using EPM.Core.Nesneler;
+using EPM.Dto.Models;
+using EPM.Tools.Helpers;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Linq;
@@ -80,7 +81,7 @@ ORDER BY 1",paraBirimi);
 
         public OperationResult SatinAlmaListesiniAktarExcelYukle(HttpRequest request,int ORGANIZATION_ID)
         {
-            WebLogin user = new CookieHelper().GetUserFromCookie(request.HttpContext);
+            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(request.HttpContext,"USER");
             OracleServer.ExecSql("DELETE FDEIT005.EPM_CREATE_PO_TEMP WHERE USER_CODE='" + user.USER_CODE + "'");
             OperationResult result = new OperationResult();
             result.ISOK = true;
@@ -179,7 +180,7 @@ ORDER BY 1",paraBirimi);
 
         void InitSatinAlma(HttpContext context)
         {
-            WebLogin login = new CookieHelper().GetUserFromCookie(context);
+            WebLogin login = new CookieHelper().GetObjectFromCookie<WebLogin>(context,"USER");
             //OracleServer.ExecSql("call apps.xxod_pkg.apps_initialize (" + login.USER_ID + ", 50257, 201, NULL, NULL)");
         }
 
@@ -284,7 +285,7 @@ ORDER BY 1",paraBirimi);
         }
         public void SatinAlmaAktar(HttpContext context,JObject obj)
         {
-            WebLogin login = new CookieHelper().GetUserFromCookie(context);
+            WebLogin login = new CookieHelper().GetObjectFromCookie<WebLogin>(context,"USER");
             List<EPM_CREATE_PO_TEMP> aktarim = OracleServer.DeserializeList<EPM_CREATE_PO_TEMP>("SELECT * FROM FDEIT005.EPM_CREATE_PO_TEMP WHERE USER_CODE='" + login.USER_CODE+"'");
             dynamic values = obj;
             string STOK_YERI = Convert.ToString(values.STOK_YERI);

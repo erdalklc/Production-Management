@@ -2,9 +2,8 @@
     $("#edListe").html("");
     var data = {
         BASLANGIC_TARIHI: jQuery("[name=BASLANGIC_TARIHI]").val(),
-        BITIS_TARIHI: jQuery("[name=BITIS_TARIHI]").val(),
-        MODEL: jQuery("[name=MODEL]").val(),
-        COLOR: jQuery("[name=COLOR]").val(),
+        BITIS_TARIHI: jQuery("[name=BITIS_TARIHI]").val(), 
+        MODEL_RENK: jQuery("[name=MODEL_RENK]").val(), 
         SEASON: jQuery("[name=SEASON]").val(),
         FIRMA_ID: jQuery("[name=FIRMA_ID]").val(),
     };
@@ -218,7 +217,7 @@ function AQLYAP(ENTEGRATION_ID, TYPE) {
                             if (columns[i].dataField == "QUANTITY")
                                 columns[i].allowEditing = false;
                             if (columns[i].dataField == "QUANTITY_SAMPLE")
-                                columns[i].allowEditing = false;
+                                columns[i].allowEditing = true;
                             if (columns[i].dataField == "HEADER_ID")
                                 columns[i].visible = false;
 

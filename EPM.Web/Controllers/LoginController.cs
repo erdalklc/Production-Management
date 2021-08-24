@@ -1,17 +1,8 @@
-﻿using EPM.Core.FormModels;
-using EPM.Core.Helpers;
-using EPM.Core.Managers;
-using EPM.Core.Models;
+﻿using EPM.Core.FormModels; 
 using EPM.Core.Services;
-using EPM.Web.ServiceHelper;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.DirectoryServices;
-using System.DirectoryServices.AccountManagement;
-using System.Linq;
-using System.Threading.Tasks;
+using EPM.Dto.Models;
+using EPM.Tools.Helpers; 
+using Microsoft.AspNetCore.Mvc; 
 
 namespace EPM.Web.Controllers
 {
@@ -48,7 +39,7 @@ namespace EPM.Web.Controllers
             else
             {
                 CookieHelper cookieHelper = new CookieHelper();
-                string mail =cookieHelper.GetEmailFromCookie(Request.HttpContext);
+                string mail = cookieHelper.GetObjectFromCookie<string>(Request.HttpContext, "EMAIL");
                 if (mail != "")
                 {
                     model.BeniHatirla = true;model.EMail = mail;
@@ -60,7 +51,7 @@ namespace EPM.Web.Controllers
 
         public IActionResult LogOut()
         {
-            new CookieHelper().DeleteUserCookie(Request.HttpContext);
+            new CookieHelper().DeleteCookie(Request.HttpContext, "USER");
             return RedirectToAction("Login");
         }
     }
