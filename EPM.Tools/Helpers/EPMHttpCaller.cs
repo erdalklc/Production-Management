@@ -30,6 +30,7 @@ namespace EPM.Tools.Helpers
                 throw new Exception(msg);
             }
         }
+
         protected static string GetRequestContent(EPMServiceType serviceType, string apiUrl)
         {
             var data = string.Empty;
@@ -89,6 +90,7 @@ namespace EPM.Tools.Helpers
             }
             return rval;
         }
+      
 
         protected static bool PostRequestByRef<T, TReturn>(EPMServiceType serviceType, string apiUrl, T model, ref TReturn rval)
         {

@@ -1,6 +1,6 @@
-﻿using EPM.Core.FormModels; 
-using EPM.Core.Services;
+﻿using EPM.Dto.FormModels.Login;
 using EPM.Dto.Models;
+using EPM.Service.Base;
 using EPM.Tools.Helpers; 
 using Microsoft.AspNetCore.Mvc; 
 
@@ -40,7 +40,7 @@ namespace EPM.Web.Controllers
             {
                 CookieHelper cookieHelper = new CookieHelper();
                 string mail = cookieHelper.GetObjectFromCookie<string>(Request.HttpContext, "EMAIL");
-                if (mail != "")
+                if (mail != "" && mail!=null)
                 {
                     model.BeniHatirla = true;model.EMail = mail;
                 }

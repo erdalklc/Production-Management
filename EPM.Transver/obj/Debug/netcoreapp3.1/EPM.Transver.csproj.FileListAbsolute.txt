@@ -111,10 +111,6 @@ E:\Eren\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Tran
 E:\Eren\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.dll
 E:\Eren\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.pdb
 E:\Eren\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.genruntimeconfig.cache
-D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.csprojAssemblyReference.cache
-D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.AssemblyInfoInputs.cache
-D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.AssemblyInfo.cs
-D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Transver.exe
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Transver.deps.json
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Transver.runtimeconfig.json
@@ -220,6 +216,10 @@ D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Fason.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Tools.pdb
+D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.csprojAssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.AssemblyInfoInputs.cache
+D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.AssemblyInfo.cs
+D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.dll
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.pdb

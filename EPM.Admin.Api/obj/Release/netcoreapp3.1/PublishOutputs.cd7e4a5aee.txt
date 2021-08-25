@@ -305,6 +305,7 @@ D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\P
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.CodeAnalysis.Razor.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.DependencyModel.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
+D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\PubTmp\Out\MongoDB.Bson.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.Bson.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\PubTmp\Out\Oracle.ManagedDataAccess.dll
@@ -315,6 +316,7 @@ D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\P
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\PubTmp\Out\System.DirectoryServices.Protocols.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\PubTmp\Out\System.Drawing.Common.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\PubTmp\Out\System.IO.FileSystem.AccessControl.dll
+D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\PubTmp\Out\System.Runtime.CompilerServices.Unsafe.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\PubTmp\Out\System.Security.AccessControl.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
 D:\Projects\Eren Production Management\EPM.Admin.Api\obj\Release\netcoreapp3.1\PubTmp\Out\System.Security.Permissions.dll

@@ -4,7 +4,7 @@
 
 
 @{
-    var editable = new EPM.Core.Helpers.MenuHelper().CanUserEditUretim(this.Context);
+    var editable = Convert.ToBoolean(ViewData["CanEditUretim"]);
 }
 
 <div class="dx-card wide-card">

@@ -1,11 +1,8 @@
 ﻿using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
-using EPM.Core.FormModels.Uretim;
-using EPM.Core.Helpers;
-using EPM.Core.Managers; 
-using EPM.Core.Services;
 using EPM.Dto.Models;
 using EPM.Fason.Dto.Fason;
+using EPM.Service.Base;
 using EPM.Tools.Helpers;
 using EPM.Tools.Managers;
 using EPM.Track.Dto.Track;
@@ -21,9 +18,11 @@ namespace EPM.Web.Controllers
 {
     [ServiceFilter(typeof(AppFilterAttribute), Order = 1)]
     public class UretimTakipController : Controller
-    { 
-        public UretimTakipController()
-        { 
+    {
+        private readonly IMenuService _menuService;
+        public UretimTakipController(IMenuService menuService)
+        {
+            _menuService = menuService;
         }
 
         public IActionResult Takip(int TYPE=1)
@@ -56,7 +55,11 @@ namespace EPM.Web.Controllers
         public IActionResult _PartiaEgemenGerceklesenFiltrele(KaliteGerceklesenFilter liste) => PartialView(liste);
 
         [HttpPost, HttpGet]
-        public IActionResult _PartialUretimTakipFiltrele(TrackList_Filter liste) => PartialView(liste);
+        public IActionResult _PartialUretimTakipFiltrele(TrackList_Filter liste)
+        {
+            ViewData["CanEditUretim"] = _menuService.CanUserEditUretim(Request.HttpContext);
+            return PartialView(liste);
+        }
 
         public IActionResult _PartialUretimTakipDetay(int HEADER_ID, int RECIPE)
         {

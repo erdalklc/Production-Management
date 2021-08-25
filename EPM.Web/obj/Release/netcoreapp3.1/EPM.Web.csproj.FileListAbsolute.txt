@@ -279,7 +279,6 @@ D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\Dapper.
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\DevExtreme.AspNet.Core.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\DevExtreme.AspNet.Data.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\ExcelDataReader.dll
-D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\FirebirdSql.Data.FirebirdClient.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
@@ -309,7 +308,6 @@ D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\System.
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\System.Composition.Runtime.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\System.Composition.TypedParts.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
-D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\System.Data.SqlClient.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\System.Diagnostics.PerformanceCounter.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\System.DirectoryServices.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\System.DirectoryServices.Protocols.dll
@@ -367,17 +365,10 @@ D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\ru\Micr
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
-D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\runtimes\win-x64\native\sni.dll
-D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\runtimes\win-x86\native\sni.dll
-D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
-D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Diagnostics.PerformanceCounter.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.DirectoryServices.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.DirectoryServices.Protocols.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Core.dll
-D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Core.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.AssemblyInfo.cs
@@ -475,7 +466,6 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\V
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Uretim\_PartialUretimliListeDikeyFiltrele.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Uretim\_PartialUretimLog.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Uretim\_PartialUretimDetailLog.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\System.Net.Http.Formatting.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll
@@ -510,3 +500,7 @@ D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Pro
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Production.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\Uretim\UretimListesi.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\UretimTakip\NosTakip.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Repository.dll
+D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Service.dll
+D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Service.pdb
+D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Repository.pdb

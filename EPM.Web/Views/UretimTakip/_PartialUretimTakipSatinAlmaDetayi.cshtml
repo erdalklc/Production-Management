@@ -1,11 +1,7 @@
 ﻿@model int
 
 @{ 
-    bool ormeVisible = true;
-    EPM.Dto.Base.EPM_MASTER_PRODUCTION_H header = EPM.Core.Managers.OracleServer.Deserialize<EPM.Dto.Base.EPM_MASTER_PRODUCTION_H>(Model);
-    if (header.PRODUCTION_TYPE == 1 && header.FABRIC_TYPE == 1)
-        ormeVisible = true;
-    else ormeVisible = false;
+    bool ormeVisible = true; 
 }
 
 <div class="dx-card wide-card">

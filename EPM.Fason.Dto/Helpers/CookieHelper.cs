@@ -15,6 +15,7 @@ namespace EPM.Fason.Dto.Helpers
         {
             CookieOptions cookieOp = new CookieOptions();
             cookieOp.Expires = DateTime.Now.AddDays(200);
+
             context.Response.Cookies.Append(CookieName, CryptHelper.Encrypt(JsonConvert.SerializeObject(obj), hash), cookieOp);
         }
 

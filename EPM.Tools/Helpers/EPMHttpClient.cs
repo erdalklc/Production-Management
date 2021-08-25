@@ -20,49 +20,28 @@ namespace EPM.Tools.Helpers
 
             client = new HttpClient();
             string apiUrl = string.Empty;
-            if (EPMServiceConfiguration.IsDevelopment())
+            switch (serviceType)
             {
-                switch (serviceType)
-                {
-                    case EPMServiceType.Fason:
-                        apiUrl = config.GetSection("AppServicesDev:Fason").Value;
-                        break;
-                    case EPMServiceType.Track:
-                        apiUrl = config.GetSection("AppServicesDev:Track").Value;
-                        break;
-                    case EPMServiceType.Plan:
-                        apiUrl = config.GetSection("AppServicesDev:Plan").Value;
-                        break;
-                    case EPMServiceType.Admin:
-                        apiUrl = config.GetSection("AppServicesDev:Admin").Value;
-                        break;
-                    case EPMServiceType.Production:
-                        apiUrl = config.GetSection("AppServicesDev:Production").Value;
-                        break;
-                }
+                case EPMServiceType.Fason:
+                    apiUrl = config.GetSection("AppServices:Fason").Value;
+                    break;
+                case EPMServiceType.Track:
+                    apiUrl = config.GetSection("AppServices:Track").Value;
+                    break;
+                case EPMServiceType.Plan:
+                    apiUrl = config.GetSection("AppServices:Plan").Value;
+                    break;
+                case EPMServiceType.Admin:
+                    apiUrl = config.GetSection("AppServices:Admin").Value;
+                    break;
+                case EPMServiceType.Production:
+                    apiUrl = config.GetSection("AppServices:Production").Value;
+                    break;
+                case EPMServiceType.WMS:
+                    apiUrl = config.GetSection("AppServices:WMS").Value;
+                    break;
             }
-            else
-            {
-                switch (serviceType)
-                {
-                    case EPMServiceType.Fason:
-                        apiUrl = config.GetSection("AppServicesApp:Fason").Value;
-                        break;
-                    case EPMServiceType.Track:
-                        apiUrl = config.GetSection("AppServicesApp:Track").Value;
-                        break;
-                    case EPMServiceType.Plan:
-                        apiUrl = config.GetSection("AppServicesApp:Plan").Value;
-                        break;
-                    case EPMServiceType.Admin:
-                        apiUrl = config.GetSection("AppServicesApp:Admin").Value;
-                        break;
-                    case EPMServiceType.Production:
-                        apiUrl = config.GetSection("AppServicesApp:Production").Value;
-                        break;
-                }
-            }
-            
+
             apiUrl = apiUrl == null ? string.Empty : apiUrl.Trim();
             if (apiUrl.Length > 0 && !apiUrl.EndsWith("/"))
             {

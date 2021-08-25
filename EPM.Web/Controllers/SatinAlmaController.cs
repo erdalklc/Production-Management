@@ -1,8 +1,7 @@
 ﻿using DevExtreme.AspNet.Data;
-using DevExtreme.AspNet.Mvc;
-using EPM.Core.Managers; 
-using EPM.Core.Services;
+using DevExtreme.AspNet.Mvc; 
 using EPM.Dto.Models;
+using EPM.Service.Base;
 using EPM.Tools.Managers;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;

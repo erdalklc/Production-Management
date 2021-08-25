@@ -1,6 +1,3 @@
- 
-using EPM.Core.Managers; 
-using EPM.Core.Services;
 using EPM.Repository.Base;
 using EPM.Service.Base;
 using EPM.Tools.Managers;
@@ -38,11 +35,13 @@ namespace EPM_Web
             services.AddControllersWithViews();
              
             services.AddScoped<AppFilterAttribute>();
-            services.AddScoped<IEPMRepository, EPMRepository>();
+            services.AddSingleton<IMongoRepository, MongoRepository>();
+            services.AddSingleton<IEPMRepository, EPMRepository>();
             services.AddScoped<ILoginService, LoginService>();
-            services.AddScoped<IUretimService, UretimService>();
-            services.AddScoped<ISatinAlmaService, SatinAlmaService>(); 
             services.AddScoped<IMenuService, MenuService>();
+            services.AddScoped<IMailService, MailService>();
+            services.AddScoped<IUretimService, UretimService>();
+            services.AddScoped<ISatinAlmaService, SatinAlmaService>();  
             services.AddScoped<IUretimIzleService, UretimIzleService>();
             services.AddSingleton<IADAccountService, ADAccountService>();
             services.AddSingleton<ILogService, LogService>();

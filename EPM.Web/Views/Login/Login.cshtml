@@ -6,7 +6,7 @@
 }
 
 
-@model EPM.Core.FormModels.Login
+@model EPM.Dto.FormModels.Login.Login
 
 @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { id = "edLoginForm" }))
 {
@@ -16,7 +16,7 @@
         <div class="login-form">
            
             <img class="login-img" src="~/images/eren.png" />
-            @(Html.DevExtreme().Form<EPM.Core.FormModels.Login>()
+            @(Html.DevExtreme().Form<EPM.Dto.FormModels.Login.Login>()
         .ID("form").ShowValidationSummary(true)
         .ColCount(1)
         .Items(items => {

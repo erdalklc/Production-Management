@@ -1,28 +1,9 @@
 ﻿@model List<EPM.Dto.Models.Menu>
  
  
-@{   
-    List<EPM.Dto.Models.Menu> menuler = new List<EPM.Dto.Models.Menu>();
-    menuler.AddRange(Model);
-    foreach (var item in menuler)
-    {
-        if (item.ACTION != null)
-        {
-            if(item.ACTION==ViewData["ACTION"].ToString() && item.CONTROLLER == ViewData["CONTROLLER"].ToString()) 
-                item.SELECTED = true; 
-            if (item.SELECTED)
-            {
-                if (item.CATEGORY_ID != 0)
-                    menuler.Find(ob => ob.ID == item.CATEGORY_ID).ISEXPANDED = true;
-            }
-
-        }
-        else item.SELECTED = false;
-    }
-}
 @(Html.DevExtreme().TreeView()
-                //.DataSource(ob=>ob.Mvc().LoadAction("GetMenuList").Controller("Home")) 
-                .DataSource(menuler)
+                .ID("leftMenuTreeView")
+                .DataSource(Model)
                 .DataSourceOptions(ob => ob.Map("mapTreeView"))
                 .ExpandEvent(TreeViewExpandEvent.Click)
                 .SelectionMode(NavSelectionMode.Single)

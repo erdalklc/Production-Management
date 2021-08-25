@@ -11,5 +11,6 @@ namespace EPM.Tools.Helpers
         Plan=3,
         Admin=4,
         Production = 5,
+        WMS = 6,
     }
 }

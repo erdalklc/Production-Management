@@ -1,6 +1,5 @@
  using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
-using EPM.Core.Helpers;
 using EPM.Service.Base;
 using EPM.Tools.Managers;
 using EPM.Web.ServiceHelper;
@@ -23,17 +22,31 @@ namespace EPM_Web.Controllers
         }
 
         [HttpGet, HttpPost]
+        [ResponseCache(Duration = 300, Location = ResponseCacheLocation.Client)]
         public PartialViewResult _PartialLeftMenu(string ACTION,string CONTROLLER)
         {
-            ViewData["CONTROLLER"] = CONTROLLER;
-            ViewData["ACTION"] = ACTION;
-            return PartialView("~/Views/Shared/_PartialLeftMenu.cshtml", _menuService.GetMenuList(Request.HttpContext));
+            var menuList = _menuService.GetMenuList(Request.HttpContext);
+            foreach (var item in menuList)
+            {
+                if (item.ACTION != null)
+                {
+                    if (item.ACTION == ACTION && item.CONTROLLER == CONTROLLER)
+                        item.SELECTED = true;
+                    if (item.SELECTED)
+                    {
+                        if (item.CATEGORY_ID != 0)
+                            menuList.Find(ob => ob.ID == item.CATEGORY_ID).ISEXPANDED = true;
+                    }
+
+                }
+                else item.SELECTED = false;
+            } 
+            return PartialView("~/Views/Shared/_PartialLeftMenu.cshtml", menuList);
         }
 
         [HttpGet,HttpPost] 
         public object GetMenuList()
-        {
-            Request.HttpContext.Session.
+        { 
             return _menuService.GetMenuList(Request.HttpContext);
         }
 

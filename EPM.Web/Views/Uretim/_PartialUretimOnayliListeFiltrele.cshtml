@@ -2,15 +2,15 @@
 @model Tuple<List<EPM.Production.Dto.Production.MasterList>, EPM.Production.Dto.Production.UretimOnayliListe>
 @using EPM.Dto.Models;
 @{
-    var editable = new EPM.Core.Helpers.MenuHelper().CanUserEditUretim(this.Context);
-    var onayDegistirir = new EPM.Core.Helpers.MenuHelper().OnayliKullanici(this.Context); 
- 
+    var editable = Convert.ToBoolean(ViewData["CanEditUretim"]);
+    var onayDegistirir = Convert.ToBoolean(ViewData["OnayliKullanici"]); 
+
 }
 
 
 <div class="dx-card wide-card">
     @(Html.DevExtreme().DataGrid<EPM.Production.Dto.Production.MasterList>().ID("edgridHeader")
-                    .ShowBorders(false) 
+                    .ShowBorders(false)
                     .DataSource(Model.Item1,"ID" )
                     .OnExporting("exportingHeader")
                     .Export(e =>

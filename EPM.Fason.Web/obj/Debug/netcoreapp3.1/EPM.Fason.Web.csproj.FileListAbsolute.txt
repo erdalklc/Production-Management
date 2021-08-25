@@ -740,6 +740,7 @@ D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\Mic
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
+D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
@@ -809,11 +810,13 @@ D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\run
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Dto.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Fason.Dto.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Fason.Service.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Tools.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Fason.Service.pdb
+D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Fason.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.pdb
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Tools.pdb
@@ -839,6 +842,7 @@ D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Raz
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\SiparisListesi.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialInspectionInlineAQL.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialInspectionList.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialPopupHtml.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialSiparisIslemler.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialSiparisListesi.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialSiparisListesiDetail.cshtml.g.cs
@@ -858,7 +862,3 @@ D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.pdb
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.genruntimeconfig.cache
-D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\Razor\Views\Inspection\_PartialPopupHtml.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
-D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Dto.dll
-D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Dto.pdb

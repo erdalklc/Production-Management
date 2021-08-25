@@ -1,25 +1,16 @@
 ﻿using DevExtreme.AspNet.Data;
-using DevExtreme.AspNet.Mvc;
-using EPM.Core.FormModels.Uretim;
-using EPM.Core.Helpers;
-using EPM.Core.Managers; 
-using EPM.Core.Services;
+using DevExtreme.AspNet.Mvc; 
 using EPM.Dto.Models;
+using EPM.Service.Base;
 using EPM.Tools.Helpers;
 using EPM.Tools.Managers;
 using EPM.Web.ServiceHelper;
-using ExcelDataReader;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EPM.Web.Controllers
 {
@@ -28,17 +19,19 @@ namespace EPM.Web.Controllers
     {
         private readonly IWebHostEnvironment _appEnvironment;
         private readonly IUretimService _uretimRepository;
+        private readonly IMenuService _menuService;
         private readonly ILogService _logRepository;
-        public UretimController(IUretimService uretimRepository, ILogService logRepository, IWebHostEnvironment appEnvironment)
+        public UretimController(IUretimService uretimRepository, ILogService logRepository, IWebHostEnvironment appEnvironment, IMenuService menuService)
         {
             _uretimRepository = uretimRepository;
             _logRepository = logRepository;
             _appEnvironment = appEnvironment;
+            _menuService = menuService;
         }
          
         public IActionResult UretimListesiAktarExcelYukle()
         {
-            object[] obj=_uretimRepository.UretimListesiAktarExcelYukle(Request);
+            object[] obj = _uretimRepository.UretimListesiAktarExcelYukle(Request);
             if ((bool)obj[0])
                 return new EmptyResult();
             else return BadRequest(obj[1]);
@@ -83,12 +76,18 @@ namespace EPM.Web.Controllers
         [HttpPost, HttpGet]
         public IActionResult _PartialUretimOnayliListeFiltrele(EPM.Production.Dto.Production.UretimOnayliListe liste)
         {
+            ViewData["CanEditUretim"] = _menuService.CanUserEditUretim(Request.HttpContext);
+            ViewData["OnayliKullanici"] = _menuService.OnayliKullanici(Request.HttpContext);
             return PartialView(new Tuple<List<EPM.Production.Dto.Production.MasterList>, EPM.Production.Dto.Production.UretimOnayliListe>(ProductionServiceHelper.OnayliUretimListesi(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, liste), liste));
 
         }
 
         [HttpPost, HttpGet]
-        public IActionResult _PartialUretimliListeDikeyFiltrele(EPM.Production.Dto.Production.UretimOnayliListe liste) => PartialView(liste);
+        public IActionResult _PartialUretimliListeDikeyFiltrele(EPM.Production.Dto.Production.UretimOnayliListe liste)
+        {
+            ViewData["CanEditUretim"] = _menuService.CanUserEditUretim(Request.HttpContext);
+            return PartialView(liste);
+        }
 
         [HttpGet]
         public object UretimOnaylilLoad2( EPM.Production.Dto.Production.UretimOnayliListe liste)
@@ -101,12 +100,16 @@ namespace EPM.Web.Controllers
             return DataSourceLoader.Load(ProductionServiceHelper.UretimListesiDikey(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, liste), loadOptions);
         }
 
-        public IActionResult _PartialUretimOnayliListeFiltreleDetail(int ID)=> PartialView(ID);
+        public IActionResult _PartialUretimOnayliListeFiltreleDetail(int ID)
+        {
+            ViewData["CanEditUretim"] = _menuService.CanUserEditUretim(Request.HttpContext); 
+            return PartialView(ID);
+        }
 
         [HttpGet]
         public object UretimOnayliDetailLoad(DataSourceLoadOptions loadOptions,[FromQuery(Name ="HEADER_ID")] int HEADER_ID)
         {   
-            return DataSourceLoader.Load( _uretimRepository.OnayliUretimListesiDetail(HEADER_ID),loadOptions);
+            return DataSourceLoader.Load(ProductionServiceHelper.OnayliUretimListesiDetail(HEADER_ID),loadOptions);
         }
 
         [HttpPut]
@@ -199,12 +202,12 @@ namespace EPM.Web.Controllers
         {
             return DataSourceLoader.Load(ProductionServiceHelper.OnayliUretimListesiLog(HEADER_ID), loadOptions);
         }
+
         [HttpGet]
         public object UretimOnayliDetailLogLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "DETAIL_ID")] int DETAIL_ID)
         {
             return DataSourceLoader.Load(ProductionServiceHelper.OnayliUretimListesiLogDetail(DETAIL_ID), loadOptions);
-        }
-
+        } 
 
         [HttpGet]
         public IActionResult SablonDownload()
@@ -213,6 +216,7 @@ namespace EPM.Web.Controllers
             var fs = new FileStream(path, FileMode.Open,FileAccess.Read); 
             return File(fs, "application/octet-stream", "EPM AKTARIM SABLON.xlsx");
         }
+
         [HttpGet]
         public IActionResult SablonBilgileriDownload()
         {

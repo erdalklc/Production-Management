@@ -1,8 +1,9 @@
-﻿using EPM.Core.Loglar;
-using EPM.Dto.Base;
+﻿using EPM.Dto.Base;
+using EPM.Dto.Loglar;
 using EPM.Production.Dto.Extensions;
 using EPM.Production.Dto.Production;
 using EPM.Tools.Helpers;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace EPM.Web.ServiceHelper
 {
     public class ProductionServiceHelper : EPMHttpCaller
     {
+     
         public static List<UretimListesi> UretimListesi(string USER_CODE, string MODEL, string SEZON, string URETIM_TIPI, int DURUM)
         {
             string apiUrl = "UretimListesi";
@@ -25,6 +27,8 @@ namespace EPM.Web.ServiceHelper
             var list = PostRequest<object[], Tuple<UretimOnayliListe, List<UretimListesiAktarim>>>(EPMServiceType.Production, apiUrl, new object[] { model });
             return list;
         }
+
+        
 
         public static List<EPM_PRODUCTION_BRANDS> GetBrandList(string USER_CODE, bool hepsi = true)
         {

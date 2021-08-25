@@ -1,10 +1,5 @@
 ﻿
-@model EPM.Production.Dto.Production.UretimOnayliListe
-@using EPM.Dto.Models;
-@{
-    var editable = new EPM.Core.Helpers.MenuHelper().CanUserEditUretim(this.Context);
-}
-
+@model EPM.Production.Dto.Production.UretimOnayliListe 
 
 <div class="dx-card wide-card">
     @(Html.DevExtreme().DataGrid<EPM.Production.Dto.Production.VerticalList> ().ID("edgridHeader")
