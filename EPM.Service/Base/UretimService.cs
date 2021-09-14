@@ -1,15 +1,12 @@
-﻿using Dapper.Oracle;
-using EPM.Dto.Base;
+﻿using EPM.Dto.Base;
 using EPM.Dto.Models;
 using EPM.Repository.Base;
 using EPM.Tools.Extensions;
 using EPM.Tools.Helpers;
 using ExcelDataReader;
-using Microsoft.AspNetCore.Http; 
-using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 

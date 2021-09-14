@@ -7,29 +7,94 @@
 
 <div id="form-container">
     <div class="dx-card wide-card">
-        <div style="display:inline-block;float:left;width:200px">
+        @(Html.DevExtreme().Form<EPM.Production.Monitoring.Dto.Models.FilterModel>()
+        .ID("edOnayliListe").ShowValidationSummary(true)
+        .Items(items =>
+        {
+            items.AddGroup().ColCount(8).Items(groupItems =>
+            {
+                groupItems.AddSimpleFor(m => m.BRAND).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.SEASON).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.MODEL).Editor(ob => ob.TextBox().ID("edModel")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.COLOR).Editor(ob => ob.TextBox().ID("edColor")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.ORDER_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetOrderList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.PRODUCT_GROUP).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetProductGroupList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddSimpleFor(m => m.BAND).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddButton().HorizontalAlignment(HorizontalAlignment.Left).VerticalAlignment(VerticalAlignment.Center)
+                  .ButtonOptions(b => b.Text("FİLTRELE")
+                      .Type(ButtonType.Default)
+                      .Icon("fas fa-sign-in-alt")
+                      .Width("100%")
+                      .OnClick("UretimIzleFilter")
+                      .UseSubmitBehavior(true)
+              );
 
-            @Html.Partial("_PartialSeasons")
-        </div>
+            });
 
-        <div id="edWeeks" class="list-container" style="display:inline-block;float:left;width:200px"></div>
 
+
+        })
+        .FormData(Model).ShowValidationSummary(false)
+    )
+
+
+        <div id="popupDetay"></div>
     </div>
 
+    <div class="dx-card wide-card" style="width:220px">
+        <div id="weekDetail"></div>
+    </div>
 </div>
-
 
 
 <script>
 
-    function GetWeeks(e) {
+    function UretimIzleFilter() {
+        $("#weekDetail").html("");
         var data = {
-            SEASON: e.row.data.ID
+            BRAND: jQuery("[name=BRAND]").val(),
+            SEASON: jQuery("[name=SEASON]").val(),
+            BAND: jQuery("[name=BAND]").val(),
+            MODEL: jQuery("[name=MODEL]").val(),
+            COLOR: jQuery("[name=COLOR]").val(),
+            ORDER_TYPE: jQuery("[name=ORDER_TYPE]").val(),
+            PRODUCT_GROUP: jQuery("[name=PRODUCT_GROUP]").val()
         };
-        $.get('@Url.Action("_PartialWeeks", "UretimIzle")', data, function (data) {
-            $("#edWeeks").html("");
-            $("#edWeeks").html(data);
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("UretimIzleFilter", "UretimIzle")',
+            data: data,
+            contentType: 'application/x-www-form-urlencoded',
+            timeout: 180000,
+            success: function (income, status, xmlRequest) {
+                console.log(income)
+
+                $("#weekDetail").dxList({
+                    dataSource: new DevExpress.data.DataSource({
+                        store: new DevExpress.data.ArrayStore({
+                            key: "ID",
+                            data: income
+                        })
+                    }),
+                    height: "calc(100vh - 140px)", 
+                    itemTemplate: function (data) {
+                        var html = "<div><span style='color:indianred'>" + data.YEAR + "</span> <span style='font-weight:bold'>" + data.WEEK + " H.</span></div>";
+                        return html;
+                    },
+                    showSelectionControls: true,
+                    selectionMode: "single"
+                }).dxList("instance");
+
+            }, beforeSend: function () {
+                getLoadPanelInstance().show();
+            }
+
+
+        }).always(function () {
+            getLoadPanelInstance().hide();
         });
     }
+
 
 </script>

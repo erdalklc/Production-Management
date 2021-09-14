@@ -1,0 +1,12 @@
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Dto\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.deps.json
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Dto\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.dll
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Dto\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Dto\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.csprojAssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Dto\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.AssemblyInfoInputs.cache
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Dto\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.AssemblyInfo.cs
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Dto\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.csproj.CoreCompileInputs.cache
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Dto\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.dll
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Dto\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Dto\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Dto\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Dto\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.csproj.CopyComplete

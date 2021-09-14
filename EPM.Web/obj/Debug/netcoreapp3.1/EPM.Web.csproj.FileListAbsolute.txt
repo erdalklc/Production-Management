@@ -1510,3 +1510,5 @@ D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Repos
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.Views.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.genruntimeconfig.cache
+D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.dll
+D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.pdb

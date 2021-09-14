@@ -12,5 +12,6 @@ namespace EPM.Tools.Helpers
         Admin=4,
         Production = 5,
         WMS = 6,
+        Monitoring=7
     }
 }

@@ -1,4 +1,6 @@
-﻿using EPM.Service.Base;
+﻿using EPM.Production.Monitoring.Dto.Models;
+using EPM.Service.Base;
+using EPM.Web.ServiceHelper;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,21 +19,13 @@ namespace EPM.Web.Controllers
         }
         public IActionResult UretimIzle()
         {
-            return View();
+            return View(new FilterModel());
         }
-
-        public IActionResult _PartialSeasons()
-        {
-            return PartialView();
+        [HttpPost, HttpGet]
+        public IActionResult UretimIzleFilter(FilterModel tt)
+        { 
+            return Json(MonitoringServiceHelper.GetTerminList(tt));
         }
-        public IActionResult _PartialWeeks(int SEASON)
-        {
-            return PartialView(_uretimIzleService.GetWeeks(SEASON));
-        }
-
-        public IActionResult _PartialModels(int SEASON,int YEAR, int WEEK)
-        {
-            return PartialView(_uretimIzleService.GetModels(SEASON, YEAR, WEEK));
-        }
+        
     }
 }

@@ -40,6 +40,9 @@ namespace EPM.Tools.Helpers
                 case EPMServiceType.WMS:
                     apiUrl = config.GetSection("AppServices:WMS").Value;
                     break;
+                case EPMServiceType.Monitoring:
+                    apiUrl = config.GetSection("AppServices:Monitoring").Value;
+                    break;
             }
 
             apiUrl = apiUrl == null ? string.Empty : apiUrl.Trim();

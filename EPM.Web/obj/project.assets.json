@@ -3198,6 +3198,19 @@
           "bin/placeholder/EPM.Production.Dto.dll": {}
         }
       },
+      "EPM.Production.Monitoring.Dto/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "EPM.Dto": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/EPM.Production.Monitoring.Dto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EPM.Production.Monitoring.Dto.dll": {}
+        }
+      },
       "EPM.Repository/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -9507,6 +9520,11 @@
       "path": "../EPM.Production.Dto/EPM.Production.Dto.csproj",
       "msbuildProject": "../EPM.Production.Dto/EPM.Production.Dto.csproj"
     },
+    "EPM.Production.Monitoring.Dto/1.0.0": {
+      "type": "project",
+      "path": "../EPM.Production.Monitoring.Dto/EPM.Production.Monitoring.Dto.csproj",
+      "msbuildProject": "../EPM.Production.Monitoring.Dto/EPM.Production.Monitoring.Dto.csproj"
+    },
     "EPM.Repository/1.0.0": {
       "type": "project",
       "path": "../EPM.Repository/EPM.Repository.csproj",
@@ -9537,6 +9555,7 @@
       "EPM.Fason.Dto >= 1.0.0",
       "EPM.Plan.Dto >= 1.0.0",
       "EPM.Production.Dto >= 1.0.0",
+      "EPM.Production.Monitoring.Dto >= 1.0.0",
       "EPM.Service >= 1.0.0",
       "EPM.Tools >= 1.0.0",
       "EPM.Track.Dto >= 1.0.0",
@@ -9595,6 +9614,9 @@
             },
             "D:\\Projects\\Eren Production Management\\EPM.Production.Dto\\EPM.Production.Dto.csproj": {
               "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Production.Dto\\EPM.Production.Dto.csproj"
+            },
+            "D:\\Projects\\Eren Production Management\\EPM.Production.Monitoring.Dto\\EPM.Production.Monitoring.Dto.csproj": {
+              "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Production.Monitoring.Dto\\EPM.Production.Monitoring.Dto.csproj"
             },
             "D:\\Projects\\Eren Production Management\\EPM.Service\\EPM.Service.csproj": {
               "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Service\\EPM.Service.csproj"
