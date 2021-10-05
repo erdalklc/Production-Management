@@ -9,5 +9,6 @@ namespace EPM.Production.Monitoring.Service.Services
     {
         public List<HaftaModel> GetHaftaModelList();
         public List<HaftaModel> GetTerminList(FilterModel model);
+        public List<ProductModel> GetProductList(Tuple<HaftaModel, FilterModel> model);
     }
 }

@@ -15,5 +15,12 @@ namespace EPM.Web.ServiceHelper
             var list = PostRequest<FilterModel, List<HaftaModel>>(EPMServiceType.Monitoring, apiUrl, model);
             return list;
         }
+
+        public static List<ProductModel> GetProductList(HaftaModel model,FilterModel filterModel)
+        {
+            string apiUrl = "GetProductList";
+            var list = PostRequest<Tuple<HaftaModel,FilterModel>, List<ProductModel>>(EPMServiceType.Monitoring, apiUrl, new Tuple<HaftaModel, FilterModel>(model,filterModel));
+            return list;
+        }
     }
 }

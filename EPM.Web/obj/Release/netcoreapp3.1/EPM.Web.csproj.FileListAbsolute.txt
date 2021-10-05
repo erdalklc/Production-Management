@@ -504,3 +504,5 @@ D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Rep
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Service.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Service.pdb
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Repository.pdb
+D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Production.Monitoring.Dto.dll
+D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Production.Monitoring.Dto.pdb

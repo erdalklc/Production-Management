@@ -22,5 +22,10 @@ namespace EPM.Production.Monitoring.Api.Controllers
         {
             return _monitoringService.GetTerminList(model);
         }
+
+        public List<ProductModel> GetProductList(Tuple<HaftaModel, FilterModel> model)
+        {
+            return _monitoringService.GetProductList(model);
+        }
     }
 }

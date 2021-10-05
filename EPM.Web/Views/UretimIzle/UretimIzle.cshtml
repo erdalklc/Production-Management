@@ -41,16 +41,18 @@
         <div id="popupDetay"></div>
     </div>
 
-    <div class="dx-card wide-card" style="width:220px">
+    <div class="dx-card wide-card" id="weekDetailCard" style="width:265px;height:calc(100vh - 135px);display:inline-block;margin:0 2px">
         <div id="weekDetail"></div>
+    </div>
+    <div class="dx-card wide-card" id="productDetailCard" style="width:200px;height:calc(100vh - 135px);display:inline-block;margin:0 2px">
+        <div id="productDetail"></div>
     </div>
 </div>
 
 
 <script>
-
-    function UretimIzleFilter() {
-        $("#weekDetail").html("");
+    var weekDetail, productDetail;
+    function UretimIzleFilter() { 
         var data = {
             BRAND: jQuery("[name=BRAND]").val(),
             SEASON: jQuery("[name=SEASON]").val(),
@@ -60,7 +62,6 @@
             ORDER_TYPE: jQuery("[name=ORDER_TYPE]").val(),
             PRODUCT_GROUP: jQuery("[name=PRODUCT_GROUP]").val()
         };
-        console.log(data);
         $.ajax({
             type: "POST",
             url: '@Url.Action("UretimIzleFilter", "UretimIzle")',
@@ -68,22 +69,70 @@
             contentType: 'application/x-www-form-urlencoded',
             timeout: 180000,
             success: function (income, status, xmlRequest) {
-                console.log(income)
-
-                $("#weekDetail").dxList({
+                
+                weekDetail= $("#weekDetail").dxList({
                     dataSource: new DevExpress.data.DataSource({
                         store: new DevExpress.data.ArrayStore({
                             key: "ID",
                             data: income
                         })
                     }),
-                    height: "calc(100vh - 140px)", 
+                    height: "100%",
                     itemTemplate: function (data) {
-                        var html = "<div><span style='color:indianred'>" + data.YEAR + "</span> <span style='font-weight:bold'>" + data.WEEK + " H.</span></div>";
+                        var html = "<div> <span style='font-weight:bold;font-size:11px'>" + data.WEEK + ". Hafta</span> <span style='font-style:italic;color:indianred'> (" + moment(data.START_DATE).format("DD.MM.YYYY") + " - " + moment(data.END_DATE).format("DD.MM.YYYY") + ")</span></div>";
                         return html;
                     },
                     showSelectionControls: true,
-                    selectionMode: "single"
+                    selectionMode: "single", pageLoadMode: "scrollBottom",
+                    onSelectionChanged: function (data) {
+                        GetProductDetail(data.addedItems[0]);
+                    }
+                });
+
+            }, beforeSend: function () {
+                getLoadPanelInstance().show();
+            }
+
+
+        }).always(function () {
+            getLoadPanelInstance().hide();
+        });
+    }
+
+    function GetProductDetail(haftaModel) {
+        data = {
+            model: haftaModel,
+            filterModel: {
+                BRAND: jQuery("[name=BRAND]").val(),
+                SEASON: jQuery("[name=SEASON]").val(),
+                BAND: jQuery("[name=BAND]").val(),
+                MODEL: jQuery("[name=MODEL]").val(),
+                COLOR: jQuery("[name=COLOR]").val(),
+                ORDER_TYPE: jQuery("[name=ORDER_TYPE]").val(),
+                PRODUCT_GROUP: jQuery("[name=PRODUCT_GROUP]").val()
+            }
+        }
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetProductList", "UretimIzle")',
+            data: data,
+            contentType: 'application/x-www-form-urlencoded',
+            timeout: 180000,
+            success: function (income, status, xmlRequest) {
+                productDetail= $("#productDetail").dxList({
+                    dataSource: new DevExpress.data.DataSource({
+                        store: new DevExpress.data.ArrayStore({
+                            key: "ID",
+                            data: income
+                        })
+                    }),
+                    height: "100%",
+                    itemTemplate: function (data) {
+                        var html = "<div> <span style='font-weight:bold;'>" + data.MODEL + "</span>.<span style='font-weight:bold'>" + data.COLOR + "</span></div>";
+                        return html;
+                    },
+                    showSelectionControls: true, pageLoadMode: "scrollBottom",
+                    selectionMode: "single",
                 }).dxList("instance");
 
             }, beforeSend: function () {

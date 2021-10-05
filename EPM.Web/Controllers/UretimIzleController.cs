@@ -26,6 +26,13 @@ namespace EPM.Web.Controllers
         { 
             return Json(MonitoringServiceHelper.GetTerminList(tt));
         }
-        
+
+        [HttpPost, HttpGet]
+        public IActionResult GetProductList(HaftaModel model,FilterModel filterModel)
+        {
+            return Json(MonitoringServiceHelper.GetProductList(model,filterModel));
+        }
+
+
     }
 }

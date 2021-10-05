@@ -60,11 +60,27 @@ WHERE 0=0 _SQLFILTER_
             return _monitoringRepository.DeserializeList<HaftaModel>(sql);
         }
 
-        public List<ProductModel> GetProductList(HaftaModel haftaModel)
+        public List<ProductModel> GetProductList(Tuple<HaftaModel, FilterModel> model)
         {
-            string sql = string.Format(@"SELECT H.MODEL ,H.COLOR,M.ADI AS MARKET FROM FDEIT005.EPM_PRODUCTION_PLAN P 
+            string sql = string.Format(@"SELECT DISTINCT H.MODEL ,H.COLOR FROM FDEIT005.EPM_PRODUCTION_PLAN P 
 INNER JOIN  FDEIT005.EPM_MASTER_PRODUCTION_H  H ON H.ID=P.HEADER_ID
-INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND P.WEEK={0} AND P.YEAR={1}", haftaModel.WEEK, haftaModel.YEAR);
+INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND P.WEEK={0} AND P.YEAR={1} _SQLFILTER_", model.Item1.WEEK, model.Item1.YEAR);
+            string sqlFilter = "";
+            if (model.Item2.SEASON != 0)
+                sqlFilter += " AND H.SEASON=" + model.Item2.SEASON;
+            if (model.Item2.BRAND != 0)
+                sqlFilter += " AND H.BRAND=" + model.Item2.BRAND;
+            if (model.Item2.PRODUCT_GROUP != 0)
+                sqlFilter += " AND H.PRODUCT_GROUP=" + model.Item2.PRODUCT_GROUP;
+            if (model.Item2.ORDER_TYPE != 0)
+                sqlFilter += " AND H.ORDER_TYPE=" + model.Item2.ORDER_TYPE;
+            if (model.Item2.BAND != 0)
+                sqlFilter += " AND H.BAND_ID=" + model.Item2.BAND;
+            if (model.Item2.MODEL != null && model.Item2.MODEL != "")
+                sqlFilter += " AND H.MODEL='" + model.Item2.MODEL + "'";
+            if (model.Item2.COLOR != null && model.Item2.COLOR != "")
+                sqlFilter += " AND H.COLOR='" + model.Item2.COLOR + "'";
+            sql = sql.Replace("_SQLFILTER_", sqlFilter);
             return _monitoringRepository.DeserializeList<ProductModel>(sql);
         }
 

@@ -128,6 +128,7 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\devextreme\vectormap-utils\dx.vectormaputils.js
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\devextreme\vectormap-utils\dx.vectormaputils.node.js
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\jquery-3.5.1.min.js
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\moment.js
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\vendor.js
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.Development.json
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.json
@@ -558,6 +559,7 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Fason.Dto.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Plan.Dto.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Production.Dto.dll
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Production.Monitoring.Dto.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Repository.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Service.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Tools.dll
@@ -566,6 +568,7 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Fason.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Plan.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Production.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Production.Monitoring.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Service.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Tools.pdb
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\EPM.Track.Dto.pdb

@@ -165,43 +165,47 @@ namespace EPM.Service.Base
                         }
                         if((bool)err[0])
                         {
-                            EPM_PRODUCTION_SEASON_WEEKS week = weeks.Find(ob => ob.SEASON_ID == seasonList.Find(ob => ob.ADI == reader.GetValue(2).ToStringParse()).ID);
-                            if (week != null)
+                            if(reader.GetValue(30).IntParse()!=0 && reader.GetValue(31).IntParse() != 0)
                             {
-                                if(week.START_YEAR <= reader.GetValue(30).IntParse() && week.END_YEAR>= reader.GetValue(30).IntParse())
+                                EPM_PRODUCTION_SEASON_WEEKS week = weeks.Find(ob => ob.SEASON_ID == seasonList.Find(ob => ob.ADI == reader.GetValue(2).ToStringParse()).ID);
+                                if (week != null)
                                 {
-                                    
-                                    if(week.START_YEAR == reader.GetValue(30).IntParse())
+                                    if (week.START_YEAR <= reader.GetValue(30).IntParse() && week.END_YEAR >= reader.GetValue(30).IntParse())
                                     {
-                                        if(!(week.START_WEEK<= reader.GetValue(31).IntParse()) )
+
+                                        if (week.START_YEAR == reader.GetValue(30).IntParse())
                                         {
-                                            err[0] = false;
-                                            err[1] += (i + 1) + " Satırında girilen Plan haftası Sezon sınırlarında değil<br>";
+                                            if (!(week.START_WEEK <= reader.GetValue(31).IntParse()))
+                                            {
+                                                err[0] = false;
+                                                err[1] += (i + 1) + " Satırında girilen Plan haftası Sezon sınırlarında değil<br>";
+                                            }
+                                        }
+
+                                        if (week.END_YEAR == reader.GetValue(30).IntParse())
+                                        {
+                                            if (!(week.END_WEEK >= reader.GetValue(31).IntParse()))
+                                            {
+                                                err[0] = false;
+                                                err[1] += (i + 1) + " Satırında girilen Plan haftası Sezon sınırlarında değil<br>";
+                                            }
+
                                         }
                                     }
-
-                                    if (week.END_YEAR == reader.GetValue(30).IntParse())
+                                    else
                                     {
-                                        if (!(week.END_WEEK >= reader.GetValue(31).IntParse()))
-                                        {
-                                            err[0] = false;
-                                            err[1] += (i + 1) + " Satırında girilen Plan haftası Sezon sınırlarında değil<br>";
-                                        }
-
+                                        err[0] = false;
+                                        err[1] += (i + 1) + " Satırında girilen Plan Yılı Sezon sınırlarında değil<br>";
                                     }
                                 }
                                 else
                                 {
+
                                     err[0] = false;
-                                    err[1] += (i + 1) + " Satırında girilen Plan Yılı Sezon sınırlarında değil<br>";
+                                    err[1] += (i + 1) + " Satırında Sezon bilgisine ait hafta-yıl bilgisi bulunamadı<br>";
                                 }
                             }
-                            else
-                            {
-
-                                err[0] = false;
-                                err[1] += (i + 1) + " Satırında Sezon bilgisine ait hafta-yıl bilgisi bulunamadı<br>";
-                            }
+                            
                         }
 
                     }

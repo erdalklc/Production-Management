@@ -38,6 +38,7 @@
           "EPM.Fason.Dto": "1.0.0",
           "EPM.Plan.Dto": "1.0.0",
           "EPM.Production.Dto": "1.0.0",
+          "EPM.Production.Monitoring.Dto": "1.0.0",
           "EPM.Service": "1.0.0",
           "EPM.Tools": "1.0.0",
           "EPM.Track.Dto": "1.0.0",
@@ -2665,6 +2666,17 @@
         },
         "compile": {
           "EPM.Production.Dto.dll": {}
+        }
+      },
+      "EPM.Production.Monitoring.Dto/1.0.0": {
+        "dependencies": {
+          "EPM.Dto": "1.0.0"
+        },
+        "runtime": {
+          "EPM.Production.Monitoring.Dto.dll": {}
+        },
+        "compile": {
+          "EPM.Production.Monitoring.Dto.dll": {}
         }
       },
       "EPM.Repository/1.0.0": {
@@ -5744,6 +5756,11 @@
       "sha512": ""
     },
     "EPM.Production.Dto/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EPM.Production.Monitoring.Dto/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
