@@ -24,3 +24,5 @@ D:\Projects\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp
 D:\Projects\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.dll
 D:\Projects\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.pdb
+E:\Eren\Eren Production Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+E:\Eren\Eren Production Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Dto.pdb

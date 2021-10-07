@@ -19,3 +19,6 @@ D:\Projects\Eren Production Management\EPM.Tools\obj\Debug\netcoreapp3.1\EPM.Too
 D:\Projects\Eren Production Management\EPM.Tools\obj\Debug\netcoreapp3.1\EPM.Tools.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Tools\obj\Debug\netcoreapp3.1\EPM.Tools.dll
 D:\Projects\Eren Production Management\EPM.Tools\obj\Debug\netcoreapp3.1\EPM.Tools.pdb
+E:\Eren\Eren Production Management\EPM.Tools\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+E:\Eren\Eren Production Management\EPM.Tools\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
+E:\Eren\Eren Production Management\EPM.Tools\obj\Debug\netcoreapp3.1\EPM.Tools.csproj.CopyComplete

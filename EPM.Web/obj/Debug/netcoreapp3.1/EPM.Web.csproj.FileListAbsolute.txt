@@ -775,8 +775,6 @@ E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\DevExtreme.As
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\DevExtreme.AspNet.Data.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\DnsClient.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\ExcelDataReader.dll
-E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\FirebirdSql.Data.FirebirdClient.dll
-E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Negotiate.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Connections.Abstractions.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
@@ -823,7 +821,6 @@ E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\System.Compos
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\System.Composition.Runtime.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\System.Composition.TypedParts.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
-E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\System.Diagnostics.PerformanceCounter.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\System.DirectoryServices.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\System.DirectoryServices.AccountManagement.dll
@@ -897,11 +894,6 @@ E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\win\
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\linux\native\libmongocrypt.so
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\osx\native\libmongocrypt.dylib
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\win\native\mongocrypt.dll
-E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
-E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
-E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
-E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
-E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Diagnostics.PerformanceCounter.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.DirectoryServices.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.DirectoryServices.AccountManagement.dll
@@ -916,12 +908,10 @@ E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\win\
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Core.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Dto.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Fason.Dto.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Tools.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Track.Dto.dll
-E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Core.pdb
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Fason.Dto.pdb
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Tools.pdb
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Track.Dto.pdb
@@ -1512,3 +1502,9 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.c
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.genruntimeconfig.cache
 D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.pdb
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.dll
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Repository.dll
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Service.dll
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.pdb
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Service.pdb
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Repository.pdb
