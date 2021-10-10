@@ -1,4 +1,5 @@
-﻿using EPM.Production.Monitoring.Dto.Models;
+﻿using EPM.Dto.Base;
+using EPM.Production.Monitoring.Dto.Models;
 using EPM.Tools.Helpers;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,19 @@ namespace EPM.Web.ServiceHelper
         {
             string apiUrl = "GetProductList";
             var list = PostRequest<Tuple<HaftaModel,FilterModel>, List<ProductModel>>(EPMServiceType.Monitoring, apiUrl, new Tuple<HaftaModel, FilterModel>(model,filterModel));
+            return list;
+        }
+
+        public static object GetProductionDetails(HaftaModel haftaModel, ProductModel productModel, FilterModel filterModel)
+        {
+            string apiUrl = "GetProductionDetails";
+            var list = PostRequest<Tuple<HaftaModel, ProductModel, FilterModel>, Tuple<EPM_MASTER_PRODUCTION_H, List<PlanModel>, EPM_TRACKING_PROCESS_VALUES>>(EPMServiceType.Monitoring, apiUrl, new Tuple<HaftaModel, ProductModel, FilterModel>(haftaModel, productModel, filterModel));
+            return list;
+        }
+        public static object GetProductionDetailsByDate(HaftaModel haftaModel, ProductModel productModel, FilterModel filterModel,DateTime tarih)
+        {
+            string apiUrl = "GetProductionDetailsByDate";
+            var list = PostRequest<Tuple<HaftaModel, ProductModel, FilterModel, DateTime>, EPM_TRACKING_PROCESS_VALUES>(EPMServiceType.Monitoring, apiUrl, new Tuple<HaftaModel, ProductModel, FilterModel, DateTime>(haftaModel, productModel, filterModel, tarih));
             return list;
         }
     }

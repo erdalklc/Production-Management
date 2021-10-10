@@ -33,6 +33,17 @@ namespace EPM.Web.Controllers
             return Json(MonitoringServiceHelper.GetProductList(model,filterModel));
         }
 
+        [HttpPost, HttpGet]
+        public IActionResult GetProductionDetails(HaftaModel haftaModel,ProductModel productModel, FilterModel filterModel)
+        {
+            return Json(MonitoringServiceHelper.GetProductionDetails(haftaModel, productModel, filterModel));
+        }
+        [HttpPost, HttpGet]
+        public IActionResult GetProductionDetailsByDate(HaftaModel haftaModel, ProductModel productModel, FilterModel filterModel,DateTime Tarih)
+        {
+            return Json(MonitoringServiceHelper.GetProductionDetailsByDate(haftaModel, productModel, filterModel, Tarih));
+        }
+
 
     }
 }

@@ -1,5 +1,7 @@
-﻿using EPM.Production.Monitoring.Dto.Models;
+﻿using EPM.Dto.Base;
+using EPM.Production.Monitoring.Dto.Models;
 using EPM.Production.Monitoring.Repository.Repository;
+using EPM.Production.Monitoring.Service.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,9 +11,11 @@ namespace EPM.Production.Monitoring.Service.Services
     public class MonitoringService : IMonitoringService
     {
         private readonly IMonitoringRepository _monitoringRepository;
-        public MonitoringService(IMonitoringRepository monitoringRepository)
+        private readonly IEgemenRepository _egemenRepository;
+        public MonitoringService(IMonitoringRepository monitoringRepository, IEgemenRepository egemenRepository)
         {
             _monitoringRepository = monitoringRepository;
+            _egemenRepository = egemenRepository;
         }
         public List<HaftaModel> GetHaftaModelList()
         {
@@ -62,7 +66,7 @@ WHERE 0=0 _SQLFILTER_
 
         public List<ProductModel> GetProductList(Tuple<HaftaModel, FilterModel> model)
         {
-            string sql = string.Format(@"SELECT DISTINCT H.MODEL ,H.COLOR FROM FDEIT005.EPM_PRODUCTION_PLAN P 
+            string sql = string.Format(@"SELECT * FROM (SELECT DISTINCT H.MODEL ,H.COLOR, H.ID AS HEADER_ID FROM FDEIT005.EPM_PRODUCTION_PLAN P 
 INNER JOIN  FDEIT005.EPM_MASTER_PRODUCTION_H  H ON H.ID=P.HEADER_ID
 INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND P.WEEK={0} AND P.YEAR={1} _SQLFILTER_", model.Item1.WEEK, model.Item1.YEAR);
             string sqlFilter = "";
@@ -81,8 +85,42 @@ INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND P.
             if (model.Item2.COLOR != null && model.Item2.COLOR != "")
                 sqlFilter += " AND H.COLOR='" + model.Item2.COLOR + "'";
             sql = sql.Replace("_SQLFILTER_", sqlFilter);
+            sql += ") A ORDER BY MODEL,COLOR";
             return _monitoringRepository.DeserializeList<ProductModel>(sql);
         }
 
+        public Tuple<EPM_MASTER_PRODUCTION_H, List<PlanModel>, EPM_TRACKING_PROCESS_VALUES> GetProductionDetails(Tuple<HaftaModel, ProductModel, FilterModel> model)
+        {
+            EPM_MASTER_PRODUCTION_H master = _monitoringRepository.Deserialize<EPM_MASTER_PRODUCTION_H>(model.Item2.HEADER_ID);
+            List<PlanModel> plan = _monitoringRepository.DeserializeList<PlanModel>(string.Format("SELECT P.*,M.ADI AS MARKET_NAME FROM FDEIT005.EPM_PRODUCTION_PLAN P INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE P.YEAR={0} AND P.WEEK={1} AND P.HEADER_ID={2}", model.Item1.YEAR, model.Item1.WEEK, model.Item2.HEADER_ID));
+            foreach (var item in plan) 
+                item.ORDER_QUANTITY = _monitoringRepository.ReadInteger(string.Format("SELECT SUM(QUANTITY) FROM FDEIT005.EPM_MASTER_PRODUCTION_D WHERE MARKET={0} AND HEADER_ID={1}",item.MARKET_ID,item.HEADER_ID)); 
+
+            EPM_TRACKING_PROCESS_VALUES values = _monitoringRepository.Deserialize<EPM_TRACKING_PROCESS_VALUES>("SELECT * FROM FDEIT005.EPM_TRACKING_PROCESS_VALUES WHERE HEADER_ID=" + model.Item2.HEADER_ID + "");
+            return new Tuple<EPM_MASTER_PRODUCTION_H, List<PlanModel>, EPM_TRACKING_PROCESS_VALUES>(master, plan, values); 
+
+        }
+        public EPM_TRACKING_PROCESS_VALUES GetProductionDetailsByDate(Tuple<HaftaModel, ProductModel, FilterModel, DateTime> model)
+        {
+            EPM_MASTER_PRODUCTION_H master = _monitoringRepository.Deserialize<EPM_MASTER_PRODUCTION_H>(model.Item2.HEADER_ID);
+            List<PlanModel> plan = _monitoringRepository.DeserializeList<PlanModel>(string.Format("SELECT P.*,M.ADI AS MARKET_NAME FROM FDEIT005.EPM_PRODUCTION_PLAN P INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE P.YEAR={0} AND P.WEEK={1} AND P.HEADER_ID={2}", model.Item1.YEAR, model.Item1.WEEK, model.Item2.HEADER_ID));
+            foreach (var item in plan)
+                item.ORDER_QUANTITY = _monitoringRepository.ReadInteger(string.Format("SELECT SUM(QUANTITY) FROM FDEIT005.EPM_MASTER_PRODUCTION_D WHERE MARKET={0} AND HEADER_ID={1}", item.MARKET_ID, item.HEADER_ID));
+
+
+            EPM_PRODUCTION_SEASON season = _monitoringRepository.Deserialize<EPM_PRODUCTION_SEASON>(master.SEASON);
+
+            var kesimAdet = _monitoringRepository.ReadInteger("SELECT SUM(FIILI_KESIM) FROM XXXT.XXXT_IS_EMIRLERI WHERE SEZON_BILGISI='"+season.EGEMEN_ADI+"' AND MODEL='"+master.MODEL+"' AND MAMUL_RENGI='"+master.COLOR+"'");
+            var tasnifAdet = _monitoringRepository.ReadInteger("SELECT SUM(TASNIF_MIKTARI) FROM XXXT.XXXT_IS_EMIRLERI WHERE SEZON_BILGISI='"+season.EGEMEN_ADI+"' AND MODEL='"+master.MODEL+"' AND MAMUL_RENGI='"+master.COLOR+"'");
+            var bantAdet = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().BantBitisleriByDate(model.Item4.Date, model.Item4.Date.AddDays(1).AddSeconds(-1), season.EGEMEN_ADI, master.MODEL, master.COLOR));
+            var kaliteAdet = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().KaliteBitisleriByDate(model.Item4.Date, model.Item4.Date.AddDays(1).AddSeconds(-1), season.EGEMEN_ADI, master.MODEL, master.COLOR));
+            EPM_TRACKING_PROCESS_VALUES values = new EPM_TRACKING_PROCESS_VALUES();
+            values.BANT = bantAdet;
+            values.KALITE = kaliteAdet;
+            values.TASNIF = tasnifAdet;
+            values.KESIM = kesimAdet;
+            return values;
+
+        }
     }
 }
