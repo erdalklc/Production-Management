@@ -1091,7 +1091,7 @@ where 1=1
 and ws.ORGANIZATION_ID=105
 and msi.INVENTORY_ITEM_ID=ws.INVENTORY_ITEM_ID
 and msi.ORGANIZATION_ID=105   
-and ws.SUBINVENTORY_CODE in ('NOS') 
+and ws.SUBINVENTORY_CODE in ('NOS','NOSTR','NOSIHR') 
 group by  ws.SUBINVENTORY_CODE, 
 msi.segment1,msi.segment2,msi.ATTRIBUTE12,
 msi.segment3

@@ -96,7 +96,14 @@ INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND P.
             foreach (var item in plan) 
                 item.ORDER_QUANTITY = _monitoringRepository.ReadInteger(string.Format("SELECT SUM(QUANTITY) FROM FDEIT005.EPM_MASTER_PRODUCTION_D WHERE MARKET={0} AND HEADER_ID={1}",item.MARKET_ID,item.HEADER_ID)); 
 
-            EPM_TRACKING_PROCESS_VALUES values = _monitoringRepository.Deserialize<EPM_TRACKING_PROCESS_VALUES>("SELECT * FROM FDEIT005.EPM_TRACKING_PROCESS_VALUES WHERE HEADER_ID=" + model.Item2.HEADER_ID + "");
+            EPM_PRODUCTION_SEASON season = _monitoringRepository.Deserialize<EPM_PRODUCTION_SEASON>(master.SEASON);
+
+            EPM_TRACKING_PROCESS_VALUES values = new EPM_TRACKING_PROCESS_VALUES();
+
+            values.KESIM = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().KesimAdediniGetir(season.EGEMEN_ADI, master.MODEL, master.COLOR));
+            values.TASNIF = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().TasnifAdediniGetir(season.EGEMEN_ADI, master.MODEL, master.COLOR));
+            values.KALITE = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().KaliteAdediniGetir(season.EGEMEN_ADI, master.MODEL, master.COLOR));
+            values.BANT = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().BantAdediniGetir(season.EGEMEN_ADI, master.MODEL, master.COLOR));
             return new Tuple<EPM_MASTER_PRODUCTION_H, List<PlanModel>, EPM_TRACKING_PROCESS_VALUES>(master, plan, values); 
 
         }
@@ -110,15 +117,15 @@ INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND P.
 
             EPM_PRODUCTION_SEASON season = _monitoringRepository.Deserialize<EPM_PRODUCTION_SEASON>(master.SEASON);
 
-            var kesimAdet = _monitoringRepository.ReadInteger("SELECT SUM(FIILI_KESIM) FROM XXXT.XXXT_IS_EMIRLERI WHERE SEZON_BILGISI='"+season.EGEMEN_ADI+"' AND MODEL='"+master.MODEL+"' AND MAMUL_RENGI='"+master.COLOR+"'");
-            var tasnifAdet = _monitoringRepository.ReadInteger("SELECT SUM(TASNIF_MIKTARI) FROM XXXT.XXXT_IS_EMIRLERI WHERE SEZON_BILGISI='"+season.EGEMEN_ADI+"' AND MODEL='"+master.MODEL+"' AND MAMUL_RENGI='"+master.COLOR+"'");
-            var bantAdet = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().BantBitisleriByDate(model.Item4.Date, model.Item4.Date.AddDays(1).AddSeconds(-1), season.EGEMEN_ADI, master.MODEL, master.COLOR));
-            var kaliteAdet = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().KaliteBitisleriByDate(model.Item4.Date, model.Item4.Date.AddDays(1).AddSeconds(-1), season.EGEMEN_ADI, master.MODEL, master.COLOR));
+            //var kesimAdet = _monitoringRepository.ReadInteger("SELECT SUM(FIILI_KESIM) FROM XXXT.XXXT_IS_EMIRLERI WHERE SEZON_BILGISI='"+season.EGEMEN_ADI+"' AND MODEL='"+master.MODEL+"' AND MAMUL_RENGI='"+master.COLOR+"'");
+            //var tasnifAdet = _monitoringRepository.ReadInteger("SELECT SUM(TASNIF_MIKTARI) FROM XXXT.XXXT_IS_EMIRLERI WHERE SEZON_BILGISI='"+season.EGEMEN_ADI+"' AND MODEL='"+master.MODEL+"' AND MAMUL_RENGI='"+master.COLOR+"'");
+            //var bantAdet = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().BantBitisleriByDate(model.Item4.Date, model.Item4.Date.AddDays(1).AddSeconds(-1), season.EGEMEN_ADI, master.MODEL, master.COLOR));
+            //var kaliteAdet = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().KaliteBitisleriByDate(model.Item4.Date, model.Item4.Date.AddDays(1).AddSeconds(-1), season.EGEMEN_ADI, master.MODEL, master.COLOR));
             EPM_TRACKING_PROCESS_VALUES values = new EPM_TRACKING_PROCESS_VALUES();
-            values.BANT = bantAdet;
-            values.KALITE = kaliteAdet;
-            values.TASNIF = tasnifAdet;
-            values.KESIM = kesimAdet;
+            values.KESIM = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().KesimAdediniGetirByDate(season.EGEMEN_ADI, master.MODEL, master.COLOR, model.Item4.Date, model.Item4.Date.AddDays(1).AddSeconds(-1)));
+            values.TASNIF = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().TasnifAdediniGetirByDate(season.EGEMEN_ADI, master.MODEL, master.COLOR, model.Item4.Date, model.Item4.Date.AddDays(1).AddSeconds(-1)));
+            values.KALITE = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().KaliteAdediniGetirByDate(season.EGEMEN_ADI, master.MODEL, master.COLOR, model.Item4.Date, model.Item4.Date.AddDays(1).AddSeconds(-1)));
+            values.BANT = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().BantAdediniGetirByDate(season.EGEMEN_ADI, master.MODEL, master.COLOR, model.Item4.Date, model.Item4.Date.AddDays(1).AddSeconds(-1)));
             return values;
 
         }
