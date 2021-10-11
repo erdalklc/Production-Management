@@ -146,16 +146,20 @@
 
 <script>
     var weekDetail, productDetail;
-    function UretimIzleFilter() {
+    function ClearBottom() {
         $("#hfKesim").html(0);
         $("#hfTasnif").html(0);
         $("#hfBant").html(0);
         $("#hfKalite").html(0);
-
+    }
+    function ClearRealTime() { 
         $("#trKesim").html(0);
         $("#trTasnif").html(0);
         $("#trBant").html(0);
         $("#trKalite").html(0);
+    }
+    function UretimIzleFilter() {
+        ClearBottom();
         var data = {
             BRAND: jQuery("[name=BRAND]").val(),
             SEASON: jQuery("[name=SEASON]").val(),
@@ -206,6 +210,7 @@
     var haftaModel = null;
     var productModel = null;
     function GetProductDetail() {
+        ClearBottom();
         data = {
             model: haftaModel,
             filterModel: {
@@ -257,6 +262,7 @@
     }
 
     function TarihFiltrele(TarihDeger) {
+        ClearRealTime();
          var data = {
             haftaModel: haftaModel,
             productModel: productModel,
@@ -294,11 +300,12 @@
         });
     }
     function dateBoxProduct_valueChanged(data) {
+        
         TarihFiltrele(moment(data.value).format("DD.MM.YYYY"));
 
     }
-    function GetProductionDetails() { 
-        TarihFiltrele(moment($("#dateBoxProduct").dxCalendar("instance").option("value")).format("DD.MM.YYYY"))
+    function GetProductionDetails() {
+        ClearBottom();
         data = {
             haftaModel: haftaModel,
             productModel: productModel,
@@ -389,6 +396,8 @@
                             }]
                     }
                 });
+
+                TarihFiltrele(moment($("#dateBoxProduct").dxCalendar("instance").option("value")).format("DD.MM.YYYY"));
             }, beforeSend: function () {
                 getLoadPanelInstance().show();
             }

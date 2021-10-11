@@ -224,3 +224,5 @@ D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.dll
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.pdb
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.genruntimeconfig.cache
+E:\Eren\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+E:\Eren\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
