@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EPM.Dto.Base
 {
-    [Table("FDEIT005.EPM_PRODUCTION_SEASON")]
+    [Table("FDEIT005.EPM_PRODUCTION_MARKET")]
     public class EPM_PRODUCTION_MARKET
     {
         [Key]

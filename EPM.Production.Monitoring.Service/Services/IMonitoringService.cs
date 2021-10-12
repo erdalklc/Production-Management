@@ -10,8 +10,8 @@ namespace EPM.Production.Monitoring.Service.Services
     {
         public List<HaftaModel> GetHaftaModelList();
         public List<HaftaModel> GetTerminList(FilterModel model);
-        public List<ProductModel> GetProductList(Tuple<HaftaModel, FilterModel> model);
-        public Tuple<EPM_MASTER_PRODUCTION_H, List<PlanModel>, EPM_TRACKING_PROCESS_VALUES> GetProductionDetails(Tuple<HaftaModel, ProductModel, FilterModel> model);
-        public EPM_TRACKING_PROCESS_VALUES GetProductionDetailsByDate(Tuple<HaftaModel, ProductModel, FilterModel, DateTime> model);
+        public List<ProductModel> GetProductList(Tuple<List<HaftaModel>, FilterModel> model);
+        public Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>> GetProductionDetails(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel> model);
+        public EPM_TRACKING_PROCESS_VALUES GetProductionDetailsByDate(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, DateTime> model);
     }
 }

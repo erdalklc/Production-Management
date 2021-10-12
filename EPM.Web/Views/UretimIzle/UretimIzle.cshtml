@@ -146,20 +146,30 @@
 
 <script>
     var weekDetail, productDetail;
+    function ClearChart() {
+        try { $("#productBar").dxChart("instance").option("dataSource", null); } catch (e) { }
+        try { $("#productPlan").dxDataGrid("instance").option("dataSource", null); } catch (e) { }
+    }
+    function ClearGrid() {
+        $("#productBar").dxChart("instance").option("dataSource", null);
+    }
     function ClearBottom() {
         $("#hfKesim").html(0);
         $("#hfTasnif").html(0);
         $("#hfBant").html(0);
         $("#hfKalite").html(0);
     }
-    function ClearRealTime() { 
+    function ClearRealTime() {
         $("#trKesim").html(0);
         $("#trTasnif").html(0);
         $("#trBant").html(0);
         $("#trKalite").html(0);
     }
     function UretimIzleFilter() {
+        ClearChart();
         ClearBottom();
+        try { $("#weekDetail").dxList("instance").option("dataSource", null); } catch (e) { }
+        try { $("#productDetail").dxList("instance").option("dataSource", null); } catch (e) { }
         var data = {
             BRAND: jQuery("[name=BRAND]").val(),
             SEASON: jQuery("[name=SEASON]").val(),
@@ -182,7 +192,8 @@
                         store: new DevExpress.data.ArrayStore({
                             key: "ID",
                             data: income
-                        })
+                        }),
+                        paginate: false
                     }),
                     height: "100%",
                     itemTemplate: function (data) {
@@ -190,9 +201,11 @@
                         return html;
                     },
                     showSelectionControls: true,
-                    selectionMode: "single", pageLoadMode: "scrollBottom",
+                    selectionMode: "all",
+                    pageLoadMode: "scrollBottom",
                     onSelectionChanged: function (data) {
-                        haftaModel = data.addedItems[0];
+                        haftaModel = weekDetail.dxList("instance").option("selectedItems");
+                        try { $("#productDetail").dxList("instance").option("dataSource", null); } catch (e) { }
                         GetProductDetail();
                     }
                 });
@@ -210,7 +223,11 @@
     var haftaModel = null;
     var productModel = null;
     function GetProductDetail() {
+        ClearChart();
         ClearBottom();
+
+        if (haftaModel == null || haftaModel.length == 0)
+            return;
         data = {
             model: haftaModel,
             filterModel: {
@@ -230,26 +247,29 @@
             contentType: 'application/x-www-form-urlencoded',
             timeout: 180000,
             success: function (income, status, xmlRequest) {
-                productDetail= $("#productDetail").dxList({
+                productDetail = $("#productDetail").dxList({
                     dataSource: new DevExpress.data.DataSource({
                         store: new DevExpress.data.ArrayStore({
                             key: "ID",
                             data: income
-                        })
+                        }),
+                        paginate: false
                     }),
-                    height: "100%", searchEnabled: true,
+                    height: "100%",
+                    //searchEnabled: true,
                     searchExpr: "MODEL",
                     itemTemplate: function (data) {
                         var html = "<div> <span style='font-weight:bold;'>" + data.MODEL + "</span>.<span style='font-weight:bold'>" + data.COLOR + "</span></div>";
                         return html;
                     },
-                    showSelectionControls: true, pageLoadMode: "scrollBottom",
-                    selectionMode: "single",
+                    showSelectionControls: true,
+                    //pageLoadMode: "scrollBottom",
+                    selectionMode: "all",
                     onSelectionChanged: function (data) {
-                        productModel = data.addedItems[0];
+                        productModel = productDetail.dxList("instance").option("selectedItems");
                         GetProductionDetails();
                     }
-                }).dxList("instance");
+                });
 
             }, beforeSend: function () {
                 getLoadPanelInstance().show();
@@ -263,6 +283,10 @@
 
     function TarihFiltrele(TarihDeger) {
         ClearRealTime();
+        if (haftaModel == null || haftaModel.length == 0)
+            return;
+        if (productModel == null || productModel.length == 0)
+            return;
          var data = {
             haftaModel: haftaModel,
             productModel: productModel,
@@ -280,8 +304,8 @@
           $.ajax({
             type: "POST",
             url: '@Url.Action("GetProductionDetailsByDate", "UretimIzle")',
-            data: data,
-            contentType: 'application/x-www-form-urlencoded',
+              data: JSON.stringify(data),
+              contentType: 'application/json',
             timeout: 180000,
             success: function (income, status, xmlRequest) {
 
@@ -300,12 +324,18 @@
         });
     }
     function dateBoxProduct_valueChanged(data) {
-        
+
         TarihFiltrele(moment(data.value).format("DD.MM.YYYY"));
 
     }
     function GetProductionDetails() {
+        ClearChart();
         ClearBottom();
+        if (haftaModel == null || haftaModel.length == 0)
+            return;
+        if (productModel == null || productModel.length == 0)
+            return;
+
         data = {
             haftaModel: haftaModel,
             productModel: productModel,
@@ -319,19 +349,19 @@
                 PRODUCT_GROUP: jQuery("[name=PRODUCT_GROUP]").val()
             }
         }
-
+        console.log(data);
         $.ajax({
             type: "POST",
             url: '@Url.Action("GetProductionDetails", "UretimIzle")',
-            data: data,
-            contentType: 'application/x-www-form-urlencoded',
+            data: JSON.stringify( data),
+            contentType: 'application/json',
             timeout: 180000,
             success: function (income, status, xmlRequest) {
                 var totalPLAN = 0;
                 var totalORDER = 0;
-                for (var i = 0; i < income.Item2.length; i++) {
-                    totalORDER += income.Item2[i].ORDER_QUANTITY;
-                    totalPLAN += income.Item2[i].QUANTITY;
+                for (var i = 0; i < income.Item1.length; i++) {
+                    totalORDER += income.Item1[i].ORDER_QUANTITY;
+                    totalPLAN += income.Item1[i].QUANTITY;
                 }
                 var bar = [{
                     arg: "SİPARİŞ",
@@ -341,16 +371,16 @@
                     val: totalPLAN
                 }, {
                     arg: "KESİM",
-                    val: income.Item3.KESIM
+                    val: income.Item2.KESIM
                 }, {
                     arg: "TASNİF",
-                    val: income.Item3.TASNIF
+                    val: income.Item2.TASNIF
                 }, {
                     arg: "BANT",
-                    val: income.Item3.BANT
+                    val: income.Item2.BANT
                 }, {
                     arg: "KALİTE",
-                    val: income.Item3.KALITE
+                    val: income.Item2.KALITE
                     }];
                 $("#productBar").dxChart({
                     dataSource: bar,
@@ -372,12 +402,12 @@
                     },
                     title: "Üretim Durumu"
                 });
-                $("#hfKesim").html(income.Item3.KESIM);
-                $("#hfTasnif").html(income.Item3.TASNIF);
-                $("#hfBant").html(income.Item3.BANT);
-                $("#hfKalite").html(income.Item3.KALITE);
+                $("#hfKesim").html(income.Item2.KESIM);
+                $("#hfTasnif").html(income.Item2.TASNIF);
+                $("#hfBant").html(income.Item2.BANT);
+                $("#hfKalite").html(income.Item2.KALITE);
                 $("#productPlan").dxDataGrid({
-                    dataSource: income.Item2,
+                    dataSource: income.Item1,
                     keyExpr: 'ID',
                     selection: {
                         mode: "single"

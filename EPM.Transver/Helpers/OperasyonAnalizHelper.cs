@@ -10,7 +10,7 @@ namespace EPM.Transver.Helpers
     {
         public string GetOperasyonAnalizBySeason(string SEASON)
         {
-            string sql = string.Format(@"Select Model.kisaadi MODEL_ADI, renk.transferkodu RENK_ADI,SEZON.adi SEZON_ADI,IsEmriOperasyon.OperasyonId OPERASYON_ID,SUM(IsEmriOperasyonDetay.Miktar) MIKTAR from IsEmriOperasyonDetay
+            string sql = string.Format(@"Select Model.kisaadi MODEL_ADI, renk.transferkodu RENK_ADI,SEZON.adi SEZON_ADI,IsEmriOperasyon.OperasyonId OPERASYON_ID,Pazar.adi PAZAR_ADI,KesimFoyu.SiparisTipi SIPARIS_TIPI,SUM(IsEmriOperasyonDetay.Miktar) MIKTAR from IsEmriOperasyonDetay
     left join IsEmriOperasyon on IsEmriOperasyon.IsEmriOperasyonID = IsEmriOperasyonDetay.IsEmriOperasyonId
     left join Operasyon on Operasyon.OperasyonID = IsEmriOperasyon.OperasyonId  
     left join IsEmri on IsEmri.IsEmriKayitID = IsEmriOperasyonDetay.IsEmriKayitID
@@ -19,14 +19,16 @@ namespace EPM.Transver.Helpers
     left join Model On Model.ModelId = KesimFoyu.ModelId
     left join Renk On Renk.RenkId = KesimFoyuDetay.RenkId
     left join Sezon on Sezon.SezonID = KesimFoyu.SezonID
+    Left Join Pazar on Pazar.PazarId = IsEmri.PazarId
     left join GenelIEOperasyonGrup on GenelIEOperasyonGrup.GenelIEOperasyonGrupID = Operasyon.GenelIEOperasyonGrupId
     left join Vardiya On Vardiya.VardiyaId = IsEmriOperasyonDetay.VardiyaId
+    Left Join IslemTipi on IslemTipi.IslemTipiId = IsEmri.IslemTipiId
     left join OperasyonGrup on OperasyonGrup.OperasyonGrupID = Operasyon.OperasyonGrupId
     where IsEmriOperasyon.OperasyonId IN (181,1160,745,743,744,5,600,9595,845,670,80,8631,8632,8633,9576,5515,5516,5517) and
           (IsEmriOperasyonDetay.MakinaId <> 'XXXX')  
           and   sezon.adi='{0}'
-          GROUP BY Model.kisaadi , renk.transferkodu ,SEZON.adi ,IsEmriOperasyon.OperasyonId
-",SEASON);
+          GROUP BY Model.kisaadi , renk.transferkodu ,SEZON.adi ,IsEmriOperasyon.OperasyonId,Pazar.adi,KesimFoyu.SiparisTipi
+", SEASON);
             return sql;
         }
 

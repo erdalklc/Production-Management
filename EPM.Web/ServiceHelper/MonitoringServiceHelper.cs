@@ -17,23 +17,23 @@ namespace EPM.Web.ServiceHelper
             return list;
         }
 
-        public static List<ProductModel> GetProductList(HaftaModel model,FilterModel filterModel)
+        public static List<ProductModel> GetProductList(List<HaftaModel> model,FilterModel filterModel)
         {
             string apiUrl = "GetProductList";
-            var list = PostRequest<Tuple<HaftaModel,FilterModel>, List<ProductModel>>(EPMServiceType.Monitoring, apiUrl, new Tuple<HaftaModel, FilterModel>(model,filterModel));
+            var list = PostRequest<Tuple<List<HaftaModel>, FilterModel>, List<ProductModel>>(EPMServiceType.Monitoring, apiUrl, new Tuple<List<HaftaModel>, FilterModel>(model,filterModel));
             return list;
         }
 
-        public static object GetProductionDetails(HaftaModel haftaModel, ProductModel productModel, FilterModel filterModel)
+        public static object GetProductionDetails(List<HaftaModel> haftaModel, List<ProductModel> productModel, FilterModel filterModel)
         {
             string apiUrl = "GetProductionDetails";
-            var list = PostRequest<Tuple<HaftaModel, ProductModel, FilterModel>, Tuple<EPM_MASTER_PRODUCTION_H, List<PlanModel>, EPM_TRACKING_PROCESS_VALUES>>(EPMServiceType.Monitoring, apiUrl, new Tuple<HaftaModel, ProductModel, FilterModel>(haftaModel, productModel, filterModel));
+            var list = PostRequest<Tuple<List<HaftaModel>, List<ProductModel>, FilterModel>, Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>>>(EPMServiceType.Monitoring, apiUrl, new Tuple<List<HaftaModel>, List<ProductModel>, FilterModel>(haftaModel, productModel, filterModel));
             return list;
         }
-        public static object GetProductionDetailsByDate(HaftaModel haftaModel, ProductModel productModel, FilterModel filterModel,DateTime tarih)
+        public static object GetProductionDetailsByDate(List<HaftaModel> haftaModel, List<ProductModel> productModel, FilterModel filterModel,DateTime tarih)
         {
             string apiUrl = "GetProductionDetailsByDate";
-            var list = PostRequest<Tuple<HaftaModel, ProductModel, FilterModel, DateTime>, EPM_TRACKING_PROCESS_VALUES>(EPMServiceType.Monitoring, apiUrl, new Tuple<HaftaModel, ProductModel, FilterModel, DateTime>(haftaModel, productModel, filterModel, tarih));
+            var list = PostRequest<Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, DateTime>, EPM_TRACKING_PROCESS_VALUES>(EPMServiceType.Monitoring, apiUrl, new Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, DateTime>(haftaModel, productModel, filterModel, tarih));
             return list;
         }
     }
