@@ -74,23 +74,27 @@
         <div class="dx-card wide-card" id="productDetailCard" style="width: 200px; height: 100%; display: inline-block; margin: 0 2px">
             <div id="productDetail"></div>
         </div>
-        <div class="dx-card wide-card" style="width: calc(100% - 485px); height: 100%; display: inline-block; ">
+        <div class="dx-card wide-card" style="width: calc(100% - 485px);overflow-y:auto; height: 100%; display: inline-block; ">
             <div class="dx-card wide-card" id="productPlan" style="width: 49%; height: 200px; display: inline-block; margin: 0 2px">
 
             </div>
             <div class="dx-card wide-card" id="productBar" style="width: 49%; height: 200px; display: inline-block; margin: 0 2px">
 
             </div>
-            <div class="dx-card wide-card" id="productDate" style="width: 100%; display: inline-block; margin: 0 2px">
-                @(Html.DevExtreme().Calendar()
-            .ID("dateBoxProduct")
-            .Value(DateTime.Now)
-            .Disabled(false)
-            .ZoomLevel(CalendarZoomLevel.Month)
-            .OnValueChanged("dateBoxProduct_valueChanged")
-        )
+
+            <div class="dx-card wide-card" id="releasedTasnif" style="width: 49%; height: 250px; display: inline-block; margin: 0 2px">
+
             </div>
-            <div class="dx-card wide-card" id="productDetailValues" style="width: 100%; height: 150px; display: inline-block; margin: 0 2px">
+            <div class="dx-card wide-card" id="releasedBant" style="width: 49%; height: 250px; display: inline-block; margin: 0 2px ">
+
+            </div>
+            <div class="dx-card wide-card" id="releasedKalite" style="width: 49%; height: 250px; display: inline-block; margin: 0 2px ">
+
+            </div>
+            <div class="dx-card wide-card" id="releasedKaliteG" style="width: 49%; height: 250px; display: inline-block; margin: 0 2px ">
+
+            </div>
+            @*<div class="dx-card wide-card" id="productDetailValues" style="width: 100%; height: 150px; display: inline-block; margin: 0 2px">
                 <div class="dx-card wide-card" id="productKesim" style="width: 24.4%; height: 200px; display: inline-block; margin: 0 2px">
                     <div class="productDetailCardHeader">KESİM</div>
                     <div style="padding:5px 15px">
@@ -132,10 +136,10 @@
                     </div>
                     <div style="padding:5px 15px">
                         <div class="detailItemEx">TARİH</div>
-                        <div id="trKalite"  class="detailItemValue">0</div>
+                        <div id="trKalite" class="detailItemValue">0</div>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
     </div>
 
@@ -148,6 +152,10 @@
     var weekDetail, productDetail;
     function ClearChart() {
         try { $("#productBar").dxChart("instance").option("dataSource", null); } catch (e) { }
+        try { $("#releasedTasnif").dxChart("instance").option("dataSource", null); } catch (e) { }
+        try { $("#releasedBant").dxChart("instance").option("dataSource", null); } catch (e) { }
+        try { $("#releasedKalite").dxChart("instance").option("dataSource", null); } catch (e) { }
+        try { $("#releasedKaliteG").dxChart("instance").option("dataSource", null); } catch (e) { }
         try { $("#productPlan").dxDataGrid("instance").option("dataSource", null); } catch (e) { }
     }
     function ClearGrid() {
@@ -206,6 +214,7 @@
                     onSelectionChanged: function (data) {
                         haftaModel = weekDetail.dxList("instance").option("selectedItems");
                         try { $("#productDetail").dxList("instance").option("dataSource", null); } catch (e) { }
+                        ClearChart();
                         GetProductDetail();
                     }
                 });
@@ -280,54 +289,8 @@
             getLoadPanelInstance().hide();
         });
     }
-
-    function TarihFiltrele(TarihDeger) {
-        ClearRealTime();
-        if (haftaModel == null || haftaModel.length == 0)
-            return;
-        if (productModel == null || productModel.length == 0)
-            return;
-         var data = {
-            haftaModel: haftaModel,
-            productModel: productModel,
-            filterModel: {
-                BRAND: jQuery("[name=BRAND]").val(),
-                SEASON: jQuery("[name=SEASON]").val(),
-                BAND: jQuery("[name=BAND]").val(),
-                MODEL: jQuery("[name=MODEL]").val(),
-                COLOR: jQuery("[name=COLOR]").val(),
-                ORDER_TYPE: jQuery("[name=ORDER_TYPE]").val(),
-                PRODUCT_GROUP: jQuery("[name=PRODUCT_GROUP]").val()
-             },
-             Tarih: TarihDeger
-        }
-          $.ajax({
-            type: "POST",
-            url: '@Url.Action("GetProductionDetailsByDate", "UretimIzle")',
-              data: JSON.stringify(data),
-              contentType: 'application/json',
-            timeout: 180000,
-            success: function (income, status, xmlRequest) {
-
-                $("#trKesim").html(income.KESIM);
-                $("#trTasnif").html(income.TASNIF);
-                $("#trBant").html(income.BANT);
-                $("#trKalite").html(income.KALITE);
-
-            }, beforeSend: function () {
-                getLoadPanelInstance().show();
-            }
-
-
-        }).always(function () {
-            getLoadPanelInstance().hide();
-        });
-    }
-    function dateBoxProduct_valueChanged(data) {
-
-        TarihFiltrele(moment(data.value).format("DD.MM.YYYY"));
-
-    }
+     
+    
     function GetProductionDetails() {
         ClearChart();
         ClearBottom();
@@ -382,8 +345,41 @@
                     arg: "KALİTE",
                     val: income.Item2.KALITE
                     }];
-                $("#productBar").dxChart({
-                    dataSource: bar,
+                var barKesim = [];
+                var barTasnif = [];
+                var barBant = [];
+                var barKalite = [];
+                var barKaliteG = [];
+                var kaliteGSum = 0;
+                for (var i = 0; i < income.Item3.length; i++) {
+                    var marketReleased = income.Item3[i];
+                    if (marketReleased.TYPE == "KESİM") 
+                        barKesim.push({ arg: marketReleased.PAZAR_ADI, val: marketReleased.MIKTAR });
+                    if (marketReleased.TYPE == "TASNİF")
+                        barTasnif.push({ arg: marketReleased.PAZAR_ADI, val: marketReleased.MIKTAR });
+                    if (marketReleased.TYPE == "BANT")
+                        barBant.push({ arg: marketReleased.PAZAR_ADI, val: marketReleased.MIKTAR });
+                    if (marketReleased.TYPE == "KALİTE")
+                        barKalite.push({ arg: marketReleased.PAZAR_ADI, val: marketReleased.MIKTAR });
+                    if (marketReleased.TYPE == "KALİTEG") {
+                        barKaliteG.push({ arg: marketReleased.PAZAR_ADI, val: marketReleased.MIKTAR });
+                        kaliteGSum += marketReleased.MIKTAR;
+                    }
+                }
+                bar.push({ arg: "KALİTE GERÇEKLEŞEN", val: kaliteGSum });
+               
+                $("#releasedTasnif").dxChart({
+                    commonSeriesSettings: { 
+                        label: {
+                            visible: true,
+                            format: {
+                                type: "fixedPoint",
+                                precision: 0
+                            }
+                        }
+                    },
+                    dataSource: barTasnif,
+                    palette: "Ocean",
                     legend: {
                         visible: false
                     },
@@ -397,10 +393,176 @@
                         label: {
                             format: {
                                 type: "decimal"
+                            }, font: {
+                                color: "black",
+                                size: 8
+                            }
+                        }
+                        
+                    },
+                    title: {
+                        text: "Tasnif",
+                        font: {
+                            color: "black",
+                            size: 14
+                        }
+                    },
+                });
+                $("#releasedBant").dxChart({
+                    commonSeriesSettings: {
+                        label: {
+                            visible: true,
+                            format: {
+                                type: "fixedPoint",
+                                precision: 0
                             }
                         }
                     },
-                    title: "Üretim Durumu"
+                    dataSource: barBant,
+                    palette: "soft",
+                    legend: {
+                        visible: false
+                    },
+                    series: {
+                        type: "bar"
+                    }, tooltip: {
+                        enabled: true
+                    },
+                    argumentAxis: {
+                        tickInterval: 5,
+                        label: {
+                            format: {
+                                type: "decimal"
+                            }, font: {
+                                color: "black",
+                                size: 8
+                            }
+                        }
+                    },
+                    title: {
+                        text: "Bant",
+                        font: {
+                            color: "black",
+                            size: 14
+                        }
+                    },
+                });
+                $("#releasedKalite").dxChart({
+                    commonSeriesSettings: {
+                        label: {
+                            visible: true,
+                            format: {
+                                type: "fixedPoint",
+                                precision: 0
+                            }
+                        }
+                    },
+                    dataSource: barKalite,
+                    palette: "soft",
+                    legend: {
+                        visible: false
+                    },
+                    series: {
+                        type: "bar"
+                    }, tooltip: {
+                        enabled: true
+                    },
+                    argumentAxis: {
+                        tickInterval: 5,
+                        label: {
+                            format: {
+                                type: "decimal"
+                            }, font: {
+                                color: "black",
+                                size: 8
+                            }
+                        }
+                    },
+                    title: {
+                        text: "Kalite",
+                        font: {
+                            color: "black",
+                            size: 14
+                        }
+                    },
+                });
+                $("#releasedKaliteG").dxChart({
+                    commonSeriesSettings: { 
+                        label: {
+                            visible: true,
+                            format: {
+                                type: "fixedPoint",
+                                precision: 0
+                            }
+                        }
+                    },
+                    dataSource: barKaliteG,
+                    palette: "soft",
+                    legend: {
+                        visible: false
+                    },
+                    series: {
+                        type: "bar"
+                    }, tooltip: {
+                        enabled: true
+                    },
+                    argumentAxis: {
+                        tickInterval: 5,
+                        label: {
+                            format: {
+                                type: "decimal"
+                            }, font: {
+                                color: "black",
+                                size: 8
+                            }
+                        }
+                    },
+                    title: {
+                        text: "Kalite Gerçekleşen",
+                        font: {
+                            color: "black",
+                            size: 14
+                        }
+                    },
+                });
+                $("#productBar").dxChart({
+                    title: {
+                        text: "Üretim Durumu",
+                        font: {
+                            color: "black",
+                            size:14
+                        }
+                    },
+                    commonSeriesSettings: {
+                        label: {
+                            visible: true,
+                            format: {
+                                type: "fixedPoint",
+                                precision: 0
+                            }
+                        }
+                    },
+                    dataSource: bar,
+                    palette: "soft",
+                    legend: {
+                        visible: false
+                    },
+                    series: {
+                        type: "bar"
+                    }, tooltip: {
+                        enabled: true
+                    },
+                    argumentAxis: {
+                        tickInterval: 5,
+                        label: {
+                            format: {
+                                type: "decimal"
+                            }, font: {
+                                color: "black",
+                                size: 8
+                            }
+                        }
+                    }
                 });
                 $("#hfKesim").html(income.Item2.KESIM);
                 $("#hfTasnif").html(income.Item2.TASNIF);
@@ -426,8 +588,7 @@
                             }]
                     }
                 });
-
-                TarihFiltrele(moment($("#dateBoxProduct").dxCalendar("instance").option("value")).format("DD.MM.YYYY"));
+                 
             }, beforeSend: function () {
                 getLoadPanelInstance().show();
             }
