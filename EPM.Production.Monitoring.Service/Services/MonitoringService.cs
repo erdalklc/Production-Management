@@ -65,32 +65,32 @@ WHERE 0=0 AND H.STATUS=0 _SQLFILTER_
             return _monitoringRepository.DeserializeList<HaftaModel>(sql);
         }
 
-        public List<ProductModel> GetProductList(Tuple<List<HaftaModel>, FilterModel> model)
+        public List<ProductModel> GetProductList(Tuple<List<HaftaModel>, List<EPM_PRODUCT_GROUP>, List<EPM_PRODUCTION_MARKET>, FilterModel> model)
         {
             string sql = string.Format(@"SELECT * FROM (SELECT DISTINCT H.MODEL ,H.COLOR, H.ID AS HEADER_ID FROM FDEIT005.EPM_PRODUCTION_PLAN P 
 INNER JOIN  FDEIT005.EPM_MASTER_PRODUCTION_H  H ON H.ID=P.HEADER_ID
-INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND H.STATUS=0 AND P.WEEK IN ({0}) AND P.YEAR IN ({1}) _SQLFILTER_", string.Join(',', model.Item1.Select(ob=>ob.WEEK).Distinct().ToList()), string.Join(',', model.Item1.Select(ob => ob.YEAR).Distinct().ToList()));
+INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND M.ID IN ({3}) AND H.PRODUCT_GROUP IN ({2}) AND H.STATUS=0 AND P.WEEK IN ({0}) AND P.YEAR IN ({1}) _SQLFILTER_"
+, string.Join(',', model.Item1.Select(ob=>ob.WEEK).Distinct().ToList()), string.Join(',', model.Item1.Select(ob => ob.YEAR).Distinct().ToList()), string.Join(',', model.Item2.Select(ob => ob.ID).Distinct().ToList()), string.Join(',', model.Item3.Select(ob => ob.ID).Distinct().ToList()));
             string sqlFilter = "";
-            if (model.Item2.SEASON != 0)
-                sqlFilter += " AND H.SEASON=" + model.Item2.SEASON;
-            if (model.Item2.BRAND != 0)
-                sqlFilter += " AND H.BRAND=" + model.Item2.BRAND;
-            if (model.Item2.PRODUCT_GROUP != 0)
-                sqlFilter += " AND H.PRODUCT_GROUP=" + model.Item2.PRODUCT_GROUP;
-            if (model.Item2.ORDER_TYPE != 0)
-                sqlFilter += " AND H.ORDER_TYPE=" + model.Item2.ORDER_TYPE;
-            if (model.Item2.BAND != 0)
-                sqlFilter += " AND H.BAND_ID=" + model.Item2.BAND;
-            if (model.Item2.MODEL != null && model.Item2.MODEL != "")
-                sqlFilter += " AND H.MODEL='" + model.Item2.MODEL + "'";
-            if (model.Item2.COLOR != null && model.Item2.COLOR != "")
-                sqlFilter += " AND H.COLOR='" + model.Item2.COLOR + "'";
+            if (model.Item4.SEASON != 0)
+                sqlFilter += " AND H.SEASON=" + model.Item4.SEASON;
+            if (model.Item4.BRAND != 0)
+                sqlFilter += " AND H.BRAND=" + model.Item4.BRAND;
+           
+            if (model.Item4.ORDER_TYPE != 0)
+                sqlFilter += " AND H.ORDER_TYPE=" + model.Item4.ORDER_TYPE;
+            if (model.Item4.BAND != 0)
+                sqlFilter += " AND H.BAND_ID=" + model.Item4.BAND;
+            if (model.Item4.MODEL != null && model.Item4.MODEL != "")
+                sqlFilter += " AND H.MODEL='" + model.Item4.MODEL + "'";
+            if (model.Item4.COLOR != null && model.Item4.COLOR != "")
+                sqlFilter += " AND H.COLOR='" + model.Item4.COLOR + "'";
             sql = sql.Replace("_SQLFILTER_", sqlFilter);
             sql += ") A ORDER BY MODEL,COLOR";
             return _monitoringRepository.DeserializeList<ProductModel>(sql);
         }
 
-        public Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>, List<ProductionModel>> GetProductionDetails(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel> model)
+        public Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>, List<ProductionModel>> GetProductionDetails(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, List<EPM_PRODUCT_GROUP>, List<EPM_PRODUCTION_MARKET>> model)
         {
             string filterHeader = "";
             for (int i = 0; i < model.Item2.Count; i++)
@@ -110,22 +110,35 @@ INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND H.
 FROM FDEIT005.EPM_PRODUCTION_PLAN P 
 INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID 
 INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=P.HEADER_ID
-WHERE H.STATUS=0 AND P.YEAR IN ({0}) AND P.WEEK IN ({1}) AND H.MODEL||'.'||H.COLOR IN (SELECT M FROM FILTER_MODEL) "
-, string.Join(',', model.Item1.Select(ob => ob.YEAR).Distinct().ToList()), string.Join(',', model.Item1.Select(ob => ob.WEEK).Distinct().ToList()), filterHeader) ;
+WHERE H.STATUS=0 AND M.ID IN ({3}) AND H.PRODUCT_GROUP IN ({4}) AND P.YEAR IN ({0}) AND P.WEEK IN ({1}) AND H.MODEL||'.'||H.COLOR IN (SELECT M FROM FILTER_MODEL) "
+, string.Join(',', model.Item1.Select(ob => ob.YEAR).Distinct().ToList())
+, string.Join(',', model.Item1.Select(ob => ob.WEEK).Distinct().ToList())
+, filterHeader
+, string.Join(',', model.Item5.Select(ob => ob.ID).Distinct().ToList())
+, string.Join(',', model.Item4.Select(ob => ob.ID).Distinct().ToList())) ;
             List<PlanModel> plan = _monitoringRepository.DeserializeList<PlanModel>(sql);
             //foreach (var item in plan)
             //    item.ORDER_QUANTITY = _monitoringRepository.ReadInteger(string.Format("SELECT SUM(QUANTITY) FROM FDEIT005.EPM_MASTER_PRODUCTION_D WHERE MARKET={0} AND HEADER_ID={1}", item.MARKET_ID, item.HEADER_ID));
 
             var tList = plan.Select(ob => new { ob.MODEL, ob.COLOR }).Distinct().ToList();
-            string filter = ""; 
+            string filter = "";
+            string filterPazar = "";
             for (int i = 0; i < tList.Count; i++)
             {
                 var item = tList[i];
-                if (i != 0)
-                    filter += " UNION ALL";
-
+                if (i != 0) 
+                    filter += " UNION ALL";  
+                 
                 filter += " SELECT '" + item.MODEL + "." + item.COLOR + "' M FROM DUAL";
-            } 
+            }
+            for (int i = 0; i < model.Item5.Count; i++)
+            {
+                var item = model.Item5[i];
+                if (i != 0)
+                    filterPazar += " UNION ALL";
+
+                filterPazar += " SELECT '" + item.EGEMEN_ADI + "' M FROM DUAL";
+            }
             List<PlanModel> planReturn = new List<PlanModel>();
             var distinctMarkets = plan.Select(ob => ob.MARKET_NAME).Distinct().ToList();
             foreach (var item in distinctMarkets)
@@ -135,10 +148,10 @@ WHERE H.STATUS=0 AND P.YEAR IN ({0}) AND P.WEEK IN ({1}) AND H.MODEL||'.'||H.COL
             EPM_TRACKING_PROCESS_VALUES values = new EPM_TRACKING_PROCESS_VALUES();
 
             List<MarketReleasedModel> valuesReleased = new List<MarketReleasedModel>();
-            List<MarketReleasedModel> kesimGM = _monitoringRepository.DeserializeList<MarketReleasedModel>("WITH FILTER_MODEL AS("+ filter + ") SELECT 'KESİM' TYPE,PAZAR_ADI,SUM(MIKTAR) MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (5515,5516,5517) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL) GROUP BY PAZAR_ADI");
-            List<MarketReleasedModel> tasnifGM = _monitoringRepository.DeserializeList<MarketReleasedModel>("WITH FILTER_MODEL AS(" + filter + ")  SELECT 'TASNİF' TYPE,PAZAR_ADI,SUM(MIKTAR) MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (8631,8632,8633,9576) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL) GROUP BY PAZAR_ADI");
-            List<MarketReleasedModel> bantGM = _monitoringRepository.DeserializeList<MarketReleasedModel>("WITH FILTER_MODEL AS(" + filter + ")  SELECT 'BANT' TYPE,PAZAR_ADI,SUM(MIKTAR) MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (5,600,9595,845,670,80) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL) GROUP BY PAZAR_ADI");
-            List<MarketReleasedModel> kaliteGM = _monitoringRepository.DeserializeList<MarketReleasedModel>("WITH FILTER_MODEL AS(" + filter + ")  SELECT 'KALİTE' TYPE,PAZAR_ADI,SUM(MIKTAR) MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (181,1160,745,743,744) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL)  GROUP BY PAZAR_ADI");
+            List<MarketReleasedModel> kesimGM = _monitoringRepository.DeserializeList<MarketReleasedModel>("WITH FILTER_MODEL AS("+ filter + ") ,FILTER_PAZAR AS(" + filterPazar + ") SELECT 'KESİM' TYPE,PAZAR_ADI,SUM(MIKTAR) MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE PAZAR_ADI IN (SELECT M FROM FILTER_PAZAR) AND SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (5515,5516,5517) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL) GROUP BY PAZAR_ADI");
+            List<MarketReleasedModel> tasnifGM = _monitoringRepository.DeserializeList<MarketReleasedModel>("WITH FILTER_MODEL AS(" + filter + ") ,FILTER_PAZAR AS(" + filterPazar + ") SELECT 'TASNİF' TYPE,PAZAR_ADI,SUM(MIKTAR) MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE PAZAR_ADI IN (SELECT M FROM FILTER_PAZAR) AND SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (8631,8632,8633,9576) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL) GROUP BY PAZAR_ADI");
+            List<MarketReleasedModel> bantGM = _monitoringRepository.DeserializeList<MarketReleasedModel>("WITH FILTER_MODEL AS(" + filter + ")  ,FILTER_PAZAR AS(" + filterPazar + ") SELECT 'BANT' TYPE,PAZAR_ADI,SUM(MIKTAR) MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE PAZAR_ADI IN (SELECT M FROM FILTER_PAZAR) AND SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (5,600,9595,845,670,80) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL) GROUP BY PAZAR_ADI");
+            List<MarketReleasedModel> kaliteGM = _monitoringRepository.DeserializeList<MarketReleasedModel>("WITH FILTER_MODEL AS(" + filter + ") ,FILTER_PAZAR AS(" + filterPazar + ") SELECT 'KALİTE' TYPE,PAZAR_ADI,SUM(MIKTAR) MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE PAZAR_ADI IN (SELECT M FROM FILTER_PAZAR) AND SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (181,1160,745,743,744) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL)  GROUP BY PAZAR_ADI");
             List<MarketReleasedModel> kaliteGerceklesenGM = _monitoringRepository.DeserializeList<MarketReleasedModel>(string.Format(@"
 WITH FILTER_MODEL AS({0}) 
 SELECT 'KALİTEG' TYPE
@@ -146,7 +159,12 @@ SELECT 'KALİTEG' TYPE
 ,SUM(BIRINCI_KALITE) AS MIKTAR FROM FDEIT005.EPM_PRODUCTION_EGEMEN PG
 INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON PG.MARKET=M.ID
 INNER JOIN FDEIT005.EPM_PRODUCTION_SEASON S ON S.ID=PG.SEASON 
-WHERE S.EGEMEN_ADI='{1}'  AND PG.MODEL||'.'||PG.COLOR IN (SELECT M FROM FILTER_MODEL)  GROUP BY M.EGEMEN_ADI", filter,season.EGEMEN_ADI));
+WHERE S.EGEMEN_ADI='{1}' AND M.ID IN ({2})   AND PG.MODEL||'.'||PG.COLOR IN (SELECT M FROM FILTER_MODEL)  
+GROUP BY M.EGEMEN_ADI"
+, filter
+,season.EGEMEN_ADI
+, string.Join(',', model.Item5.Select(ob => ob.ID).Distinct().ToList())
+));
             values.KESIM = kesimGM.Sum(ob => ob.MIKTAR);
             values.TASNIF = tasnifGM.Sum(ob => ob.MIKTAR);
             values.BANT = bantGM.Sum(ob => ob.MIKTAR);
@@ -231,9 +249,12 @@ CASE
                   FROM FDEIT005.EPM_PRODUCTION_TRACKING_LIST PL2
                  WHERE PL2.HEADER_ID = H.ID)
                   ELSE 0 END AS TANIMLANAN
-,(SELECT SUM(QUANTITY) FROM FDEIT005.EPM_MASTER_PRODUCTION_D D WHERE D.HEADER_ID=H.ID AND D.STATUS=0) QUANTITY
-FROM FDEIT005.EPM_MASTER_PRODUCTION_H H WHERE H.SEASON={0} AND H.STATUS=0 AND H.MODEL||'.'||H.COLOR IN (SELECT M FROM FILTER_MODEL) ) A 
- ", season.ID,filterHeader);
+,(SELECT SUM(QUANTITY) FROM FDEIT005.EPM_MASTER_PRODUCTION_D D WHERE D.HEADER_ID=H.ID AND D.STATUS=0 AND D.MARKET IN ({2})) QUANTITY
+FROM FDEIT005.EPM_MASTER_PRODUCTION_H H WHERE   H.PRODUCT_GROUP IN ({3}) AND H.SEASON={0} AND H.STATUS=0 AND H.MODEL||'.'||H.COLOR IN (SELECT M FROM FILTER_MODEL) ) A 
+ ", season.ID
+ , filterHeader
+, string.Join(',', model.Item5.Select(ob => ob.ID).Distinct().ToList())
+, string.Join(',', model.Item4.Select(ob => ob.ID).Distinct().ToList()));
 
             List<ProductionModel> productionModel = _monitoringRepository.DeserializeList<ProductionModel>(sql);
             return new Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>, List<ProductionModel>>(planReturn, values, valuesReleased, productionModel);
@@ -287,6 +308,16 @@ WHERE P.YEAR IN ({0}) AND P.WEEK IN ({1})  AND ({2})"
             values.BANT = _egemenRepository.ReadInteger(new EgemenDevanlayHelper().BantAdediniGetirByDate(season.EGEMEN_ADI, model.Item4.Date, model.Item4.Date.AddDays(1).AddSeconds(-1),filter));
             return values;
 
+        }
+
+        public List<EPM_PRODUCTION_MARKET> GetMarketList()
+        {
+            return _monitoringRepository.DeserializeList<EPM_PRODUCTION_MARKET>("SELECT * FROM FDEIT005.EPM_PRODUCTION_MARKET");
+        }
+
+        public List<EPM_PRODUCT_GROUP> GetProductGroup()
+        {
+            return _monitoringRepository.DeserializeList<EPM_PRODUCT_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCT_GROUP");
         }
     }
 }

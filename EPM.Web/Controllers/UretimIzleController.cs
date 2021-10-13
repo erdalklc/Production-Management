@@ -1,4 +1,5 @@
-﻿using EPM.Production.Monitoring.Dto.Models;
+﻿using EPM.Dto.Base;
+using EPM.Production.Monitoring.Dto.Models;
 using EPM.Service.Base;
 using EPM.Web.ServiceHelper;
 using Microsoft.AspNetCore.Mvc;
@@ -30,17 +31,37 @@ namespace EPM.Web.Controllers
         }
 
         [HttpPost, HttpGet]
-        public IActionResult GetProductList(List<HaftaModel> model,FilterModel filterModel)
+        public IActionResult GetProductList([FromBody] JObject data)
         {
-            return Json(MonitoringServiceHelper.GetProductList(model,filterModel));
+            dynamic value = data;
+            var haftaModel = JsonConvert.DeserializeObject<List<HaftaModel>>(value.haftaModel.ToString());
+            var marketModel = JsonConvert.DeserializeObject<List<EPM_PRODUCTION_MARKET>>(value.marketModel.ToString());
+            var productGroupModel = JsonConvert.DeserializeObject<List<EPM_PRODUCT_GROUP>>(value.productGroupModel.ToString());
+            var filterModel = JsonConvert.DeserializeObject<FilterModel>(value.filterModel.ToString());
+            return Json(MonitoringServiceHelper.GetProductList(haftaModel, productGroupModel,marketModel, filterModel));
         }
-
+        [HttpPost, HttpGet]
+        public IActionResult GetMarketList()
+        {
+            return Json(MonitoringServiceHelper.GetMarketList());
+        }
+        [HttpPost, HttpGet]
+        public IActionResult GetProductGroup()
+        {
+            return Json(MonitoringServiceHelper.GetProductGroup());
+        }
         [HttpPost, HttpGet]
         public IActionResult GetProductionDetails([FromBody] JObject data)
         {
             dynamic value = data;
+            var haftaModel = JsonConvert.DeserializeObject<List<HaftaModel>>(value.haftaModel.ToString());
+            var productModel = JsonConvert.DeserializeObject<List<ProductModel>>(value.productModel.ToString());
+            var filterModel = JsonConvert.DeserializeObject<FilterModel>(value.filterModel.ToString());
+            var marketModel = JsonConvert.DeserializeObject<List<EPM_PRODUCTION_MARKET>>(value.marketModel.ToString());
+            var productGroupModel = JsonConvert.DeserializeObject<List<EPM_PRODUCT_GROUP>>(value.productGroupModel.ToString());
+
             //List<HaftaModel> haftaModel,List<ProductModel> productModel, FilterModel filterModel
-            return Json(MonitoringServiceHelper.GetProductionDetails(JsonConvert.DeserializeObject < List<HaftaModel>>(value.haftaModel.ToString()), JsonConvert.DeserializeObject<List<ProductModel>>(value.productModel.ToString()), JsonConvert.DeserializeObject<FilterModel>(value.filterModel.ToString())));
+            return Json(MonitoringServiceHelper.GetProductionDetails(haftaModel, productModel, filterModel,productGroupModel,marketModel));
              
         }
         [HttpPost, HttpGet]

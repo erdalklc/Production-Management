@@ -24,18 +24,27 @@ namespace EPM.Production.Monitoring.Api.Controllers
             return _monitoringService.GetTerminList(model);
         }
 
-        public List<ProductModel> GetProductList(Tuple<List<HaftaModel>, FilterModel> model)
+        public List<ProductModel> GetProductList(Tuple<List<HaftaModel>, List<EPM_PRODUCT_GROUP>, List<EPM_PRODUCTION_MARKET>, FilterModel> model)
         {
             return _monitoringService.GetProductList(model);
         }
 
-        public Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>, List<ProductionModel>> GetProductionDetails(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel> model)
+        public Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>, List<ProductionModel>> GetProductionDetails(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, List<EPM_PRODUCT_GROUP>, List<EPM_PRODUCTION_MARKET>> model)
         {
             return _monitoringService.GetProductionDetails(model); 
         }
         public EPM_TRACKING_PROCESS_VALUES GetProductionDetailsByDate(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel,DateTime> model)
         {
             return _monitoringService.GetProductionDetailsByDate(model);
+        }
+
+        public List<EPM_PRODUCTION_MARKET> GetMarketList()
+        {
+            return _monitoringService.GetMarketList();
+        }
+        public List<EPM_PRODUCT_GROUP> GetProductGroup()
+        {
+            return _monitoringService.GetProductGroup();
         }
     }
 }

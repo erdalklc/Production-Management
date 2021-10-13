@@ -66,35 +66,38 @@
 
         <div id="popupDetay"></div>
     </div>
-
-    <div class="dx-card wide-card" style="width: 100%; height: calc(100vh - 128px); ">
-        <div class="dx-card wide-card" id="weekDetailCard" style="width:225px;height:100%;display:inline-block;margin:0 2px">
-            <div id="weekDetail"></div>
+     
+    <div style="width: 100%; height: calc(100vh - 135px); ">
+        <div id="weekDetailCard" style="width:175px;height:100%;display:inline-block;margin:0 2px">
+            <div class="dx-card wide-card" id="marketDetail" style="max-height: 50%; min-height: 50%;margin:1px 0; "></div>
+            <div class="dx-card wide-card" id="productGroupDetail" style="max-height: 50%; min-height: 50%;margin:1px 0; "></div>
         </div>
-        <div class="dx-card wide-card" id="productDetailCard" style="width: 200px; height: 100%; display: inline-block; margin: 0 2px">
-            <div id="productDetail"></div>
+
+        <div id="productDetailCard" style="width: 225px; height: 100%; display: inline-block;">
+            <div class="dx-card wide-card" id="weekDetail" style="max-height: 50%; min-height: 50%; margin: 1px 0; "></div>
+            <div class="dx-card wide-card" id="productDetail" style="max-height: 50%; min-height: 50%; margin: 1px 0; "></div>
         </div>
-        <div class="dx-card wide-card" style="width: calc(100% - 485px);overflow-y:auto; height: 100%; display: inline-block; ">
-            <div class="dx-card wide-card" id="productPlan" style="width: 49%; height: 200px; display: inline-block; margin: 0 2px">
+        <div style="width: calc(100% - 415px); overflow-y:auto;overflow-x:hidden; height: 100%; display: inline-block; ">
+            <div class="dx-card wide-card" id="productPlan" style="width: 49.4%; height: 200px; display: inline-block; margin: 0 1px">
 
             </div>
-            <div class="dx-card wide-card" id="productBar" style="width: 49%; height: 200px; display: inline-block; margin: 0 2px">
+            <div class="dx-card wide-card" id="productBar" style="width: 49.4%; height: 200px; display: inline-block; margin: 0 1px">
 
             </div>
 
-            <div class="dx-card wide-card" id="releasedTasnif" style="width: 49%; height: 250px; display: inline-block; margin: 0 2px">
+            <div class="dx-card wide-card" id="releasedTasnif" style="width: 49.4%; height: 250px; display: inline-block; margin: 0 1px">
 
             </div>
-            <div class="dx-card wide-card" id="releasedBant" style="width: 49%; height: 250px; display: inline-block; margin: 0 2px ">
+            <div class="dx-card wide-card" id="releasedBant" style="width: 49.4%; height: 250px; display: inline-block; margin: 0 1px ">
 
             </div>
-            <div class="dx-card wide-card" id="releasedKalite" style="width: 49%; height: 250px; display: inline-block; margin: 0 2px ">
+            <div class="dx-card wide-card" id="releasedKalite" style="width: 49.4%; height: 250px; display: inline-block; margin: 0 1px ">
 
             </div>
-            <div class="dx-card wide-card" id="releasedKaliteG" style="width: 49%; height: 250px; display: inline-block; margin: 0 2px ">
+            <div class="dx-card wide-card" id="releasedKaliteG" style="width: 49.4%; height: 250px; display: inline-block; margin: 0 1px ">
 
             </div>
-            <div class="dx-card wide-card" id="releasedProductList" style="width: 100%; height: 450px; display: inline-block; margin: 0 2px ">
+            <div id="releasedProductList" style="width: 100%; height: 450px; display: inline-block; padding: 4px 2px ">
                 @(Html.DevExtreme().DataGrid<EPM.Production.Monitoring.Dto.Models.ProductionModel>().ID("edUretimTakipGrid")
     .ShowBorders(false)
     .FilterRow(f => f.Visible(true))
@@ -110,9 +113,9 @@
     .ShowColumnHeaders(true)
     .ColumnMinWidth(60)
     .AllowColumnResizing(true)
-    .Columns(columns => { 
+    .Columns(columns => {
         columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn => btn.Add().Icon("fa fa-search").OnClick("DetailSearch"));
-        columns.AddFor(m => m.ID).Width(100).AllowEditing(false); 
+        columns.AddFor(m => m.ID).Width(100).AllowEditing(false);
         columns.AddFor(m => m.APPROVAL_STATUS).Visible(false).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetApprovalStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.BRAND).Visible(false).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.SEASON).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
@@ -132,9 +135,9 @@
         columns.AddFor(m => m.DEADLINE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy");
         columns.AddFor(m => m.SHIPMENT_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Visible(false);
         columns.AddFor(m => m.QUANTITY);
-         
+
         columns.AddFor(m => m.PROCESS_INFO).Caption("SÜREÇ DURUMU");
-        
+
     })
     .Summary(sm =>
     {
@@ -142,7 +145,7 @@
         {
             t.AddFor(ob => ob.MODEL).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
                 t.AddFor(ob => ob.QUANTITY).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
-            
+
         });
 
     })
@@ -264,6 +267,94 @@
         $("#trBant").html(0);
         $("#trKalite").html(0);
     }
+    function GetMarketList() {
+         $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetMarketList", "UretimIzle")',
+            data: "",
+            contentType: 'application/x-www-form-urlencoded',
+            timeout: 180000,
+             success: function (income, status, xmlRequest) {
+                 marketModel = income;
+                marketDetail = $("#marketDetail").dxList({
+                    dataSource: new DevExpress.data.DataSource({
+                        store: new DevExpress.data.ArrayStore({
+                            key: "ID",
+                            data: income
+                        }),
+                        paginate: false
+                    }),
+                    height: "100%",
+                    selectedItemKeys: $(income).map(function () {
+                        return this.ID;
+                    }).get(),
+                    itemTemplate: function (data) {
+                        var html = "<div> <span style='font-weight:bold;'>" + data.EGEMEN_ADI + "</span></div>";
+                        return html;
+                    },
+                    showSelectionControls: true,
+                    selectionMode: "all",
+                    pageLoadMode: "scrollBottom",
+                    onSelectionChanged: function (data) {
+                        marketModel = marketDetail.dxList("instance").option("selectedItems");
+                    }
+                });
+
+            }, beforeSend: function () {
+                getLoadPanelInstance().show();
+            }
+
+
+        }).always(function () {
+            getLoadPanelInstance().hide();
+        });
+    }
+    function GetProductGroup() {
+         $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetProductGroup", "UretimIzle")',
+            data: "",
+            contentType: 'application/x-www-form-urlencoded',
+            timeout: 180000,
+            success: function (income, status, xmlRequest) {
+                productGroupModel = income;
+                productGroupDetail = $("#productGroupDetail").dxList({
+                    dataSource: new DevExpress.data.DataSource({
+                        store: new DevExpress.data.ArrayStore({
+                            key: "ID",
+                            data: income
+                        }),
+                        paginate: false
+                    }), selectedItemKeys: $(income).map(function () {
+                        return this.ID;
+                    }).get(),
+                    height: "100%",
+                    itemTemplate: function (data) {
+                        var html = "<div> <span style='font-weight:bold;'>" + data.ADI + "</span></div>";
+                        return html;
+                    },
+                    showSelectionControls: true,
+                    selectionMode: "all",
+                    pageLoadMode: "scrollBottom",
+                    onSelectionChanged: function (data) {
+                        productGroupModel = productGroupDetail.dxList("instance").option("selectedItems");
+                    }
+                });
+
+            }, beforeSend: function () {
+                getLoadPanelInstance().show();
+            }
+
+
+        }).always(function () {
+            getLoadPanelInstance().hide();
+        });
+    }
+    $(function () {
+        GetMarketList();
+        GetProductGroup();
+    });
+     
     function UretimIzleFilter() {
         ClearChart();
         ClearBottom();
@@ -308,7 +399,7 @@
                         ClearChart();
                         GetProductDetail();
                     }
-                });
+                }); 
 
             }, beforeSend: function () {
                 getLoadPanelInstance().show();
@@ -322,6 +413,8 @@
 
     var haftaModel = null;
     var productModel = null;
+    var marketModel = null;
+    var productGroupModel = null;
     function GetProductDetail() {
         ClearChart();
         ClearBottom();
@@ -329,7 +422,9 @@
         if (haftaModel == null || haftaModel.length == 0)
             return;
         data = {
-            model: haftaModel,
+            haftaModel: haftaModel,
+            marketModel: marketModel,
+            productGroupModel: productGroupModel,
             filterModel: {
                 BRAND: jQuery("[name=BRAND]").val(),
                 SEASON: jQuery("[name=SEASON]").val(),
@@ -343,8 +438,8 @@
         $.ajax({
             type: "POST",
             url: '@Url.Action("GetProductList", "UretimIzle")',
-            data: data,
-            contentType: 'application/x-www-form-urlencoded',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
             timeout: 180000,
             success: function (income, status, xmlRequest) {
                 productDetail = $("#productDetail").dxList({
@@ -393,6 +488,8 @@
         data = {
             haftaModel: haftaModel,
             productModel: productModel,
+            marketModel: marketModel,
+            productGroupModel: productGroupModel,
             filterModel: {
                 BRAND: jQuery("[name=BRAND]").val(),
                 SEASON: jQuery("[name=SEASON]").val(),
