@@ -42,7 +42,7 @@ namespace EPM.Production.Monitoring.Service.Services
         INNER JOIN (
                 SELECT P.WEEK,P.YEAR FROM FDEIT005.EPM_MASTER_PRODUCTION_H H
 INNER JOIN FDEIT005.EPM_PRODUCTION_PLAN P ON P.HEADER_ID=H.ID 
-WHERE 0=0 _SQLFILTER_
+WHERE 0=0 AND H.STATUS=0 _SQLFILTER_
             ) PL ON PL.WEEK=WK.WEEK AND PL.YEAR=WK.YEAR
     ORDER BY WK.WEEK,WK.YEAR
          ";
@@ -69,7 +69,7 @@ WHERE 0=0 _SQLFILTER_
         {
             string sql = string.Format(@"SELECT * FROM (SELECT DISTINCT H.MODEL ,H.COLOR, H.ID AS HEADER_ID FROM FDEIT005.EPM_PRODUCTION_PLAN P 
 INNER JOIN  FDEIT005.EPM_MASTER_PRODUCTION_H  H ON H.ID=P.HEADER_ID
-INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND P.WEEK IN ({0}) AND P.YEAR IN ({1}) _SQLFILTER_", string.Join(',', model.Item1.Select(ob=>ob.WEEK).Distinct().ToList()), string.Join(',', model.Item1.Select(ob => ob.YEAR).Distinct().ToList()));
+INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND H.STATUS=0 AND P.WEEK IN ({0}) AND P.YEAR IN ({1}) _SQLFILTER_", string.Join(',', model.Item1.Select(ob=>ob.WEEK).Distinct().ToList()), string.Join(',', model.Item1.Select(ob => ob.YEAR).Distinct().ToList()));
             string sqlFilter = "";
             if (model.Item2.SEASON != 0)
                 sqlFilter += " AND H.SEASON=" + model.Item2.SEASON;
@@ -90,7 +90,7 @@ INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND P.
             return _monitoringRepository.DeserializeList<ProductModel>(sql);
         }
 
-        public Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>> GetProductionDetails(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel> model)
+        public Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>, List<ProductionModel>> GetProductionDetails(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel> model)
         {
             string filterHeader = "";
             for (int i = 0; i < model.Item2.Count; i++)
@@ -110,7 +110,7 @@ INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND P.
 FROM FDEIT005.EPM_PRODUCTION_PLAN P 
 INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID 
 INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=P.HEADER_ID
-WHERE P.YEAR IN ({0}) AND P.WEEK IN ({1}) AND H.MODEL||'.'||H.COLOR IN (SELECT M FROM FILTER_MODEL) "
+WHERE H.STATUS=0 AND P.YEAR IN ({0}) AND P.WEEK IN ({1}) AND H.MODEL||'.'||H.COLOR IN (SELECT M FROM FILTER_MODEL) "
 , string.Join(',', model.Item1.Select(ob => ob.YEAR).Distinct().ToList()), string.Join(',', model.Item1.Select(ob => ob.WEEK).Distinct().ToList()), filterHeader) ;
             List<PlanModel> plan = _monitoringRepository.DeserializeList<PlanModel>(sql);
             //foreach (var item in plan)
@@ -156,9 +156,90 @@ WHERE S.EGEMEN_ADI='{1}'  AND PG.MODEL||'.'||PG.COLOR IN (SELECT M FROM FILTER_M
             valuesReleased.AddRange(bantGM);
             valuesReleased.AddRange(kaliteGM);
             valuesReleased.AddRange(kaliteGerceklesenGM);
-            return new Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>>(planReturn, values, valuesReleased);
+
+
+            sql = string.Format(@" 
+WITH FILTER_MODEL AS({1}) 
+SELECT A.*,CASE
+          WHEN SATIN_ALMA_BAGLANTI > 0
+          THEN
+             CASE
+                WHEN TANIMLANAN = 0
+                THEN
+                   'TAKIP BASLATILMADI'
+                ELSE
+                   CASE
+                      WHEN TAMAMLANAN = TANIMLANAN
+                      THEN
+                         'TAMAMLANDI'
+                      ELSE
+                         CASE
+                            WHEN LAST_STATE IS NULL THEN 'YOK'
+                            ELSE LAST_STATE
+                         END
+                   END
+             END
+          ELSE
+             'SATIN ALMA EŞLEŞTİRİLMEDİ'
+       END
+          AS PROCESS_INFO FROM (
+SELECT H.*,
+CASE WHEN H.PRODUCTION_TYPE =1 THEN
+CASE WHEN RECIPE NOT IN (1,2,3)  THEN (SELECT PROCESS_NAME
+                  FROM (  SELECT PI.PROCESS_NAME,
+                                 PL.END_DATE,
+                                 PL.PO_HEADER_ID,
+                                 PL.HEADER_ID,
+                                 RD.HEADER_ID AS RECETE_ID,
+                                 (SELECT COUNT (*)
+                                    FROM FDEIT005.EPM_PRODUCTION_TRACKING_LIST PL2
+                                   WHERE     STATUS = 2
+                                         AND PL2.PO_HEADER_ID = PL.PO_HEADER_ID)
+                                    AS TAMAMLANAN,
+                                 (SELECT COUNT (*)
+                                    FROM FDEIT005.EPM_PRODUCTION_TRACKING_LIST PL2
+                                   WHERE PL2.PO_HEADER_ID = PL.PO_HEADER_ID)
+                                    AS TANIMLANAN
+                            FROM FDEIT005.EPM_PRODUCTION_TRACKING_LIST PL
+                                 INNER JOIN
+                                 FDEIT005.EPM_PRODUCTION_PROCESS_INFO PI
+                                    ON PI.ID = PL.PROCESS_ID
+                                 INNER JOIN
+                                 FDEIT005.EPM_PRODUCTION_RECIPE_DETAIL RD
+                                    ON RD.PROCESS_ID = PL.PROCESS_ID
+                           WHERE PL.STATUS = 1
+                        ORDER BY PL.PO_HEADER_ID, RD.QUEUE) DE
+                 WHERE     DE.HEADER_ID = H.ID
+                       AND DE.RECETE_ID = H.RECIPE
+                       AND ROWNUM = 1) ELSE '' END
+ELSE '' END  LAST_STATE,
+CASE
+                  WHEN RECIPE IN (1, 2, 3)
+                  THEN
+                     (SELECT COUNT (*)
+                        FROM FDEIT005.EPM_MASTER_PRODUCTION_ORDERS O
+                       WHERE O.HEADER_ID = H.ID)
+                  ELSE
+                     3
+               END
+                  AS SATIN_ALMA_BAGLANTI
+                  ,   CASE WHEN RECIPE IN (1,2,3)  THEN (SELECT COUNT (*)
+                  FROM FDEIT005.EPM_PRODUCTION_TRACKING_LIST PL2
+                 WHERE STATUS IN (2, 4) AND PL2.HEADER_ID = H.ID)
+                  ELSE 0 END AS TAMAMLANAN,
+              CASE WHEN RECIPE IN (1,2,3)  THEN (SELECT COUNT (*)
+                  FROM FDEIT005.EPM_PRODUCTION_TRACKING_LIST PL2
+                 WHERE PL2.HEADER_ID = H.ID)
+                  ELSE 0 END AS TANIMLANAN
+,(SELECT SUM(QUANTITY) FROM FDEIT005.EPM_MASTER_PRODUCTION_D D WHERE D.HEADER_ID=H.ID AND D.STATUS=0) QUANTITY
+FROM FDEIT005.EPM_MASTER_PRODUCTION_H H WHERE H.SEASON={0} AND H.STATUS=0 AND H.MODEL||'.'||H.COLOR IN (SELECT M FROM FILTER_MODEL) ) A 
+ ", season.ID,filterHeader);
+
+            List<ProductionModel> productionModel = _monitoringRepository.DeserializeList<ProductionModel>(sql);
+            return new Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>, List<ProductionModel>>(planReturn, values, valuesReleased, productionModel);
 
         }
+
         public EPM_TRACKING_PROCESS_VALUES GetProductionDetailsByDate(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, DateTime> model)
         {
             string filterHeader = "";

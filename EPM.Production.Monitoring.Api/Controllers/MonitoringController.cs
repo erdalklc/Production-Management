@@ -29,7 +29,7 @@ namespace EPM.Production.Monitoring.Api.Controllers
             return _monitoringService.GetProductList(model);
         }
 
-        public Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>> GetProductionDetails(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel> model)
+        public Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>, List<ProductionModel>> GetProductionDetails(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel> model)
         {
             return _monitoringService.GetProductionDetails(model); 
         }

@@ -67,7 +67,7 @@
         <div id="popupDetay"></div>
     </div>
 
-    <div class="dx-card wide-card" style="width: 100%; height: calc(100vh - 135px); ">
+    <div class="dx-card wide-card" style="width: 100%; height: calc(100vh - 128px); ">
         <div class="dx-card wide-card" id="weekDetailCard" style="width:225px;height:100%;display:inline-block;margin:0 2px">
             <div id="weekDetail"></div>
         </div>
@@ -94,52 +94,61 @@
             <div class="dx-card wide-card" id="releasedKaliteG" style="width: 49%; height: 250px; display: inline-block; margin: 0 2px ">
 
             </div>
-            @*<div class="dx-card wide-card" id="productDetailValues" style="width: 100%; height: 150px; display: inline-block; margin: 0 2px">
-                <div class="dx-card wide-card" id="productKesim" style="width: 24.4%; height: 200px; display: inline-block; margin: 0 2px">
-                    <div class="productDetailCardHeader">KESİM</div>
-                    <div style="padding:5px 15px">
-                        <div class="detailItemEx">HAFTALIK</div>
-                        <div id="hfKesim" class="detailItemValue">0</div>
-                    </div>
-                    <div style="padding:5px 15px">
-                        <div class="detailItemEx">TARİH</div>
-                        <div id="trKesim" class="detailItemValue">0</div>
-                    </div>
-                </div>
-                <div class="dx-card wide-card" id="productTasnif" style="width: 24.4%; height: 200px; display: inline-block; margin: 0 2px">
-                    <div class="productDetailCardHeader">TASNİF</div>
-                    <div style="padding:5px 15px">
-                        <div class="detailItemEx">HAFTALIK</div>
-                        <div id="hfTasnif" class="detailItemValue">0</div>
-                    </div>
-                    <div style="padding:5px 15px">
-                        <div class="detailItemEx">TARİH</div>
-                        <div id="trTasnif" class="detailItemValue">0</div>
-                    </div>
-                </div>
-                <div class="dx-card wide-card" id="productBant" style="width: 24.4%; height: 200px; display: inline-block; margin: 0 2px">
-                    <div class="productDetailCardHeader">BANT</div>
-                    <div style="padding:5px 15px">
-                        <div class="detailItemEx">HAFTALIK</div>
-                        <div id="hfBant" class="detailItemValue">0</div>
-                    </div>
-                    <div style="padding:5px 15px">
-                        <div class="detailItemEx">TARİH</div>
-                        <div id="trBant" class="detailItemValue">0</div>
-                    </div>
-                </div>
-                <div class="dx-card wide-card" id="productKalite" style="width: 24.4%; height: 200px; display: inline-block; margin: 0 2px">
-                    <div class="productDetailCardHeader">KALİTE</div>
-                    <div style="padding:5px 15px">
-                        <div class="detailItemEx">HAFTALIK</div>
-                        <div id="hfKalite" class="detailItemValue">0</div>
-                    </div>
-                    <div style="padding:5px 15px">
-                        <div class="detailItemEx">TARİH</div>
-                        <div id="trKalite" class="detailItemValue">0</div>
-                    </div>
-                </div>
-            </div>*@
+            <div class="dx-card wide-card" id="releasedProductList" style="width: 100%; height: 450px; display: inline-block; margin: 0 2px ">
+                @(Html.DevExtreme().DataGrid<EPM.Production.Monitoring.Dto.Models.ProductionModel>().ID("edUretimTakipGrid")
+    .ShowBorders(false)
+    .FilterRow(f => f.Visible(true))
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .ShowBorders(true)
+    .HeaderFilter(a=>a.Visible(true))
+    .Paging(o => o.PageSize(50))
+    .Height(450)
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(60)
+    .AllowColumnResizing(true)
+    .Columns(columns => { 
+        columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn => btn.Add().Icon("fa fa-search").OnClick("DetailSearch"));
+        columns.AddFor(m => m.ID).Width(100).AllowEditing(false); 
+        columns.AddFor(m => m.APPROVAL_STATUS).Visible(false).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetApprovalStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.BRAND).Visible(false).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.SEASON).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.MODEL);
+        columns.AddFor(m => m.COLOR);
+        columns.AddFor(m => m.COMPANY_NAME);
+        columns.AddFor(m => m.COLLECTION_TYPE).Visible(false).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetCollectionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.ROYALTY).Visible(false);
+        columns.AddFor(m => m.TEMA).Visible(false);
+        columns.AddFor(m => m.ANA_TEMA).Visible(false);
+        columns.AddFor(m => m.PRODUCT_GROUP).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetProductGroupList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.FABRIC_TYPE).Visible(false).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetFabricList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.PRODUCTION_TYPE).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetProductionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.ORDER_TYPE).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetOrderList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.RECIPE).Width(140).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetRecipeList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.BAND_ID).Visible(false).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.DEADLINE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy");
+        columns.AddFor(m => m.SHIPMENT_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Visible(false);
+        columns.AddFor(m => m.QUANTITY);
+         
+        columns.AddFor(m => m.PROCESS_INFO).Caption("SÜREÇ DURUMU");
+        
+    })
+    .Summary(sm =>
+    {
+        sm.TotalItems(t =>
+        {
+            t.AddFor(ob => ob.MODEL).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
+                t.AddFor(ob => ob.QUANTITY).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+            
+        });
+
+    })
+    .OnCellPrepared("edUretimTakipGridCellPrepared")
+    )
+            </div>
         </div>
     </div>
 
@@ -149,6 +158,87 @@
 
 
 <script>
+    function DetailSearch(e) {
+        var width = "";
+        var height = "";
+        if (e.row.data.PRODUCTION_TYPE == 1) {
+            width = "calc(100% - 20px)";
+            height = "calc(100% - 10px)";
+            title = "SATIN ALMA DETAYI";
+        }
+        else {
+            width = "calc(100% / 2)";
+            height = "calc(100% - 250px)";
+            title = "FASON SİPARİŞ SÜREÇ DURUMLARI";
+        }
+        var header_id = e.row.data.ID;
+        tempHeaderId = header_id;
+        var popupOptions = {
+            contentTemplate: function () {
+                var data = {
+                    HEADER_ID: tempHeaderId,
+                    RECIPE: e.row.data.RECIPE
+                };
+                return  $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("_PartialUretimTakipDetay", "UretimTakip")',
+                    data: data,
+                    async: false,
+                    success: function (status) {
+                    }
+                }).responseText;
+            },
+            width: function () { return width; },
+            height: function () { return height; },
+            showTitle: true,
+            title: title,
+            dragEnabled: true,
+            closeOnOutsideClick: true
+        };
+
+        $("#popupDetay").dxPopup(popupOptions).dxPopup("instance").show();
+    }
+     function gridSatinAlmaFocusedRowChanged(e) {
+        console.log(e.row.data);
+        setTimeout(function () {
+            $("#edProcessInformations").load('@Url.Action("_PartialProcessInformations", "UretimTakip")', {
+                PO_HEADER_ID: e.row.data.PO_HEADER_ID,
+                HEADER_ID: e.row.data.HEADER_ID,
+                DETAIL_ID: e.row.data.DETAIL_TAKIP_NO
+            });
+
+
+            $("#edOrmeTab").load('@Url.Action("_PartialEgemenOrmeList", "UretimTakip")', {
+                TAKIP_NO: e.row.data.TAKIP_NO,
+                DETAIL_TAKIP_NO: e.row.data.DETAIL_TAKIP_NO
+            });
+
+            $("#edKumasDepoTab").load('@Url.Action("_PartialKumasDepoList", "UretimTakip")', {
+                ITEM_ID: e.row.data.ITEM_ID,
+                PO_HEADER_ID: e.row.data.PO_HEADER_ID
+            });
+            $("#edKesimTab").load('@Url.Action("_PartialKesimFoyuList", "UretimTakip")', {
+                ITEM_ID: e.row.data.ITEM_ID,
+                PO_HEADER_ID: e.row.data.PO_HEADER_ID,
+                RENK_DETAY: e.row.data.RENKDETAY,
+            });
+            $("#edBantTab").load('@Url.Action("_PartialBantList", "UretimTakip")', {
+                ITEM_ID: e.row.data.ITEM_ID,
+                PO_HEADER_ID: e.row.data.PO_HEADER_ID,
+                RENK_DETAY: e.row.data.RENKDETAY,
+            });
+            $("#edKaliteTab").load('@Url.Action("_PartialKaliteList", "UretimTakip")', {
+                ITEM_ID: e.row.data.ITEM_ID,
+                PO_HEADER_ID: e.row.data.PO_HEADER_ID,
+                RENK_DETAY: e.row.data.RENKDETAY,
+            });
+        }, 200);
+
+
+    }
+    function edUretimTakipGridCellPrepared() {
+
+    }
     var weekDetail, productDetail;
     function ClearChart() {
         try { $("#productBar").dxChart("instance").option("dataSource", null); } catch (e) { }
@@ -157,6 +247,7 @@
         try { $("#releasedKalite").dxChart("instance").option("dataSource", null); } catch (e) { }
         try { $("#releasedKaliteG").dxChart("instance").option("dataSource", null); } catch (e) { }
         try { $("#productPlan").dxDataGrid("instance").option("dataSource", null); } catch (e) { }
+        try { $("#edUretimTakipGrid").dxDataGrid("instance").option("dataSource", null); } catch (e) { }
     }
     function ClearGrid() {
         $("#productBar").dxChart("instance").option("dataSource", null);
@@ -289,8 +380,8 @@
             getLoadPanelInstance().hide();
         });
     }
-     
-    
+
+
     function GetProductionDetails() {
         ClearChart();
         ClearBottom();
@@ -353,7 +444,7 @@
                 var kaliteGSum = 0;
                 for (var i = 0; i < income.Item3.length; i++) {
                     var marketReleased = income.Item3[i];
-                    if (marketReleased.TYPE == "KESİM") 
+                    if (marketReleased.TYPE == "KESİM")
                         barKesim.push({ arg: marketReleased.PAZAR_ADI, val: marketReleased.MIKTAR });
                     if (marketReleased.TYPE == "TASNİF")
                         barTasnif.push({ arg: marketReleased.PAZAR_ADI, val: marketReleased.MIKTAR });
@@ -367,9 +458,11 @@
                     }
                 }
                 bar.push({ arg: "KALİTE GERÇEKLEŞEN", val: kaliteGSum });
-               
+
+
+                try { $("#edUretimTakipGrid").dxDataGrid("instance").option("dataSource", income.Item4); } catch (e) { }
                 $("#releasedTasnif").dxChart({
-                    commonSeriesSettings: { 
+                    commonSeriesSettings: {
                         label: {
                             visible: true,
                             format: {
@@ -379,7 +472,8 @@
                         }
                     },
                     dataSource: barTasnif,
-                    palette: "Ocean",
+                    palette: "Material",
+                    paletteExtensionMode: "Extrapolate",
                     legend: {
                         visible: false
                     },
@@ -398,7 +492,7 @@
                                 size: 8
                             }
                         }
-                        
+
                     },
                     title: {
                         text: "Tasnif",
@@ -419,7 +513,8 @@
                         }
                     },
                     dataSource: barBant,
-                    palette: "soft",
+                    palette: "Office",
+                    paletteExtensionMode: "Extrapolate",
                     legend: {
                         visible: false
                     },
@@ -458,7 +553,8 @@
                         }
                     },
                     dataSource: barKalite,
-                    palette: "soft",
+                    palette: "Pastel",
+                    paletteExtensionMode: "Extrapolate",
                     legend: {
                         visible: false
                     },
@@ -487,7 +583,7 @@
                     },
                 });
                 $("#releasedKaliteG").dxChart({
-                    commonSeriesSettings: { 
+                    commonSeriesSettings: {
                         label: {
                             visible: true,
                             format: {
@@ -497,7 +593,8 @@
                         }
                     },
                     dataSource: barKaliteG,
-                    palette: "soft",
+                    palette: "Bright",
+                    paletteExtensionMode: "Extrapolate",
                     legend: {
                         visible: false
                     },
@@ -588,7 +685,7 @@
                             }]
                     }
                 });
-                 
+
             }, beforeSend: function () {
                 getLoadPanelInstance().show();
             }
