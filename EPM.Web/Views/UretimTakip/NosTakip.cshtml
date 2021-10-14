@@ -18,6 +18,12 @@
         f.AddFor(ff => ff.SATIS_ADET_AY).Caption("SONRAKİ AY TAHMİNİ SATIŞ ADEDİ").Area(PivotGridArea.Data)
                    .SummaryType(SummaryType.Sum)
                    .Format(Format.FixedPoint);
+        f.AddFor(ff => ff.NOSTR_ADET).Caption("NOSTR STOK ADET").Area(PivotGridArea.Data)
+                    .SummaryType(SummaryType.Sum)
+                    .Format(Format.FixedPoint); 
+        f.AddFor(ff => ff.NOSIHR_ADET).Caption("NOSIHR STOK ADET").Area(PivotGridArea.Data)
+                    .SummaryType(SummaryType.Sum)
+                    .Format(Format.FixedPoint);
         f.AddFor(ff => ff.NOS_ADET).Caption("NOS STOK ADET").Area(PivotGridArea.Data)
                     .SummaryType(SummaryType.Sum)
                     .Format(Format.FixedPoint);

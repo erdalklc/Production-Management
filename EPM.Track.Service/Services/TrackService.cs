@@ -1036,14 +1036,16 @@ SELECT MA.MODEL,
            MA.BEDEN,
            MA.MODEL||'.'||MA.RENK||'.'||MA.BEDEN AS SKU,
            MA.ADET AS MIN_ADET,
-           NVL (NO.ENVANTER, 0) NOS_ADET,
+            NVL (NOTR.ENVANTER, 0)+  NVL (NOIHR.ENVANTER, 0) NOS_ADET, 
+           NVL (NOTR.ENVANTER, 0) NOSTR_ADET, 
+           NVL (NOIHR.ENVANTER, 0) NOSIHR_ADET, 
            NVL (LO.ENVANTER, 0) LOJ_ADET,
            STAY.SATIS_ADET_AY,
-           cast((CASE WHEN (NVL (NO.ENVANTER, 0) / MA.ADET)*100.00 >100 THEN 100 ELSE (NVL (NO.ENVANTER, 0) / MA.ADET)*100.00 END) as integer) AS YUZDE,
+           cast((CASE WHEN ((NVL (NOTR.ENVANTER, 0)+  NVL (NOIHR.ENVANTER, 0)) / MA.ADET)*100.00 >100 THEN 100 ELSE ((NVL (NOTR.ENVANTER, 0)+  NVL (NOIHR.ENVANTER, 0)) / MA.ADET)*100.00 END) as integer) AS YUZDE,
            CASE
-              WHEN MA.ADET - NVL (NO.ENVANTER, 0) >= 0
+              WHEN MA.ADET - (NVL (NOTR.ENVANTER, 0)+  NVL (NOIHR.ENVANTER, 0)) >= 0
               THEN
-                 MA.ADET - NVL (NO.ENVANTER, 0)
+                 MA.ADET - (NVL (NOTR.ENVANTER, 0)+  NVL (NOIHR.ENVANTER, 0))
               ELSE
                  0
            END
@@ -1065,8 +1067,8 @@ SELECT MA.MODEL,
               HAVING 1 = 1) LO
               ON LO.MODEL = MA.MODEL
                  AND LO.RENK = MA.RENK
-                 AND LO.BEDEN = MA.BEDEN 
-                 LEFT JOIN (
+                 AND LO.BEDEN = MA.BEDEN
+LEFT JOIN (
                  SELECT  o3501345.DEPO as DEPO,o3501345.MIKTAR as ENVANTER,o3501345.MODEL ,o3501345.RENK ,o3501345.BEDEN 
 FROM ( select 
 msi.segment1 model,
@@ -1091,13 +1093,45 @@ where 1=1
 and ws.ORGANIZATION_ID=105
 and msi.INVENTORY_ITEM_ID=ws.INVENTORY_ITEM_ID
 and msi.ORGANIZATION_ID=105   
-and ws.SUBINVENTORY_CODE in ('NOS','NOSTR','NOSIHR') 
+and ws.SUBINVENTORY_CODE in ('NOSTR') 
 group by  ws.SUBINVENTORY_CODE, 
 msi.segment1,msi.segment2,msi.ATTRIBUTE12,
 msi.segment3
-) o3501345    ) NO ON NO.MODEL = MA.MODEL
-                 AND NO.RENK = MA.RENK
-                 AND NO.BEDEN = MA.BEDEN 
+) o3501345    ) NOTR ON NOTR.MODEL = MA.MODEL
+                 AND NOTR.RENK = MA.RENK
+                 AND NOTR.BEDEN = MA.BEDEN  
+LEFT JOIN (
+                 SELECT  o3501345.DEPO as DEPO,o3501345.MIKTAR as ENVANTER,o3501345.MODEL ,o3501345.RENK ,o3501345.BEDEN 
+FROM ( select 
+msi.segment1 model,
+msi.segment2 renk,
+msi.segment3 beden, 
+ws.SUBINVENTORY_CODE depo,
+msi.ATTRIBUTE12,
+sum(ws.TRANSACTION_QUANTITY) miktar,
+(
+select 
+ml.segment1||'.'||
+ml.segment2||'.'||
+ml.segment3 
+from
+apps.mtl_item_locations ml
+where ml.INVENTORY_LOCATION_ID=ws.LOCATOR_ID
+and ml.ORGANIZATION_ID=ws.ORGANIZATION_ID)raf
+from
+apps.mtl_onhand_quantities_detail ws,
+apps.mtl_system_items_b msi 
+where 1=1 
+and ws.ORGANIZATION_ID=105
+and msi.INVENTORY_ITEM_ID=ws.INVENTORY_ITEM_ID
+and msi.ORGANIZATION_ID=105   
+and ws.SUBINVENTORY_CODE in ('NOSIHR') 
+group by  ws.SUBINVENTORY_CODE, 
+msi.segment1,msi.segment2,msi.ATTRIBUTE12,
+msi.segment3
+) o3501345    ) NOIHR ON NOIHR.MODEL = MA.MODEL
+                 AND NOIHR.RENK = MA.RENK
+                 AND NOIHR.BEDEN = MA.BEDEN  
                                  LEFT JOIN
                 (SELECT MODEL,
                           RENK,

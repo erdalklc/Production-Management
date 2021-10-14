@@ -13,6 +13,8 @@ namespace EPM.Track.Dto.Track
         public string BEDEN { get; set; }
         public int MIN_ADET { get; set; }
         public int NOS_ADET { get; set; }
+        public int NOSTR_ADET { get; set; }
+        public int NOSIHR_ADET { get; set; }
         public int LOJ_ADET { get; set; }
         public int SATIS_ADET_AY { get; set; }
         public int YUZDE { get; set; }
