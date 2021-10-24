@@ -34,7 +34,7 @@ namespace EPM.Transver.Helpers
 
         public void  OperasyonAnalizEt()
         {
-            string[] seasons = { "21-22 KIS", "2021 YAZ" };
+            string[] seasons = { "21-22 KIS", "2021 YAZ", "2022 YAZ" };
 
             foreach (var item in seasons)
             {

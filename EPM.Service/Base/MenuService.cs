@@ -20,38 +20,44 @@ namespace EPM.Service.Base
         public List<Menu> GetMenuList(HttpContext context)
         {
             List<Menu> menu = new List<Menu>();
-
-            try
+            CookieHelper cHelper = new CookieHelper();
+            menu = cHelper.GetObjectFromCookie<List<Menu>>(context, "MENU");
+            if (menu == null)
             {
-                menu = _epmRepository.DeserializeList<Menu>("SELECT * FROM FDEIT005.EPM_WEB_MENU");
-                WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
-
-                foreach (var item in menu)
+                try
                 {
-                    if (item.CATEGORY_ID.IntParse() > 0)
-                    {
-                        if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == item.RESPONSIBILITYS.IntParse()).Count > 0)
-                            item.ISVISIBLE = true;
-                        else item.ISVISIBLE = false;
-                    }
-                    else item.ISVISIBLE = true;
-                }
+                    menu = _epmRepository.DeserializeList<Menu>("SELECT * FROM FDEIT005.EPM_WEB_MENU");
+                    WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
 
-                var list = menu.FindAll(ob => ob.CATEGORY_ID.IntParse() == 0);
-                if (list != null)
-                {
-                    foreach (var item in list)
+                    foreach (var item in menu)
                     {
-                        if (menu.FindAll(ob => ob.CATEGORY_ID == item.ID && ob.ISVISIBLE).Count == 0)
+                        if (item.CATEGORY_ID.IntParse() > 0)
                         {
-                            menu.Find(ob => ob.ID == item.ID).ISVISIBLE = false;
+                            if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == item.RESPONSIBILITYS.IntParse()).Count > 0)
+                                item.ISVISIBLE = true;
+                            else item.ISVISIBLE = false;
+                        }
+                        else item.ISVISIBLE = true;
+                    }
+
+                    var list = menu.FindAll(ob => ob.CATEGORY_ID.IntParse() == 0);
+                    if (list != null)
+                    {
+                        foreach (var item in list)
+                        {
+                            if (menu.FindAll(ob => ob.CATEGORY_ID == item.ID && ob.ISVISIBLE).Count == 0)
+                            {
+                                menu.Find(ob => ob.ID == item.ID).ISVISIBLE = false;
+                            }
                         }
                     }
+                    cHelper.AddCookie(context, menu, "MENU");
+                }
+                catch (Exception)
+                {
                 }
             }
-            catch (Exception)
-            {
-            }
+           
 
             return menu;
         }

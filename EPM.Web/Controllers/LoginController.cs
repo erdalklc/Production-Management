@@ -11,13 +11,15 @@ namespace EPM.Web.Controllers
     public class LoginController : Controller
     {
         private readonly ILoginService _loginRepository;
+        private readonly IMenuService _menuService;
         private readonly IADAccountService _aDARepository;
         private readonly ILogService _logRepository;
-        public LoginController(ILoginService loginRepository, IADAccountService aDARepository, ILogService logRepository)
+        public LoginController(ILoginService loginRepository, IADAccountService aDARepository, ILogService logRepository, IMenuService menuService)
         {
             _loginRepository = loginRepository;
             _aDARepository = aDARepository;
             _logRepository = logRepository;
+            _menuService = menuService;
         }
         public IActionResult Login(Login model)
         { 
@@ -27,6 +29,7 @@ namespace EPM.Web.Controllers
                 WebLogin loginM = _loginRepository.LoginAD(Request.HttpContext, model, _aDARepository);
                 if (loginM.USER_CODE != "")
                 {
+                    //_menuService.GetMenuList(Request.HttpContext);
                     _loginRepository.LoginLog(loginM, _logRepository);
                     return RedirectToAction("Index", "Home");
                 } 

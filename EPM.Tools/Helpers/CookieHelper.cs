@@ -9,7 +9,7 @@ namespace EPM.Tools.Helpers
         public void AddCookie(HttpContext context, object obj, string CookieName)
         {
             CookieOptions cookieOp = new CookieOptions();
-            cookieOp.Expires = DateTime.Now.AddDays(200);
+            cookieOp.Expires = DateTime.Now.AddDays(200); 
             context.Response.Cookies.Append(CryptHelper.Encrypt(CookieName,CryptHelper.hash2), CryptHelper.Encrypt(JsonConvert.SerializeObject(obj), CryptHelper.hash), cookieOp);
         }
 

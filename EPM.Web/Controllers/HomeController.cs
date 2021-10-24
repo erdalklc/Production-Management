@@ -21,8 +21,7 @@ namespace EPM_Web.Controllers
             return View();
         }
 
-        [HttpGet, HttpPost]
-        [ResponseCache(Duration = 300, Location = ResponseCacheLocation.Client)]
+        [HttpGet, HttpPost] 
         public PartialViewResult _PartialLeftMenu(string ACTION,string CONTROLLER)
         {
             var menuList = _menuService.GetMenuList(Request.HttpContext);

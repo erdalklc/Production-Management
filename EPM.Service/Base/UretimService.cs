@@ -269,8 +269,8 @@ namespace EPM.Service.Base
                             aktarim.PRODUCT_SIZE = reader.GetValue(7).ToStringParse();
                             aktarim.QUANTITY = reader.GetValue(8).IntParse();
                             aktarim.MARKET = marketList.Find(ob => ob.ADI == reader.GetValue(9).ToStringParse()).ID;
-                            aktarim.DEADLINE = reader.GetValue(10).DatetimeParse();
-                            aktarim.SHIPMENT_DATE = reader.GetValue(11).DatetimeParse();
+                            aktarim.DEADLINE = reader.GetValue(10).DatetimeParse().Date;
+                            aktarim.SHIPMENT_DATE = reader.GetValue(11).DatetimeParse().Date;
                             aktarim.COLLECTION_TYPE = reader.GetValue(12).IntParse();
                             aktarim.ROYALTY = reader.GetValue(13).ToStringParse() == "0" ? "" : reader.GetValue(13).ToStringParse();
                             aktarim.ANA_TEMA = reader.GetValue(14).ToStringParse() == "0" ? "" : reader.GetValue(14).ToStringParse();
@@ -396,6 +396,17 @@ namespace EPM.Service.Base
                                 QUANTITY = item.QUANTITY,
                                 PRODUCT_SIZE = item.PRODUCT_SIZE
                             });
+                            if (item.PLAN_YEAR != 0 && item.PLAN_WEEK != 0)
+                            {
+                                h.PLAN.Add(new EPM_PRODUCTION_PLAN()
+                                {
+                                    MARKET_ID = item.MARKET,
+                                    QUANTITY = item.QUANTITY,
+                                    WEEK = item.PLAN_WEEK,
+                                    YEAR = item.PLAN_YEAR,
+                                    CREATED_BY = item.CREATED_BY
+                                });
+                            }
                         }
                     }
                     
@@ -439,6 +450,9 @@ namespace EPM.Service.Base
                              dd.HEADER_ID = hh.ID;
                              _epmRepository.Serialize(dd);
                          }
+                         hh.PLAN = (from val in hh.PLAN
+                                   group val by new { val.ID, val.HEADER_ID, val.MARKET_ID, val.WEEK, val.YEAR, val.CREATED_BY } into grouped
+                                   select new EPM_PRODUCTION_PLAN() { ID = grouped.Key.ID, HEADER_ID =grouped.Key.HEADER_ID, MARKET_ID = grouped.Key.MARKET_ID, WEEK = grouped.Key.WEEK, YEAR = grouped.Key.YEAR, CREATED_BY = grouped.Key.CREATED_BY, QUANTITY = grouped.Sum(o=>o.QUANTITY) }).ToList();
                          for (int p = 0; p < hh.PLAN.Count; p++)
                          {
                              EPM_PRODUCTION_PLAN plan = hh.PLAN[p];
