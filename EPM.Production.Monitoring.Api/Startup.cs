@@ -1,5 +1,6 @@
 using EPM.Production.Monitoring.Repository.Repository;
 using EPM.Production.Monitoring.Service.Services;
+using EPM.Tools.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,8 @@ namespace EPM.Production.Monitoring.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddSingleton<RedisServer>();
+            services.AddSingleton<ICacheService, RedisCacheService>();
             services.AddScoped<IMonitoringService, MonitoringService>();
             services.AddScoped<IEgemenRepository, EgemenRepository>();
             services.AddSingleton<IMonitoringRepository, MonitoringRepository>();

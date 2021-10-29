@@ -33,6 +33,10 @@ namespace EPM.Production.Monitoring.Api.Controllers
         {
             return _monitoringService.GetProductionDetails(model); 
         }
+        public List<ProductionDetailModel> GetProductionDetailsList(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, List<EPM_PRODUCT_GROUP>, List<EPM_PRODUCTION_MARKET>,ProductionDetail> model)
+        {
+            return _monitoringService.GetProductionDetailsList(model);
+        }
         public EPM_TRACKING_PROCESS_VALUES GetProductionDetailsByDate(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel,DateTime> model)
         {
             return _monitoringService.GetProductionDetailsByDate(model);

@@ -1508,3 +1508,6 @@ E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Service.d
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.pdb
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Service.pdb
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Repository.pdb
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Redis.dll
+E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\StackExchange.Redis.StrongName.dll
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimIzle\_GetProductionDetailsListGrid.cshtml.g.cs

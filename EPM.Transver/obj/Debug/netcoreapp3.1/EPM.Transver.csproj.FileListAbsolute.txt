@@ -226,3 +226,6 @@ D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.genruntimeconfig.cache
 E:\Eren\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Dto.dll
 E:\Eren\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
+E:\Eren\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+E:\Eren\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Redis.dll
+E:\Eren\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\StackExchange.Redis.StrongName.dll

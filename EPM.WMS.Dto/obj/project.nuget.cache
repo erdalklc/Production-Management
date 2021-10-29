@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "DTOucg4anck5ioAdjr2YmL5cV7l+iT7RlAgO6acJQF+X0xfthPJeEzFwFTjUclGl+vRqw7uCbCjxtXrBX2UMYA==",
+  "dgSpecHash": "7+sr/pRyB6pbqHq99/oWaeOXDvSrllN8L3D8gTWumxR3R28D7wnKAPaXH2nfoSrLW0AN8/6RRimTxVuN/cdCBg==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\Eren Production Management\\EPM.WMS.Dto\\EPM.WMS.Dto.csproj",
+  "projectFilePath": "E:\\Eren\\Eren Production Management\\EPM.WMS.Dto\\EPM.WMS.Dto.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\FDEIT005\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+    "C:\\Users\\Code\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],
   "logs": []
 }

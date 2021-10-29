@@ -12,52 +12,52 @@ namespace EPM.Service.Base
     public class MenuService :IMenuService
     {
         private readonly IEPMRepository _epmRepository;
-        public MenuService(IEPMRepository epmRepository)
+        private readonly ICacheService _cacheService;
+        public MenuService(IEPMRepository epmRepository, ICacheService cacheService)
         {
             _epmRepository = epmRepository;
+            _cacheService = cacheService;
         }
 
         public List<Menu> GetMenuList(HttpContext context)
         {
             List<Menu> menu = new List<Menu>();
-            CookieHelper cHelper = new CookieHelper();
-            menu = cHelper.GetObjectFromCookie<List<Menu>>(context, "MENU");
+            menu = _cacheService.Get<List<Menu>>(0, "MENU");
             if (menu == null)
             {
-                try
+                menu = _epmRepository.DeserializeList<Menu>("SELECT * FROM FDEIT005.EPM_WEB_MENU");
+                _cacheService.AddWithLifeTime(0, "MENU", menu, TimeSpan.FromHours(5));
+            }
+            try
+            {
+                WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER"); 
+                foreach (var item in menu)
                 {
-                    menu = _epmRepository.DeserializeList<Menu>("SELECT * FROM FDEIT005.EPM_WEB_MENU");
-                    WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
-
-                    foreach (var item in menu)
+                    if (item.CATEGORY_ID.IntParse() > 0)
                     {
-                        if (item.CATEGORY_ID.IntParse() > 0)
-                        {
-                            if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == item.RESPONSIBILITYS.IntParse()).Count > 0)
-                                item.ISVISIBLE = true;
-                            else item.ISVISIBLE = false;
-                        }
-                        else item.ISVISIBLE = true;
+                        if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == item.RESPONSIBILITYS.IntParse()).Count > 0)
+                            item.ISVISIBLE = true;
+                        else item.ISVISIBLE = false;
                     }
-
-                    var list = menu.FindAll(ob => ob.CATEGORY_ID.IntParse() == 0);
-                    if (list != null)
-                    {
-                        foreach (var item in list)
-                        {
-                            if (menu.FindAll(ob => ob.CATEGORY_ID == item.ID && ob.ISVISIBLE).Count == 0)
-                            {
-                                menu.Find(ob => ob.ID == item.ID).ISVISIBLE = false;
-                            }
-                        }
-                    }
-                    cHelper.AddCookie(context, menu, "MENU");
+                    else item.ISVISIBLE = true;
                 }
-                catch (Exception)
+
+                var list = menu.FindAll(ob => ob.CATEGORY_ID.IntParse() == 0);
+                if (list != null)
                 {
+                    foreach (var item in list)
+                    {
+                        if (menu.FindAll(ob => ob.CATEGORY_ID == item.ID && ob.ISVISIBLE).Count == 0)
+                        {
+                            menu.Find(ob => ob.ID == item.ID).ISVISIBLE = false;
+                        }
+                    }
                 }
             }
-           
+            catch (Exception)
+            {
+            }
+
 
             return menu;
         }

@@ -202,7 +202,6 @@
         $("#popupDetay").dxPopup(popupOptions).dxPopup("instance").show();
     }
      function gridSatinAlmaFocusedRowChanged(e) {
-        console.log(e.row.data);
         setTimeout(function () {
             $("#edProcessInformations").load('@Url.Action("_PartialProcessInformations", "UretimTakip")', {
                 PO_HEADER_ID: e.row.data.PO_HEADER_ID,
@@ -354,7 +353,7 @@
         GetMarketList();
         GetProductGroup();
     });
-     
+
     function UretimIzleFilter() {
         ClearChart();
         ClearBottom();
@@ -399,7 +398,7 @@
                         ClearChart();
                         GetProductDetail();
                     }
-                }); 
+                });
 
             }, beforeSend: function () {
                 getLoadPanelInstance().show();
@@ -500,7 +499,6 @@
                 PRODUCT_GROUP: jQuery("[name=PRODUCT_GROUP]").val()
             }
         }
-        console.log(data);
         $.ajax({
             type: "POST",
             url: '@Url.Action("GetProductionDetails", "UretimIzle")',
@@ -567,6 +565,8 @@
                                 precision: 0
                             }
                         }
+                    }, onPointClick: function (e) {
+                        GetProductionDetailsList("TASNİF", e.target.data.arg);
                     },
                     dataSource: barTasnif,
                     palette: "Material",
@@ -608,6 +608,8 @@
                                 precision: 0
                             }
                         }
+                    }, onPointClick: function (e) {
+                        GetProductionDetailsList("BANT", e.target.data.arg);
                     },
                     dataSource: barBant,
                     palette: "Office",
@@ -648,6 +650,8 @@
                                 precision: 0
                             }
                         }
+                    }, onPointClick: function (e) {
+                        GetProductionDetailsList("KALİTE", e.target.data.arg);
                     },
                     dataSource: barKalite,
                     palette: "Pastel",
@@ -688,6 +692,8 @@
                                 precision: 0
                             }
                         }
+                    }, onPointClick: function (e) {
+                        GetProductionDetailsList("KALİTE GERÇEKLEŞEN", e.target.data.arg);
                     },
                     dataSource: barKaliteG,
                     palette: "Bright",
@@ -726,6 +732,9 @@
                             color: "black",
                             size:14
                         }
+                    }, onPointClick: function (e) {
+                        if (e.target.data.arg != "HAFTALIK PLAN" || e.target.data.arg != "SİPARİŞ")
+                        GetProductionDetailsList(e.target.data.arg, "");
                     },
                     commonSeriesSettings: {
                         label: {
@@ -792,6 +801,70 @@
             getLoadPanelInstance().hide();
         });
     }
+    function GetProductionDetailsList(OPERATION, MARKET) {
+        data = {
+            haftaModel: haftaModel,
+            productModel: productModel,
+            marketModel: marketModel,
+            productGroupModel: productGroupModel,
+            filterModel: {
+                BRAND: jQuery("[name=BRAND]").val(),
+                SEASON: jQuery("[name=SEASON]").val(),
+                BAND: jQuery("[name=BAND]").val(),
+                MODEL: jQuery("[name=MODEL]").val(),
+                COLOR: jQuery("[name=COLOR]").val(),
+                ORDER_TYPE: jQuery("[name=ORDER_TYPE]").val(),
+                PRODUCT_GROUP: jQuery("[name=PRODUCT_GROUP]").val()
+            },
+            operation: {
+                OPERATION: OPERATION,
+                MARKET: MARKET
+            }
+        }
 
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetProductionDetailsList", "UretimIzle")',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            timeout: 180000,
+            success: function (income, status, xmlRequest) {
+                var tit = OPERATION + " -- " + MARKET;
+
+                var popupOptions = {
+                    contentTemplate: function () {
+                      
+                        return $.ajax({
+                            type: "GET",
+                            url: '@Url.Action("_GetProductionDetailsListGrid", "UretimIzle")',
+                            data: "",
+                            async: false,
+                            success: function (status) {
+                            }
+                        }).responseText;
+                    },
+                    width: function () { return "calc(100% /2)"; },
+                    height: function () { return "calc(100% / 2)"; },
+                    showTitle: true,
+                    title: tit,
+                    dragEnabled: true,
+                    closeOnOutsideClick: true,
+                    onContentReady: function () {
+                        try { $("#edProductionDetailModelGrid").dxDataGrid("instance").option("dataSource", income); } catch (e) { }
+                    }
+
+                };
+
+                $("#popupDetay").dxPopup(popupOptions).dxPopup("instance").show();
+
+            }, beforeSend: function () {
+                getLoadPanelInstance().show();
+            }
+
+
+        }).always(function () {
+            getLoadPanelInstance().hide();
+        });
+    }
 
 </script>

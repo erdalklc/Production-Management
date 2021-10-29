@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EPM.Production.Monitoring.Service\EPM.Production.Monitoring.Service.csproj" />
+    <ProjectReference Include="..\EPM.Tools\EPM.Tools.csproj" />
   </ItemGroup>
 
 

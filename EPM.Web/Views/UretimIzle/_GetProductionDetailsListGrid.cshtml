@@ -1,0 +1,35 @@
+﻿@(Html.DevExtreme().DataGrid<EPM.Production.Monitoring.Dto.Models.ProductionDetailModel>().ID("edProductionDetailModelGrid")
+    .ShowBorders(false)
+    .FilterRow(f => f.Visible(true))
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .ShowBorders(true)
+    .HeaderFilter(a=>a.Visible(true))
+    .Height("100%")
+    .ShowColumnLines(true)
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(60)
+    .AllowColumnResizing(true)
+    .Columns(columns => {
+        columns.AddFor(m => m.MODEL);
+        columns.AddFor(m => m.RENK);
+        columns.AddFor(m => m.BEDEN);
+        columns.AddFor(m => m.PAZAR);
+        columns.AddFor(m => m.SEZON);
+        columns.AddFor(m => m.SIPARIS_TIPI);
+        columns.AddFor(m => m.KESIM_FOYU_NOT).Caption("NOT");
+        columns.AddFor(m => m.KESIM_FOYU_NO);
+        columns.AddFor(m => m.MIKTAR);
+    }) .Summary(sm =>
+    {
+        sm.TotalItems(t =>
+        {
+            t.AddFor(ob => ob.MODEL).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
+                t.AddFor(ob => ob.MIKTAR).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>);
+
+        });
+
+    })
+    )

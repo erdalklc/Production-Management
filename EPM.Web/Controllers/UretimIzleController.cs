@@ -65,6 +65,21 @@ namespace EPM.Web.Controllers
              
         }
         [HttpPost, HttpGet]
+        public IActionResult GetProductionDetailsList([FromBody] JObject data)
+        {
+            dynamic value = data;
+            var haftaModel = JsonConvert.DeserializeObject<List<HaftaModel>>(value.haftaModel.ToString());
+            var productModel = JsonConvert.DeserializeObject<List<ProductModel>>(value.productModel.ToString());
+            var filterModel = JsonConvert.DeserializeObject<FilterModel>(value.filterModel.ToString());
+            var marketModel = JsonConvert.DeserializeObject<List<EPM_PRODUCTION_MARKET>>(value.marketModel.ToString());
+            var productGroupModel = JsonConvert.DeserializeObject<List<EPM_PRODUCT_GROUP>>(value.productGroupModel.ToString());
+            var operation = JsonConvert.DeserializeObject<ProductionDetail>(value.operation.ToString());
+
+            //List<HaftaModel> haftaModel,List<ProductModel> productModel, FilterModel filterModel
+            return Json(MonitoringServiceHelper.GetProductionDetailsList(haftaModel, productModel, filterModel, productGroupModel, marketModel,operation));
+
+        }
+        [HttpPost, HttpGet]
         public IActionResult GetProductionDetailsByDate([FromBody] JObject data)
         {
             dynamic value = data;
@@ -75,6 +90,12 @@ namespace EPM.Web.Controllers
                 , JsonConvert.DeserializeObject<FilterModel>(value.filterModel.ToString())
                 , Convert.ToDateTime(value.Tarih.ToString("dd.MM.yyyy"))));
         }
+
+        public IActionResult _GetProductionDetailsListGrid()
+        {
+            return PartialView();
+        }
+
 
 
     }

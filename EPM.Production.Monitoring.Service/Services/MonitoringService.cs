@@ -6,17 +6,21 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using EPM.Tools.Helpers;
 
 namespace EPM.Production.Monitoring.Service.Services
 {
     public class MonitoringService : IMonitoringService
     {
         private readonly IMonitoringRepository _monitoringRepository;
+        private readonly ICacheService _cacheService;
         private readonly IEgemenRepository _egemenRepository;
-        public MonitoringService(IMonitoringRepository monitoringRepository, IEgemenRepository egemenRepository)
+
+        public MonitoringService(IMonitoringRepository monitoringRepository, IEgemenRepository egemenRepository, ICacheService cacheService)
         {
             _monitoringRepository = monitoringRepository;
             _egemenRepository = egemenRepository;
+            _cacheService = cacheService;
         }
         public List<HaftaModel> GetHaftaModelList()
         {
@@ -44,7 +48,7 @@ namespace EPM.Production.Monitoring.Service.Services
 INNER JOIN FDEIT005.EPM_PRODUCTION_PLAN P ON P.HEADER_ID=H.ID 
 WHERE 0=0 AND H.STATUS=0 _SQLFILTER_
             ) PL ON PL.WEEK=WK.WEEK AND PL.YEAR=WK.YEAR
-    ORDER BY WK.WEEK,WK.YEAR
+    ORDER BY WK.YEAR,WK.WEEK
          ";
             string sqlFilter = "";
             if (model.SEASON != 0)
@@ -152,18 +156,20 @@ WHERE H.STATUS=0 AND M.ID IN ({3}) AND H.PRODUCT_GROUP IN ({4}) AND P.YEAR IN ({
             List<MarketReleasedModel> tasnifGM = _monitoringRepository.DeserializeList<MarketReleasedModel>("WITH FILTER_MODEL AS(" + filter + ") ,FILTER_PAZAR AS(" + filterPazar + ") SELECT 'TASNİF' TYPE,PAZAR_ADI,SUM(MIKTAR) MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE PAZAR_ADI IN (SELECT M FROM FILTER_PAZAR) AND SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (8631,8632,8633,9576) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL) GROUP BY PAZAR_ADI");
             List<MarketReleasedModel> bantGM = _monitoringRepository.DeserializeList<MarketReleasedModel>("WITH FILTER_MODEL AS(" + filter + ")  ,FILTER_PAZAR AS(" + filterPazar + ") SELECT 'BANT' TYPE,PAZAR_ADI,SUM(MIKTAR) MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE PAZAR_ADI IN (SELECT M FROM FILTER_PAZAR) AND SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (5,600,9595,845,670,80) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL) GROUP BY PAZAR_ADI");
             List<MarketReleasedModel> kaliteGM = _monitoringRepository.DeserializeList<MarketReleasedModel>("WITH FILTER_MODEL AS(" + filter + ") ,FILTER_PAZAR AS(" + filterPazar + ") SELECT 'KALİTE' TYPE,PAZAR_ADI,SUM(MIKTAR) MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE PAZAR_ADI IN (SELECT M FROM FILTER_PAZAR) AND SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (181,1160,745,743,744) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL)  GROUP BY PAZAR_ADI");
+       
             List<MarketReleasedModel> kaliteGerceklesenGM = _monitoringRepository.DeserializeList<MarketReleasedModel>(string.Format(@"
 WITH FILTER_MODEL AS({0}) 
+,FILTER_PAZAR AS({3})
 SELECT 'KALİTEG' TYPE
 ,M.EGEMEN_ADI PAZAR_ADI
 ,SUM(BIRINCI_KALITE) AS MIKTAR FROM FDEIT005.EPM_PRODUCTION_EGEMEN PG
 INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON PG.MARKET=M.ID
 INNER JOIN FDEIT005.EPM_PRODUCTION_SEASON S ON S.ID=PG.SEASON 
-WHERE S.EGEMEN_ADI='{1}' AND M.ID IN ({2})   AND PG.MODEL||'.'||PG.COLOR IN (SELECT M FROM FILTER_MODEL)  
+WHERE S.EGEMEN_ADI='{1}' AND M.ID IN ({2})   AND PG.MODEL||'.'||PG.COLOR IN (SELECT M FROM FILTER_MODEL)  AND M.EGEMEN_ADI IN (SELECT M FROM FILTER_PAZAR)
 GROUP BY M.EGEMEN_ADI"
 , filter
 ,season.EGEMEN_ADI
-, string.Join(',', model.Item5.Select(ob => ob.ID).Distinct().ToList())
+, string.Join(',', model.Item5.Select(ob => ob.ID).Distinct().ToList()), filterPazar
 ));
             values.KESIM = kesimGM.Sum(ob => ob.MIKTAR);
             values.TASNIF = tasnifGM.Sum(ob => ob.MIKTAR);
@@ -312,12 +318,134 @@ WHERE P.YEAR IN ({0}) AND P.WEEK IN ({1})  AND ({2})"
 
         public List<EPM_PRODUCTION_MARKET> GetMarketList()
         {
-            return _monitoringRepository.DeserializeList<EPM_PRODUCTION_MARKET>("SELECT * FROM FDEIT005.EPM_PRODUCTION_MARKET");
+            List<EPM_PRODUCTION_MARKET> market;
+            market = _cacheService.Get<List<EPM_PRODUCTION_MARKET>>(0, "EPM_PRODUCTION_MARKET");
+            if (market == null)
+            {
+                market = _monitoringRepository.DeserializeList<EPM_PRODUCTION_MARKET>("SELECT * FROM FDEIT005.EPM_PRODUCTION_MARKET"); 
+                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_MARKET", market, TimeSpan.FromDays(1));
+            }
+            return market;
         }
 
         public List<EPM_PRODUCT_GROUP> GetProductGroup()
         {
-            return _monitoringRepository.DeserializeList<EPM_PRODUCT_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCT_GROUP");
+            List<EPM_PRODUCT_GROUP> groups;
+
+            groups = _cacheService.Get<List<EPM_PRODUCT_GROUP>>(0, "EPM_PRODUCT_GROUP");
+            if (groups == null)
+            {
+                groups = _monitoringRepository.DeserializeList<EPM_PRODUCT_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCT_GROUP");
+                _cacheService.AddWithLifeTime(0, "EPM_PRODUCT_GROUP", groups, TimeSpan.FromHours(10));
+            }
+            return groups; 
+        }
+
+        public List<ProductionDetailModel> GetProductionDetailsList(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, List<EPM_PRODUCT_GROUP>, List<EPM_PRODUCTION_MARKET>, ProductionDetail> model)
+        {
+            List<ProductionDetailModel> list = new List<ProductionDetailModel>();
+            string filterHeader = "";
+            for (int i = 0; i < model.Item2.Count; i++)
+            {
+                var item = model.Item2[i];
+                if (i != 0)
+                    filterHeader += " UNION ALL";
+
+                filterHeader += " SELECT '" + item.MODEL + "." + item.COLOR + "' M FROM DUAL";
+            }
+
+            string sql = string.Format(@"WITH FILTER_MODEL AS({2}) SELECT P.*
+,M.EGEMEN_ADI AS MARKET_NAME
+,H.MODEL
+,H.COLOR
+,(SELECT SUM(QUANTITY) FROM FDEIT005.EPM_MASTER_PRODUCTION_D WHERE MARKET=M.ID AND HEADER_ID=H.ID)  ORDER_QUANTITY
+FROM FDEIT005.EPM_PRODUCTION_PLAN P 
+INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID 
+INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=P.HEADER_ID
+WHERE H.STATUS=0 AND M.ID IN ({3}) AND H.PRODUCT_GROUP IN ({4}) AND P.YEAR IN ({0}) AND P.WEEK IN ({1}) AND H.MODEL||'.'||H.COLOR IN (SELECT M FROM FILTER_MODEL) "
+, string.Join(',', model.Item1.Select(ob => ob.YEAR).Distinct().ToList())
+, string.Join(',', model.Item1.Select(ob => ob.WEEK).Distinct().ToList())
+, filterHeader
+, string.Join(',', model.Item5.Select(ob => ob.ID).Distinct().ToList())
+, string.Join(',', model.Item4.Select(ob => ob.ID).Distinct().ToList()));
+            List<PlanModel> plan = _monitoringRepository.DeserializeList<PlanModel>(sql);
+           
+
+            var tList = plan.Select(ob => new { ob.MODEL, ob.COLOR }).Distinct().ToList();
+            string filter = "";
+            string filterPazar = "";
+            for (int i = 0; i < tList.Count; i++)
+            {
+                var item = tList[i];
+                if (i != 0)
+                    filter += " UNION ALL";
+
+                filter += " SELECT '" + item.MODEL + "." + item.COLOR + "' M FROM DUAL";
+            }
+            if (model.Item6.MARKET != "")
+            { 
+                filterPazar += " SELECT '" + model.Item6.MARKET + "' M FROM DUAL";
+            }
+            else
+            {
+                for (int i = 0; i < model.Item5.Count; i++)
+                {
+                    var item = model.Item5[i];
+                    if (i != 0)
+                        filterPazar += " UNION ALL";
+
+                    filterPazar += " SELECT '" + item.EGEMEN_ADI + "' M FROM DUAL";
+                }
+            }
+            
+            EPM_PRODUCTION_SEASON season = _monitoringRepository.Deserialize<EPM_PRODUCTION_SEASON>(model.Item3.SEASON);
+
+
+
+            List<MarketReleasedModel> valuesReleased = new List<MarketReleasedModel>();
+            switch (model.Item6.OPERATION)
+            {
+                case "KESİM":
+                    list = _monitoringRepository.DeserializeList<ProductionDetailModel>(@"WITH FILTER_MODEL AS(" + filter + ")  SELECT MODEL_ADI MODEL,RENK_ADI RENK,BEDEN_ADI BEDEN, SEZON_ADI SEZON,PAZAR_ADI PAZAR,SIPARIS_TIPI,KESIM_FOYU_NO,KESIM_FOYU_NOT,MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (5515,5516,5517) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL)");
+                    break;
+                case "TASNİF":
+                    list = _monitoringRepository.DeserializeList<ProductionDetailModel>("WITH FILTER_MODEL AS(" + filter + ") ,FILTER_PAZAR AS(" + filterPazar + ") SELECT MODEL_ADI MODEL,RENK_ADI RENK,BEDEN_ADI BEDEN, SEZON_ADI SEZON,PAZAR_ADI PAZAR,SIPARIS_TIPI,KESIM_FOYU_NO,KESIM_FOYU_NOT,MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE PAZAR_ADI IN (SELECT M FROM FILTER_PAZAR) AND SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (8631,8632,8633,9576) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL)");
+                    break;
+                case "BANT":
+                    list = _monitoringRepository.DeserializeList<ProductionDetailModel>("WITH FILTER_MODEL AS(" + filter + ") ,FILTER_PAZAR AS(" + filterPazar + ") SELECT MODEL_ADI MODEL,RENK_ADI RENK,BEDEN_ADI BEDEN, SEZON_ADI SEZON,PAZAR_ADI PAZAR,SIPARIS_TIPI,KESIM_FOYU_NO,KESIM_FOYU_NOT,MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE PAZAR_ADI IN (SELECT M FROM FILTER_PAZAR) AND SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (5,600,9595,845,670,80) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL)");
+                    break;
+                case "KALİTE":
+                    list = _monitoringRepository.DeserializeList<ProductionDetailModel>("WITH FILTER_MODEL AS(" + filter + ") ,FILTER_PAZAR AS(" + filterPazar + ") SELECT MODEL_ADI MODEL,RENK_ADI RENK,BEDEN_ADI BEDEN, SEZON_ADI SEZON,PAZAR_ADI PAZAR,SIPARIS_TIPI,KESIM_FOYU_NO,KESIM_FOYU_NOT,MIKTAR FROM FDEIT005.EPM_OPERATION_QUANTITYS WHERE PAZAR_ADI IN (SELECT M FROM FILTER_PAZAR) AND SEZON_ADI='" + season.EGEMEN_ADI + "' AND OPERASYON_ID IN (181,1160,745,743,744) AND MODEL_ADI||'.'||RENK_ADI IN (SELECT M FROM FILTER_MODEL)");
+                    break;
+                case "KALİTE GERÇEKLEŞEN":
+                    list = _monitoringRepository.DeserializeList<ProductionDetailModel>(string.Format(@"
+WITH FILTER_MODEL AS({0}) 
+,FILTER_PAZAR AS({3})
+SELECT 
+PG.BIRINCI_KALITE AS MIKTAR,
+PG.KESIM_FOYU_NO,
+PG.PRODUCT_SIZE AS BEDEN,
+PG.MODEL AS MODEL,
+PG.COLOR AS RENK,
+S.ADI AS SEZON,
+M.EGEMEN_ADI PAZAR,
+O.ADI AS SIPARIS_TIPI
+FROM FDEIT005.EPM_PRODUCTION_EGEMEN PG
+INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON PG.MARKET=M.ID
+INNER JOIN FDEIT005.EPM_PRODUCTION_SEASON S ON S.ID=PG.SEASON 
+INNER JOIN FDEIT005.EPM_PRODUCTION_ORDER_TYPES O ON O.ID=PG.SIPARIS_TIPI
+WHERE S.EGEMEN_ADI='{1}' AND M.ID IN ({2})   AND PG.MODEL||'.'||PG.COLOR IN (SELECT M FROM FILTER_MODEL)  AND M.EGEMEN_ADI IN (SELECT M FROM FILTER_PAZAR)
+"
+, filter
+, season.EGEMEN_ADI
+, string.Join(',', model.Item5.Select(ob => ob.ID).Distinct().ToList()), filterPazar
+));
+                    break;
+                default:
+                    break;
+            }
+             
+            return list;
         }
     }
 }

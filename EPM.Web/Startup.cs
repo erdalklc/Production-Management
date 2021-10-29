@@ -1,5 +1,6 @@
 using EPM.Repository.Base;
 using EPM.Service.Base;
+using EPM.Tools.Helpers;
 using EPM.Tools.Managers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting; 
@@ -37,6 +38,8 @@ namespace EPM_Web
             services.AddScoped<AppFilterAttribute>();
             services.AddSingleton<IMongoRepository, MongoRepository>();
             services.AddSingleton<IEPMRepository, EPMRepository>();
+            services.AddSingleton<RedisServer>();
+            services.AddSingleton<ICacheService, RedisCacheService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IMailService, MailService>();

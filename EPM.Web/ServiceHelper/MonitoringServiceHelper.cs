@@ -48,6 +48,12 @@ namespace EPM.Web.ServiceHelper
             }
             return list;
         }
+        public static List<ProductionDetailModel> GetProductionDetailsList(List<HaftaModel> haftaModel, List<ProductModel> productModel, FilterModel filterModel, List<EPM_PRODUCT_GROUP> productGroupModel, List<EPM_PRODUCTION_MARKET> marketModel,ProductionDetail detail)
+        {
+            string apiUrl = "GetProductionDetailsList";
+            var list = PostRequest<Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, List<EPM_PRODUCT_GROUP>, List<EPM_PRODUCTION_MARKET>, ProductionDetail>, List<ProductionDetailModel>>(EPMServiceType.Monitoring, apiUrl, new Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, List<EPM_PRODUCT_GROUP>, List<EPM_PRODUCTION_MARKET>, ProductionDetail>(haftaModel, productModel, filterModel,productGroupModel,marketModel,detail));
+            return list;
+        }
         public static object GetProductionDetailsByDate(List<HaftaModel> haftaModel, List<ProductModel> productModel, FilterModel filterModel,DateTime tarih)
         {
             string apiUrl = "GetProductionDetailsByDate";
