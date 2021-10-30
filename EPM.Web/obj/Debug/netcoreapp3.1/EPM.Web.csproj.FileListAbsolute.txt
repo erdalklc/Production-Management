@@ -1511,3 +1511,6 @@ E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\EPM.Repositor
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Redis.dll
 E:\Eren\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\StackExchange.Redis.StrongName.dll
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimIzle\_GetProductionDetailsListGrid.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Redis.dll
+D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\StackExchange.Redis.StrongName.dll
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimIzle\_GetProductionDetailsListGrid.cshtml.g.cs
