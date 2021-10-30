@@ -13,7 +13,7 @@ namespace EPM.Production.Service.Services
 
         public Tuple<UretimOnayliListe, List<UretimListesiAktarim>> UretimOnayliListe(Tuple<UretimOnayliListe, List<UretimListesiAktarim>> model);
 
-        public List<EPM_PRODUCTION_BRANDS> GetBrandList(string USER_CODE, bool hepsi = true);
+        public List<EPM_PRODUCTION_BRANDS> GetBrandList(string USER_CODE, List<EPM_USER_BRANDS> userBrands, bool hepsi = true);
 
         public List<EPM_PRODUCTION_SUB_BRANDS> GetSubBrandList(string USER_CODE, bool hepsi = true);
 
@@ -23,9 +23,9 @@ namespace EPM.Production.Service.Services
 
         public List<EPM_PRODUCTION_ORDER_TYPES> GetOrderList(bool hepsi = true);
 
-        public List<EPM_PRODUCTION_FABRIC_TYPES> GetFabricTypes(string USER_CODE, bool hepsi = true);
+        public List<EPM_PRODUCTION_FABRIC_TYPES> GetFabricTypes(string USER_CODE, List<EPM_USER_FABRIC_TYPES> userFabricTypes, bool hepsi = true);
 
-        public List<EPM_PRODUCTION_TYPES> GetProductionTypes(string USER_CODE, bool hepsi = true);
+        public List<EPM_PRODUCTION_TYPES> GetProductionTypes(string USER_CODE, List<EPM_USER_PRODUCTION_TYPES> userProductionTypes, bool hepsi = true);
 
         public List<EPM_PRODUCT_COLLECTION_TYPES> GetCollectionTypes(bool hepsi = true);
 

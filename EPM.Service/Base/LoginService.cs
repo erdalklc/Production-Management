@@ -29,17 +29,24 @@ namespace EPM.Service.Base
                 bool ok = principalContext.ValidateCredentials(acc.USER_CODE, model.Password);
                 if (ok)
                 {
-                    login.EMAIL = model.EMail; 
+                    login.EMAIL = model.EMail;
                     login.USER_CODE = acc.USER_CODE;
                     login.USER_NAME = acc.USER_NAME;
-                    login.responsibility = _epmRepository.DeserializeList<EPM_USER_RESPONSIBILITY>("SELECT * FROM FDEIT005.EPM_USER_RESPONSIBILITY WHERE USER_CODE='" + login.USER_CODE + "'");
+                    List<EPM_USER_RESPONSIBILITY> responsibility = _epmRepository.DeserializeList<EPM_USER_RESPONSIBILITY>("SELECT * FROM FDEIT005.EPM_USER_RESPONSIBILITY WHERE USER_CODE='" + login.USER_CODE + "'");
+                    List<EPM_USER_BRANDS> brands = _epmRepository.DeserializeList<EPM_USER_BRANDS>("SELECT * FROM FDEIT005.EPM_USER_BRANDS WHERE USER_CODE='" + login.USER_CODE + "'");
+                    List<EPM_USER_FABRIC_TYPES> fabricTypes = _epmRepository.DeserializeList<EPM_USER_FABRIC_TYPES>("SELECT * FROM FDEIT005.EPM_USER_FABRIC_TYPES WHERE USER_CODE='" + login.USER_CODE + "'");
+                    List<EPM_USER_PRODUCTION_TYPES> productionTypes = _epmRepository.DeserializeList<EPM_USER_PRODUCTION_TYPES>("SELECT * FROM FDEIT005.EPM_USER_PRODUCTION_TYPES WHERE USER_CODE='" + login.USER_CODE + "'");
                     CookieHelper cHelper = new CookieHelper();
                     cHelper.AddCookie(context, login, "USER");
+                    cHelper.AddCookie(context, responsibility, "EPM_USER_RESPONSIBILITY");
+                    cHelper.AddCookie(context, brands, "EPM_USER_BRANDS");
+                    cHelper.AddCookie(context, fabricTypes, "EPM_USER_FABRIC_TYPES");
+                    cHelper.AddCookie(context, productionTypes, "EPM_USER_PRODUCTION_TYPES");
 
-                    if (model.BeniHatirla)  
-                        new CookieHelper().AddCookie(context, model.EMail, "EMAIL"); 
+                    if (model.BeniHatirla)
+                        new CookieHelper().AddCookie(context, model.EMail, "EMAIL");
                 }
-            } 
+            }
 
 
             return login;

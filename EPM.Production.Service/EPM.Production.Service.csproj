@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EPM.Production.Repository\EPM.Production.Repository.csproj" />
+    <ProjectReference Include="..\EPM.Tools\EPM.Tools.csproj" />
   </ItemGroup>
 
 </Project>

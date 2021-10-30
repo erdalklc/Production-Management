@@ -1,5 +1,6 @@
 ﻿using DevExtreme.AspNet.Data;
-using DevExtreme.AspNet.Mvc; 
+using DevExtreme.AspNet.Mvc;
+using EPM.Dto.Base;
 using EPM.Dto.Models;
 using EPM.Service.Base;
 using EPM.Tools.Helpers;
@@ -163,13 +164,13 @@ namespace EPM.Web.Controllers
         [HttpGet]
         public object GetMarkets(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetMarketList(hepsi), loadOptions);
         [HttpGet]
-        public object GetProductionTypes(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetProductionTypes(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, hepsi), loadOptions);
+        public object GetProductionTypes(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetProductionTypes(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, new CookieHelper().GetObjectFromCookie<List<EPM_USER_PRODUCTION_TYPES>>(Request.HttpContext, "EPM_USER_PRODUCTION_TYPES"), hepsi), loadOptions);
         [HttpGet]
         public object GetOrderList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetOrderList(hepsi), loadOptions);
         [HttpGet]
-        public object GetFabricList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetFabricTypes(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, hepsi), loadOptions);
+        public object GetFabricList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetFabricTypes(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, new CookieHelper().GetObjectFromCookie<List<EPM_USER_FABRIC_TYPES>>(Request.HttpContext, "EPM_USER_FABRIC_TYPES"), hepsi), loadOptions);
         [HttpGet]
-        public object GetBrandList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetBrandList(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, hepsi), loadOptions);
+        public object GetBrandList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetBrandList(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, new CookieHelper().GetObjectFromCookie<List<EPM_USER_BRANDS>>(Request.HttpContext, "EPM_USER_BRANDS"), hepsi), loadOptions);
         [HttpGet]
         public object GetSubBrandList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetSubBrandList(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, hepsi), loadOptions);
         [HttpGet]

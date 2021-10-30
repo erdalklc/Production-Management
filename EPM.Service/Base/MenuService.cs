@@ -1,4 +1,5 @@
-﻿using EPM.Dto.Models;
+﻿using EPM.Dto.Base;
+using EPM.Dto.Models;
 using EPM.Repository.Base;
 using EPM.Tools.Extensions;
 using EPM.Tools.Helpers;
@@ -29,13 +30,13 @@ namespace EPM.Service.Base
                 _cacheService.AddWithLifeTime(0, "MENU", menu, TimeSpan.FromHours(5));
             }
             try
-            {
-                WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER"); 
+            { 
+                List<EPM_USER_RESPONSIBILITY> res = new CookieHelper().GetObjectFromCookie<List<EPM_USER_RESPONSIBILITY>>(context, "EPM_USER_RESPONSIBILITY");
                 foreach (var item in menu)
                 {
                     if (item.CATEGORY_ID.IntParse() > 0)
                     {
-                        if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == item.RESPONSIBILITYS.IntParse()).Count > 0)
+                        if (res.FindAll(ob => ob.RESPONSIBILITY_ID == item.RESPONSIBILITYS.IntParse()).Count > 0)
                             item.ISVISIBLE = true;
                         else item.ISVISIBLE = false;
                     }
@@ -65,9 +66,9 @@ namespace EPM.Service.Base
         public bool CanUserEditPlan(HttpContext context)
         {
             bool yes = true;
-            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
+            List<EPM_USER_RESPONSIBILITY> res = new CookieHelper().GetObjectFromCookie<List<EPM_USER_RESPONSIBILITY>>(context, "EPM_USER_RESPONSIBILITY");
 
-            if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == 1).Count > 0)
+            if (res.FindAll(ob => ob.RESPONSIBILITY_ID == 1).Count > 0)
                 yes = true;
             else yes = false;
 
@@ -77,9 +78,9 @@ namespace EPM.Service.Base
         public bool CanUserEditUretim(HttpContext context)
         {
             bool yes = true;
-            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
+            List<EPM_USER_RESPONSIBILITY> res = new CookieHelper().GetObjectFromCookie<List<EPM_USER_RESPONSIBILITY>>(context, "EPM_USER_RESPONSIBILITY");
 
-            if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == 62).Count > 0)
+            if (res.FindAll(ob => ob.RESPONSIBILITY_ID == 62).Count > 0)
                 yes = true;
             else yes = false;
 
@@ -89,9 +90,9 @@ namespace EPM.Service.Base
         public bool CanUserEditUretimTakip(HttpContext context)
         {
             bool yes = true;
-            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
+            List<EPM_USER_RESPONSIBILITY> res = new CookieHelper().GetObjectFromCookie<List<EPM_USER_RESPONSIBILITY>>(context, "EPM_USER_RESPONSIBILITY");
 
-            if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == 4).Count > 0)
+            if (res.FindAll(ob => ob.RESPONSIBILITY_ID == 4).Count > 0)
                 yes = true;
             else yes = false;
 
@@ -101,9 +102,9 @@ namespace EPM.Service.Base
         public bool OnayliKullanici(HttpContext context)
         {
             bool yes = true;
-            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
+            List<EPM_USER_RESPONSIBILITY> res = new CookieHelper().GetObjectFromCookie<List<EPM_USER_RESPONSIBILITY>>(context, "EPM_USER_RESPONSIBILITY");
 
-            if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == 81).Count > 0)
+            if (res.FindAll(ob => ob.RESPONSIBILITY_ID == 81).Count > 0)
                 yes = true;
             else yes = false;
 
@@ -113,9 +114,9 @@ namespace EPM.Service.Base
         public bool CanUserEnterTools(HttpContext context)
         {
             bool yes = true;
-            WebLogin user = new CookieHelper().GetObjectFromCookie<WebLogin>(context, "USER");
+            List<EPM_USER_RESPONSIBILITY> res = new CookieHelper().GetObjectFromCookie<List<EPM_USER_RESPONSIBILITY>>(context, "EPM_USER_RESPONSIBILITY");
 
-            if (user.responsibility.FindAll(ob => ob.RESPONSIBILITY_ID == 41).Count > 0)
+            if (res.FindAll(ob => ob.RESPONSIBILITY_ID == 41).Count > 0)
                 yes = true;
             else yes = false;
 

@@ -30,10 +30,10 @@ namespace EPM.Web.ServiceHelper
 
         
 
-        public static List<EPM_PRODUCTION_BRANDS> GetBrandList(string USER_CODE, bool hepsi = true)
+        public static List<EPM_PRODUCTION_BRANDS> GetBrandList(string USER_CODE, List<EPM_USER_BRANDS> userBrands, bool hepsi = true)
         {
             string apiUrl = "GetBrandList";
-            var list = PostRequest<object[], List<EPM_PRODUCTION_BRANDS>>(EPMServiceType.Production, apiUrl, new object[] { USER_CODE,hepsi });
+            var list = PostRequest<object[], List<EPM_PRODUCTION_BRANDS>>(EPMServiceType.Production, apiUrl, new object[] { USER_CODE,hepsi, userBrands });
             return list;
         }
 
@@ -65,17 +65,17 @@ namespace EPM.Web.ServiceHelper
             return list;
         }
 
-        public static List<EPM_PRODUCTION_FABRIC_TYPES> GetFabricTypes(string USER_CODE, bool hepsi = true)
+        public static List<EPM_PRODUCTION_FABRIC_TYPES> GetFabricTypes(string USER_CODE, List<EPM_USER_FABRIC_TYPES> userFabricTypes, bool hepsi = true)
         {
             string apiUrl = "GetFabricTypes";
-            var list = PostRequest<object[], List<EPM_PRODUCTION_FABRIC_TYPES>>(EPMServiceType.Production, apiUrl, new object[] { USER_CODE,hepsi });
+            var list = PostRequest<object[], List<EPM_PRODUCTION_FABRIC_TYPES>>(EPMServiceType.Production, apiUrl, new object[] { USER_CODE,hepsi, userFabricTypes });
             return list;
         }
 
-        public static List<EPM_PRODUCTION_TYPES> GetProductionTypes(string USER_CODE, bool hepsi = true)
+        public static List<EPM_PRODUCTION_TYPES> GetProductionTypes(string USER_CODE, List<EPM_USER_PRODUCTION_TYPES> userProductionTypes, bool hepsi = true)
         {
             string apiUrl = "GetProductionTypes";
-            var list = PostRequest<object[], List<EPM_PRODUCTION_TYPES>>(EPMServiceType.Production, apiUrl, new object[] { USER_CODE, hepsi });
+            var list = PostRequest<object[], List<EPM_PRODUCTION_TYPES>>(EPMServiceType.Production, apiUrl, new object[] { USER_CODE, hepsi, userProductionTypes });
             return list;
         }
 

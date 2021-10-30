@@ -1,5 +1,6 @@
 using EPM.Production.Repository.Repository;
 using EPM.Production.Service.Services;
+using EPM.Tools.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,7 +29,9 @@ namespace EPM.Production.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddScoped<IProductionService, ProductionService>(); 
+            services.AddScoped<IProductionService, ProductionService>();
+            services.AddSingleton<RedisServer>();
+            services.AddSingleton<ICacheService, RedisCacheService>();
             services.AddSingleton<ILogService, LogService>();
             services.AddSingleton<IProductionRepository, ProductionRepository>();
             services.AddSingleton<IMongoRepository, MongoRepository>();

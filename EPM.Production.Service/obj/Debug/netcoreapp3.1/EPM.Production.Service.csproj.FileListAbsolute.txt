@@ -30,3 +30,5 @@ D:\Projects\Eren Production Management\EPM.Production.Service\obj\Debug\netcorea
 D:\Projects\Eren Production Management\EPM.Production.Service\obj\Debug\netcoreapp3.1\EPM.Production.Service.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Production.Service\obj\Debug\netcoreapp3.1\EPM.Production.Service.dll
 D:\Projects\Eren Production Management\EPM.Production.Service\obj\Debug\netcoreapp3.1\EPM.Production.Service.pdb
+E:\Eren\Eren Production Management\EPM.Production.Service\bin\Debug\netcoreapp3.1\EPM.Tools.dll
+E:\Eren\Eren Production Management\EPM.Production.Service\bin\Debug\netcoreapp3.1\EPM.Tools.pdb

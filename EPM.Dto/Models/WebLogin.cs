@@ -12,6 +12,5 @@ namespace EPM.Dto.Models
         public string EMAIL { get; set; } = "";
         public DateTime ENTERY_DATE { get; set; } = DateTime.Now;
 
-        public List<EPM_USER_RESPONSIBILITY> responsibility { get; set; }
     }
 }

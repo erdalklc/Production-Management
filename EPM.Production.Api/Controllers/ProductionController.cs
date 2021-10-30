@@ -32,7 +32,7 @@ namespace EPM.Production.Api.Controllers
         public ActionResult<Tuple<UretimOnayliListe, List<UretimListesiAktarim>>> UretimOnayliListe(object[] obj) => _productionService.UretimOnayliListe((Tuple<UretimOnayliListe, List<UretimListesiAktarim>>)obj[0]);
 
         [HttpGet, HttpPost]
-        public ActionResult<List<EPM_PRODUCTION_BRANDS>> GetBrandList(object[] obj) => _productionService.GetBrandList(obj[0].ToString(), obj[1].BooleanParse());
+        public ActionResult<List<EPM_PRODUCTION_BRANDS>> GetBrandList(object[] obj) => _productionService.GetBrandList(obj[0].ToString(), JsonConvert.DeserializeObject<List<EPM_USER_BRANDS>>(JsonConvert.SerializeObject(obj[2])), obj[1].BooleanParse());
 
         [HttpGet, HttpPost]
         public ActionResult<List<EPM_PRODUCTION_SUB_BRANDS>> GetSubBrandList(object[] obj) => _productionService.GetSubBrandList(obj[0].ToString(), obj[1].BooleanParse());
@@ -46,10 +46,10 @@ namespace EPM.Production.Api.Controllers
         public ActionResult<List<EPM_PRODUCTION_ORDER_TYPES>> GetOrderList(object[] obj) => _productionService.GetOrderList(obj[0].BooleanParse());
 
         [HttpGet, HttpPost]
-        public ActionResult<List<EPM_PRODUCTION_FABRIC_TYPES>> GetFabricTypes(object[] obj) => _productionService.GetFabricTypes(obj[0].ToString(), obj[1].BooleanParse());
+        public ActionResult<List<EPM_PRODUCTION_FABRIC_TYPES>> GetFabricTypes(object[] obj) => _productionService.GetFabricTypes(obj[0].ToString(), JsonConvert.DeserializeObject<List<EPM_USER_FABRIC_TYPES>>(JsonConvert.SerializeObject(obj[2])), obj[1].BooleanParse());
 
         [HttpGet, HttpPost]
-        public ActionResult<List<EPM_PRODUCTION_TYPES>> GetProductionTypes(object[] obj) => _productionService.GetProductionTypes(obj[0].ToString(), obj[1].BooleanParse());
+        public ActionResult<List<EPM_PRODUCTION_TYPES>> GetProductionTypes(object[] obj) => _productionService.GetProductionTypes(obj[0].ToString(), JsonConvert.DeserializeObject<List<EPM_USER_PRODUCTION_TYPES>>(JsonConvert.SerializeObject(obj[2])), obj[1].BooleanParse());
 
         [HttpGet, HttpPost]
         public ActionResult<List<EPM_PRODUCT_COLLECTION_TYPES>> GetCollectionTypes(object[] obj) => _productionService.GetCollectionTypes(obj[0].BooleanParse());

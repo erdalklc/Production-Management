@@ -4,6 +4,7 @@ using EPM.Dto.Loglar;
 using EPM.Production.Dto.Extensions;
 using EPM.Production.Dto.Production;
 using EPM.Production.Repository.Repository;
+using EPM.Tools.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,12 @@ namespace EPM.Production.Service.Services
     {
 
         private readonly IProductionRepository _productionRepository;
-        public ProductionService(IProductionRepository productionRepository) => _productionRepository = productionRepository;
+        private readonly ICacheService _cacheService;
+        public ProductionService(IProductionRepository productionRepository, ICacheService cacheService)
+        {
+            _productionRepository = productionRepository;
+            _cacheService = cacheService;
+        }
 
         public List<UretimListesi> UretimListesi(string MODEL, string SEZON, string URETIM_TIPI, int DURUM)
         {
@@ -189,119 +195,189 @@ namespace EPM.Production.Service.Services
             return new Tuple<UretimOnayliListe, List<UretimListesiAktarim>>(new UretimOnayliListe(), new List<UretimListesiAktarim>());
         }
 
-        public List<EPM_PRODUCTION_BRANDS> GetBrandList(string USER_CODE, bool hepsi = true)
-        { 
-            OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
-            dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32,ParameterDirection.Input);
-            dynamicParameters.Add(":P_USER_CODE", USER_CODE, OracleMappingType.Varchar2,ParameterDirection.Input);
-            dynamicParameters.Add(":P_RECORDSET",dbType: OracleMappingType.RefCursor,direction: ParameterDirection.Output);
-            List<EPM_PRODUCTION_BRANDS> brandList = _productionRepository.DeserializeListPROC<EPM_PRODUCTION_BRANDS>("FDEIT005.GET_EPM_BRANDS", dynamicParameters);
+        public List<EPM_PRODUCTION_BRANDS> GetBrandList(string USER_CODE, List<EPM_USER_BRANDS> userBrands, bool hepsi = true)
+        {
+            List<EPM_PRODUCTION_BRANDS> list;
+            list = _cacheService.Get<List<EPM_PRODUCTION_BRANDS>>(0, "EPM_PRODUCTION_BRANDS");
+            if (list == null)
+            {
+                list = _productionRepository.DeserializeList<EPM_PRODUCTION_BRANDS>("SELECT * FROM FDEIT005.EPM_PRODUCTION_BRANDS");
+                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_BRANDS", list, TimeSpan.FromDays(4));
+            }
+            list = list.Where(ob => userBrands.Select(ob => ob.BRAND_ID).ToArray().Contains(ob.ID)).ToList();
+            if (hepsi)
+                list.Insert(0, new EPM_PRODUCTION_BRANDS() { ID = 0, ADI = "HEPSİ" }); 
              
-            return brandList;
+            return list;
         }
 
         public List<EPM_PRODUCTION_SUB_BRANDS> GetSubBrandList(string USER_CODE, bool hepsi = true)
-        { 
-            OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
-            dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32, ParameterDirection.Input);
-            dynamicParameters.Add(":P_USER_CODE", USER_CODE, OracleMappingType.Varchar2, ParameterDirection.Input);
-            dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
-            List<EPM_PRODUCTION_SUB_BRANDS> brandList = _productionRepository.DeserializeListPROC<EPM_PRODUCTION_SUB_BRANDS>("FDEIT005.GET_EPM_SUB_BRANDS", dynamicParameters);
+        {
+            List<EPM_PRODUCTION_SUB_BRANDS> list;
+            list = _cacheService.Get<List<EPM_PRODUCTION_SUB_BRANDS>>(0, "EPM_PRODUCTION_SUB_BRANDS");
+            if (list == null)
+            {
+                list = _productionRepository.DeserializeList<EPM_PRODUCTION_SUB_BRANDS>("SELECT * FROM FDEIT005.EPM_PRODUCTION_SUB_BRANDS");
+                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_SUB_BRANDS", list, TimeSpan.FromDays(4));
+            }
+            if (hepsi)
+                list.Insert(0, new EPM_PRODUCTION_SUB_BRANDS() { ID = 0, ADI = "HEPSİ" }); 
 
-            return brandList;
+            return list;
         }
 
         public List<EPM_PRODUCTION_SEASON> GetSeasonList()
         {
-            OracleDynamicParameters dynamicParameters = new OracleDynamicParameters(); 
-            dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
-            List<EPM_PRODUCTION_SEASON> seasonList = _productionRepository.DeserializeListPROC<EPM_PRODUCTION_SEASON>("FDEIT005.GET_EPM_SEASONS", dynamicParameters);
-            return seasonList; 
+            List<EPM_PRODUCTION_SEASON> list;
+            list = _cacheService.Get<List<EPM_PRODUCTION_SEASON>>(0, "EPM_PRODUCTION_SEASON");
+            if (list == null)
+            {
+                list = _productionRepository.DeserializeList<EPM_PRODUCTION_SEASON>("SELECT * FROM FDEIT005.EPM_PRODUCTION_SEASON");
+                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_SEASON", list, TimeSpan.FromDays(4));
+            } 
+            return list; 
         }
 
         public List<EPM_PRODUCTION_MARKET> GetMarketList(bool hepsi = true)
         {
-            OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
-            dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32, ParameterDirection.Input); 
-            dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
-            List<EPM_PRODUCTION_MARKET> marketList = _productionRepository.DeserializeListPROC<EPM_PRODUCTION_MARKET>("FDEIT005.GET_EPM_MARKETS", dynamicParameters); 
-            return marketList;
+            List<EPM_PRODUCTION_MARKET> list;
+            list = _cacheService.Get<List<EPM_PRODUCTION_MARKET>>(0, "EPM_PRODUCTION_MARKET");
+            if (list == null)
+            {
+                list = _productionRepository.DeserializeList<EPM_PRODUCTION_MARKET>("SELECT * FROM FDEIT005.EPM_PRODUCTION_MARKET");
+                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_MARKET", list, TimeSpan.FromDays(1));
+            }
+
+            if (hepsi)
+                list.Insert(0, new EPM_PRODUCTION_MARKET() { ID = 0, ADI = "HEPSİ" }); 
+            return list;
         }
 
         public List<EPM_PRODUCTION_ORDER_TYPES> GetOrderList(bool hepsi = true)
         {
-            OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
-            dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32, ParameterDirection.Input);
-            dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
-            List<EPM_PRODUCTION_ORDER_TYPES> orderTypes = _productionRepository.DeserializeListPROC<EPM_PRODUCTION_ORDER_TYPES>("FDEIT005.GET_EPM_ORDERTYPES", dynamicParameters);
-            return orderTypes; 
+            List<EPM_PRODUCTION_ORDER_TYPES> list;
+            list = _cacheService.Get<List<EPM_PRODUCTION_ORDER_TYPES>>(0, "EPM_PRODUCTION_ORDER_TYPES");
+            if (list == null)
+            {
+                list = _productionRepository.DeserializeList<EPM_PRODUCTION_ORDER_TYPES>("SELECT * FROM FDEIT005.EPM_PRODUCTION_ORDER_TYPES");
+                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_ORDER_TYPES", list, TimeSpan.FromDays(1));
+            }
+
+            if (hepsi)
+                list.Insert(0, new EPM_PRODUCTION_ORDER_TYPES() { ID = 0, ADI = "HEPSİ" }); 
+            return list; 
         }
 
-        public List<EPM_PRODUCTION_FABRIC_TYPES> GetFabricTypes(string USER_CODE, bool hepsi = true)
-        { 
-            OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
-            dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32, ParameterDirection.Input);
-            dynamicParameters.Add(":P_USER_CODE", USER_CODE, OracleMappingType.Varchar2, ParameterDirection.Input);
-            dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
-            List<EPM_PRODUCTION_FABRIC_TYPES> fabricTypes = _productionRepository.DeserializeListPROC<EPM_PRODUCTION_FABRIC_TYPES>("FDEIT005.GET_EPM_FABRICTYPES", dynamicParameters); 
-            return fabricTypes; 
+        public List<EPM_PRODUCTION_FABRIC_TYPES> GetFabricTypes(string USER_CODE,List<EPM_USER_FABRIC_TYPES> userFabricTypes, bool hepsi = true)
+        {
+            List<EPM_PRODUCTION_FABRIC_TYPES> list;
+            list = _cacheService.Get<List<EPM_PRODUCTION_FABRIC_TYPES>>(0, "EPM_PRODUCTION_FABRIC_TYPES");
+            if (list == null)
+            {
+                list = _productionRepository.DeserializeList<EPM_PRODUCTION_FABRIC_TYPES>("SELECT * FROM FDEIT005.EPM_PRODUCTION_FABRIC_TYPES");
+                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_FABRIC_TYPES", list, TimeSpan.FromDays(1));
+            }
+
+            list = list.Where(ob => userFabricTypes.Select(ob => ob.FABRIC_TYPE_ID).ToArray().Contains(ob.ID)).ToList();
+            if (hepsi)
+                list.Insert(0, new EPM_PRODUCTION_FABRIC_TYPES() { ID = 0, ADI = "HEPSİ" }); 
+            return list; 
         }
 
-        public List<EPM_PRODUCTION_TYPES> GetProductionTypes(string USER_CODE, bool hepsi = true)
-        { 
-            OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
-            dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32, ParameterDirection.Input);
-            dynamicParameters.Add(":P_USER_CODE", USER_CODE, OracleMappingType.Varchar2, ParameterDirection.Input);
-            dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
-            List<EPM_PRODUCTION_TYPES> productionTypes = _productionRepository.DeserializeListPROC<EPM_PRODUCTION_TYPES>("FDEIT005.GET_EPM_PRODUCTIONTYPES", dynamicParameters);
-            return productionTypes;
+        public List<EPM_PRODUCTION_TYPES> GetProductionTypes(string USER_CODE, List<EPM_USER_PRODUCTION_TYPES> userProductionTypes, bool hepsi = true)
+        {
+            List<EPM_PRODUCTION_TYPES> list;
+            list = _cacheService.Get<List<EPM_PRODUCTION_TYPES>>(0, "EPM_PRODUCTION_TYPES");
+            if (list == null)
+            {
+                list = _productionRepository.DeserializeList<EPM_PRODUCTION_TYPES>("SELECT * FROM FDEIT005.EPM_PRODUCTION_TYPES");
+                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_TYPES", list, TimeSpan.FromDays(1));
+            }
+
+            list = list.Where(ob => userProductionTypes.Select(ob => ob.PRODUCTION_TYPE_ID).ToArray().Contains(ob.ID)).ToList();
+            if (hepsi)
+                list.Insert(0, new EPM_PRODUCTION_TYPES() { ID = 0, ADI = "HEPSİ" }); 
+            return list;
 
              
         }
 
         public List<EPM_PRODUCT_COLLECTION_TYPES> GetCollectionTypes(bool hepsi = true)
         {
-            OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
-            dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32, ParameterDirection.Input);
-            dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
-            List<EPM_PRODUCT_COLLECTION_TYPES> list = _productionRepository.DeserializeListPROC<EPM_PRODUCT_COLLECTION_TYPES>("FDEIT005.GET_EPM_COLLECTIONTYPES", dynamicParameters);
+            List<EPM_PRODUCT_COLLECTION_TYPES> list;
+            list = _cacheService.Get<List<EPM_PRODUCT_COLLECTION_TYPES>>(0, "EPM_PRODUCT_COLLECTION_TYPES");
+            if (list == null)
+            {
+                list = _productionRepository.DeserializeList<EPM_PRODUCT_COLLECTION_TYPES>("SELECT * FROM FDEIT005.EPM_PRODUCT_COLLECTION_TYPES");
+                _cacheService.AddWithLifeTime(0, "EPM_PRODUCT_COLLECTION_TYPES", list, TimeSpan.FromDays(1));
+            }
+
+            if (hepsi)
+                list.Insert(0, new EPM_PRODUCT_COLLECTION_TYPES() { ID = 0, ADI = "HEPSİ" }); 
             return list; 
         }
 
         public List<EPM_PRODUCTION_BAND_GROUP> GetBandList(bool hepsi = true)
         {
-            OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
-            dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32, ParameterDirection.Input);
-            dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
-            List<EPM_PRODUCTION_BAND_GROUP> list = _productionRepository.DeserializeListPROC<EPM_PRODUCTION_BAND_GROUP>("FDEIT005.GET_EPM_BANDGROUPS", dynamicParameters);
+            List<EPM_PRODUCTION_BAND_GROUP> list;
+            list = _cacheService.Get<List<EPM_PRODUCTION_BAND_GROUP>>(0, "EPM_PRODUCTION_BAND_GROUP");
+            if (list == null)
+            {
+                list = _productionRepository.DeserializeList<EPM_PRODUCTION_BAND_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCTION_BAND_GROUP");
+                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_BAND_GROUP", list, TimeSpan.FromDays(1));
+            }
+
+            if (hepsi)
+                list.Insert(0, new EPM_PRODUCTION_BAND_GROUP() { ID = 0, ADI = "HEPSİ" }); 
             return list;
         }
        
         public List<EPM_PRODUCT_GROUP> GetProductGroupList(bool hepsi = true)
         {
-            OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
-            dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32, ParameterDirection.Input);
-            dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
-            List<EPM_PRODUCT_GROUP> list = _productionRepository.DeserializeListPROC<EPM_PRODUCT_GROUP>("FDEIT005.GET_EPM_PRODUCTGROUPS", dynamicParameters);
+            List<EPM_PRODUCT_GROUP> list; 
+            list = _cacheService.Get<List<EPM_PRODUCT_GROUP>>(0, "EPM_PRODUCT_GROUP");
+            if (list == null)
+            {
+                list = _productionRepository.DeserializeList<EPM_PRODUCT_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCT_GROUP");
+                _cacheService.AddWithLifeTime(0, "EPM_PRODUCT_GROUP", list, TimeSpan.FromDays(1));
+            }
+
+            if (hepsi)
+                list.Insert(0, new EPM_PRODUCT_GROUP() { ID = 0, ADI = "HEPSİ" }); 
             return list;
         }
 
         public List<EPM_PRODUCTION_RECIPE> GetRecipeList(bool hepsi = true)
         {
-            OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
-            dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32, ParameterDirection.Input);
-            dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
-            List<EPM_PRODUCTION_RECIPE> list = _productionRepository.DeserializeListPROC<EPM_PRODUCTION_RECIPE>("FDEIT005.GET_EPM_RECIPES", dynamicParameters);
+            List<EPM_PRODUCTION_RECIPE> list;
+            list = _cacheService.Get<List<EPM_PRODUCTION_RECIPE>>(0, "EPM_PRODUCTION_RECIPE");
+            if (list == null)
+            {
+                list = _productionRepository.DeserializeList<EPM_PRODUCTION_RECIPE>("SELECT * FROM FDEIT005.EPM_PRODUCTION_RECIPE");
+                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_RECIPE", list, TimeSpan.FromDays(1));
+            }
+            if (hepsi)
+                list.Insert(0, new EPM_PRODUCTION_RECIPE() { ID = 0, ADI = "HEPSİ" }); 
             return list;
         }
 
         public List<EPM_PRODUCTION_RECIPE> GetRecipeListByType(bool hepsi = true,int TYPE=1)
         {
-            OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
-            dynamicParameters.Add(":P_ALL", Convert.ToInt32(hepsi), OracleMappingType.Int32, ParameterDirection.Input);
-            dynamicParameters.Add(":P_TYPE", Convert.ToInt32(TYPE), OracleMappingType.Int32, ParameterDirection.Input);
-            dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
-            List<EPM_PRODUCTION_RECIPE> list = _productionRepository.DeserializeListPROC<EPM_PRODUCTION_RECIPE>("FDEIT005.GET_EPM_RECIPES_BYTYPE", dynamicParameters);
+            List<EPM_PRODUCTION_RECIPE> list;
+            list = _cacheService.Get<List<EPM_PRODUCTION_RECIPE>>(0, "EPM_PRODUCTION_RECIPE");
+            if (list == null)
+            {
+                list = _productionRepository.DeserializeList<EPM_PRODUCTION_RECIPE>("SELECT * FROM FDEIT005.EPM_PRODUCTION_RECIPE");
+                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_RECIPE", list, TimeSpan.FromDays(1));
+            }
+
+            if (hepsi)
+                list.Insert(0, new EPM_PRODUCTION_RECIPE() { ID = 0, ADI = "HEPSİ" });
+
+            if (TYPE == 1)
+                list = list.FindAll(ob => ob.ID == 1 || ob.ID == 2);
+            else
+                list = list.FindAll(ob => ob.ID == 3 || ob.ID == 4 || ob.ID == 5); 
             return list;
         }
 
