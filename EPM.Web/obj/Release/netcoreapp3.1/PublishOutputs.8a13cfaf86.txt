@@ -434,6 +434,7 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.CodeAnalysis.Razor.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.CodeAnalysis.Workspaces.dll
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Caching.Redis.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Configuration.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Configuration.Abstractions.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Configuration.FileExtensions.dll
@@ -461,6 +462,7 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\NuGet.Frameworks.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\Oracle.ManagedDataAccess.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\SharpCompress.dll
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\StackExchange.Redis.StrongName.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\System.Composition.AttributedModel.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\System.Composition.Convention.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\System.Composition.Hosting.dll

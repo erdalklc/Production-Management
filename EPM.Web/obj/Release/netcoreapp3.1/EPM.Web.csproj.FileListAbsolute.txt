@@ -506,3 +506,6 @@ D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Ser
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Repository.pdb
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Production.Monitoring.Dto.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Production.Monitoring.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\Microsoft.Extensions.Caching.Redis.dll
+D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\StackExchange.Redis.StrongName.dll
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\UretimIzle\_GetProductionDetailsListGrid.cshtml.g.cs
