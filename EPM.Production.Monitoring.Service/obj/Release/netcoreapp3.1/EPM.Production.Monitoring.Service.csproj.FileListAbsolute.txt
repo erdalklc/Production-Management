@@ -14,3 +14,5 @@ D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\obj\Rel
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.dll
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.pdb
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Tools.dll
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Tools.pdb
