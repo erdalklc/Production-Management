@@ -10,6 +10,7 @@
     .Height("100%")
     .ShowColumnLines(true)
     .ShowColumnHeaders(true)
+    .Export(ob=>ob.Enabled(true))
     .ColumnMinWidth(60)
     .AllowColumnResizing(true)
     .Columns(columns => {
@@ -21,7 +22,7 @@
         columns.AddFor(m => m.SIPARIS_TIPI);
         columns.AddFor(m => m.KESIM_FOYU_NOT).Caption("NOT");
         columns.AddFor(m => m.KESIM_FOYU_NO);
-        columns.AddFor(m => m.MIKTAR);
+        columns.AddFor(m => m.MIKTAR).DataType(GridColumnDataType.Number);
     }) .Summary(sm =>
     {
         sm.TotalItems(t =>
