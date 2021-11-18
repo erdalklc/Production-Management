@@ -109,7 +109,7 @@ namespace EPM.Web.ServiceHelper
         public static object[] ProductionOrdersInsert(string Values)
         {
             string apiUrl = "ProductionOrdersInsert";
-            var list = PostRequest<string, object[]>(EPMServiceType.Track, apiUrl, Values);
+            var list = PostRequest<object[], object[]>(EPMServiceType.Track, apiUrl, new object[] { Values });
             return list;
         }
 

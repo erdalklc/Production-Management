@@ -9,10 +9,11 @@ D:\Projects\Eren Production Management\EPM.Track.Service\bin\Release\netcoreapp3
 D:\Projects\Eren Production Management\EPM.Track.Service\bin\Release\netcoreapp3.1\EPM.Fason.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Track.Service\bin\Release\netcoreapp3.1\EPM.Track.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Track.Service\bin\Release\netcoreapp3.1\EPM.Track.Repository.pdb
-D:\Projects\Eren Production Management\EPM.Track.Service\obj\Release\netcoreapp3.1\EPM.Track.Service.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Track.Service\obj\Release\netcoreapp3.1\EPM.Track.Service.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Track.Service\obj\Release\netcoreapp3.1\EPM.Track.Service.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Track.Service\obj\Release\netcoreapp3.1\EPM.Track.Service.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.Track.Service\obj\Release\netcoreapp3.1\EPM.Track.Service.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Track.Service\obj\Release\netcoreapp3.1\EPM.Track.Service.dll
 D:\Projects\Eren Production Management\EPM.Track.Service\obj\Release\netcoreapp3.1\EPM.Track.Service.pdb
+D:\Projects\Eren Production Management\EPM.Track.Service\obj\Release\netcoreapp3.1\EPM.Track.Service.csproj.AssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Track.Service\obj\Release\netcoreapp3.1\EPM.Track.Service.GeneratedMSBuildEditorConfig.editorconfig

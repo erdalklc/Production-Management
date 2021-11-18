@@ -994,7 +994,6 @@ E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\A
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Admin\_PartialKullaniciYetkiListesi.cshtml.g.cs
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimTakip\NosTakip.cshtml.g.cs
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\Uretim\UretimListesi.cshtml.g.cs
-D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.csproj.CoreCompileInputs.cache
@@ -1003,8 +1002,6 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.M
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.RazorAssemblyInfo.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.RazorAssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\staticwebassets\EPM.Web.StaticWebAssets.Manifest.cache
-D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\staticwebassets\EPM.Web.StaticWebAssets.xml
-D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\scopedcss\bundle\EPM.Web.styles.css
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.TagHelpers.input.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.TagHelpers.output.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.RazorCoreGenerate.cache
@@ -1514,3 +1511,5 @@ E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\U
 D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Redis.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\StackExchange.Redis.StrongName.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimIzle\_GetProductionDetailsListGrid.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.csproj.AssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.GeneratedMSBuildEditorConfig.editorconfig

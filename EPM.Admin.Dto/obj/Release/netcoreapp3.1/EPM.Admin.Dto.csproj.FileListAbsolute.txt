@@ -1,9 +1,10 @@
 D:\Projects\Eren Production Management\EPM.Admin.Dto\bin\Release\netcoreapp3.1\EPM.Admin.Dto.deps.json
 D:\Projects\Eren Production Management\EPM.Admin.Dto\bin\Release\netcoreapp3.1\EPM.Admin.Dto.dll
 D:\Projects\Eren Production Management\EPM.Admin.Dto\bin\Release\netcoreapp3.1\EPM.Admin.Dto.pdb
-D:\Projects\Eren Production Management\EPM.Admin.Dto\obj\Release\netcoreapp3.1\EPM.Admin.Dto.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Admin.Dto\obj\Release\netcoreapp3.1\EPM.Admin.Dto.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Admin.Dto\obj\Release\netcoreapp3.1\EPM.Admin.Dto.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Admin.Dto\obj\Release\netcoreapp3.1\EPM.Admin.Dto.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.Admin.Dto\obj\Release\netcoreapp3.1\EPM.Admin.Dto.dll
 D:\Projects\Eren Production Management\EPM.Admin.Dto\obj\Release\netcoreapp3.1\EPM.Admin.Dto.pdb
+D:\Projects\Eren Production Management\EPM.Admin.Dto\obj\Release\netcoreapp3.1\EPM.Admin.Dto.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Eren Production Management\EPM.Admin.Dto\obj\Release\netcoreapp3.1\EPM.Admin.Dto.csproj.AssemblyReference.cache

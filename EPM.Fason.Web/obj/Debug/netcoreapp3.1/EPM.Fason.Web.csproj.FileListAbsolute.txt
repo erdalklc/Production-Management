@@ -820,7 +820,6 @@ D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Fason.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.pdb
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Tools.pdb
-D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.csproj.CoreCompileInputs.cache
@@ -829,8 +828,6 @@ D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.RazorAssemblyInfo.cache
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.RazorAssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\staticwebassets\EPM.Fason.Web.StaticWebAssets.Manifest.cache
-D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\staticwebassets\EPM.Fason.Web.StaticWebAssets.xml
-D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\scopedcss\bundle\EPM.Fason.Web.styles.css
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.TagHelpers.input.cache
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.TagHelpers.output.cache
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.RazorCoreGenerate.cache
@@ -870,3 +867,6 @@ E:\Eren\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\Microso
 E:\Eren\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\StackExchange.Redis.StrongName.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Redis.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\StackExchange.Redis.StrongName.dll
+D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Fason.Web.StaticWebAssets.xml
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.csproj.AssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.GeneratedMSBuildEditorConfig.editorconfig

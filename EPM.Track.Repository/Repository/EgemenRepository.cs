@@ -13,11 +13,11 @@ namespace EPM.Track.Repository.Repository
     {
          
         static string LACOSTECNN = @"User ID=sysdba;Password=masterkey;Database=192.168.2.95/3050:C:\egemen\kt01\dataserver\data\lacoste\kt01data.gdb;Charset=UTF8";
-        static string HAMIPLIKCNN = @"User ID=sysdba;Password=masterkey;Database=192.168.2.54/3050:C:\Egemen\eb01\DataServer\data\ErenHamIplik\EB01DATA.GDB;Charset=UTF8";
+        static string HAMIPLIKCNN = @"User ID=sysdba;Password=masterkey;Database=192.168.2.9/3050:C:\Egemen\eb01\DataServer\data\ErenHamIplik\EB01DATA.GDB;Charset=UTF8";
         static string KUMASBOYACNN = @"User ID=sysdba;Password=masterkey;Database=192.168.2.100/3050:D:\egemen\eb01\dataserver\data\MODERNKUMASBOYA\EB01DATA.GDB;Charset=UTF8";
         static string IPLIKBOYACNN = @"User ID=sysdba;Password=masterkey;Database=192.168.2.100/3050:D:\egemen\eb01\dataserver\data\MODERNIPLIKBOYA\EB01DATA.GDB;Charset=UTF8";
-        static string TRIKOCNN = @"User ID=sysdba;Password=masterkey;Database=192.168.2.100/3050:C:\Egemen\Orme\OrmeDataServer\Data\EREN TRIKO\ORME.GDB;Charset=UTF8";
-        static string ORMECNN = @"User ID=sysdba;Password=masterkey;Database=192.168.2.100/3050:C:\Egemen\Orme\OrmeDataServer\Data\EREN ORME\ORME.GDB;Charset=UTF8";
+        static string TRIKOCNN = @"User ID=sysdba;Password=masterkey;Database=192.168.2.23/3050:C:\Egemen\Orme\OrmeDataServer\Data\EREN TRIKO\ORME.GDB;Charset=UTF8";
+        static string ORMECNN = @"User ID=sysdba;Password=masterkey;Database=192.168.2.23/3050:C:\Egemen\Orme\OrmeDataServer\Data\EREN ORME\ORME.GDB;Charset=UTF8";
         static string TEKSTILCNN = @"User ID=sysdba;Password=masterkey;Database=192.168.2.100/3050:C:\Egemen\Orme\OrmeDataServer\Data\EREN TEKSTİL\ORME.GDB;Charset=UTF8";
 
         public DataTable QueryFill(string sql, FirebirdConnectionDB dB = FirebirdConnectionDB.DEVANLAY)

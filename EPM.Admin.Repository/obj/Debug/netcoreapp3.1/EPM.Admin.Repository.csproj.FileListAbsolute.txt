@@ -15,10 +15,11 @@ D:\Projects\Eren Production Management\EPM.Admin.Repository\bin\Debug\netcoreapp
 D:\Projects\Eren Production Management\EPM.Admin.Repository\bin\Debug\netcoreapp3.1\EPM.Admin.Repository.pdb
 D:\Projects\Eren Production Management\EPM.Admin.Repository\bin\Debug\netcoreapp3.1\EPM.Admin.Dto.dll
 D:\Projects\Eren Production Management\EPM.Admin.Repository\bin\Debug\netcoreapp3.1\EPM.Admin.Dto.pdb
-D:\Projects\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.dll
 D:\Projects\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.pdb
+D:\Projects\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.csproj.AssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Admin.Repository\obj\Debug\netcoreapp3.1\EPM.Admin.Repository.GeneratedMSBuildEditorConfig.editorconfig

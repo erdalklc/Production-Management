@@ -348,15 +348,12 @@ D:\Projects\Eren Production Management\EPM.Production.Api\bin\Release\netcoreapp
 D:\Projects\Eren Production Management\EPM.Production.Api\bin\Release\netcoreapp3.1\EPM.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Production.Api\bin\Release\netcoreapp3.1\EPM.Production.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Production.Api\bin\Release\netcoreapp3.1\EPM.Production.Repository.pdb
-D:\Projects\Eren Production Management\EPM.Production.Api\obj\Release\netcoreapp3.1\EPM.Production.Api.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Production.Api\obj\Release\netcoreapp3.1\EPM.Production.Api.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Production.Api\obj\Release\netcoreapp3.1\EPM.Production.Api.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Production.Api\obj\Release\netcoreapp3.1\EPM.Production.Api.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.Production.Api\obj\Release\netcoreapp3.1\EPM.Production.Api.MvcApplicationPartsAssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Production.Api\obj\Release\netcoreapp3.1\EPM.Production.Api.MvcApplicationPartsAssemblyInfo.cache
 D:\Projects\Eren Production Management\EPM.Production.Api\obj\Release\netcoreapp3.1\staticwebassets\EPM.Production.Api.StaticWebAssets.Manifest.cache
-D:\Projects\Eren Production Management\EPM.Production.Api\obj\Release\netcoreapp3.1\staticwebassets\EPM.Production.Api.StaticWebAssets.xml
-D:\Projects\Eren Production Management\EPM.Production.Api\obj\Release\netcoreapp3.1\scopedcss\bundle\EPM.Production.Api.styles.css
 D:\Projects\Eren Production Management\EPM.Production.Api\obj\Release\netcoreapp3.1\EPM.Production.Api.RazorTargetAssemblyInfo.cache
 D:\Projects\Eren Production Management\EPM.Production.Api\obj\Release\netcoreapp3.1\EPM.Production.Api.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Production.Api\obj\Release\netcoreapp3.1\EPM.Production.Api.dll
@@ -376,3 +373,5 @@ D:\Projects\Eren Production Management\EPM.Production.Api\bin\Release\netcoreapp
 D:\Projects\Eren Production Management\EPM.Production.Api\bin\Release\netcoreapp3.1\System.IO.Pipelines.dll
 D:\Projects\Eren Production Management\EPM.Production.Api\bin\Release\netcoreapp3.1\EPM.Tools.dll
 D:\Projects\Eren Production Management\EPM.Production.Api\bin\Release\netcoreapp3.1\EPM.Tools.pdb
+D:\Projects\Eren Production Management\EPM.Production.Api\obj\Release\netcoreapp3.1\EPM.Production.Api.csproj.AssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Production.Api\obj\Release\netcoreapp3.1\EPM.Production.Api.GeneratedMSBuildEditorConfig.editorconfig

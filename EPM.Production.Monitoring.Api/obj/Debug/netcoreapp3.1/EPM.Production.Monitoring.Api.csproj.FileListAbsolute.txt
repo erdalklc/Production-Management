@@ -338,15 +338,12 @@ D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\bin\Debug\n
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Repository.pdb
-D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Api.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Api.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Api.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Api.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Api.MvcApplicationPartsAssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Api.MvcApplicationPartsAssemblyInfo.cache
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\obj\Debug\netcoreapp3.1\staticwebassets\EPM.Production.Monitoring.Api.StaticWebAssets.Manifest.cache
-D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\obj\Debug\netcoreapp3.1\staticwebassets\EPM.Production.Monitoring.Api.StaticWebAssets.xml
-D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\obj\Debug\netcoreapp3.1\scopedcss\bundle\EPM.Production.Monitoring.Api.styles.css
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Api.RazorTargetAssemblyInfo.cache
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Api.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Api.dll
@@ -734,3 +731,6 @@ D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\bin\Debug\n
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\bin\Debug\netcoreapp3.1\EPM.Tools.dll
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\bin\Debug\netcoreapp3.1\EPM.Tools.pdb
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Api.StaticWebAssets.xml
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Api.csproj.AssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Api\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Api.GeneratedMSBuildEditorConfig.editorconfig

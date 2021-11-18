@@ -7,7 +7,6 @@ D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\bin\Rel
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Production.Monitoring.Repository.pdb
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Production.Monitoring.Dto.pdb
-D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.csproj.CoreCompileInputs.cache
@@ -16,3 +15,5 @@ D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\obj\Rel
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.pdb
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Tools.dll
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Tools.pdb
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.csproj.AssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.GeneratedMSBuildEditorConfig.editorconfig

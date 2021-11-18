@@ -25,7 +25,8 @@ namespace EPM.Tools.Helpers
         { 
             RedisServer.SetDatabase(dbId);
             string jsonData = JsonConvert.SerializeObject(data);
-            _redisServer.Database.StringSet(key, Compress(jsonData), lifeTime);
+            //_redisServer.Database.StringSet(key, Compress(jsonData), lifeTime);
+            _redisServer.Database.StringSet(key, Compress(jsonData));
         }
 
         public bool Any(int dbId, string key)

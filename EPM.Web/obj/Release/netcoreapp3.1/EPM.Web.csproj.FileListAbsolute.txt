@@ -369,7 +369,6 @@ D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\runtime
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.DirectoryServices.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.DirectoryServices.Protocols.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.csproj.CoreCompileInputs.cache
@@ -378,8 +377,6 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.RazorAssemblyInfo.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.RazorAssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\staticwebassets\EPM.Web.StaticWebAssets.Manifest.cache
-D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\staticwebassets\EPM.Web.StaticWebAssets.xml
-D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\scopedcss\bundle\EPM.Web.styles.css
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.TagHelpers.input.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.TagHelpers.output.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.RazorCoreGenerate.cache
@@ -509,3 +506,5 @@ D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\EPM.Pro
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\Microsoft.Extensions.Caching.Redis.dll
 D:\Projects\Eren Production Management\EPM.Web\bin\Release\netcoreapp3.1\StackExchange.Redis.StrongName.dll
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\UretimIzle\_GetProductionDetailsListGrid.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.csproj.AssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web.GeneratedMSBuildEditorConfig.editorconfig

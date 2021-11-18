@@ -1,0 +1,61 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "66e88b59-036b-4d7e-a77d-b94dc549f4ef": {
+      "ProjectGuid": "66e88b59-036b-4d7e-a77d-b94dc549f4ef",
+      "DisplayName": "EPM.Track.Api",
+      "ColorIndex": 0
+    },
+    "21c6de33-56e7-4959-b9ce-4eb4b38c6432": {
+      "ProjectGuid": "21c6de33-56e7-4959-b9ce-4eb4b38c6432",
+      "DisplayName": "EPM.Track.Repository",
+      "ColorIndex": 1
+    },
+    "b2fc5ef5-066a-4e1b-9697-28479b636121": {
+      "ProjectGuid": "b2fc5ef5-066a-4e1b-9697-28479b636121",
+      "DisplayName": "EPM.Tools",
+      "ColorIndex": 2
+    },
+    "68ef76af-6345-4fc3-b87c-c81746191e67": {
+      "ProjectGuid": "68ef76af-6345-4fc3-b87c-c81746191e67",
+      "DisplayName": "EPM.Web",
+      "ColorIndex": 3
+    },
+    "2dc383ec-8a74-42bb-ac25-154937041ac5": {
+      "ProjectGuid": "2dc383ec-8a74-42bb-ac25-154937041ac5",
+      "DisplayName": "EPM.Admin.Api",
+      "ColorIndex": 4
+    },
+    "20024df1-7f6a-4a7b-bff6-d390d0c3e762": {
+      "ProjectGuid": "20024df1-7f6a-4a7b-bff6-d390d0c3e762",
+      "DisplayName": "EPM.Plan.Api",
+      "ColorIndex": 5
+    },
+    "75446db0-a42b-4188-9279-c504747fd266": {
+      "ProjectGuid": "75446db0-a42b-4188-9279-c504747fd266",
+      "DisplayName": "EPM.Production.Api",
+      "ColorIndex": 6
+    },
+    "bc025247-b760-4801-bf2b-ac65d7de7921": {
+      "ProjectGuid": "bc025247-b760-4801-bf2b-ac65d7de7921",
+      "DisplayName": "EPM.Production.Monitoring.Api",
+      "ColorIndex": 7
+    },
+    "add9ad56-8aa3-44a0-9b3a-e6ca3487a6eb": {
+      "ProjectGuid": "add9ad56-8aa3-44a0-9b3a-e6ca3487a6eb",
+      "DisplayName": "EPM.Track.Service",
+      "ColorIndex": 8
+    },
+    "1087a5a0-58fd-4db5-8675-2352f1a68440": {
+      "ProjectGuid": "1087a5a0-58fd-4db5-8675-2352f1a68440",
+      "DisplayName": "EPM.Plan.Service",
+      "ColorIndex": 9
+    },
+    "4568bddf-dc15-440d-913f-1fcc76944a21": {
+      "ProjectGuid": "4568bddf-dc15-440d-913f-1fcc76944a21",
+      "DisplayName": "EPM.Repository",
+      "ColorIndex": 10
+    }
+  },
+  "NextColorIndex": 11
+}

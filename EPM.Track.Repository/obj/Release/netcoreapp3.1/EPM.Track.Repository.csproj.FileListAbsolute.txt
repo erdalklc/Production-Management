@@ -5,10 +5,11 @@ D:\Projects\Eren Production Management\EPM.Track.Repository\bin\Release\netcorea
 D:\Projects\Eren Production Management\EPM.Track.Repository\bin\Release\netcoreapp3.1\EPM.Track.Dto.dll
 D:\Projects\Eren Production Management\EPM.Track.Repository\bin\Release\netcoreapp3.1\EPM.Track.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Track.Repository\bin\Release\netcoreapp3.1\EPM.Dto.pdb
-D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Release\netcoreapp3.1\EPM.Track.Repository.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Release\netcoreapp3.1\EPM.Track.Repository.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Release\netcoreapp3.1\EPM.Track.Repository.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Release\netcoreapp3.1\EPM.Track.Repository.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Release\netcoreapp3.1\EPM.Track.Repository.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Release\netcoreapp3.1\EPM.Track.Repository.dll
 D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Release\netcoreapp3.1\EPM.Track.Repository.pdb
+D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Release\netcoreapp3.1\EPM.Track.Repository.csproj.AssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Release\netcoreapp3.1\EPM.Track.Repository.GeneratedMSBuildEditorConfig.editorconfig

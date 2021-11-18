@@ -10,7 +10,6 @@ D:\Projects\Eren Production Management\EPM.Production.Monitoring.Repository\bin\
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Repository\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.dll
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Repository\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Repository\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
-D:\Projects\Eren Production Management\EPM.Production.Monitoring.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Repository.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Repository.csproj.CopyComplete
 E:\Eren\Eren Production Management\EPM.Production.Monitoring.Repository\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Repository.deps.json
 E:\Eren\Eren Production Management\EPM.Production.Monitoring.Repository\bin\Debug\netcoreapp3.1\EPM.Production.Monitoring.Repository.dll
@@ -26,3 +25,5 @@ E:\Eren\Eren Production Management\EPM.Production.Monitoring.Repository\obj\Debu
 E:\Eren\Eren Production Management\EPM.Production.Monitoring.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Repository.csproj.CopyComplete
 E:\Eren\Eren Production Management\EPM.Production.Monitoring.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Repository.dll
 E:\Eren\Eren Production Management\EPM.Production.Monitoring.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Repository.pdb
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Repository.csproj.AssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Production.Monitoring.Repository\obj\Debug\netcoreapp3.1\EPM.Production.Monitoring.Repository.GeneratedMSBuildEditorConfig.editorconfig

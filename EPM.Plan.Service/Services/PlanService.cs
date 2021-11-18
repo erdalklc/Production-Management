@@ -99,8 +99,8 @@ namespace EPM.Plan.Service.Services
                 column.DefaultValue = 0;
             }
             //List<EPM_PRODUCTION_PLAN> plan = OracleServer.DeserializeList<EPM_PRODUCTION_PLAN>("SELECT * FROM FDEIT005.EPM_PRODUCTION_PLAN WHERE HEADER_ID IN (" + tSql + ")");
-            List<EPM_PRODUCTION_PLAN> plan = _planRepository.DeserializeList<EPM_PRODUCTION_PLAN>(@"SELECT PL.ID,PL.HEADER_ID,PL.MARKET_ID FROM FDEIT005.EPM_PRODUCTION_PLAN PL
-                    INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=PL.HEADER_ID AND H.SEASON=" + SEASON + "");
+            List<EPM_PRODUCTION_PLAN> plan = _planRepository.DeserializeList<EPM_PRODUCTION_PLAN>(@"SELECT PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR,SUM(PL.QUANTITY) QUANTITY FROM FDEIT005.EPM_PRODUCTION_PLAN PL
+                    INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=PL.HEADER_ID AND H.SEASON=" + SEASON + "    GROUP BY PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR");
             foreach (var item in plan)
             {
                 DataRow[] row = dt.Select("ID=" + item.HEADER_ID + " AND MARKET_ID=" + item.MARKET_ID + "");

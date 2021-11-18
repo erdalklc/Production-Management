@@ -7,7 +7,6 @@ D:\Projects\Eren Production Management\EPM.Service\bin\Debug\netcoreapp3.1\EPM.T
 D:\Projects\Eren Production Management\EPM.Service\bin\Debug\netcoreapp3.1\EPM.Repository.pdb
 D:\Projects\Eren Production Management\EPM.Service\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Service\bin\Debug\netcoreapp3.1\EPM.Tools.pdb
-D:\Projects\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.csproj.CoreCompileInputs.cache
@@ -30,3 +29,5 @@ E:\Eren\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Servi
 E:\Eren\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.csproj.CopyComplete
 E:\Eren\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.dll
 E:\Eren\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.pdb
+D:\Projects\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.csproj.AssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Service\obj\Debug\netcoreapp3.1\EPM.Service.GeneratedMSBuildEditorConfig.editorconfig

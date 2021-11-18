@@ -344,15 +344,12 @@ D:\Projects\Eren Production Management\EPM.Track.Api\bin\Release\netcoreapp3.1\E
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Release\netcoreapp3.1\EPM.Fason.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Release\netcoreapp3.1\EPM.Track.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Release\netcoreapp3.1\EPM.Track.Repository.pdb
-D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\EPM.Track.Api.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\EPM.Track.Api.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\EPM.Track.Api.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\EPM.Track.Api.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\EPM.Track.Api.MvcApplicationPartsAssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\EPM.Track.Api.MvcApplicationPartsAssemblyInfo.cache
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\staticwebassets\EPM.Track.Api.StaticWebAssets.Manifest.cache
-D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\staticwebassets\EPM.Track.Api.StaticWebAssets.xml
-D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\scopedcss\bundle\EPM.Track.Api.styles.css
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\EPM.Track.Api.RazorTargetAssemblyInfo.cache
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\EPM.Track.Api.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\EPM.Track.Api.dll
@@ -365,3 +362,5 @@ D:\Projects\Eren Production Management\EPM.Track.Api\bin\Release\netcoreapp3.1\M
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Release\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Release\netcoreapp3.1\Serilog.dll
 D:\Projects\Eren Production Management\EPM.Track.Api\bin\Release\netcoreapp3.1\MongoDB.Bson.dll
+D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\EPM.Track.Api.csproj.AssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Track.Api\obj\Release\netcoreapp3.1\EPM.Track.Api.GeneratedMSBuildEditorConfig.editorconfig
