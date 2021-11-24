@@ -14,19 +14,22 @@ namespace EPM.Tools.Helpers
         {
             _redisServer = redisServer;
         }
-        public void Add(int dbId, string key, object data)
+        public void Add(int dbId, string key, object data,bool compress =false)
         {
             RedisServer.SetDatabase(dbId);
             string jsonData = JsonConvert.SerializeObject(data);
-            _redisServer.Database.StringSet(key, Compress(jsonData));
+            if (compress)
+                _redisServer.Database.StringSet(key, Compress(jsonData));
+           else _redisServer.Database.StringSet(key, jsonData);
         }
 
-        public void AddWithLifeTime(int dbId, string key, object data, TimeSpan lifeTime)
-        { 
+        public void AddWithLifeTime(int dbId, string key, object data, TimeSpan lifeTime, bool compress = false)
+        {
             RedisServer.SetDatabase(dbId);
             string jsonData = JsonConvert.SerializeObject(data);
-            //_redisServer.Database.StringSet(key, Compress(jsonData), lifeTime);
-            _redisServer.Database.StringSet(key, Compress(jsonData));
+            if (compress)
+                _redisServer.Database.StringSet(key, Compress(jsonData), lifeTime);
+            else _redisServer.Database.StringSet(key, jsonData, lifeTime);
         }
 
         public bool Any(int dbId, string key)
@@ -49,13 +52,15 @@ namespace EPM.Tools.Helpers
         {
             _redisServer.FlushDatabsae();
         }
-        public T Get<T>(int dbId, string key)
+        public T Get<T>(int dbId, string key, bool decompress = false)
         {
             RedisServer.SetDatabase(dbId);
             if (Any(dbId, key))
             {
                 string jsonData = _redisServer.Database.StringGet(key);
-                return JsonConvert.DeserializeObject<T>(Decompress(jsonData));
+                if (decompress)
+                    return JsonConvert.DeserializeObject<T>(Decompress(jsonData));
+                else return JsonConvert.DeserializeObject<T>(jsonData);
             }
             return default;
         }
@@ -91,6 +96,6 @@ namespace EPM.Tools.Helpers
             }
         }
 
-     
+
     }
 }

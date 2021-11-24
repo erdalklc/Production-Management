@@ -22,12 +22,14 @@ namespace EPM.Web.Controllers
         private readonly IUretimService _uretimRepository;
         private readonly IMenuService _menuService;
         private readonly ILogService _logRepository;
-        public UretimController(IUretimService uretimRepository, ILogService logRepository, IWebHostEnvironment appEnvironment, IMenuService menuService)
+        private readonly ICacheService _cacheService;
+        public UretimController(IUretimService uretimRepository, ILogService logRepository, IWebHostEnvironment appEnvironment, IMenuService menuService, ICacheService cacheService)
         {
             _uretimRepository = uretimRepository;
             _logRepository = logRepository;
             _appEnvironment = appEnvironment;
             _menuService = menuService;
+            _cacheService = cacheService;
         }
          
         public IActionResult UretimListesiAktarExcelYukle()
@@ -45,26 +47,12 @@ namespace EPM.Web.Controllers
             ViewBag.Page = "ÜRETİM LİSTESİ AKTARIM";
             return View();
         }
+ 
 
-        public IActionResult UretimOnayliListe()
+        public IActionResult UretimListesi()
         {
-            ViewBag.Page = "ONAYLI ÜRETİM LİSTESİ";
-            return View(new EPM.Production.Dto.Production.UretimOnayliListe());
-        }
-
-
-        public IActionResult UretimListesi(int TYPE,int STATUS=1)
-        {
-            if(TYPE==0)
-            ViewBag.Page = "ÜRETİM LİSTESİ";
-            else ViewBag.Page = "İPTAL ÜRETİM LİSTESİ";
-
-            if(STATUS==0)
-                ViewBag.Page = "ONAYSIZ ÜRETİM LİSTESİ";
-
-            EPM.Production.Dto.Production.UretimOnayliListe liste = new EPM.Production.Dto.Production.UretimOnayliListe();
-            liste.STATUS = TYPE;
-            liste.APPROVAL_STATUS = STATUS;
+            EPM.Production.Dto.Production.UretimOnayliListe liste =new EPM.Production.Dto.Production.UretimOnayliListe();
+            liste.APPROVAL_STATUS = 1;
             return View(liste);
         }
 
@@ -186,7 +174,9 @@ namespace EPM.Web.Controllers
         [HttpGet]
         public object GetBandList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetBandList(hepsi), loadOptions);
         [HttpGet]
-        public object GetApprovalStatusList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetApprovalStatueList(), loadOptions);
+        public object GetApprovalStatusList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetApprovalStatueList(hepsi), loadOptions);
+        [HttpGet]
+        public object GetStatusList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetStatusList(hepsi), loadOptions);
         [HttpGet]
         public object GetFlagList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(ProductionServiceHelper.GetFlagList(hepsi), loadOptions);
         [HttpGet]

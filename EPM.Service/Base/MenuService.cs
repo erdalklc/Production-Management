@@ -27,7 +27,7 @@ namespace EPM.Service.Base
             if (menu == null)
             {
                 menu = _epmRepository.DeserializeList<Menu>("SELECT * FROM FDEIT005.EPM_WEB_MENU");
-                _cacheService.AddWithLifeTime(0, "MENU", menu, TimeSpan.FromHours(5));
+                _cacheService.Add(0, "MENU", menu);
             }
             try
             { 

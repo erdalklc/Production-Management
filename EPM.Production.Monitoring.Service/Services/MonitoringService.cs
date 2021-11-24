@@ -323,7 +323,7 @@ WHERE P.YEAR IN ({0}) AND P.WEEK IN ({1})  AND ({2})"
             if (market == null)
             {
                 market = _monitoringRepository.DeserializeList<EPM_PRODUCTION_MARKET>("SELECT * FROM FDEIT005.EPM_PRODUCTION_MARKET"); 
-                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_MARKET", market, TimeSpan.FromDays(1));
+                _cacheService.Add(0, "EPM_PRODUCTION_MARKET", market);
             }
             return market;
         }
@@ -336,7 +336,7 @@ WHERE P.YEAR IN ({0}) AND P.WEEK IN ({1})  AND ({2})"
             if (groups == null)
             {
                 groups = _monitoringRepository.DeserializeList<EPM_PRODUCT_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCT_GROUP");
-                _cacheService.AddWithLifeTime(0, "EPM_PRODUCT_GROUP", groups, TimeSpan.FromHours(10));
+                _cacheService.Add(0, "EPM_PRODUCT_GROUP", groups);
             }
             return groups; 
         }

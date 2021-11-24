@@ -127,8 +127,11 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\devextreme\vectormap-utils\dx.vectormaputils.debug.js
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\devextreme\vectormap-utils\dx.vectormaputils.js
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\devextreme\vectormap-utils\dx.vectormaputils.node.js
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\exceljs.min.js
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\FileSaver.min.js
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\jquery-3.5.1.min.js
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\moment.js
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\polyfill.min.js
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\vendor.js
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.Development.json
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.json

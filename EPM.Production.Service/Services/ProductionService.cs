@@ -8,6 +8,7 @@ using EPM.Tools.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -202,7 +203,7 @@ namespace EPM.Production.Service.Services
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_BRANDS>("SELECT * FROM FDEIT005.EPM_PRODUCTION_BRANDS");
-                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_BRANDS", list, TimeSpan.FromDays(4));
+                _cacheService.Add(0, "EPM_PRODUCTION_BRANDS", list);
             }
             list = list.Where(ob => userBrands.Select(ob => ob.BRAND_ID).ToArray().Contains(ob.ID)).ToList();
             if (hepsi)
@@ -218,7 +219,7 @@ namespace EPM.Production.Service.Services
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_SUB_BRANDS>("SELECT * FROM FDEIT005.EPM_PRODUCTION_SUB_BRANDS");
-                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_SUB_BRANDS", list, TimeSpan.FromDays(4));
+                _cacheService.Add(0, "EPM_PRODUCTION_SUB_BRANDS", list);
             }
             if (hepsi)
                 list.Insert(0, new EPM_PRODUCTION_SUB_BRANDS() { ID = 0, ADI = "HEPSİ" }); 
@@ -233,7 +234,7 @@ namespace EPM.Production.Service.Services
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_SEASON>("SELECT * FROM FDEIT005.EPM_PRODUCTION_SEASON");
-                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_SEASON", list, TimeSpan.FromDays(4));
+                _cacheService.Add(0, "EPM_PRODUCTION_SEASON", list);
             } 
             return list; 
         }
@@ -245,7 +246,7 @@ namespace EPM.Production.Service.Services
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_MARKET>("SELECT * FROM FDEIT005.EPM_PRODUCTION_MARKET");
-                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_MARKET", list, TimeSpan.FromDays(1));
+                _cacheService.Add(0, "EPM_PRODUCTION_MARKET", list);
             }
 
             if (hepsi)
@@ -260,7 +261,7 @@ namespace EPM.Production.Service.Services
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_ORDER_TYPES>("SELECT * FROM FDEIT005.EPM_PRODUCTION_ORDER_TYPES");
-                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_ORDER_TYPES", list, TimeSpan.FromDays(1));
+                _cacheService.Add(0, "EPM_PRODUCTION_ORDER_TYPES", list);
             }
 
             if (hepsi)
@@ -275,7 +276,7 @@ namespace EPM.Production.Service.Services
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_FABRIC_TYPES>("SELECT * FROM FDEIT005.EPM_PRODUCTION_FABRIC_TYPES");
-                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_FABRIC_TYPES", list, TimeSpan.FromDays(1));
+                _cacheService.Add(0, "EPM_PRODUCTION_FABRIC_TYPES", list);
             }
 
             list = list.Where(ob => userFabricTypes.Select(ob => ob.FABRIC_TYPE_ID).ToArray().Contains(ob.ID)).ToList();
@@ -291,7 +292,7 @@ namespace EPM.Production.Service.Services
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_TYPES>("SELECT * FROM FDEIT005.EPM_PRODUCTION_TYPES");
-                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_TYPES", list, TimeSpan.FromDays(1));
+                _cacheService.Add(0, "EPM_PRODUCTION_TYPES", list);
             }
 
             list = list.Where(ob => userProductionTypes.Select(ob => ob.PRODUCTION_TYPE_ID).ToArray().Contains(ob.ID)).ToList();
@@ -309,7 +310,7 @@ namespace EPM.Production.Service.Services
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCT_COLLECTION_TYPES>("SELECT * FROM FDEIT005.EPM_PRODUCT_COLLECTION_TYPES");
-                _cacheService.AddWithLifeTime(0, "EPM_PRODUCT_COLLECTION_TYPES", list, TimeSpan.FromDays(1));
+                _cacheService.Add(0, "EPM_PRODUCT_COLLECTION_TYPES", list);
             }
 
             if (hepsi)
@@ -324,7 +325,7 @@ namespace EPM.Production.Service.Services
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_BAND_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCTION_BAND_GROUP");
-                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_BAND_GROUP", list, TimeSpan.FromDays(1));
+                _cacheService.Add(0, "EPM_PRODUCTION_BAND_GROUP", list);
             }
 
             if (hepsi)
@@ -339,7 +340,7 @@ namespace EPM.Production.Service.Services
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCT_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCT_GROUP");
-                _cacheService.AddWithLifeTime(0, "EPM_PRODUCT_GROUP", list, TimeSpan.FromDays(1));
+                _cacheService.Add(0, "EPM_PRODUCT_GROUP", list);
             }
 
             if (hepsi)
@@ -354,7 +355,7 @@ namespace EPM.Production.Service.Services
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_RECIPE>("SELECT * FROM FDEIT005.EPM_PRODUCTION_RECIPE");
-                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_RECIPE", list, TimeSpan.FromDays(1));
+                _cacheService.Add(0, "EPM_PRODUCTION_RECIPE", list);
             }
             if (hepsi)
                 list.Insert(0, new EPM_PRODUCTION_RECIPE() { ID = 0, ADI = "HEPSİ" }); 
@@ -368,7 +369,7 @@ namespace EPM.Production.Service.Services
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_RECIPE>("SELECT * FROM FDEIT005.EPM_PRODUCTION_RECIPE");
-                _cacheService.AddWithLifeTime(0, "EPM_PRODUCTION_RECIPE", list, TimeSpan.FromDays(1));
+                _cacheService.Add(0, "EPM_PRODUCTION_RECIPE", list);
             }
 
             if (hepsi)
@@ -381,9 +382,19 @@ namespace EPM.Production.Service.Services
             return list;
         }
 
-        public List<ENUMMODEL> GetApprovalStatueList()
+        public List<ENUMMODEL> GetApprovalStatueList(bool hepsi = true)
         {
             List<ENUMMODEL> enums = ((APPROVAL_STATUSES[])Enum.GetValues(typeof(APPROVAL_STATUSES))).Select(c => new ENUMMODEL() { ID = (int)c, ADI = c.ToString() }).ToList();
+            if(hepsi)
+            enums.Insert(0, new ENUMMODEL() { ID = -1, ADI = "HEPSİ" });
+            return enums;
+        }
+
+        public List<ENUMMODEL> GetStatusList(bool hepsi = true)
+        {
+            List<ENUMMODEL> enums = ((STATUSES[])Enum.GetValues(typeof(STATUSES))).Select(c => new ENUMMODEL() { ID = (int)c, ADI = ProductionExtensions.GetDescription<STATUSES>(c) }).ToList();
+            if(hepsi)
+            enums.Insert(0, new ENUMMODEL() { ID = -1, ADI = "HEPSİ" });
             return enums;
         }
 

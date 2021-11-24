@@ -63,10 +63,10 @@ namespace EPM.Service.Base
                             err[1] += "8.Kolon QUANTITY olmalıdır<br>";
                         if (reader.GetValue(9).ToStringParse() != "MARKET")
                             err[1] += "9.Kolon MARKET olmalıdır<br>";
-                        if (reader.GetValue(10).ToStringParse() != "DEADLINE")
-                            err[1] += "10.Kolon DEADLINE olmalıdır<br>";
-                        if (reader.GetValue(11).ToStringParse() != "SHIPMENT_DATE")
-                            err[1] += "11.Kolon SHIPMENT_DATE olmalıdır<br>";
+                        //if (reader.GetValue(10).ToStringParse() != "DEADLINE")
+                        //    err[1] += "10.Kolon DEADLINE olmalıdır<br>";
+                        //if (reader.GetValue(11).ToStringParse() != "SHIPMENT_DATE")
+                        //    err[1] += "11.Kolon SHIPMENT_DATE olmalıdır<br>";
                         if (reader.GetValue(12).ToStringParse() != "COLLECTION_TYPE")
                             err[1] += "12.Kolon COLLECTION_TYPE olmalıdır<br>";
                         if (reader.GetValue(13).ToStringParse() != "ROYALTY")

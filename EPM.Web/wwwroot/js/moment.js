@@ -3,6 +3,9 @@
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
+$(document).ready(function () {
+    Date.prototype.toJSON = function () { return moment(this).format(); }
+});
 
 ;(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :

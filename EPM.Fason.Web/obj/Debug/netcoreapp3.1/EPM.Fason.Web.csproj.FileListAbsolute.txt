@@ -867,6 +867,5 @@ E:\Eren\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\Microso
 E:\Eren\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\StackExchange.Redis.StrongName.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Redis.dll
 D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\StackExchange.Redis.StrongName.dll
-D:\Projects\Eren Production Management\EPM.Fason.Web\bin\Debug\netcoreapp3.1\EPM.Fason.Web.StaticWebAssets.xml
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Fason.Web\obj\Debug\netcoreapp3.1\EPM.Fason.Web.GeneratedMSBuildEditorConfig.editorconfig

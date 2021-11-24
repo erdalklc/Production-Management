@@ -29,10 +29,11 @@ namespace EPM.Production.Dto.Production
         [Display(Name = "BAND")]
         public int BAND_ID { get; set; } = 0;
         [Display(Name = "APPROVAL STATUS")]
-        public int APPROVAL_STATUS { get; set; } = 0;
+        public int APPROVAL_STATUS { get; set; } = 1;
         [Display(Name = "PRODUCT GROUP")]
         public int PRODUCT_GROUP { get; set; } = 0;
         public int STATUS { get; set; }
+
 
 
     }

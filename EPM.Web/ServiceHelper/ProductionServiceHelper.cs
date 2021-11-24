@@ -13,7 +13,7 @@ namespace EPM.Web.ServiceHelper
 {
     public class ProductionServiceHelper : EPMHttpCaller
     {
-     
+         
         public static List<UretimListesi> UretimListesi(string USER_CODE, string MODEL, string SEZON, string URETIM_TIPI, int DURUM)
         {
             string apiUrl = "UretimListesi";
@@ -93,13 +93,18 @@ namespace EPM.Web.ServiceHelper
             return list;
         }
 
-        public static List<ENUMMODEL> GetApprovalStatueList()
+        public static List<ENUMMODEL> GetApprovalStatueList(bool hepsi =true)
         {
             string apiUrl = "GetApprovalStatueList";
-            var list = GetRequest<List<ENUMMODEL>>(EPMServiceType.Production, apiUrl);
+            var list = PostRequest<object[], List<ENUMMODEL>>(EPMServiceType.Production, apiUrl, new object[] { hepsi });
             return list;
         }
-
+        public static List<ENUMMODEL> GetStatusList(bool hepsi = true)
+        {
+            string apiUrl = "GetStatusList";
+            var list = PostRequest<object[], List<ENUMMODEL>>(EPMServiceType.Production, apiUrl, new object[] { hepsi });
+            return list;
+        }
         public static List<EPM_PRODUCTION_FLAGS> GetFlagList(bool hepsi = true)
         {
             string apiUrl = "GetFlagList";

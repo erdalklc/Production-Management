@@ -50,7 +50,7 @@ namespace EPM.Plan.Service.Services
                         INNER JOIN FDEIT005.EPM_PRODUCT_GROUP PG ON PG.ID=H.PRODUCT_GROUP
                         INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_D D ON D.HEADER_ID = H.ID 
                         INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET MR ON MR.ID=D.MARKET
-                        WHERE 0=0";
+                        WHERE 0=0 AND H.STATUS=0 AND H.APPROVAL_STATUS=1";
 
             if (BRAND != 0)
                 sql += " AND H.BRAND=" + BRAND;
@@ -82,7 +82,7 @@ namespace EPM.Plan.Service.Services
             DataTable dt = _planRepository.QueryFill(sql);
             string tSql = "SELECT ID FROM ( " + sql + " )B";
             EPM_PRODUCTION_SEASON_WEEKS seasonWeek = _planRepository.Deserialize<EPM_PRODUCTION_SEASON_WEEKS>("SELECT * FROM FDEIT005.EPM_PRODUCTION_SEASON_WEEKS WHERE SEASON_ID=" + SEASON + "");
-            for (int i = seasonWeek.START_WEEK; i <= 54; i++)
+            for (int i = seasonWeek.START_WEEK; i <= 52; i++)
             {
                 string columnName = seasonWeek.START_YEAR.ToString() + "_" + i;
                 dtColumnNames.Rows.Add(columnName);
@@ -100,7 +100,7 @@ namespace EPM.Plan.Service.Services
             }
             //List<EPM_PRODUCTION_PLAN> plan = OracleServer.DeserializeList<EPM_PRODUCTION_PLAN>("SELECT * FROM FDEIT005.EPM_PRODUCTION_PLAN WHERE HEADER_ID IN (" + tSql + ")");
             List<EPM_PRODUCTION_PLAN> plan = _planRepository.DeserializeList<EPM_PRODUCTION_PLAN>(@"SELECT PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR,SUM(PL.QUANTITY) QUANTITY FROM FDEIT005.EPM_PRODUCTION_PLAN PL
-                    INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=PL.HEADER_ID AND H.SEASON=" + SEASON + "    GROUP BY PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR");
+                    INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=PL.HEADER_ID AND H.STATUS=0 AND H.APPROVAL_STATUS=1 AND H.SEASON=" + SEASON + "    GROUP BY PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR");
             foreach (var item in plan)
             {
                 DataRow[] row = dt.Select("ID=" + item.HEADER_ID + " AND MARKET_ID=" + item.MARKET_ID + "");

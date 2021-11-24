@@ -751,6 +751,5 @@ D:\Projects\Eren Production Management\EPM.Production.Api\bin\Debug\netcoreapp3.
 D:\Projects\Eren Production Management\EPM.Production.Api\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
 D:\Projects\Eren Production Management\EPM.Production.Api\bin\Debug\netcoreapp3.1\EPM.Tools.dll
 D:\Projects\Eren Production Management\EPM.Production.Api\bin\Debug\netcoreapp3.1\EPM.Tools.pdb
-D:\Projects\Eren Production Management\EPM.Production.Api\bin\Debug\netcoreapp3.1\EPM.Production.Api.StaticWebAssets.xml
 D:\Projects\Eren Production Management\EPM.Production.Api\obj\Debug\netcoreapp3.1\EPM.Production.Api.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Production.Api\obj\Debug\netcoreapp3.1\EPM.Production.Api.GeneratedMSBuildEditorConfig.editorconfig

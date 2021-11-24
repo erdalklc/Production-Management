@@ -18,11 +18,8 @@
                         e.Enabled(true);
                     })
                     .DataSourceOptions(ob=>ob.ReshapeOnPush(false))
-
-
      .OnRowUpdating("UpdateMasterRow")
-     .OnRowInserting("InsertMasterRow")
-     .OnRowRemoving("DeleteMasterRow")
+     .OnRowInserting("InsertMasterRow") 
     .FocusedRowEnabled(true)
     .FilterRow(x=>x.Visible(true))
     .FocusedRowIndex(0)
@@ -49,19 +46,15 @@
         }))
     .Columns(columns =>
     {
-        if (Model.Item2.STATUS==0)
-        {
+         
             columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn =>
             {
                 btn.Add().Icon("fa fa-history").OnClick("LogSearchHeader");
-            }); columns.Add().Width(50).Type(GridCommandColumnType.Buttons).Buttons(btn =>
-            {
-                btn.Add().Name(GridColumnButtonName.Delete);
-            });
-        }
+            }); 
 
         columns.AddFor(m => m.ID).SortOrder(SortOrder.Asc).Width(60).AllowEditing(false);
-        columns.AddFor(m => m.APPROVAL_STATUS).Width(110).AllowEditing(onayDegistirir).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetApprovalStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.STATUS).Width(110).AllowEditing(onayDegistirir).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.APPROVAL_STATUS).Width(110).AllowEditing(onayDegistirir).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetApprovalStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.FLAG_ID).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetFlagList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.BRAND).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.SUB_BRAND).Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetSubBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
@@ -80,8 +73,8 @@
         columns.AddFor(m => m.BAND_ID).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.DEADLINE).Caption("1. DEADLINE").AllowEditing(false).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
         columns.AddFor(m => m.DEADLINE_2).Caption("2. DEADLINE").DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
-        columns.AddFor(m => m.DEADLINE_3).Caption("3. DEADLINE").Visible(false).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
-        columns.AddFor(m => m.DEADLINE_4).Caption("4. DEADLINE").Visible(false).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
+        columns.AddFor(m => m.DEADLINE_3).Caption("3. DEADLINE").Visible(true).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
+        columns.AddFor(m => m.DEADLINE_4).Caption("4. DEADLINE").Visible(true).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
         columns.AddFor(m => m.SHIPMENT_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
         columns.AddFor(m => m.QUANTITY);
     })

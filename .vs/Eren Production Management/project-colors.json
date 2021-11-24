@@ -55,7 +55,47 @@
       "ProjectGuid": "4568bddf-dc15-440d-913f-1fcc76944a21",
       "DisplayName": "EPM.Repository",
       "ColorIndex": 10
+    },
+    "1563a735-8041-4cff-b7a1-74f95f71d9e6": {
+      "ProjectGuid": "1563a735-8041-4cff-b7a1-74f95f71d9e6",
+      "DisplayName": "EPM.Service",
+      "ColorIndex": 11
+    },
+    "ac1a76be-f17e-4ae6-9a4e-de364e11f401": {
+      "ProjectGuid": "ac1a76be-f17e-4ae6-9a4e-de364e11f401",
+      "DisplayName": "EPM.Dto",
+      "ColorIndex": 12
+    },
+    "4bd1cc0a-9525-4742-95ad-8b2c001d3064": {
+      "ProjectGuid": "4bd1cc0a-9525-4742-95ad-8b2c001d3064",
+      "DisplayName": "EPM.Production.Monitoring.Service",
+      "ColorIndex": 13
+    },
+    "aa397ee5-4dd1-4fea-b9bb-2449f1ce868d": {
+      "ProjectGuid": "aa397ee5-4dd1-4fea-b9bb-2449f1ce868d",
+      "DisplayName": "EPM.Production.Service",
+      "ColorIndex": 14
+    },
+    "fa38a6a0-6d67-4f77-b86f-63403a914242": {
+      "ProjectGuid": "fa38a6a0-6d67-4f77-b86f-63403a914242",
+      "DisplayName": "EPM.Production.Dto",
+      "ColorIndex": 15
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "c8a5a6fb-df4d-4dbb-8b00-b8e70483f86a": {
+      "ProjectGuid": "c8a5a6fb-df4d-4dbb-8b00-b8e70483f86a",
+      "DisplayName": "EPM.Admin.Dto",
+      "ColorIndex": 0
+    },
+    "636793d9-7327-41bf-9fe3-35581b378743": {
+      "ProjectGuid": "636793d9-7327-41bf-9fe3-35581b378743",
+      "DisplayName": "EPM.Production.Repository",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 11
+  "NextColorIndex": 2
 }

@@ -37,7 +37,8 @@ namespace EPM.Production.Service.Services
 
         public List<EPM_PRODUCTION_RECIPE> GetRecipeListByType(bool hepsi = true, int TYPE = 1);
 
-        public List<ENUMMODEL> GetApprovalStatueList();
+        public List<ENUMMODEL> GetApprovalStatueList(bool hepsi = true);
+        public List<ENUMMODEL> GetStatusList(bool hepsi = true);
 
         public List<EPM_PRODUCTION_FLAGS> GetFlagList(bool hepsi);
 

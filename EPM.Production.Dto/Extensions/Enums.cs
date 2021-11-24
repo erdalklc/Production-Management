@@ -99,6 +99,13 @@ namespace EPM.Production.Dto.Extensions
         ONAYLI = 1,
     }
 
+    public enum STATUSES
+    {
+        [Description("DEVAM EDEN SİPARİŞLER")]
+        ONAYSIZ = 0,
+        [Description("İPTAL EDİLEN SİPARİŞLER")]
+        ONAYLI = 1,
+    }
     public class ENUMMODEL
     {
         public int ID { get; set; }
