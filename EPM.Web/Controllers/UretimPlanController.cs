@@ -79,7 +79,11 @@ namespace EPM.Web.Controllers
         {
             return PlanServiceHelper.GetPlan(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, BRAND, SEASON, MODEL, COLOR, ORDER_TYPE, PRODUCTION_TYPE, FABRIC_TYPE);
         }
-
+        [HttpGet, HttpPost]
+        public object _PartialGetPlanListByChart(KapasiyeUyumChart_Filter filter)
+        {
+            return PlanServiceHelper.GetPlanByChart(filter);
+        }
         [HttpPut,HttpGet,HttpPost]
         public object UpdateTask( [FromBody] JObject elem)
         {

@@ -20,5 +20,6 @@ namespace EPM.Plan.Service.Services
         public object[] KapasitePlanListUpdate(int Key, string Values);
 
         public List<KapasitePlanUyum> GetKapasiteUyumList(int YEAR, int BAND_GROUP);
+        public object GetPlanByChart(KapasiyeUyumChart_Filter filter);
     }
 }

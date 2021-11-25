@@ -18,7 +18,12 @@ namespace EPM.Web.ServiceHelper
                 , BRAND,SEASON,MODEL,COLOR,ORDER_TYPE,PRODUCTION_TYPE,FABRIC_TYPE });
             return list;
         }
-
+        public static object GetPlanByChart(KapasiyeUyumChart_Filter filter)
+        {
+            string apiUrl = "GetPlanByChart";
+            var list = PostRequest<KapasiyeUyumChart_Filter, object>(EPMServiceType.Plan, apiUrl, filter);
+            return list;
+        }
         public static object UpdateInsertPlan(string USER_CODE, JObject obj)
         {
             string apiUrl = "UpdateInsertPlan";

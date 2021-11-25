@@ -19,7 +19,140 @@ namespace EPM.Plan.Service.Services
         {
             _planRepository = planRepository;
         }
+        public object GetPlanByChart(KapasiyeUyumChart_Filter filter)
+        {
+            DataTable dtColumnNames = new DataTable();
+            dtColumnNames.TableName = "COLUMNNAMES";
+            dtColumnNames.Columns.Add("NAME", typeof(string));
+            DataSet set = new DataSet();
+            string sql = @"SELECT ROWNUM||'_'||ID AS ROW_ID,A.* FROM (SELECT H.ID,
+                             BR.ADI BRAND,
+                             PS.ADI SEASON,
+                             H.MODEL,
+                             H.COLOR,
+                             PG.ADI AS PRODUCT_GROUP,
+                             FT.ADI AS FABRIC_TYPE,
+                             OT.ADI AS ORDER_TYPE,
+                             PT.ADI AS PRODUCTION_TYPE,
+                             H.DEADLINE,H.SHIPMENT_DATE,
+                             MR.ADI AS MARKET,
+                             MR.ID AS MARKET_ID,
+                             SUM (D.QUANTITY) AS URETIM_ADET,
+                             0 AS PLANLANAN_ADET,
+                             0 AS PLANSIZ_ADET
+                        FROM FDEIT005.EPM_MASTER_PRODUCTION_H H
+                        INNER JOIN FDEIT005.EPM_PRODUCTION_BRANDS BR ON BR.ID=H.BRAND
+                        INNER JOIN FDEIT005.EPM_PRODUCTION_TYPES PT ON PT.ID=H.PRODUCTION_TYPE
+                        INNER JOIN FDEIT005.EPM_PRODUCTION_FABRIC_TYPES FT ON FT.ID=H.FABRIC_TYPE
+                        INNER JOIN FDEIT005.EPM_PRODUCTION_ORDER_TYPES OT ON OT.ID=H.ORDER_TYPE
+                        INNER JOIN FDEIT005.EPM_PRODUCTION_SEASON PS ON PS.ID=H.SEASON
+                        INNER JOIN FDEIT005.EPM_PRODUCT_GROUP PG ON PG.ID=H.PRODUCT_GROUP
+                        INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_D D ON D.HEADER_ID = H.ID 
+                        INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET MR ON MR.ID=D.MARKET
+                        INNER JOIN FDEIT005.EPM_PRODUCTION_PLAN PL ON PL.HEADER_ID=H.ID AND PL.MARKET_ID=MR.ID
+                        WHERE 0=0 AND H.STATUS=0 AND H.APPROVAL_STATUS=1";
+            sql += " AND H.BAND_ID=" + filter.BAND;
+            sql += " AND PL.WEEK=" + filter.WEEK;
+            sql += " AND PL.YEAR=" + filter.YEAR; 
+            sql += @"GROUP BY H.ID,
+                             BR.ADI,
+                             PS.ADI,
+                             H.MODEL,
+                             H.COLOR,
+                             OT.ADI,
+                             PG.ADI,
+                             FT.ADI,
+                             PT.ADI,
+                             H.DEADLINE,
+                             H.SHIPMENT_DATE,
+                             MR.ADI, MR.ID
+                    ORDER BY H.ID) A";
+            DataTable dt = _planRepository.QueryFill(sql);
+            string tSql = "SELECT ID FROM ( " + sql + " )B";
+            EPM_PRODUCTION_SEASON_WEEKS seasonWeek = new EPM_PRODUCTION_SEASON_WEEKS();
+            seasonWeek.START_WEEK = filter.WEEK-10;
+            seasonWeek.START_YEAR=filter.YEAR;
+            seasonWeek.END_WEEK = filter.WEEK + 10;
+            seasonWeek.END_YEAR = filter.YEAR;
+            if (seasonWeek.START_WEEK <= 5)
+            {
+                seasonWeek.START_WEEK = 45;
+                seasonWeek.START_YEAR = seasonWeek.START_YEAR - 1;
+            }
+            else
+            {
+                if (seasonWeek.START_WEEK >= 42)
+                {
+                    seasonWeek.START_WEEK = 45;
+                    seasonWeek.START_YEAR = seasonWeek.START_YEAR;
+                    seasonWeek.END_YEAR = filter.YEAR + 1;
+                    seasonWeek.END_WEEK = 10;
+                }
+            }
+            if(seasonWeek.END_WEEK > 52)
+            {
 
+                seasonWeek.END_YEAR = filter.YEAR + 1;
+                seasonWeek.END_WEEK = seasonWeek.END_WEEK-52;
+            }
+            var lastValue = 52;
+            if (seasonWeek.START_YEAR == seasonWeek.END_YEAR)
+                lastValue = seasonWeek.END_WEEK;
+            for (int i = seasonWeek.START_WEEK; i <= lastValue; i++)
+            {
+                string columnName = seasonWeek.START_YEAR.ToString() + "_" + i;
+                dtColumnNames.Rows.Add(columnName);
+                DataColumn column = dt.Columns.Add(columnName, typeof(int));
+                column.Caption = i + ". HAFTA";
+                column.DefaultValue = 0;
+            }
+            if (seasonWeek.START_YEAR != seasonWeek.END_YEAR)
+            {
+                for (int i = 1; i <= seasonWeek.END_WEEK; i++)
+                {
+
+                    string columnName = seasonWeek.END_YEAR.ToString() + "_" + i;
+                    if (!dt.Columns.Contains(columnName))
+                    {
+                        dtColumnNames.Rows.Add(columnName);
+                        DataColumn column = dt.Columns.Add(columnName, typeof(int));
+                        column.Caption = i + ". HAFTA";
+                        column.DefaultValue = 0;
+                    }
+                }
+            }
+            dtColumnNames.DefaultView.Sort = "NAME ASC";
+            //List<EPM_PRODUCTION_PLAN> plan = OracleServer.DeserializeList<EPM_PRODUCTION_PLAN>("SELECT * FROM FDEIT005.EPM_PRODUCTION_PLAN WHERE HEADER_ID IN (" + tSql + ")");
+            List<EPM_PRODUCTION_PLAN> plan = _planRepository.DeserializeList<EPM_PRODUCTION_PLAN>(@"SELECT PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR,SUM(PL.QUANTITY) QUANTITY FROM FDEIT005.EPM_PRODUCTION_PLAN PL
+                    INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=PL.HEADER_ID AND H.STATUS=0 AND H.APPROVAL_STATUS=1 AND H.BAND_ID=" + filter.BAND + " AND   PL.WEEK=" + filter.WEEK + " AND PL.YEAR=" + filter.YEAR + " GROUP BY PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR");
+            foreach (var item in plan)
+            {
+                DataRow[] row = dt.Select("ID=" + item.HEADER_ID + " AND MARKET_ID=" + item.MARKET_ID + "");
+                if (row.Length > 0)
+                {
+                    if (dt.Columns.Contains(item.YEAR + "_" + item.WEEK))
+                    {
+                        row[0][item.YEAR + "_" + item.WEEK] = item.QUANTITY;
+                        row[0]["PLANLANAN_ADET"] = row[0]["PLANLANAN_ADET"].IntParse() + item.QUANTITY;
+                        row[0]["PLANSIZ_ADET"] = row[0]["URETIM_ADET"].IntParse() + row[0]["PLANLANAN_ADET"].IntParse();
+
+                    }
+                }
+            }
+            dt.AcceptChanges();
+            dt.TableName = "DATA";
+            DataTable dtYear = new DataTable();
+            dtYear.Columns.Add("YEAR", typeof(int));
+            
+            dtYear.Rows.Add(seasonWeek.START_YEAR);
+            if (seasonWeek.START_YEAR != seasonWeek.END_YEAR)
+                dtYear.Rows.Add(seasonWeek.END_YEAR);
+            dtYear.TableName = "YEARS";
+            set.Tables.Add(dt);
+            set.Tables.Add(dtYear);
+            set.Tables.Add(dtColumnNames);
+            return JsonConvert.SerializeObject(set, Formatting.Indented);
+        }
         public object GetPlan(string USER_CODE, int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE)
         { 
             DataTable dtColumnNames = new DataTable();

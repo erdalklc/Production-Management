@@ -23,22 +23,27 @@
 
 </div>
 <div class="dx-card wide-card">
-    <div style="width:87%;max-width:100%">
+    <div style="width:87%;max-width:100%;">
         @(Html.DevExtreme().Chart()
     .ID("edChart")
     .CommonSeriesSettings(s => s
         .ArgumentField("WEEK")
+        .Label(l=>l.Visible(true).Format(x=>x.Type(Format.FixedPoint).Precision(0)))
         .Type(SeriesType.Bar)
         .HoverMode(ChartSeriesHoverMode.AllArgumentPoints)
         .SelectionMode(ChartSeriesSelectionMode.AllArgumentPoints)
 
-    )
+    ).OnPointClick(@<text>
+        function (e) {
+                        Chart_Clicked(e.target.data.WEEK);
+                    }
+    </text>)
     .RedrawOnResize(true)
     .AdjustOnZoom(true)
     .Series(s =>
     {
         s.Add().ValueField("QUANTITY").Name("QUANTITY");
-        s.Add().ValueField("CAPACITY").Name("CAPACITY");
+        s.Add().ValueField("CAPACITY").Name("CAPACITY").Label(lb=>lb.Visible(false));
     })
     .Legend(l => l
         .VerticalAlignment(VerticalEdge.Bottom)

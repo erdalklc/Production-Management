@@ -95,7 +95,17 @@
       "ProjectGuid": "636793d9-7327-41bf-9fe3-35581b378743",
       "DisplayName": "EPM.Production.Repository",
       "ColorIndex": 1
+    },
+    "65ecc3c0-f4ab-434d-bb0c-9dfa65403f57": {
+      "ProjectGuid": "65ecc3c0-f4ab-434d-bb0c-9dfa65403f57",
+      "DisplayName": "EPM.Plan.Dto",
+      "ColorIndex": 2
+    },
+    "a0214058-bf76-46b8-b9aa-b4013d7f5c01": {
+      "ProjectGuid": "a0214058-bf76-46b8-b9aa-b4013d7f5c01",
+      "DisplayName": "EPM.Plan.Repository",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 2
+  "NextColorIndex": 4
 }

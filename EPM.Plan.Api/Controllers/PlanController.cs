@@ -21,6 +21,9 @@ namespace EPM.Plan.Api.Controllers
         public ActionResult<object> GetPlan(object[] obj)=>_planService.GetPlan(obj[0].ToStringParse(),obj[1].IntParse(), obj[2].IntParse(), obj[3].ToStringParse(), obj[4].ToStringParse(), obj[5].IntParse(), obj[6].IntParse(), obj[7].IntParse());
 
         [HttpPost]
+        public ActionResult<object> GetPlanByChart(KapasiyeUyumChart_Filter filter) => _planService.GetPlanByChart(filter);
+
+        [HttpPost]
         public object UpdateInsertPlan(object[] obj)=>_planService.UpdateInsertPlan(obj[0].ToString(),(JObject)obj[1]);
 
         [HttpGet]
