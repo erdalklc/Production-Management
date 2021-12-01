@@ -924,8 +924,6 @@ E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.MvcAp
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.RazorAssemblyInfo.cache
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.RazorAssemblyInfo.cs
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\staticwebassets\EPM.Web.StaticWebAssets.Manifest.cache
-E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\staticwebassets\EPM.Web.StaticWebAssets.xml
-E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\scopedcss\bundle\EPM.Web.styles.css
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.TagHelpers.input.cache
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.TagHelpers.output.cache
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.RazorCoreGenerate.cache
@@ -1515,3 +1513,7 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.c
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.GeneratedMSBuildEditorConfig.editorconfig
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialBandWork.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialBandWorkMinutes.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.GeneratedMSBuildEditorConfig.editorconfig
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialBandWork.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialBandWorkMinutes.cshtml.g.cs
+E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialProductionTimes.cshtml.g.cs

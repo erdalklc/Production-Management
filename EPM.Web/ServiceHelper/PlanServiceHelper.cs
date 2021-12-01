@@ -74,6 +74,14 @@ namespace EPM.Web.ServiceHelper
                 , BAND_GROUP });
             return list;
         }
+
+        public static List<ModelSureleriView> ProductionTimesLoad()
+        {
+            string apiUrl = "ProductionTimesLoad";
+            var list = GetRequest<List<ModelSureleriView>>(EPMServiceType.Plan, apiUrl);
+            return list;
+        }
+
         public static List<KapasitePlanPerformans> GetKapasitePerformansList(int YEAR, int BAND_GROUP)
         {
             string apiUrl = "GetKapasitePerformansList";

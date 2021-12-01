@@ -958,5 +958,10 @@ SELECT WK.ID,
 
             return sureler;
         }
+
+        public List<ModelSureleriView> ProductionTimesLoad()
+        {
+            return JsonConvert.DeserializeObject<List<ModelSureleriView>>(JsonConvert.SerializeObject(GetSureler()));
+        }
     }
 }

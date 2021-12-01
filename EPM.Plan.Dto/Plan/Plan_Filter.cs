@@ -31,5 +31,6 @@ namespace EPM.Plan.Dto.Plan
         public int APPROVAL_STATUS { get; set; } = 0;
         [Display(Name = "PRODUCT GROUP")]
         public int PRODUCT_GROUP { get; set; } = 0;
+        public int PLAN_DURUM { get; set; } = 0;
     }
 }

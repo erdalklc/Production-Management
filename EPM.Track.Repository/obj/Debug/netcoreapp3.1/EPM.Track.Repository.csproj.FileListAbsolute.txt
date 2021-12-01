@@ -27,3 +27,4 @@ D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp
 D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.pdb
 D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.GeneratedMSBuildEditorConfig.editorconfig
+E:\Eren\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.GeneratedMSBuildEditorConfig.editorconfig

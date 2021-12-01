@@ -33,7 +33,11 @@
 
        </div>
     </div> 
+      <div style="max-width:30%;display:inline-block;float:left">
+       <div id="edModelWorkTimes">
 
+       </div>
+    </div> 
 <script>
    
     function GetYear() { 
@@ -44,6 +48,8 @@
         $("#edWorker").load('@Url.Action("_PartialBandWork","UretimPlan")', function() { 
         });
          $("#edWorkerMinutes").load('@Url.Action("_PartialBandWorkMinutes","UretimPlan")', function() { 
+        });
+        $("#edModelWorkTimes").load('@Url.Action("_PartialProductionTimes","UretimPlan")', function() { 
         });
         //$("#edgridWorker").dxDataGrid("instance").refresh();
         //$("#edgridWorkerMinutes").dxDataGrid("instance").refresh();

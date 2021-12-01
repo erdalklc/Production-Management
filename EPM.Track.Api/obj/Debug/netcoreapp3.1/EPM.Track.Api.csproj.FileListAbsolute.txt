@@ -350,8 +350,6 @@ E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Tra
 E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.MvcApplicationPartsAssemblyInfo.cs
 E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.MvcApplicationPartsAssemblyInfo.cache
 E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\staticwebassets\EPM.Track.Api.StaticWebAssets.Manifest.cache
-E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\staticwebassets\EPM.Track.Api.StaticWebAssets.xml
-E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\scopedcss\bundle\EPM.Track.Api.styles.css
 E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.RazorTargetAssemblyInfo.cache
 E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.csproj.CopyComplete
 E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.dll
@@ -731,3 +729,4 @@ D:\Projects\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.genruntimeconfig.cache
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.GeneratedMSBuildEditorConfig.editorconfig
+E:\Eren\Eren Production Management\EPM.Track.Api\obj\Debug\netcoreapp3.1\EPM.Track.Api.GeneratedMSBuildEditorConfig.editorconfig

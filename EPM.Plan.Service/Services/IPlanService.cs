@@ -27,6 +27,6 @@ namespace EPM.Plan.Service.Services
 
         public List<EpmBandWorkModel> GetBandWorkers(int YEAR, int BAND_GROUP);
         public List<EpmBandWorkMinuteModel> GetBandWorkMinutes(int YEAR, int BAND_GROUP);
-
+        public List<ModelSureleriView> ProductionTimesLoad();
     }
 }

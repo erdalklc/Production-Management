@@ -31,3 +31,4 @@ D:\Projects\Eren Production Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1
 D:\Projects\Eren Production Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.pdb
 D:\Projects\Eren Production Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.GeneratedMSBuildEditorConfig.editorconfig
+E:\Eren\Eren Production Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.GeneratedMSBuildEditorConfig.editorconfig

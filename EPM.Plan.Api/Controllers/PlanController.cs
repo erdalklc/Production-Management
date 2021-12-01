@@ -31,6 +31,9 @@ namespace EPM.Plan.Api.Controllers
         public List<EPM_PRODUCTION_BAND_CAPASITIES> GetKapasitePlanList()=>_planService.GetKapasitePlanList();
 
         [HttpGet]
+        public List<ModelSureleriView> ProductionTimesLoad() => _planService.ProductionTimesLoad();
+
+        [HttpGet]
         public List<KapasitePlanListChart> GetKapasitePlanListChart()=>_planService.GetKapasitePlanListChart();
 
         [HttpPost]

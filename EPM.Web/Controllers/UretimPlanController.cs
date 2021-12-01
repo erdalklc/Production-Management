@@ -56,6 +56,11 @@ namespace EPM.Web.Controllers
         {
             return PartialView();
         }
+        [HttpGet, HttpPost]
+        public IActionResult _PartialProductionTimes()
+        {
+            return PartialView();
+        }
         [HttpGet]
         public object KapasitePlanUyumLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "YEAR")] int YEAR, [FromQuery(Name = "BAND_GROUP")] int BAND_GROUP)
         {
@@ -75,6 +80,11 @@ namespace EPM.Web.Controllers
         public object BandWorkMinutesLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "YEAR")] int YEAR, [FromQuery(Name = "BAND_GROUP")] int BAND_GROUP)
         {
             return DataSourceLoader.Load(PlanServiceHelper.GetBandWorkMinutes(YEAR, BAND_GROUP), loadOptions);
+        }
+        [HttpGet]
+        public object ProductionTimesLoad(DataSourceLoadOptions loadOptions)
+        {
+            return DataSourceLoader.Load(PlanServiceHelper.ProductionTimesLoad(), loadOptions);
         }
 
 
