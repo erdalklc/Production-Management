@@ -249,7 +249,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Projects\\Eren Production Management\\EPM.Dto\\EPM.Dto.csproj": {
+                "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Dto\\EPM.Dto.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

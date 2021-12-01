@@ -105,7 +105,27 @@
       "ProjectGuid": "a0214058-bf76-46b8-b9aa-b4013d7f5c01",
       "DisplayName": "EPM.Plan.Repository",
       "ColorIndex": 3
+    },
+    "feac1e22-6629-40a3-8d43-33e6b931311a": {
+      "ProjectGuid": "feac1e22-6629-40a3-8d43-33e6b931311a",
+      "DisplayName": "EPM.Track.Dto",
+      "ColorIndex": 4
+    },
+    "4259cc1b-64fb-4aef-a407-b39e9334fc30": {
+      "ProjectGuid": "4259cc1b-64fb-4aef-a407-b39e9334fc30",
+      "DisplayName": "EPM.Transver",
+      "ColorIndex": 5
+    },
+    "8cf3f69b-c31e-46b7-b01a-731422d15fda": {
+      "ProjectGuid": "8cf3f69b-c31e-46b7-b01a-731422d15fda",
+      "DisplayName": "EPM.Production.Monitoring.Dto",
+      "ColorIndex": 6
+    },
+    "85903c9c-6094-4c19-9ec1-03fcc967699e": {
+      "ProjectGuid": "85903c9c-6094-4c19-9ec1-03fcc967699e",
+      "DisplayName": "EPM.Fason.Web",
+      "ColorIndex": 7
     }
   },
-  "NextColorIndex": 4
+  "NextColorIndex": 8
 }

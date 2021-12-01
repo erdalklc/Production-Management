@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EPM.Dto\EPM.Dto.csproj" />
     <ProjectReference Include="..\EPM.Plan.Repository\EPM.Plan.Repository.csproj" />
+    <ProjectReference Include="..\EPM.Tools\EPM.Tools.csproj" />
   </ItemGroup>
 
 </Project>

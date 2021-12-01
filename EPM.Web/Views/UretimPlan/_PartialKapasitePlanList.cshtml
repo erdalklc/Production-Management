@@ -1,40 +1,73 @@
-﻿<div class="dx-card wide-card">
-    <div style="width:30%;display:inline-block;float:left">
-        @(Html.DevExtreme().DataGrid<EPM.Dto.Base.EPM_PRODUCTION_BAND_CAPASITIES> ().ID("edgridHeader")
-    .ShowBorders(false)
-    .DataSource(
-        ob=>ob.Mvc().Controller("UretimPlan") 
-        .LoadAction("KapasitePlanListLoad")
-        .UpdateAction("KapasitePlanListUpdate")
-        .Key("ID")
+﻿@{ 
+    int[] years = { DateTime.Now.Year - 1, DateTime.Now.Year, DateTime.Now.Year + 1 };
+} 
+<div class="dx-card wide-card">
+    @(Html.DevExtreme().Form()
+        .ID("edFilter").ShowValidationSummary(true)
+        .ColCount(8)
+        .Items(items =>
+        {
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddSimple().Editor(ob => ob.Lookup().Name("edProductGroup").OnSelectionChanged("RefreshChart").DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimple().Editor(ob => ob.Lookup().Name("edYear").OnSelectionChanged("RefreshChart").DataSource(d => d.Array().Data(years)));
+            items.AddEmpty();
+            items.AddEmpty(); 
+            items.AddEmpty();
+
+        })
+        .FormData(Model).ShowValidationSummary(false)
     )
-    .FilterRow(f => f.Visible(true))
-    .FocusedRowEnabled(true)
-    .FocusedRowIndex(0)
-    .Selection(s => s.Mode(SelectionMode.Single))
-    .ColumnAutoWidth(true)
-    .ShowBorders(true)
-    .Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
-    .Editing(ob => ob.Mode(GridEditMode.Cell).AllowUpdating(true).AllowDeleting(false).AllowAdding(false))
-    .ShowColumnLines(true)
-    .ShowColumnHeaders(true)
-    .ColumnMinWidth(60)
-    .Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
-    .Columns(columns => {
-        columns.AddFor(m => m.ID).Width(60).AllowEditing(false);
-        columns.AddFor(m => m.BAND_ID).Width(110).Caption("BAND").AllowEditing(false).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
-        columns.AddFor(m => m.CAPACITY).Width(110).AllowEditing(true);
-    })
-    )
+
+
+</div>    
+  
+      <div style="max-width:30%;display:inline-block;float:left">
+       <div id="edWorker">
+
+       </div>
     </div>
-    <div style="display:inline-block;float:left;">
-        @(Html.DevExtreme().Chart().DataSource(
-        ob=>ob.Mvc()
-        .Controller("UretimPlan")
-        .LoadAction("KapasitePlanListChartLoad")
-        .Key("ID")
-        ).Series(s=>s.Add().ArgumentField("BAND_NAME").ValueField("CAPACITY").Name("BAND CAPACITIES") 
-        .Type(SeriesType.Bar)).Size(s=>s.Height(320).Width(600)))
-    </div>
+     <div style="max-width:30%;display:inline-block;float:left">
+       <div id="edWorkerMinutes">
+
+       </div>
+    </div> 
+
+<script>
    
-</div>
+    function GetYear() { 
+        return jQuery("[name=edYear]").val();
+    }
+    function RefreshChart() { 
+        console.log("burda");
+        $("#edWorker").load('@Url.Action("_PartialBandWork","UretimPlan")', function() { 
+        });
+         $("#edWorkerMinutes").load('@Url.Action("_PartialBandWorkMinutes","UretimPlan")', function() { 
+        });
+        //$("#edgridWorker").dxDataGrid("instance").refresh();
+        //$("#edgridWorkerMinutes").dxDataGrid("instance").refresh();
+    }
+    function GetGroup() { 
+        return jQuery("[name=edProductGroup]").val();
+    }
+
+    function getLoadParameters(){
+        var data={
+            "YEAR" : jQuery("[name=edYear]").val(),
+            "BAND_GROUP" : jQuery("[name=edProductGroup]").val()
+        };
+        console.log(data);
+        return data; 
+    }
+      function onWorkUpdating(e){  
+        var value =e.oldData;
+        value.WORKER=e.newData.WORKER; 
+        e.newData=value;
+    }
+    function onWorkMinutesUpdating(e){  
+        var value =e.oldData;
+        value.WORK_MINUTE=e.newData.WORK_MINUTE; 
+        e.newData=value;
+    }
+</script>

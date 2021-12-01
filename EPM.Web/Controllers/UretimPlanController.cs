@@ -46,12 +46,37 @@ namespace EPM.Web.Controllers
         {
             return PartialView();
         }
-
+        [HttpGet, HttpPost]
+        public IActionResult _PartialBandWork()
+        {
+            return PartialView();
+        }
+        [HttpGet,HttpPost]
+        public IActionResult _PartialBandWorkMinutes()
+        {
+            return PartialView();
+        }
         [HttpGet]
         public object KapasitePlanUyumLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "YEAR")] int YEAR, [FromQuery(Name = "BAND_GROUP")] int BAND_GROUP)
         {
             return DataSourceLoader.Load(PlanServiceHelper.GetKapasiteUyumList(YEAR, BAND_GROUP), loadOptions);
         }
+        [HttpGet]
+        public object KapasitePlanPerformansLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "YEAR")] int YEAR, [FromQuery(Name = "BAND_GROUP")] int BAND_GROUP)
+        {
+            return DataSourceLoader.Load(PlanServiceHelper.GetKapasitePerformansList(YEAR, BAND_GROUP), loadOptions);
+        }
+        [HttpGet]
+        public object BandWorkersLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "YEAR")] int YEAR, [FromQuery(Name = "BAND_GROUP")] int BAND_GROUP)
+        {
+            return DataSourceLoader.Load(PlanServiceHelper.GetBandWorkers(YEAR, BAND_GROUP), loadOptions);
+        }
+        [HttpGet]
+        public object BandWorkMinutesLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "YEAR")] int YEAR, [FromQuery(Name = "BAND_GROUP")] int BAND_GROUP)
+        {
+            return DataSourceLoader.Load(PlanServiceHelper.GetBandWorkMinutes(YEAR, BAND_GROUP), loadOptions);
+        }
+
 
         [HttpGet]
         public object KapasitePlanListLoad(DataSourceLoadOptions loadOptions)
@@ -67,7 +92,22 @@ namespace EPM.Web.Controllers
                 return Ok();
             else return BadRequest(islem[1]);
         }
-
+        [HttpPut]
+        public IActionResult BandWorkersUpdate(int key, string values)
+        {
+            object[] islem = PlanServiceHelper.BandWorkersUpdate(key, values);
+            if ((bool)islem[0])
+                return Ok();
+            else return BadRequest(islem[1]);
+        }
+        [HttpPut]
+        public IActionResult BandWorkMinutesUpdate(int key, string values)
+        {
+            object[] islem = PlanServiceHelper.BandWorkMinutesUpdate(key, values);
+            if ((bool)islem[0])
+                return Ok();
+            else return BadRequest(islem[1]);
+        }
         [HttpGet]
         public object KapasitePlanListChartLoad(DataSourceLoadOptions loadOptions)
         {

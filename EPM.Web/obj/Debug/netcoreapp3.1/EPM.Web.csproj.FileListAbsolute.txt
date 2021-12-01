@@ -1513,3 +1513,5 @@ D:\Projects\Eren Production Management\EPM.Web\bin\Debug\netcoreapp3.1\StackExch
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimIzle\_GetProductionDetailsListGrid.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialBandWork.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialBandWorkMinutes.cshtml.g.cs

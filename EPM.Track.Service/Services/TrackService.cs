@@ -510,7 +510,7 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
             List<EPM_CONTRACT_PROCESS_INFO> processInfo = _trackRepository.DeserializeList<EPM_CONTRACT_PROCESS_INFO>("SELECT * FROM FDEIT005.EPM_CONTRACT_PROCESS_INFO ORDER BY ID");
 
             List<ContractProcessList> list = new List<ContractProcessList>();
-            DateTime endDate = master.DEADLINE;
+            DateTime endDate = master.DEADLINE.DatetimeParse();
             foreach (var item in processInfo)
             {
                 list.Add(new ContractProcessList()
@@ -630,7 +630,7 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
                 int HEADER_ID = master.ID;
                 int URETIM_ADET = detaiList.Sum(ob => ob.QUANTITY).IntParse();
                 int TEDARIK = rowDetail["TEDARIK"].IntParse();
-                DateTime URETIMTARIHI = master.DEADLINE;
+                DateTime URETIMTARIHI = master.DEADLINE.DatetimeParse();
                 string KesimFoyleri = "";
 
                 List<ReceteProcessModel> m = _trackRepository.DeserializeList<ReceteProcessModel>(@"
@@ -939,7 +939,7 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
                 string HEADER_ID = row["TAKIP_NO"].ToString();
                 int DETAIL_ID = row["DETAIL_TAKIP_NO"].IntParse();
                 int ADET = detaiList.Sum(ob => ob.QUANTITY);
-                DateTime URETIMTARIHI = master.DEADLINE;
+                DateTime URETIMTARIHI = master.DEADLINE.DatetimeParse();
 
                 if (ISTHERELIST(order.PO_HEADER_ID, DETAIL_ID, order.HEADER_ID)) return;
                 List<ReceteProcessModel> m = _trackRepository.DeserializeList<ReceteProcessModel>(@"

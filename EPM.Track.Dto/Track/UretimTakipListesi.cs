@@ -23,7 +23,7 @@ namespace EPM.Track.Dto.Track
         public string NEW_TAKIP_NO {
             get {
                 if (_NEW_TAKIP_NO == null)
-                    _NEW_TAKIP_NO = DEADLINE.Year.ToString() + "." + MODEL + "-" + COLOR;
+                    _NEW_TAKIP_NO = DEADLINE?.Year.ToString() + "." + MODEL + "-" + COLOR;
                 return _NEW_TAKIP_NO;
             }
             set { _NEW_TAKIP_NO = value; }

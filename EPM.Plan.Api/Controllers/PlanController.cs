@@ -3,7 +3,8 @@ using EPM.Plan.Dto.Extensions;
 using EPM.Plan.Dto.Plan;
 using EPM.Plan.Service.Services; 
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq; 
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic; 
 
 namespace EPM.Plan.Api.Controllers
@@ -36,6 +37,24 @@ namespace EPM.Plan.Api.Controllers
         public object[] KapasitePlanListUpdate(object[] obj)=>_planService.KapasitePlanListUpdate(obj[0].IntParse(),obj[1].ToString());
 
         [HttpPost]
+        public object[] BandWorkersUpdate(object[] obj) => _planService.BandWorkersUpdate(obj[0].IntParse(), obj[1].ToString());
+
+
+        [HttpPost]
+        public object[] BandWorkMinutesUpdate(object[] obj) => _planService.BandWorkMinutesUpdate(obj[0].IntParse(), obj[1].ToString());
+
+        [HttpPost]
         public List<KapasitePlanUyum> GetKapasiteUyumList(object[] obj) => _planService.GetKapasiteUyumList(obj[0].IntParse(), obj[1].IntParse());
+
+        [HttpPost]
+        public List<KapasitePlanPerformans> GetKapasitePerformansList(object[] obj) => _planService.GetKapasitePerformansList(obj[0].IntParse(), obj[1].IntParse());
+
+
+        [HttpPost]
+        public List<EpmBandWorkModel> GetBandWorkers(object[] obj) => _planService.GetBandWorkers(obj[0].IntParse(), obj[1].IntParse());
+
+
+        [HttpPost]
+        public List<EpmBandWorkMinuteModel> GetBandWorkMinutes(object[] obj) => _planService.GetBandWorkMinutes(obj[0].IntParse(), obj[1].IntParse());
     }
 }

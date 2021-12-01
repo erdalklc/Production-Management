@@ -3389,6 +3389,9 @@
       "EPM.Plan.Dto/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "EPM.Dto": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/EPM.Plan.Dto.dll": {}
         },

@@ -216,7 +216,6 @@ D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Fason.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Tools.pdb
-D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.csproj.CoreCompileInputs.cache
@@ -229,3 +228,8 @@ E:\Eren\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\EPM.Dto.
 E:\Eren\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
 E:\Eren\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Redis.dll
 E:\Eren\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\StackExchange.Redis.StrongName.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Redis.dll
+D:\Projects\Eren Production Management\EPM.Transver\bin\Debug\netcoreapp3.1\StackExchange.Redis.StrongName.dll
+D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.csproj.AssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.Transver\obj\Debug\netcoreapp3.1\EPM.Transver.GeneratedMSBuildEditorConfig.editorconfig

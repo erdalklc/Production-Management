@@ -13,6 +13,7 @@ namespace EPM.Production.Monitoring.Dto.Models
         public string SEZON { get; set; }
         public string SIPARIS_TIPI { get; set; }
         public string MIKTAR { get; set; }
+        public string IKINCI_KALITE { get; set; }
         public string KESIM_FOYU_NOT { get; set; }
         public string KESIM_FOYU_NO { get; set; }
     }

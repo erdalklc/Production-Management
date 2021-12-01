@@ -63,15 +63,12 @@ D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\EPM.W
 D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\EPM.Tools.pdb
 D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\EPM.WMS.Dto.pdb
 D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
-D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.csprojAssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.AssemblyInfoInputs.cache
 D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.AssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.csproj.CoreCompileInputs.cache
 D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.MvcApplicationPartsAssemblyInfo.cs
 D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.MvcApplicationPartsAssemblyInfo.cache
 D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\staticwebassets\EPM.WMS.Api.StaticWebAssets.Manifest.cache
-D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\staticwebassets\EPM.WMS.Api.StaticWebAssets.xml
-D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\scopedcss\bundle\EPM.WMS.Api.styles.css
 D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.RazorTargetAssemblyInfo.cache
 D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.dll
@@ -92,3 +89,8 @@ E:\Eren\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\EPM.WMS.D
 E:\Eren\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\EPM.WMS.Dto.pdb
 E:\Eren\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
 E:\Eren\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.MvcApplicationPartsAssemblyInfo.cs
+D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\EPM.WMS.Api.StaticWebAssets.xml
+D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Redis.dll
+D:\Projects\Eren Production Management\EPM.WMS.Api\bin\Debug\netcoreapp3.1\StackExchange.Redis.StrongName.dll
+D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.csproj.AssemblyReference.cache
+D:\Projects\Eren Production Management\EPM.WMS.Api\obj\Debug\netcoreapp3.1\EPM.WMS.Api.GeneratedMSBuildEditorConfig.editorconfig

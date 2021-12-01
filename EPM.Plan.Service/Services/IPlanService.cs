@@ -18,8 +18,15 @@ namespace EPM.Plan.Service.Services
         public List<KapasitePlanListChart> GetKapasitePlanListChart();
 
         public object[] KapasitePlanListUpdate(int Key, string Values);
+        public object[] BandWorkersUpdate(int Key, string Values);
+        public object[] BandWorkMinutesUpdate(int Key, string Values);
 
         public List<KapasitePlanUyum> GetKapasiteUyumList(int YEAR, int BAND_GROUP);
+        public List<KapasitePlanPerformans> GetKapasitePerformansList(int YEAR, int BAND_GROUP);
         public object GetPlanByChart(KapasiyeUyumChart_Filter filter);
+
+        public List<EpmBandWorkModel> GetBandWorkers(int YEAR, int BAND_GROUP);
+        public List<EpmBandWorkMinuteModel> GetBandWorkMinutes(int YEAR, int BAND_GROUP);
+
     }
 }

@@ -9,6 +9,7 @@ namespace EPM.Plan.Dto.Plan
         public int BAND_ID { get; set; }
         public string BAND_NAME { get; set; }
         public int CAPACITY { get; set; }
+        public int CAPACITY_RELEASED { get; set; }
         public int WEEK { get; set; }
         public int QUANTITY { get; set; }
     }

@@ -52,6 +52,20 @@ namespace EPM.Web.ServiceHelper
                 , Values });
             return list;
         }
+        public static object[] BandWorkersUpdate(int Key, string Values)
+        {
+            string apiUrl = "BandWorkersUpdate";
+            var list = PostRequest<object[], object[]>(EPMServiceType.Plan, apiUrl, new object[] { Key
+                , Values });
+            return list;
+        }
+        public static object[] BandWorkMinutesUpdate(int Key, string Values)
+        {
+            string apiUrl = "BandWorkMinutesUpdate";
+            var list = PostRequest<object[], object[]>(EPMServiceType.Plan, apiUrl, new object[] { Key
+                , Values });
+            return list;
+        }
 
         public static List<KapasitePlanUyum> GetKapasiteUyumList(int YEAR, int BAND_GROUP)
         {
@@ -60,5 +74,28 @@ namespace EPM.Web.ServiceHelper
                 , BAND_GROUP });
             return list;
         }
+        public static List<KapasitePlanPerformans> GetKapasitePerformansList(int YEAR, int BAND_GROUP)
+        {
+            string apiUrl = "GetKapasitePerformansList";
+            var list = PostRequest<object[], List<KapasitePlanPerformans>>(EPMServiceType.Plan, apiUrl, new object[] { YEAR
+                , BAND_GROUP });
+            return list;
+        }
+
+        public static List<EpmBandWorkModel> GetBandWorkers(int YEAR, int BAND_GROUP)
+        {
+            string apiUrl = "GetBandWorkers";
+            var list = PostRequest<object[], List<EpmBandWorkModel>>(EPMServiceType.Plan, apiUrl, new object[] { YEAR
+                , BAND_GROUP });
+            return list;
+        }
+        public static List<EpmBandWorkMinuteModel> GetBandWorkMinutes(int YEAR, int BAND_GROUP)
+        {
+            string apiUrl = "GetBandWorkMinutes";
+            var list = PostRequest<object[], List<EpmBandWorkMinuteModel>>(EPMServiceType.Plan, apiUrl, new object[] { YEAR
+                , BAND_GROUP });
+            return list;
+        }
+
     }
 }

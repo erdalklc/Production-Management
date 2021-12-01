@@ -1,5 +1,6 @@
 using EPM.Plan.Repository.Repository;
 using EPM.Plan.Service.Services;
+using EPM.Tools.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,9 +28,12 @@ namespace EPM.Plan.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation(); 
+            services.AddSingleton<RedisServer>();
+            services.AddSingleton<ICacheService, RedisCacheService>();
             services.AddScoped<IPlanService, PlanService>();
             services.AddSingleton<IPlanRepository, PlanRepository>(); 
+            services.AddSingleton<IEgemenRepository, EgemenRepository>();
             services.AddControllers();
             services.AddControllersWithViews()
               .AddNewtonsoftJson(options => {

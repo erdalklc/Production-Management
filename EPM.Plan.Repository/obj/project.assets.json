@@ -40,6 +40,18 @@
           "lib/netstandard2.0/Dapper.Oracle.dll": {}
         }
       },
+      "FirebirdSql.Data.FirebirdClient/7.10.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Reflection.Emit": "4.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/FirebirdSql.Data.FirebirdClient.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FirebirdSql.Data.FirebirdClient.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.7.0": {
         "type": "package",
         "compile": {
@@ -97,6 +109,18 @@
             "assetType": "runtime",
             "rid": "win"
           }
+        }
+      },
+      "MongoDB.Bson/2.13.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/MongoDB.Bson.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/MongoDB.Bson.dll": {}
         }
       },
       "Oracle.ManagedDataAccess.Core/3.21.1": {
@@ -249,6 +273,15 @@
           "lib/netcoreapp2.0/_._": {}
         }
       },
+      "System.Runtime.CompilerServices.Unsafe/5.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.Runtime.CompilerServices.Unsafe.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+        }
+      },
       "System.Security.AccessControl/4.7.0": {
         "type": "package",
         "dependencies": {
@@ -342,9 +375,26 @@
           }
         }
       },
+      "EPM.Dto/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Dapper.Contrib": "2.0.78",
+          "MongoDB.Bson": "2.13.0"
+        },
+        "compile": {
+          "bin/placeholder/EPM.Dto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EPM.Dto.dll": {}
+        }
+      },
       "EPM.Plan.Dto/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "EPM.Dto": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/EPM.Plan.Dto.dll": {}
         },
@@ -404,6 +454,22 @@
         "lib/net461/Dapper.Oracle.pdb",
         "lib/netstandard2.0/Dapper.Oracle.dll",
         "lib/netstandard2.0/Dapper.Oracle.pdb"
+      ]
+    },
+    "FirebirdSql.Data.FirebirdClient/7.10.1": {
+      "sha512": "G/RWvT8swecaoNRcLw/5pT7QFXPUbofbDp12cxNPWalq8Wl9JEIXiXygpFaHIKs71fdE3UMmUgOw660U8SKJrw==",
+      "type": "package",
+      "path": "firebirdsql.data.firebirdclient/7.10.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "firebird-logo.png",
+        "firebirdsql.data.firebirdclient.7.10.1.nupkg.sha512",
+        "firebirdsql.data.firebirdclient.nuspec",
+        "lib/net452/FirebirdSql.Data.FirebirdClient.dll",
+        "lib/netstandard2.0/FirebirdSql.Data.FirebirdClient.dll",
+        "license.txt",
+        "readme.txt"
       ]
     },
     "Microsoft.CSharp/4.7.0": {
@@ -566,6 +632,27 @@
         "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.xml",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "MongoDB.Bson/2.13.0": {
+      "sha512": "voNakTxq2NV3n5lM+HpJXcd4UgLk7dtkzaPyqHMDtiBqKJauqFJ0XQIM6l9v2LTqP/GPiDCxf3XCTJHphxamZA==",
+      "type": "package",
+      "path": "mongodb.bson/2.13.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "lib/net452/MongoDB.Bson.dll",
+        "lib/net452/MongoDB.Bson.xml",
+        "lib/netstandard1.5/MongoDB.Bson.dll",
+        "lib/netstandard1.5/MongoDB.Bson.xml",
+        "lib/netstandard2.0/MongoDB.Bson.dll",
+        "lib/netstandard2.0/MongoDB.Bson.xml",
+        "lib/netstandard2.1/MongoDB.Bson.dll",
+        "lib/netstandard2.1/MongoDB.Bson.xml",
+        "mongodb.bson.2.13.0.nupkg.sha512",
+        "mongodb.bson.nuspec",
+        "packageIcon.png"
       ]
     },
     "Oracle.ManagedDataAccess.Core/3.21.1": {
@@ -888,6 +975,38 @@
         "version.txt"
       ]
     },
+    "System.Runtime.CompilerServices.Unsafe/5.0.0": {
+      "sha512": "ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA==",
+      "type": "package",
+      "path": "system.runtime.compilerservices.unsafe/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net45/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/net45/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/net461/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/net461/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/netstandard2.1/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/netstandard2.1/System.Runtime.CompilerServices.Unsafe.xml",
+        "system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
+        "system.runtime.compilerservices.unsafe.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Security.AccessControl/4.7.0": {
       "sha512": "JECvTt5aFF3WT3gHpfofL2MNNP6v84sxtXxpqhLBCcDRzqsPBmHhQ6shv4DwwN2tRlzsUxtb3G9M3763rbXKDg==",
       "type": "package",
@@ -1103,6 +1222,11 @@
         "version.txt"
       ]
     },
+    "EPM.Dto/1.0.0": {
+      "type": "project",
+      "path": "../EPM.Dto/EPM.Dto.csproj",
+      "msbuildProject": "../EPM.Dto/EPM.Dto.csproj"
+    },
     "EPM.Plan.Dto/1.0.0": {
       "type": "project",
       "path": "../EPM.Plan.Dto/EPM.Plan.Dto.csproj",
@@ -1114,6 +1238,7 @@
       "Dapper.Contrib >= 2.0.78",
       "Dapper.Oracle >= 2.0.3",
       "EPM.Plan.Dto >= 1.0.0",
+      "FirebirdSql.Data.FirebirdClient >= 7.10.1",
       "Oracle.ManagedDataAccess.Core >= 3.21.1"
     ]
   },
@@ -1177,6 +1302,10 @@
           "Dapper.Oracle": {
             "target": "Package",
             "version": "[2.0.3, )"
+          },
+          "FirebirdSql.Data.FirebirdClient": {
+            "target": "Package",
+            "version": "[7.10.1, )"
           },
           "Oracle.ManagedDataAccess.Core": {
             "target": "Package",

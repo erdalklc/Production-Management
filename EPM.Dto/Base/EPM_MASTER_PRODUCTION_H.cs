@@ -33,7 +33,7 @@ namespace EPM.Dto.Base
         [Required(ErrorMessage = "Recipe Bilgisi Gereklidir")]
         public int RECIPE { get; set; }
         [Required(ErrorMessage = "Deadline Bilgisi Gereklidir")]
-        public DateTime DEADLINE { get; set; } 
+        public DateTime? DEADLINE { get; set; } 
         public DateTime? DEADLINE_2 { get; set; } 
         public DateTime? DEADLINE_3 { get; set; } 
         public DateTime? DEADLINE_4 { get; set; }
