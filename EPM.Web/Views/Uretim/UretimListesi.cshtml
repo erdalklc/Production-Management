@@ -63,13 +63,11 @@
 </div>
 <script>
     function UpdateMasterRow(e) {
-        
-        console.log(e.newData);
+         
         var data = {
             "key": e.key,
             "values": JSON.stringify(e.newData)
-        };
-        console.log(data);
+        }; 
         var res = $.ajax({
             url: '@Url.Action("UretimOnayliUpdate","Uretim")',
             method: "PUT",
@@ -228,8 +226,7 @@
             BAND_ID: jQuery("[name=BAND_ID]").val(),
             APPROVAL_STATUS: jQuery("[name=APPROVAL_STATUS]").val(),
             STATUS: jQuery("[name=STATUS]").val()
-        };
-        console.log(data);
+        }; 
         $.ajax({
             type: "POST",
             url: '@Url.Action("_PartialUretimOnayliListeFiltrele", "Uretim")',

@@ -7,6 +7,7 @@
         .LoadAction("ProductionTimesLoad") 
         .Key("ID")
     ).Height(500)  
+    .FilterRow(f => f.Visible(true))
     .OnRowUpdating("onWorkUpdating")
     .FocusedRowEnabled(true)
     .FocusedRowIndex(0)

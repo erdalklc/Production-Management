@@ -11,6 +11,7 @@
           "Dapper.Contrib": "2.0.78",
           "Dapper.Oracle": "2.0.3",
           "EPM.Plan.Dto": "1.0.0",
+          "FirebirdSql.Data.FirebirdClient": "7.10.1",
           "Oracle.ManagedDataAccess.Core": "3.21.1"
         },
         "runtime": {
@@ -52,6 +53,17 @@
           }
         }
       },
+      "FirebirdSql.Data.FirebirdClient/7.10.1": {
+        "dependencies": {
+          "System.Reflection.Emit": "4.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FirebirdSql.Data.FirebirdClient.dll": {
+            "assemblyVersion": "7.10.1.0",
+            "fileVersion": "7.10.1.0"
+          }
+        }
+      },
       "Microsoft.CSharp/4.7.0": {},
       "Microsoft.NETCore.Platforms/3.1.0": {},
       "Microsoft.Win32.Registry/4.7.0": {
@@ -76,6 +88,17 @@
             "assetType": "runtime",
             "assemblyVersion": "4.0.2.0",
             "fileVersion": "4.700.19.56404"
+          }
+        }
+      },
+      "MongoDB.Bson/2.13.0": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/MongoDB.Bson.dll": {
+            "assemblyVersion": "2.13.0.0",
+            "fileVersion": "2.13.0.0"
           }
         }
       },
@@ -204,6 +227,14 @@
       },
       "System.Reflection.Emit/4.7.0": {},
       "System.Reflection.Emit.Lightweight/4.7.0": {},
+      "System.Runtime.CompilerServices.Unsafe/5.0.0": {
+        "runtime": {
+          "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
+          }
+        }
+      },
       "System.Security.AccessControl/4.7.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -266,7 +297,19 @@
           }
         }
       },
+      "EPM.Dto/1.0.0": {
+        "dependencies": {
+          "Dapper.Contrib": "2.0.78",
+          "MongoDB.Bson": "2.13.0"
+        },
+        "runtime": {
+          "EPM.Dto.dll": {}
+        }
+      },
       "EPM.Plan.Dto/1.0.0": {
+        "dependencies": {
+          "EPM.Dto": "1.0.0"
+        },
         "runtime": {
           "EPM.Plan.Dto.dll": {}
         }
@@ -300,6 +343,13 @@
       "path": "dapper.oracle/2.0.3",
       "hashPath": "dapper.oracle.2.0.3.nupkg.sha512"
     },
+    "FirebirdSql.Data.FirebirdClient/7.10.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-G/RWvT8swecaoNRcLw/5pT7QFXPUbofbDp12cxNPWalq8Wl9JEIXiXygpFaHIKs71fdE3UMmUgOw660U8SKJrw==",
+      "path": "firebirdsql.data.firebirdclient/7.10.1",
+      "hashPath": "firebirdsql.data.firebirdclient.7.10.1.nupkg.sha512"
+    },
     "Microsoft.CSharp/4.7.0": {
       "type": "package",
       "serviceable": true,
@@ -327,6 +377,13 @@
       "sha512": "sha512-mtVirZr++rq+XCDITMUdnETD59XoeMxSpLRIII7JRI6Yj0LEDiO1pPn0ktlnIj12Ix8bfvQqQDMMIF9wC98oCA==",
       "path": "microsoft.win32.systemevents/4.7.0",
       "hashPath": "microsoft.win32.systemevents.4.7.0.nupkg.sha512"
+    },
+    "MongoDB.Bson/2.13.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-voNakTxq2NV3n5lM+HpJXcd4UgLk7dtkzaPyqHMDtiBqKJauqFJ0XQIM6l9v2LTqP/GPiDCxf3XCTJHphxamZA==",
+      "path": "mongodb.bson/2.13.0",
+      "hashPath": "mongodb.bson.2.13.0.nupkg.sha512"
     },
     "Oracle.ManagedDataAccess.Core/3.21.1": {
       "type": "package",
@@ -391,6 +448,13 @@
       "path": "system.reflection.emit.lightweight/4.7.0",
       "hashPath": "system.reflection.emit.lightweight.4.7.0.nupkg.sha512"
     },
+    "System.Runtime.CompilerServices.Unsafe/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA==",
+      "path": "system.runtime.compilerservices.unsafe/5.0.0",
+      "hashPath": "system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+    },
     "System.Security.AccessControl/4.7.0": {
       "type": "package",
       "serviceable": true,
@@ -432,6 +496,11 @@
       "sha512": "sha512-CeWTdRNfRaSh0pm2gDTJFwVaXfTq6Xwv/sA887iwPTneW7oMtMlpvDIO+U60+3GWTB7Aom6oQwv5VZVUhQRdPQ==",
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
+    },
+    "EPM.Dto/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "EPM.Plan.Dto/1.0.0": {
       "type": "project",

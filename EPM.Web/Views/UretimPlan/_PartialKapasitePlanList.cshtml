@@ -4,17 +4,16 @@
 <div class="dx-card wide-card">
     @(Html.DevExtreme().Form()
         .ID("edFilter").ShowValidationSummary(true)
-        .ColCount(8)
+        .ColCount(7)
         .Items(items =>
         {
             items.AddEmpty();
             items.AddEmpty();
-            items.AddEmpty();
-            items.AddSimple().Editor(ob => ob.Lookup().Name("edProductGroup").OnSelectionChanged("RefreshChart").DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimple().Editor(ob => ob.Lookup().Name("edBandGroup").OnSelectionChanged("RefreshProductGroup").DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimple().Editor(ob => ob.Lookup().Name("edProductGroup").ID("edProductGroup").OnSelectionChanged("RefreshChart").DataSource(d => d.Mvc().LoadParams(new { BAND_GROUP = new JS("function(){return jQuery('[name=edBandGroup]').val()}") }).Controller("UretimPlan").LoadAction("GetProductGroupList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
             items.AddSimple().Editor(ob => ob.Lookup().Name("edYear").OnSelectionChanged("RefreshChart").DataSource(d => d.Array().Data(years)));
             items.AddEmpty();
             items.AddEmpty(); 
-            items.AddEmpty();
 
         })
         .FormData(Model).ShowValidationSummary(false)
@@ -43,27 +42,36 @@
     function GetYear() { 
         return jQuery("[name=edYear]").val();
     }
-    function RefreshChart() { 
-        console.log("burda");
+    function RefreshProductGroup(){
+        $("#edProductGroup").dxLookup("getDataSource").reload();
+    }
+    function RefreshChart() {  
         $("#edWorker").load('@Url.Action("_PartialBandWork","UretimPlan")', function() { 
         });
          $("#edWorkerMinutes").load('@Url.Action("_PartialBandWorkMinutes","UretimPlan")', function() { 
         });
         $("#edModelWorkTimes").load('@Url.Action("_PartialProductionTimes","UretimPlan")', function() { 
-        });
-        //$("#edgridWorker").dxDataGrid("instance").refresh();
-        //$("#edgridWorkerMinutes").dxDataGrid("instance").refresh();
+        }); 
     }
     function GetGroup() { 
+        return jQuery("[name=edBandGroup]").val();
+    }
+    function GetProductGroup() { 
         return jQuery("[name=edProductGroup]").val();
     }
-
+     function GetProductGroupLoad() { 
+         console.log("burada");
+       var data={ 
+            "BAND_GROUP" : jQuery("[name=edBandGroup]").val(),
+        }; 
+        return data;
+    }
     function getLoadParameters(){
         var data={
             "YEAR" : jQuery("[name=edYear]").val(),
-            "BAND_GROUP" : jQuery("[name=edProductGroup]").val()
-        };
-        console.log(data);
+            "BAND_GROUP" : jQuery("[name=edBandGroup]").val(),
+            "PRODUCT_GROUP":jQuery("[name=edProductGroup]").val(),
+        }; 
         return data; 
     }
       function onWorkUpdating(e){  

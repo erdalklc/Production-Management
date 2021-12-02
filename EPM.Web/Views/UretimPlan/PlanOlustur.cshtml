@@ -7,10 +7,11 @@
     <div class="dx-card wide-card">
         @(Html.DevExtreme().Form<Plan_Filter>()
         .ID("edOnayliListe").ShowValidationSummary(true)
-        .ColCount(8)
+        .ColCount(9)
         .Items(items =>
         {
 
+            @*items.AddSimpleFor(m => m.PLAN_DURUM).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("UretimPlan").LoadAction("GetPlanStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);*@
             items.AddSimpleFor(m => m.BRAND).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
             items.AddSimpleFor(m => m.SEASON).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
             items.AddSimpleFor(m => m.MODEL).Editor(ob=>ob.TextBox().ID("edModel")).IsRequired(false);
@@ -18,6 +19,7 @@
             items.AddSimpleFor(m => m.ORDER_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetOrderList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
             items.AddSimpleFor(m => m.PRODUCTION_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetProductionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
             items.AddSimpleFor(m => m.FABRIC_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetFabricList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddEmpty();
             items.AddButton().HorizontalAlignment(HorizontalAlignment.Left).VerticalAlignment(VerticalAlignment.Center)
                    .ButtonOptions(b => b.Text("FİLTRELE")
                        .Type(ButtonType.Default)
@@ -53,6 +55,7 @@
             ORDER_TYPE: jQuery("[name=ORDER_TYPE]").val(),
             PRODUCTION_TYPE: jQuery("[name=PRODUCTION_TYPE]").val(),
             FABRIC_TYPE: jQuery("[name=FABRIC_TYPE]").val(),
+            PLAN_DURUM: jQuery("[name=PLAN_DURUM]").val(),
         };
         getLoadPanelInstance().show();
         $.ajax({
@@ -85,6 +88,25 @@
                         visible: true,
                         applyFilter: "auto"
                     },
+                     summary: {
+                      totalItems: [{
+                        column: 'PLANSIZ_ADET',
+                        summaryType: 'sum',
+                        displayFormat: '{0}'
+                      },
+                      {
+                        column: 'URETIM_ADET',
+                        summaryType: 'sum',
+                        displayFormat: '{0}'
+                      },
+                      {
+                        column: 'PLANLANAN_ADET',
+                        summaryType: 'sum',
+                        displayFormat: '{0}'
+                      }],
+                    },onSelectionChanged(e) {
+                          e.component.refresh(true);
+                        },
                     headerFilter: { visible: true },
                     editing: {
                         mode: "cell",
@@ -115,6 +137,7 @@
                                 else if (columns[a].dataField == "PLANSIZ_ADET" || columns[a].dataField == "URETIM_ADET" || columns[a].dataField == "PLANLANAN_ADET") {
                                     columns[a].width = 130;
                                     columns[a].dataType = "number";
+                                     
                                 }
                                 if (columns[a].dataField == "PLANLANAN_ADET") {
                                     columns[a].calculateCellValue = function (rowData) {
@@ -192,19 +215,43 @@
                             d.reject("Kayıt Hatası : " + textStatus);
                         });
                         e.cancel = d.promise();
+                    }, 
+                     onCellPrepared : function(e){
+                        if(e.column.dataField=="CREATE_MINUTE"){
+                            if(e.data){
+                            if(e.data.CREATE_MINUTE==0){
+                                e.cellElement[0].bgColor="indianred";
+                            }}
+                        }
+                         if(e.column.dataField=="PLANSIZ_ADET"){
+                            if(e.data){
+                            if(e.data.PLANSIZ_ADET>0){
+                                e.cellElement[0].bgColor="indianred";
+                            }}
+                        }
+                        
                     },
                     focusedRowEnabled: true,
                     focusedRowIndex: 0,
                     focusedColumnIndex: 0 ,
                     showColumnLines: true,
-                    showRowLines: true,
-                    rowAlternationEnabled: true,
+                    showRowLines: true, 
                     showBorders: true,
-                    onContentReady: function (e) {
+                    onContentReady: function (e) { 
+                         // e.component.refresh(true);
                     },
                     onCellDblClick: function (e) {
-                        e.component.cellValue(e.rowIndex, e.columnIndex, e.data["PLANSIZ_ADET"]);
-                        e.component.saveEditData();
+                        var ok=false;
+                        console.log(YEARS);
+                        for(var i =0;i<YEARS.length;i++){
+                            console.log(e);
+                            if(e.column.name.startsWith(YEARS[i].YEAR))
+                                ok=true;
+                        }
+                        if(ok){
+                            e.component.cellValue(e.rowIndex, e.columnIndex, e.data["PLANSIZ_ADET"]);
+                            e.component.saveEditData();
+                        }
 
                     },
                     columnMinWidth: 80,

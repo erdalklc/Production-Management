@@ -48,8 +48,7 @@
             BITIS_TARIHI: jQuery("[name=BITIS_TARIHI]").val(),
             MODEL: jQuery("[name=MODEL]").val(),
             COLOR: jQuery("[name=COLOR]").val(),
-        };
-        console.log(data);
+        }; 
         $.ajax({
             type: "POST",
             url: '@Url.Action("_PartialSiparisListesi", "Fason")',
@@ -125,8 +124,7 @@
 
     }
     function cellClicked(e) {
-        var soru = "";
-        console.log(e);
+        var soru = ""; 
         if (e.row.data.HANDLE_SIDE == 0) {
             if (e.row.data.STATUS == 1)
                 soru = "SÜREÇ BAŞLATILACAK<br>Devam edilsin mi?";
@@ -144,8 +142,7 @@
                         data: dataProcess,
                         contentType: 'application/x-www-form-urlencoded',
                         timeout: 180000,
-                        success: function (income, status, xmlRequest) {
-                            console.log(income);
+                        success: function (income, status, xmlRequest) { 
                             if (income[0]) {
                                 ProcessListGetir(e.row.data.ENTEGRATION_ID);
                             } else {

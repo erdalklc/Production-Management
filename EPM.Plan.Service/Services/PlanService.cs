@@ -72,7 +72,7 @@ namespace EPM.Plan.Service.Services
                              H.DEADLINE,
                              H.SHIPMENT_DATE,
                              MR.ADI, MR.ID
-                    ORDER BY H.ID) A";
+                    ORDER BY H.ID) A WHERE URETIM_ADET>0";
             DataTable dt = _planRepository.QueryFill(sql);
 
             List<ModelSureleri> sureler = GetSureler();
@@ -137,8 +137,7 @@ namespace EPM.Plan.Service.Services
                     }
                 }
             }
-            dtColumnNames.DefaultView.Sort = "NAME ASC";
-            //List<EPM_PRODUCTION_PLAN> plan = OracleServer.DeserializeList<EPM_PRODUCTION_PLAN>("SELECT * FROM FDEIT005.EPM_PRODUCTION_PLAN WHERE HEADER_ID IN (" + tSql + ")");
+            dtColumnNames.DefaultView.Sort = "NAME ASC"; 
             List<EPM_PRODUCTION_PLAN> plan = _planRepository.DeserializeList<EPM_PRODUCTION_PLAN>(@"SELECT PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR,SUM(PL.QUANTITY) QUANTITY FROM FDEIT005.EPM_PRODUCTION_PLAN PL
                     INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=PL.HEADER_ID AND H.STATUS=0 AND H.APPROVAL_STATUS=1 AND H.BAND_ID=" + filter.BAND + " AND   PL.WEEK=" + filter.WEEK + " AND PL.YEAR=" + filter.YEAR + " GROUP BY PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR");
             foreach (var item in plan)
@@ -169,7 +168,7 @@ namespace EPM.Plan.Service.Services
             set.Tables.Add(dtColumnNames);
             return JsonConvert.SerializeObject(set, Formatting.Indented);
         }
-        public object GetPlan(string USER_CODE, int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE)
+        public object GetPlan(string USER_CODE, int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM)
         { 
             DataTable dtColumnNames = new DataTable();
             dtColumnNames.TableName = "COLUMNNAMES";
@@ -228,9 +227,8 @@ namespace EPM.Plan.Service.Services
                              PT.ADI,
                              H.DEADLINE,
                              MR.ADI, MR.ID
-                    ORDER BY H.ID) A";
-            DataTable dt = _planRepository.QueryFill(sql);
-            string tSql = "SELECT ID FROM ( " + sql + " )B";
+                    ORDER BY H.ID) A WHERE URETIM_ADET>0";
+            DataTable dt = _planRepository.QueryFill(sql); 
 
             List<ModelSureleri> sureler = GetSureler();
 
@@ -257,8 +255,7 @@ namespace EPM.Plan.Service.Services
                 DataColumn column = dt.Columns.Add(columnName, typeof(int));
                 column.Caption = i + ". HAFTA";
                 column.DefaultValue = 0;
-            }
-            //List<EPM_PRODUCTION_PLAN> plan = OracleServer.DeserializeList<EPM_PRODUCTION_PLAN>("SELECT * FROM FDEIT005.EPM_PRODUCTION_PLAN WHERE HEADER_ID IN (" + tSql + ")");
+            } 
             List<EPM_PRODUCTION_PLAN> plan = _planRepository.DeserializeList<EPM_PRODUCTION_PLAN>(@"SELECT PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR,SUM(PL.QUANTITY) QUANTITY FROM FDEIT005.EPM_PRODUCTION_PLAN PL
                     INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=PL.HEADER_ID AND H.STATUS=0 AND H.APPROVAL_STATUS=1 AND H.SEASON=" + SEASON + "    GROUP BY PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR");
             foreach (var item in plan)
@@ -270,11 +267,12 @@ namespace EPM.Plan.Service.Services
                     {
                         row[0][item.YEAR + "_" + item.WEEK] = item.QUANTITY;
                         row[0]["PLANLANAN_ADET"] = row[0]["PLANLANAN_ADET"].IntParse() + item.QUANTITY;
-                        row[0]["PLANSIZ_ADET"] = row[0]["URETIM_ADET"].IntParse() + row[0]["PLANLANAN_ADET"].IntParse();
+                        row[0]["PLANSIZ_ADET"] = row[0]["URETIM_ADET"].IntParse() - row[0]["PLANLANAN_ADET"].IntParse();
 
                     }
                 }
             }
+             
             dt.AcceptChanges();
             dt.TableName = "DATA";
             DataTable dtYear = new DataTable();
@@ -394,6 +392,7 @@ INNER JOIN FDEIT005.EPM_PRODUCTION_BAND_GROUP BG ON BG.ID = CP.BAND_ID");
             }
             return ok;
         }
+
         public object[] BandWorkersUpdate(int Key, string Values)
         {
             object[] ok = new object[] { true, "Başarılı" };
@@ -410,6 +409,7 @@ INNER JOIN FDEIT005.EPM_PRODUCTION_BAND_GROUP BG ON BG.ID = CP.BAND_ID");
             }
             return ok;
         }
+
         public object[] BandWorkMinutesUpdate(int Key, string Values)
         {
             object[] ok = new object[] { true, "Başarılı" };
@@ -426,6 +426,7 @@ INNER JOIN FDEIT005.EPM_PRODUCTION_BAND_GROUP BG ON BG.ID = CP.BAND_ID");
             }
             return ok;
         }
+
         public List<KapasitePlanUyum> GetKapasiteUyumList(int YEAR, int BAND_GROUP)
         {
 
@@ -603,7 +604,7 @@ ORDER BY P.YEAR,P.WEEK,H.MODEL", BAND_GROUP, YEAR);
                     var work = workerMinutes.Find(ob => ob.BAND_ID == BAND_GROUP && ob.WEEK == item.WEEK);
                     if (work != null)
                         workTime = work.WORK_MINUTE;
-                    else workTime = 2295;
+                    else workTime = 2700;
                     if (kisiSayisi != 0)
                     {
                         decimal tOrt = ((tQuantity / kisiSayisi) / workTime);
@@ -683,7 +684,7 @@ ORDER BY P.YEAR,P.WEEK,H.MODEL", BAND_GROUP, YEAR);
                     var work= workerMinutes.Find(ob => ob.BAND_ID == BAND_GROUP && ob.WEEK == item.WEEK);
                     if (work != null)
                         workTime = work.WORK_MINUTE;
-                    else workTime = 2295;
+                    else workTime = 2700;
                     if (kisiSayisi != 0)
                     {
                         decimal tOrt = ((tQuantity / kisiSayisi) / workTime);
@@ -829,7 +830,7 @@ SELECT WK.ID,
        A.WEEK, 
        {0} AS BAND_ID,
        {1} AS YEAR,
-       NVL(WK.WORK_MINUTE,2295) AS WORK_MINUTE
+       NVL(WK.WORK_MINUTE,2700) AS WORK_MINUTE
   FROM (SELECT 1 WEEK FROM DUAL
         UNION ALL
         SELECT 2 WEEK FROM DUAL
@@ -950,8 +951,12 @@ SELECT WK.ID,
   Left Join Operasyon on Operasyon.OperasyonId = RotaOperasyonlari.OperasyonId
   Left Join Kullanici IK on IK.KullaniciId = RotaOperasyonlari.InsertKullaniciId
   Left Join Kullanici SK on SK.KullaniciId = RotaOperasyonlari.KullaniciId
-  Left Join KaliteLimitiStrGetir on KaliteLimitiStrGetir.KaliteLimitiId = RotaOperasyonlari.KaliteLimiti 
-   GROUP BY RotaOperasyonlari.RotaId";
+  Left Join KaliteLimitiStrGetir on KaliteLimitiStrGetir.KaliteLimitiId = RotaOperasyonlari.KaliteLimiti
+  WHERE  (Operasyon.Adi LIKE 'G %' OR Operasyon.Adi LIKE 'XG %'  OR Operasyon.Adi LIKE 'D %'  OR Operasyon.Adi  LIKE 'Ö %' OR Operasyon.Adi  LIKE 'XÖ %') AND Operasyon.Adi NOT LIKE 'XÖ K.K.%' AND Operasyon.Adi NOT LIKE 'Ö K.K.%'
+  AND Operasyon.Adi NOT LIKE 'XG K.K.%'  AND Operasyon.Adi NOT LIKE 'G K.K.%' AND Operasyon.Adi NOT LIKE 'D MONT%'
+   GROUP BY RotaOperasyonlari.RotaId
+   
+   ";
                 sureler = _egemenRepository.DeserializeList<ModelSureleri>(sqlSureler);
                 _cacheService.Add(0, "ModelSureleri", sureler);
             }
@@ -962,6 +967,47 @@ SELECT WK.ID,
         public List<ModelSureleriView> ProductionTimesLoad()
         {
             return JsonConvert.DeserializeObject<List<ModelSureleriView>>(JsonConvert.SerializeObject(GetSureler()));
+        }
+
+        public List<PlanStatus> GetPlanStatusList(bool hepsi)
+        {
+            List<PlanStatus> status = new List<PlanStatus>();
+            status.Add(new PlanStatus { ID = 0, ADI = "HEPSİ" });
+            status.Add(new PlanStatus { ID = 1, ADI = "PLANLANMIŞ" });
+            status.Add(new PlanStatus { ID = 2, ADI = "PLANLAMA YAPILMAMIŞ" });
+
+            return status;
+        }
+
+        public List<EPM_PRODUCT_GROUP> GetProductGroupList(int BAND_GROUP)
+        {
+            List<EPM_PRODUCT_GROUP> productGroups = new List<EPM_PRODUCT_GROUP>();
+            if (BAND_GROUP == 1)
+            {
+                productGroups = _planRepository.DeserializeList<EPM_PRODUCT_GROUP>(@"SELECT DISTINCT PH.* FROM EPM_MASTER_PRODUCTION_H H 
+INNER JOIN EPM_PRODUCT_GROUP PH ON H.PRODUCT_GROUP =PH.ID
+WHERE  BRAND=1 AND H.PRODUCTION_TYPE=1 AND PH.ID NOT IN(11,14,20)
+ORDER BY 1
+");
+            }
+            else if (BAND_GROUP == 2)
+            {
+                productGroups = _planRepository.DeserializeList<EPM_PRODUCT_GROUP>(@"SELECT DISTINCT PH.* FROM EPM_MASTER_PRODUCTION_H H 
+INNER JOIN EPM_PRODUCT_GROUP PH ON H.PRODUCT_GROUP =PH.ID
+WHERE  BRAND=1 AND H.PRODUCTION_TYPE=1 AND PH.ID IN(14)
+ORDER BY 1
+");
+            }
+            else if (BAND_GROUP == 3)
+            {
+                productGroups = _planRepository.DeserializeList<EPM_PRODUCT_GROUP>(@"SELECT DISTINCT PH.* FROM EPM_MASTER_PRODUCTION_H H 
+INNER JOIN EPM_PRODUCT_GROUP PH ON H.PRODUCT_GROUP =PH.ID
+WHERE  BRAND=1 AND H.PRODUCTION_TYPE=1 AND PH.ID IN(1)
+ORDER BY 1
+");
+            }
+
+            return productGroups;
         }
     }
 }

@@ -15,3 +15,5 @@ D:\Projects\Eren Production Management\EPM.Plan.Service\obj\Release\netcoreapp3.
 D:\Projects\Eren Production Management\EPM.Plan.Service\obj\Release\netcoreapp3.1\EPM.Plan.Service.pdb
 D:\Projects\Eren Production Management\EPM.Plan.Service\obj\Release\netcoreapp3.1\EPM.Plan.Service.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Plan.Service\obj\Release\netcoreapp3.1\EPM.Plan.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Eren Production Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Tools.dll
+D:\Projects\Eren Production Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Tools.pdb

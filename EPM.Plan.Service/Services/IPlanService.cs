@@ -1,5 +1,6 @@
 ﻿using EPM.Dto.Base;
 using EPM.Plan.Dto.Plan;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace EPM.Plan.Service.Services
 {
     public interface IPlanService
     {
-        public object GetPlan(string USER_CODE, int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE);
+        public object GetPlan(string USER_CODE, int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM);
 
         public object UpdateInsertPlan(string USER_CODE, JObject obj);
 
@@ -28,5 +29,7 @@ namespace EPM.Plan.Service.Services
         public List<EpmBandWorkModel> GetBandWorkers(int YEAR, int BAND_GROUP);
         public List<EpmBandWorkMinuteModel> GetBandWorkMinutes(int YEAR, int BAND_GROUP);
         public List<ModelSureleriView> ProductionTimesLoad();
+        public List<PlanStatus> GetPlanStatusList(bool hepsi);
+        public List<EPM_PRODUCT_GROUP> GetProductGroupList(int BAND_GROUP);
     }
 }

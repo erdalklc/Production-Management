@@ -11,6 +11,7 @@ namespace EPM.Dto.Base
         [Key]
         public int ID { get; set; }
         public int BAND_ID { get; set; }
+        public int PRODUCT_GROUP { get;set; }
         public int YEAR { get;set; }
         public int WEEK { get;set; }    
         public int WORKER { get;set; }

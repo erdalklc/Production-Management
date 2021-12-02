@@ -1517,3 +1517,4 @@ E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\EPM.Web.Gener
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialBandWork.cshtml.g.cs
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialBandWorkMinutes.cshtml.g.cs
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialProductionTimes.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialProductionTimes.cshtml.g.cs

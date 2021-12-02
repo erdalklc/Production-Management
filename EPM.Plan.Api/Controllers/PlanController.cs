@@ -19,7 +19,7 @@ namespace EPM.Plan.Api.Controllers
             _planService = planService;
         }
         [ HttpPost]
-        public ActionResult<object> GetPlan(object[] obj)=>_planService.GetPlan(obj[0].ToStringParse(),obj[1].IntParse(), obj[2].IntParse(), obj[3].ToStringParse(), obj[4].ToStringParse(), obj[5].IntParse(), obj[6].IntParse(), obj[7].IntParse());
+        public ActionResult<object> GetPlan(object[] obj)=>_planService.GetPlan(obj[0].ToStringParse(),obj[1].IntParse(), obj[2].IntParse(), obj[3].ToStringParse(), obj[4].ToStringParse(), obj[5].IntParse(), obj[6].IntParse(), obj[7].IntParse(), obj[8].IntParse());
 
         [HttpPost]
         public ActionResult<object> GetPlanByChart(KapasiyeUyumChart_Filter filter) => _planService.GetPlanByChart(filter);
@@ -59,5 +59,12 @@ namespace EPM.Plan.Api.Controllers
 
         [HttpPost]
         public List<EpmBandWorkMinuteModel> GetBandWorkMinutes(object[] obj) => _planService.GetBandWorkMinutes(obj[0].IntParse(), obj[1].IntParse());
+
+        [HttpGet, HttpPost]
+        public List<PlanStatus> GetPlanStatusList(object[] obj) => _planService.GetPlanStatusList(obj[0].BooleanParse());
+
+
+        [HttpGet, HttpPost]
+        public List<EPM_PRODUCT_GROUP> GetProductGroupList(object[] obj) => _planService.GetProductGroupList(obj[0].IntParse());
     }
 }

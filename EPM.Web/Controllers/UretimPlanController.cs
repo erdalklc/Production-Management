@@ -67,6 +67,11 @@ namespace EPM.Web.Controllers
             return DataSourceLoader.Load(PlanServiceHelper.GetKapasiteUyumList(YEAR, BAND_GROUP), loadOptions);
         }
         [HttpGet]
+        public object GetProductGroupList(DataSourceLoadOptions loadOptions ,[FromQuery(Name = "BAND_GROUP")] int BAND_GROUP)
+        {
+            return DataSourceLoader.Load(PlanServiceHelper.GetProductGroupList( BAND_GROUP), loadOptions);
+        }
+        [HttpGet]
         public object KapasitePlanPerformansLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "YEAR")] int YEAR, [FromQuery(Name = "BAND_GROUP")] int BAND_GROUP)
         {
             return DataSourceLoader.Load(PlanServiceHelper.GetKapasitePerformansList(YEAR, BAND_GROUP), loadOptions);
@@ -125,9 +130,9 @@ namespace EPM.Web.Controllers
         }
 
         [HttpGet,HttpPost]
-        public object _PartialGetPlanList(int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE)
+        public object _PartialGetPlanList(int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE,int PLAN_DURUM)
         {
-            return PlanServiceHelper.GetPlan(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, BRAND, SEASON, MODEL, COLOR, ORDER_TYPE, PRODUCTION_TYPE, FABRIC_TYPE);
+            return PlanServiceHelper.GetPlan(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, BRAND, SEASON, MODEL, COLOR, ORDER_TYPE, PRODUCTION_TYPE, FABRIC_TYPE, PLAN_DURUM);
         }
         [HttpGet, HttpPost]
         public object _PartialGetPlanListByChart(KapasiyeUyumChart_Filter filter)
@@ -139,5 +144,9 @@ namespace EPM.Web.Controllers
         {
             return PlanServiceHelper.UpdateInsertPlan(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, elem);
         }
+
+
+        [HttpGet]
+        public object GetPlanStatusList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(PlanServiceHelper.GetPlanStatusList(hepsi), loadOptions);
     }
 }

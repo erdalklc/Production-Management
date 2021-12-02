@@ -172,8 +172,7 @@
         e.data.HEADER_ID = tempHeaderId;
     }
 
-    function gridSatinAlmaFocusedRowChanged(e) {
-        console.log(e.row.data);
+    function gridSatinAlmaFocusedRowChanged(e) { 
         setTimeout(function () {
             $("#edProcessInformations").load('@Url.Action("_PartialProcessInformations", "UretimTakip")', {
                 PO_HEADER_ID: e.row.data.PO_HEADER_ID,

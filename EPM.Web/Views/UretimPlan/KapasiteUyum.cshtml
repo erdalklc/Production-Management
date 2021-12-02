@@ -62,6 +62,22 @@
                     },
                     sorting: {
                         mode: "multiple"
+                    },summary: {
+                      totalItems: [{
+                        column: 'PLANSIZ_ADET',
+                        summaryType: 'sum',
+                        displayFormat: '{0}'
+                      },
+                      {
+                        column: 'URETIM_ADET',
+                        summaryType: 'sum',
+                        displayFormat: '{0}'
+                      },
+                      {
+                        column: 'PLANLANAN_ADET',
+                        summaryType: 'sum',
+                        displayFormat: '{0}'
+                      }],
                     },
                     filterRow: {
                         visible: true,
@@ -173,6 +189,20 @@
                             d.reject("Kayıt Hatası : " + textStatus);
                         });
                         e.cancel = d.promise();
+                    },onCellPrepared : function(e){
+                        if(e.column.dataField=="CREATE_MINUTE"){
+                            if(e.data){
+                            if(e.data.CREATE_MINUTE==0){
+                                e.cellElement[0].bgColor="indianred";
+                            }}
+                        }
+                         if(e.column.dataField=="PLANSIZ_ADET"){
+                            if(e.data){
+                            if(e.data.PLANSIZ_ADET>0){
+                                e.cellElement[0].bgColor="indianred";
+                            }}
+                        }
+                        
                     },
                     focusedRowEnabled: true,
                     focusedRowIndex: 0,
@@ -184,8 +214,17 @@
                     onContentReady: function (e) {
                     },
                     onCellDblClick: function (e) {
-                        e.component.cellValue(e.rowIndex, e.columnIndex, e.data["PLANSIZ_ADET"]);
-                        e.component.saveEditData();
+                       var ok=false;
+                        console.log(YEARS);
+                        for(var i =0;i<YEARS.length;i++){
+                            console.log(e);
+                            if(e.column.name.startsWith(YEARS[i].YEAR))
+                                ok=true;
+                        }
+                        if(ok){
+                            e.component.cellValue(e.rowIndex, e.columnIndex, e.data["PLANSIZ_ADET"]);
+                            e.component.saveEditData();
+                        }
 
                     },
                     columnMinWidth: 80,

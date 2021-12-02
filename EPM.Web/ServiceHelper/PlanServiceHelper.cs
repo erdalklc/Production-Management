@@ -11,11 +11,11 @@ namespace EPM.Web.ServiceHelper
 {
     public class PlanServiceHelper: EPMHttpCaller
     {
-        public static object GetPlan(string USER_CODE, int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE)
+        public static object GetPlan(string USER_CODE, int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM)
         {
             string apiUrl = "GetPlan";
             var list = PostRequest<object[], object>(EPMServiceType.Plan, apiUrl, new object[] { USER_CODE
-                , BRAND,SEASON,MODEL,COLOR,ORDER_TYPE,PRODUCTION_TYPE,FABRIC_TYPE });
+                , BRAND,SEASON,MODEL,COLOR,ORDER_TYPE,PRODUCTION_TYPE,FABRIC_TYPE,PLAN_DURUM });
             return list;
         }
         public static object GetPlanByChart(KapasiyeUyumChart_Filter filter)
@@ -52,6 +52,14 @@ namespace EPM.Web.ServiceHelper
                 , Values });
             return list;
         }
+
+        public static List<EPM_PRODUCT_GROUP> GetProductGroupList(int BAND_GROUP)
+        {
+            string apiUrl = "GetProductGroupList";
+            var list = PostRequest<object[], List<EPM_PRODUCT_GROUP>>(EPMServiceType.Plan, apiUrl, new object[] { BAND_GROUP });
+            return list;
+        }
+
         public static object[] BandWorkersUpdate(int Key, string Values)
         {
             string apiUrl = "BandWorkersUpdate";
@@ -105,5 +113,12 @@ namespace EPM.Web.ServiceHelper
             return list;
         }
 
+
+        public static List<PlanStatus> GetPlanStatusList(bool hepsi = true)
+        {
+            string apiUrl = "GetPlanStatusList";
+            var list = PostRequest<object[], List<PlanStatus>>(EPMServiceType.Plan, apiUrl, new object[] { hepsi });
+            return list;
+        }
     }
 }
