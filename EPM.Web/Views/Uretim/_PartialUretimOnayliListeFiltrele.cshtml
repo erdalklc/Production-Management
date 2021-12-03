@@ -36,8 +36,7 @@
     .ShowColumnLines(true)
     .ColumnChooser(ch => { ch.Mode(GridColumnChooserMode.Select);ch.Enabled(true); })
     .ShowColumnHeaders(true)
-    .OnFocusedRowChanged("gridFocusedRowChanged")
-    .ColumnMinWidth(60)
+    .OnFocusedRowChanged("gridFocusedRowChanged") 
     .Summary(
     ob=>ob.TotalItems(
         items=> {
@@ -77,6 +76,7 @@
         columns.AddFor(m => m.DEADLINE_4).Caption("4. DEADLINE").Visible(true).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
         columns.AddFor(m => m.SHIPMENT_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
         columns.AddFor(m => m.QUANTITY);
+        columns.Add().AllowEditing(false).Width(20);;
     })
     .OnEditingStart(@<text>
 

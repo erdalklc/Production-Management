@@ -2,6 +2,7 @@
 using DevExtreme.AspNet.Mvc; 
 using EPM.Dto.Models;
 using EPM.Plan.Dto.Plan;
+using EPM.Service.Base;
 using EPM.Tools.Helpers;
 using EPM.Tools.Managers;
 using EPM.Web.ServiceHelper; 
@@ -14,13 +15,19 @@ namespace EPM.Web.Controllers
     public class UretimPlanController : Controller
     {
 
+        private readonly IMenuService _menuService;
+        public UretimPlanController(IMenuService menuService)
+        {
+            _menuService = menuService;
+        }
         public IActionResult Index()
         {
             return View();
         }
 
         public IActionResult PlanOlustur()
-        {
+        { 
+            ViewData["CanEditPlan"] = _menuService.CanEditPlan(Request.HttpContext);
             ViewBag.Page = "ÜRETİM PLAN GİRİŞİ"; 
             return View(new Plan_Filter());
         }
@@ -33,6 +40,7 @@ namespace EPM.Web.Controllers
 
         public IActionResult KapasiteUyum()
         {
+            ViewData["CanEditPlan"] = _menuService.CanEditPlan(Request.HttpContext);
             ViewBag.Page = "KAPASİTE UYUM";
             return View();
         }
@@ -49,11 +57,13 @@ namespace EPM.Web.Controllers
         [HttpGet, HttpPost]
         public IActionResult _PartialBandWork()
         {
+            ViewData["CanEditPlan"] = _menuService.CanEditPlan(Request.HttpContext);
             return PartialView();
         }
         [HttpGet,HttpPost]
         public IActionResult _PartialBandWorkMinutes()
         {
+            ViewData["CanEditPlan"] = _menuService.CanEditPlan(Request.HttpContext);
             return PartialView();
         }
         [HttpGet, HttpPost]
@@ -77,9 +87,9 @@ namespace EPM.Web.Controllers
             return DataSourceLoader.Load(PlanServiceHelper.GetKapasitePerformansList(YEAR, BAND_GROUP), loadOptions);
         }
         [HttpGet]
-        public object BandWorkersLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "YEAR")] int YEAR, [FromQuery(Name = "BAND_GROUP")] int BAND_GROUP)
+        public object BandWorkersLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "YEAR")] int YEAR, [FromQuery(Name = "BAND_GROUP")] int BAND_GROUP, [FromQuery(Name = "PRODUCT_GROUP")] int PRODUCT_GROUP)
         {
-            return DataSourceLoader.Load(PlanServiceHelper.GetBandWorkers(YEAR, BAND_GROUP), loadOptions);
+            return DataSourceLoader.Load(PlanServiceHelper.GetBandWorkers(YEAR, BAND_GROUP, PRODUCT_GROUP), loadOptions);
         }
         [HttpGet]
         public object BandWorkMinutesLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "YEAR")] int YEAR, [FromQuery(Name = "BAND_GROUP")] int BAND_GROUP)

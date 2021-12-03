@@ -1,4 +1,11 @@
-﻿
+﻿ @{
+    bool canEditPlan = Convert.ToBoolean(ViewData["CanEditPlan"]);
+    string sCanEditPlan = "false";
+    if(canEditPlan)
+    {
+        sCanEditPlan = "true";
+    }
+}
 
 <div id="form-container">
     @(Html.Partial("_PartialKapasitePlanUyum"))
@@ -86,7 +93,7 @@
                     headerFilter: { visible: true },
                     editing: {
                         mode: "cell",
-                        allowUpdating: true
+                        allowUpdating: @sCanEditPlan
                     } , customizeColumns: function (columns) {
                         for (var i = 0; i < YEARS.length; i++) {
                             columns.push({
@@ -214,7 +221,8 @@
                     onContentReady: function (e) {
                     },
                     onCellDblClick: function (e) {
-                       var ok=false;
+                      if(@sCanEditPlan){
+                        var ok=false;
                         console.log(YEARS);
                         for(var i =0;i<YEARS.length;i++){
                             console.log(e);
@@ -225,6 +233,8 @@
                             e.component.cellValue(e.rowIndex, e.columnIndex, e.data["PLANSIZ_ADET"]);
                             e.component.saveEditData();
                         }
+                      }
+                    
 
                     },
                     columnMinWidth: 80,

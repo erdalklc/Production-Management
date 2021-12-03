@@ -122,5 +122,17 @@ namespace EPM.Service.Base
 
             return yes;
         }
+
+        public bool CanEditPlan(HttpContext context)
+        {
+            bool yes = true;
+            List<EPM_USER_RESPONSIBILITY> res = new CookieHelper().GetObjectFromCookie<List<EPM_USER_RESPONSIBILITY>>(context, "EPM_USER_RESPONSIBILITY");
+
+            if (res.FindAll(ob => ob.RESPONSIBILITY_ID == 1).Count > 0)
+                yes = true;
+            else yes = false;
+
+            return yes;
+        }
     }
 }

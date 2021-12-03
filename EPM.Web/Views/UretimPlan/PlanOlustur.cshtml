@@ -2,7 +2,14 @@
 @using EPM.Plan.Dto.Plan; 
 @model Plan_Filter
 
- 
+ @{
+    bool canEditPlan = Convert.ToBoolean(ViewData["CanEditPlan"]);
+    string sCanEditPlan = "false";
+    if(canEditPlan)
+    {
+        sCanEditPlan = "true";
+    }
+}
 <div id="form-container">
     <div class="dx-card wide-card">
         @(Html.DevExtreme().Form<Plan_Filter>()
@@ -110,7 +117,7 @@
                     headerFilter: { visible: true },
                     editing: {
                         mode: "cell",
-                        allowUpdating: true
+                        allowUpdating: @sCanEditPlan
                     }, columnChooser: {
                         enabled: true
                     }, customizeColumns: function (columns) {
@@ -241,6 +248,7 @@
                          // e.component.refresh(true);
                     },
                     onCellDblClick: function (e) {
+                       if(@sCanEditPlan){
                         var ok=false;
                         console.log(YEARS);
                         for(var i =0;i<YEARS.length;i++){
@@ -252,6 +260,7 @@
                             e.component.cellValue(e.rowIndex, e.columnIndex, e.data["PLANSIZ_ADET"]);
                             e.component.saveEditData();
                         }
+                      }
 
                     },
                     columnMinWidth: 80,

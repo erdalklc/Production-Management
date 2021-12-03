@@ -54,7 +54,7 @@ namespace EPM.Plan.Api.Controllers
 
 
         [HttpPost]
-        public List<EpmBandWorkModel> GetBandWorkers(object[] obj) => _planService.GetBandWorkers(obj[0].IntParse(), obj[1].IntParse());
+        public List<EpmBandWorkModel> GetBandWorkers(object[] obj) => _planService.GetBandWorkers(obj[0].IntParse(), obj[1].IntParse(),obj[2].IntParse());
 
 
         [HttpPost]

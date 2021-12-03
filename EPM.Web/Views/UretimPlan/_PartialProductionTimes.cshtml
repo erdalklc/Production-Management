@@ -6,7 +6,8 @@
         ob=>ob.Mvc().Controller("UretimPlan") 
         .LoadAction("ProductionTimesLoad") 
         .Key("ID")
-    ).Height(500)  
+    )
+    .Height("calc(100vh - 150px)")
     .FilterRow(f => f.Visible(true))
     .OnRowUpdating("onWorkUpdating")
     .FocusedRowEnabled(true)
@@ -18,13 +19,13 @@
     .Editing(ob => ob.Mode(GridEditMode.Cell).AllowUpdating(false).AllowDeleting(false).AllowAdding(false))
     .ShowColumnLines(true)
     .Sorting(s=>s.Mode(GridSortingMode.None))
-    .ShowColumnHeaders(true)
-    .ColumnMinWidth(40)
+    .ShowColumnHeaders(true) 
     .Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
     .Columns(columns => {
         columns.AddFor(m => m.ID).Width(60).AllowSorting(false).AllowEditing(false).Visible(false);
         columns.AddFor(m => m.MODEL).Width(110).AllowEditing(false); 
         columns.AddFor(m => m.SURE).Width(110).AllowEditing(false); 
+        columns.Add().AllowEditing(false).Width(20);;
     })
     )
 </div>

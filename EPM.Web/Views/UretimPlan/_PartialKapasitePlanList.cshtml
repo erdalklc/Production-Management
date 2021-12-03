@@ -1,6 +1,7 @@
 ﻿@{ 
     int[] years = { DateTime.Now.Year - 1, DateTime.Now.Year, DateTime.Now.Year + 1 };
 } 
+
 <div class="dx-card wide-card">
     @(Html.DevExtreme().Form()
         .ID("edFilter").ShowValidationSummary(true)
@@ -44,6 +45,9 @@
     }
     function RefreshProductGroup(){
         $("#edProductGroup").dxLookup("getDataSource").reload();
+          $("#edWorker").html("");
+          $("#edWorkerMinutes").html("");
+          $("#edModelWorkTimes").html(""); 
     }
     function RefreshChart() {  
         $("#edWorker").load('@Url.Action("_PartialBandWork","UretimPlan")', function() { 

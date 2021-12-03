@@ -98,11 +98,11 @@ namespace EPM.Web.ServiceHelper
             return list;
         }
 
-        public static List<EpmBandWorkModel> GetBandWorkers(int YEAR, int BAND_GROUP)
+        public static List<EpmBandWorkModel> GetBandWorkers(int YEAR, int BAND_GROUP,int PRODUCT_GROUP)
         {
             string apiUrl = "GetBandWorkers";
             var list = PostRequest<object[], List<EpmBandWorkModel>>(EPMServiceType.Plan, apiUrl, new object[] { YEAR
-                , BAND_GROUP });
+                , BAND_GROUP ,PRODUCT_GROUP});
             return list;
         }
         public static List<EpmBandWorkMinuteModel> GetBandWorkMinutes(int YEAR, int BAND_GROUP)

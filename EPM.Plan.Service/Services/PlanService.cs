@@ -577,39 +577,63 @@ ORDER BY P.YEAR,P.WEEK,H.MODEL", BAND_GROUP, YEAR);
             {
                 var modelToplam = modelPlanToplamlari.FindAll(ob => ob.WEEK == item.WEEK);
                 if (modelToplam != null)
-                {
+                { 
                     decimal tQuantity = 0;
                     foreach (var itm in modelToplam)
                     {
                         var sure = sureler.Find(ob => ob.MODEL == itm.MODEL);
                         if (sure != null)
                         {
-                            tQuantity += sure.SURE * itm.QUANTITY;
+                            var kisiSayisi = 0;
+                            int PRODUCT_GROUP_ID = _planRepository.ReadInteger("SELECT PRODUCT_GROUP FROM (SELECT PRODUCT_GROUP FROM FDEIT005.EPM_MASTER_PRODUCTION_H WHERE MODEL ='" + itm.MODEL + "'  ORDER BY ID DESC) A WHERE ROWNUM=1 ");
+                            var worker = workers.Find(ob => ob.BAND_ID == BAND_GROUP && ob.WEEK == item.WEEK && ob.PRODUCT_GROUP == PRODUCT_GROUP_ID);
+                            if (worker != null)
+                                kisiSayisi = worker.WORKER;
+                            else
+                            {
+                                if (BAND_GROUP == 1)
+                                {
+                                    switch (PRODUCT_GROUP_ID)
+                                    {
+                                        case 8://ELBISE
+                                            kisiSayisi = 23;
+                                            break;
+                                        case 16://POLO
+                                        case 20://TRIKO
+                                            kisiSayisi = 17;
+                                            break;
+                                        case 21://SSHIRT
+                                            kisiSayisi = 11;
+                                            break;
+                                        case 24://SACBANDI
+                                            kisiSayisi = 3;
+                                            break;
+                                        case 19://SSHIRT
+                                            kisiSayisi = 17;
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    kisiSayisi = 70;
+                                }
+                                else if (BAND_GROUP == 2)
+                                    kisiSayisi = 46;
+                                else if (BAND_GROUP == 3)
+                                    kisiSayisi = 50;
+                            }
+                            if(kisiSayisi!=0)
+                            tQuantity += (sure.SURE * itm.QUANTITY)/kisiSayisi;
                         }
                     }
-                    var kisiSayisi = 0;
-                    var worker = workers.Find(ob => ob.BAND_ID == BAND_GROUP && ob.WEEK == item.WEEK);
-                    if (worker != null)
-                        kisiSayisi = worker.WORKER;
-                    else
-                    {
-                        if (BAND_GROUP == 1)
-                            kisiSayisi = 70;
-                        else if (BAND_GROUP == 2)
-                            kisiSayisi = 46;
-                        else if (BAND_GROUP == 3)
-                            kisiSayisi = 50;
-                    }
+
+
                     var workTime = 0;
                     var work = workerMinutes.Find(ob => ob.BAND_ID == BAND_GROUP && ob.WEEK == item.WEEK);
                     if (work != null)
                         workTime = work.WORK_MINUTE;
                     else workTime = 2700;
-                    if (kisiSayisi != 0)
-                    {
-                        decimal tOrt = ((tQuantity / kisiSayisi) / workTime);
-                        item.PERFORMANS = tOrt;
-                    }
+                    decimal tOrt = ((tQuantity) / workTime);
+                    item.PERFORMANS = tOrt;
                 }
                 else
                 {
@@ -653,6 +677,7 @@ GROUP BY H.MODEL,P.YEAR,P.WEEK
 ORDER BY P.YEAR,P.WEEK,H.MODEL", BAND_GROUP, YEAR);
             List<ModelPlanToplamlari> modelPlanToplamlari = _planRepository.DeserializeList<ModelPlanToplamlari>(sql);
 
+
             foreach (var item in performans)
             {
                 var modelToplam = modelPlanToplamlari.FindAll(ob => ob.WEEK == item.WEEK);
@@ -664,33 +689,56 @@ ORDER BY P.YEAR,P.WEEK,H.MODEL", BAND_GROUP, YEAR);
                         var sure = sureler.Find(ob => ob.MODEL == itm.MODEL);
                         if (sure != null)
                         {
-                            tQuantity += sure.SURE * itm.QUANTITY;
+                            var kisiSayisi = 0;
+                            int PRODUCT_GROUP_ID = _planRepository.ReadInteger("SELECT PRODUCT_GROUP FROM (SELECT PRODUCT_GROUP FROM FDEIT005.EPM_MASTER_PRODUCTION_H WHERE MODEL ='" + itm.MODEL + "'  ORDER BY ID DESC) A WHERE ROWNUM=1 ");
+                            var worker = workers.Find(ob => ob.BAND_ID == BAND_GROUP && ob.WEEK == item.WEEK && ob.PRODUCT_GROUP == PRODUCT_GROUP_ID);
+                            if (worker != null)
+                                kisiSayisi = worker.WORKER;
+                            else
+                            {
+                                if (BAND_GROUP == 1)
+                                {
+                                    switch (PRODUCT_GROUP_ID)
+                                    {
+                                        case 8://ELBISE
+                                            kisiSayisi = 23;
+                                            break;
+                                        case 16://POLO
+                                        case 20://TRIKO
+                                            kisiSayisi = 17;
+                                            break;
+                                        case 21://SSHIRT
+                                            kisiSayisi = 11;
+                                            break;
+                                        case 24://SACBANDI
+                                            kisiSayisi = 3;
+                                            break;
+                                        case 19://SSHIRT
+                                            kisiSayisi = 17;
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    kisiSayisi = 70;
+                                }
+                                else if (BAND_GROUP == 2)
+                                    kisiSayisi = 46;
+                                else if (BAND_GROUP == 3)
+                                    kisiSayisi = 50;
+                            }
+                            if (kisiSayisi != 0)
+                                tQuantity += (sure.SURE * itm.QUANTITY) / kisiSayisi;
                         }
                     }
-                    var kisiSayisi = 0;
-                    var worker =workers.Find(ob => ob.BAND_ID == BAND_GROUP && ob.WEEK == item.WEEK);
-                    if (worker != null)
-                        kisiSayisi = worker.WORKER;
-                    else
-                    {
-                        if (BAND_GROUP == 1)
-                            kisiSayisi = 70;
-                        else if (BAND_GROUP == 2)
-                            kisiSayisi = 46;
-                        else if (BAND_GROUP == 3)
-                            kisiSayisi = 50;
-                    }
+
+
                     var workTime = 0;
-                    var work= workerMinutes.Find(ob => ob.BAND_ID == BAND_GROUP && ob.WEEK == item.WEEK);
+                    var work = workerMinutes.Find(ob => ob.BAND_ID == BAND_GROUP && ob.WEEK == item.WEEK);
                     if (work != null)
                         workTime = work.WORK_MINUTE;
                     else workTime = 2700;
-                    if (kisiSayisi != 0)
-                    {
-                        decimal tOrt = ((tQuantity / kisiSayisi) / workTime);
-                        item.PERFORMANS = tOrt;
-                    }
-                    else item.PERFORMANS = 0;
+                    decimal tOrt = ((tQuantity) / workTime);
+                    item.PERFORMANS = tOrt;
                 }
                 else
                 {
@@ -701,16 +749,26 @@ ORDER BY P.YEAR,P.WEEK,H.MODEL", BAND_GROUP, YEAR);
             return performans;
         }
 
-        public List<EpmBandWorkModel> GetBandWorkers(int YEAR, int BAND_GROUP)
+        public List<EpmBandWorkModel> GetBandWorkers(int YEAR, int BAND_GROUP,int PRODUCT_GROUP)
         {
-            if (YEAR == 0 || BAND_GROUP == 0)
+            if (YEAR == 0 || BAND_GROUP == 0|| PRODUCT_GROUP==0)
                 return new List<EpmBandWorkModel>();
             string sql = string.Format(@"
 SELECT WK.ID,
        A.WEEK, 
        {0} AS BAND_ID,
        {1} AS YEAR,
-       NVL(WK.WORKER,(CASE WHEN {0} =1 THEN 71 WHEN {0}=2 THEN 46 WHEN {0}=3 THEN 50 ELSE 0 END)) AS WORKER
+       {2} AS PRODUCT_GROUP,
+       (SELECT ADI FROM FDEIT005.EPM_PRODUCT_GROUP WHERE ID={2}) AS PRODUCT_GROUP_NAME,
+       NVL(WK.WORKER,(CASE WHEN {0} =1 THEN 
+(CASE WHEN {2} = 8 THEN 23 --ELBISE
+WHEN {2}=16 THEN 17 --POLO
+WHEN {2}=21 THEN 11 --TSHIRT
+WHEN {2}=24 THEN 3 --SACBANDI
+WHEN {2}=19 THEN 17 --SSHIRT
+ELSE 0 END
+)
+WHEN {0}=2 THEN 46 WHEN {0}=3 THEN 50 ELSE 0 END)) AS WORKER
   FROM (SELECT 1 WEEK FROM DUAL
         UNION ALL
         SELECT 2 WEEK FROM DUAL
@@ -814,10 +872,10 @@ SELECT WK.ID,
         SELECT 51 WEEK FROM DUAL
         UNION ALL
         SELECT 52 WEEK FROM DUAL) A
-       LEFT JOIN FDEIT005.EPM_BAND_WORKERS WK ON WK.WEEK = A.WEEK AND WK.BAND_ID={0} AND WK.YEAR={1}
+       LEFT JOIN FDEIT005.EPM_BAND_WORKERS WK ON WK.WEEK = A.WEEK AND WK.BAND_ID={0} AND WK.YEAR={1} AND WK.PRODUCT_GROUP = {2}
        LEFT JOIN FDEIT005.EPM_PRODUCTION_BAND_GROUP BG ON BG.ID = WK.BAND_ID
        ORDER BY WEEK
-       ", BAND_GROUP, YEAR);
+       ", BAND_GROUP, YEAR, PRODUCT_GROUP);
             return _planRepository.DeserializeList<EpmBandWorkModel>(sql);
         }
 
@@ -984,25 +1042,25 @@ SELECT WK.ID,
             List<EPM_PRODUCT_GROUP> productGroups = new List<EPM_PRODUCT_GROUP>();
             if (BAND_GROUP == 1)
             {
-                productGroups = _planRepository.DeserializeList<EPM_PRODUCT_GROUP>(@"SELECT DISTINCT PH.* FROM EPM_MASTER_PRODUCTION_H H 
-INNER JOIN EPM_PRODUCT_GROUP PH ON H.PRODUCT_GROUP =PH.ID
-WHERE  BRAND=1 AND H.PRODUCTION_TYPE=1 AND PH.ID NOT IN(11,14,20)
+                productGroups = _planRepository.DeserializeList<EPM_PRODUCT_GROUP>(@"SELECT DISTINCT PH.* FROM FDEIT005.EPM_MASTER_PRODUCTION_H H 
+INNER JOIN FDEIT005.EPM_PRODUCT_GROUP PH ON H.PRODUCT_GROUP =PH.ID
+WHERE  BRAND=1 AND H.PRODUCTION_TYPE=1 AND PH.ID NOT IN(11,12,14,20)
 ORDER BY 1
 ");
             }
             else if (BAND_GROUP == 2)
             {
-                productGroups = _planRepository.DeserializeList<EPM_PRODUCT_GROUP>(@"SELECT DISTINCT PH.* FROM EPM_MASTER_PRODUCTION_H H 
-INNER JOIN EPM_PRODUCT_GROUP PH ON H.PRODUCT_GROUP =PH.ID
+                productGroups = _planRepository.DeserializeList<EPM_PRODUCT_GROUP>(@"SELECT DISTINCT PH.* FROM FDEIT005.EPM_MASTER_PRODUCTION_H H 
+INNER JOIN FDEIT005.EPM_PRODUCT_GROUP PH ON H.PRODUCT_GROUP =PH.ID
 WHERE  BRAND=1 AND H.PRODUCTION_TYPE=1 AND PH.ID IN(14)
 ORDER BY 1
 ");
             }
             else if (BAND_GROUP == 3)
             {
-                productGroups = _planRepository.DeserializeList<EPM_PRODUCT_GROUP>(@"SELECT DISTINCT PH.* FROM EPM_MASTER_PRODUCTION_H H 
-INNER JOIN EPM_PRODUCT_GROUP PH ON H.PRODUCT_GROUP =PH.ID
-WHERE  BRAND=1 AND H.PRODUCTION_TYPE=1 AND PH.ID IN(1)
+                productGroups = _planRepository.DeserializeList<EPM_PRODUCT_GROUP>(@"SELECT DISTINCT PH.* FROM FDEIT005.EPM_MASTER_PRODUCTION_H H 
+INNER JOIN FDEIT005.EPM_PRODUCT_GROUP PH ON H.PRODUCT_GROUP =PH.ID
+WHERE  BRAND=1 AND H.PRODUCTION_TYPE=1 AND PH.ID IN(11)
 ORDER BY 1
 ");
             }

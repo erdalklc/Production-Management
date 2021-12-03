@@ -19,5 +19,7 @@ namespace EPM.Service.Base
         public bool OnayliKullanici(HttpContext context);
 
         public bool CanUserEnterTools(HttpContext context);
+
+        public bool CanEditPlan(HttpContext context);
     }
 }

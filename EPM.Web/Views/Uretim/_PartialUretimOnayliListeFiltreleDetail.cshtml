@@ -49,6 +49,7 @@
         columns.AddFor(m => m.MARKET).Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetMarkets").Key("ID").LoadParams(new { all = false })).DisplayExpr("ADI").ValueExpr("ID")).AllowExporting(true);
         columns.AddFor(m => m.PRODUCT_SIZE).AllowExporting(true);
         columns.AddFor(m => m.QUANTITY).AllowEditing(true).AllowExporting(true); 
+        columns.Add().AllowEditing(false).Width(20);
     }).OnInitNewRow(@<text> function(e) { e.data.HEADER_ID =@Model ; }</text>)
     )
 </div>

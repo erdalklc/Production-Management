@@ -1,4 +1,8 @@
-﻿<div  class="dx-card wide-card" style="margin:4px">
+﻿ @{
+    var canEditPlan = Convert.ToBoolean(ViewData["CanEditPlan"]);
+}
+
+<div  class="dx-card wide-card" style="margin:4px">
     <div style="width:100%;height:30px;align-items:center;justify-content:center;text-align:center;padding:5px">BAND ÇALIŞMA SÜRELERİ</div>
 @(Html.DevExtreme().DataGrid<EPM.Plan.Dto.Plan.EpmBandWorkMinuteModel> ().ID("edgridWorkerMinutes")
     .ShowBorders(false)
@@ -8,7 +12,8 @@
         .UpdateAction("BandWorkMinutesUpdate") 
         .LoadParams(new JS("getLoadParameters()"))
         .Key("ROW_ID")
-    ).Height(500) 
+    )
+    .Height("calc(100vh - 150px)")
     .OnRowUpdating("onWorkMinutesUpdating")
     .FocusedRowEnabled(true)
     .FocusedRowIndex(0)
@@ -16,11 +21,10 @@
     .ColumnAutoWidth(true)
     .ShowBorders(true)
     .Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
-    .Editing(ob => ob.Mode(GridEditMode.Cell).AllowUpdating(true).AllowDeleting(false).AllowAdding(false))
+    .Editing(ob => ob.Mode(GridEditMode.Cell).AllowUpdating(canEditPlan).AllowDeleting(false).AllowAdding(false))
     .ShowColumnLines(true)
     .Sorting(s=>s.Mode(GridSortingMode.None))
-    .ShowColumnHeaders(true)
-    .ColumnMinWidth(60)
+    .ShowColumnHeaders(true) 
     .Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
     .Columns(columns => {
         columns.AddFor(m => m.ID).AllowSorting(false).Width(60).AllowEditing(false).Visible(false);
@@ -28,6 +32,7 @@
         
         columns.AddFor(m => m.WEEK).SortOrder(SortOrder.Asc).Width(110).AllowEditing(false);
         columns.AddFor(m => m.WORK_MINUTE).AllowSorting(false).Width(110).AllowEditing(true);
+        columns.Add().AllowEditing(false).Width(20);;
     })
     )
 </div> 
