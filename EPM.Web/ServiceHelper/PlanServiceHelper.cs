@@ -120,5 +120,19 @@ namespace EPM.Web.ServiceHelper
             var list = PostRequest<object[], List<PlanStatus>>(EPMServiceType.Plan, apiUrl, new object[] { hepsi });
             return list;
         }
+
+        public static object GetUretimGerceklesenByChart(KapasiyeUyumChart_Filter filter)
+        {
+            string apiUrl = "GetUretimGerceklesenByChart";
+            var list = PostRequest<KapasiyeUyumChart_Filter, object>(EPMServiceType.Plan, apiUrl, filter);
+            return list;
+        }
+
+        public static object GeKapasiteListByChart(KapasiyeUyumChart_Filter filter)
+        {
+            string apiUrl = "GeKapasiteListByChart";
+            var list = PostRequest<KapasiyeUyumChart_Filter, object>(EPMServiceType.Plan, apiUrl, filter);
+            return list;
+        }
     }
 }

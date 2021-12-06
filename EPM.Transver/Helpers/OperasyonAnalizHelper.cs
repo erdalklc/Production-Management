@@ -20,6 +20,8 @@ namespace EPM.Transver.Helpers
 ,KesimFoyu.ReferansKesimFoyuNo KESIM_FOYU_NO
 ,KesimFoyu.Notu KESIM_FOYU_NOT
 ,SUM(IsEmriOperasyonDetay.Miktar) MIKTAR 
+,EXTRACT(WEEK FROM IsEmriOperasyon.GIRISTARIHI) AS START_WEEK
+,EXTRACT(YEAR FROM IsEmriOperasyon.GIRISTARIHI) AS START_YEAR
 from IsEmriOperasyonDetay
     left join IsEmriOperasyon on IsEmriOperasyon.IsEmriOperasyonID = IsEmriOperasyonDetay.IsEmriOperasyonId
     left join Operasyon on Operasyon.OperasyonID = IsEmriOperasyon.OperasyonId  
@@ -38,6 +40,7 @@ from IsEmriOperasyonDetay
           (IsEmriOperasyonDetay.MakinaId <> 'XXXX')  
           and   sezon.adi='{0}'
           GROUP BY Model.kisaadi , renk.transferkodu,KesimFoyuDetay.BedenId ,SEZON.adi ,IsEmriOperasyon.OperasyonId,Pazar.adi,KesimFoyu.SiparisTipi,KesimFoyu.ReferansKesimFoyuNo, KesimFoyu.Notu
+,EXTRACT (WEEK FROM ISEMRIOPERASYON.GIRISTARIHI),EXTRACT (YEAR FROM ISEMRIOPERASYON.GIRISTARIHI)
 ", SEASON);
             return sql;
         }

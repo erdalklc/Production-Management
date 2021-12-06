@@ -149,6 +149,16 @@ namespace EPM.Web.Controllers
         {
             return PlanServiceHelper.GetPlanByChart(filter);
         }
+        [HttpGet, HttpPost]
+        public object _PartialGetUretimGerceklesenListByChart(KapasiyeUyumChart_Filter filter)
+        {
+            return PlanServiceHelper.GetUretimGerceklesenByChart(filter);
+        }
+        [HttpGet, HttpPost]
+        public object _PartialGeKapasiteListByChart(KapasiyeUyumChart_Filter filter)
+        {
+            return PlanServiceHelper.GeKapasiteListByChart(filter);
+        }
         [HttpPut,HttpGet,HttpPost]
         public object UpdateTask( [FromBody] JObject elem)
         {

@@ -23,6 +23,10 @@ namespace EPM.Plan.Api.Controllers
 
         [HttpPost]
         public ActionResult<object> GetPlanByChart(KapasiyeUyumChart_Filter filter) => _planService.GetPlanByChart(filter);
+        [HttpPost]
+        public ActionResult<object> GetUretimGerceklesenByChart(KapasiyeUyumChart_Filter filter) => _planService.GetUretimGerceklesenByChart(filter);
+        [HttpPost]
+        public ActionResult<object> GeKapasiteListByChart(KapasiyeUyumChart_Filter filter) => _planService.GeKapasiteListByChart(filter);
 
         [HttpPost]
         public object UpdateInsertPlan(object[] obj)=>_planService.UpdateInsertPlan(obj[0].ToString(),(JObject)obj[1]);

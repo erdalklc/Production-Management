@@ -21,5 +21,7 @@ namespace EPM.Core.Nesneler
         public int KAYIP { get; set; }
         public int BIRINCI_KALITE { get; set; }
         public int IKINCI_KALITE { get; set; }
+        public int START_WEEK { get; set; }
+        public int START_YEAR { get; set; }
     }
 }

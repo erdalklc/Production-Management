@@ -22,14 +22,138 @@
         return jQuery("[name=edProductGroup]").val();
     }
     var datax = null;
-    function Chart_Clicked(WEEK_VALUE) {
+    function Chart_Clicked(WEEK_VALUE,SERIES_NAME) {
         var data = {
             BAND: GetGroup(),
             YEAR: GetYear(),
             WEEK: WEEK_VALUE 
         };
         getLoadPanelInstance().show();
-        $.ajax({
+        console.log(SERIES_NAME);
+        if(SERIES_NAME=="ÜRETİM GERÇEKLEŞEN"){
+               $.ajax({
+            type: "POST",
+            url: '@Url.Action("_PartialGetUretimGerceklesenListByChart", "UretimPlan")',
+            data: data,
+            contentType: 'application/x-www-form-urlencoded',
+            async: true,
+            success: function (income, status, xmlRequest) {
+                var formData = JSON.parse(income);
+
+                var popupOptions = {
+                    contentTemplate: function () {
+                      
+                        return  "<div id='edReport' style='height:calc(100vh - 100px)'></div>";
+                    },
+                    width: function () { return "1200px"; },
+                    height: function () { return "calc(100% - 20px)"; },
+                    showTitle: true,
+                    title: GetYear()+" - "+WEEK_VALUE +". HAFTA ÜRETM GERÇEKLEŞEN DETAY",
+                    dragEnabled: true,
+                    closeOnOutsideClick: true,
+                    onContentReady: function () {
+                        try { 
+                            $("#edReport").dxDataGrid({
+                            dataSource: formData,
+                            keyExpr: "ROW_ID",
+                            loadPanel: {
+                                enabled: true
+                            },columnChooser: {
+                                enabled: true
+                            }, export: {
+                                enabled: true
+                            },
+                            remoteOperations: false,
+                            columns:[
+                               {
+                                    dataField:"MODEL_ADI",
+                                    caption:"MODEL"
+                               },
+                               {
+                                    dataField:"RENK_ADI",
+                                    caption:"RENK"
+                               },
+                               {
+                                    dataField:"BEDEN_ADI",
+                                    caption:"BEDEN"
+                               },
+                               {
+                                    dataField:"SEZON_ADI",
+                                    caption:"SEZON"
+                               },
+                               {
+                                    dataField:"PAZAR_ADI",
+                                    caption:"PAZAR"
+                               },
+                               {
+                                    dataField:"SIPARIS_TIPI",
+                                    caption:"SİPARİŞ TİPİ"
+                               },
+                               {
+                                    dataField:"KESIM_FOYU_NO",
+                                    caption:"KESİM FÖYÜ NO"
+                               },
+                               {
+                                    dataField:"START_WEEK",
+                                    caption:"HAFTA"
+                               },
+                               {
+                                    dataField:"START_YEAR",
+                                    caption:"YIL"
+                               },
+                               {
+                                    dataField:"MIKTAR",
+                                    caption:"MİKTAR"
+                               }
+
+                            ],
+                            paging: {
+                                pageSize: 100
+                            },
+                            sorting: {
+                                mode: "multiple"
+                            },summary: {
+                              totalItems: [{
+                                column: 'MIKTAR',
+                                summaryType: 'sum',
+                                displayFormat: '{0}'
+                              }],
+                            },
+                            filterRow: {
+                                visible: true,
+                                applyFilter: "auto"
+                            },
+                            headerFilter: { visible: true },
+                            focusedRowEnabled: true,
+                            focusedRowIndex: 0,
+                            focusedColumnIndex: 0 ,
+                            showColumnLines: true,
+                            showRowLines: true,
+                            rowAlternationEnabled: true,
+                            showBorders: true,
+                            columnMinWidth: 80,
+                            showBorders: true,
+                        }).dxDataGrid("instance"); 
+                } catch (e) { }
+                    }
+
+                };
+
+                $("#popupDetay").dxPopup(popupOptions).dxPopup("instance").show(); 
+
+
+            }
+            , beforeSend: function () { 
+            }
+
+
+        }).always(function () {
+            getLoadPanelInstance().hide();
+        });
+        }
+        else if(SERIES_NAME=="PLAN TOPLAM"){
+
+             $.ajax({
             type: "POST",
             url: '@Url.Action("_PartialGetPlanListByChart", "UretimPlan")',
             data: data,
@@ -255,5 +379,137 @@
         }).always(function () {
             getLoadPanelInstance().hide();
         });
+        }else if(SERIES_NAME =="KAPASİTE"){
+              $.ajax({
+            type: "POST",
+            url: '@Url.Action("_PartialGeKapasiteListByChart", "UretimPlan")',
+            data: data,
+            contentType: 'application/x-www-form-urlencoded',
+            async: true,
+            success: function (income, status, xmlRequest) {
+                var formData = JSON.parse(income);
+
+                var popupOptions = {
+                    contentTemplate: function () {
+                      
+                        return  "<div id='edReport' style='height:calc(100vh - 100px)'></div>";
+                    },
+                    width: function () { return "900px"; },
+                    height: function () { return "calc(100% - 300px)"; },
+                    showTitle: true,
+                    title: GetYear()+" - "+WEEK_VALUE +". HAFTA KAPASİTE DETAY",
+                    dragEnabled: true,
+                    closeOnOutsideClick: true,
+                    onContentReady: function () {
+                        try { 
+                            $("#edReport").dxDataGrid({
+                            dataSource: formData,
+                            keyExpr: "ROW_ID",
+                            loadPanel: {
+                                enabled: true
+                            },columnChooser: {
+                                enabled: true
+                            }, export: {
+                                enabled: true
+                            },
+                            remoteOperations: false,
+                            columns:[
+                               {
+                                    dataField:"MODEL",
+                                    caption:"MODEL"
+                               },
+                               {
+                                    dataField:"WEEK",
+                                    caption:"HAFTA"
+                               },
+                               {
+                                    dataField:"YEAR",
+                                    caption:"YIL"
+                               },
+                               {
+                                    dataField:"QUANTITY",
+                                    caption:"PLAN TOPLAM"
+                               },
+                               {
+                                    dataField:"SURE",
+                                    caption:"ÜRÜN YAPILIŞ SÜRESİ"
+                               },
+                               {
+                                    dataField:"KISI",
+                                    caption:"BANT KİŞİ SAYISI"
+                               },
+                               {
+                                    dataField:"WORK_TIME",
+                                    caption:"BANT ÇALIŞMA SÜRESİ"
+                               },
+                               {
+                                    dataField:"EXPECTED_QUANTITY",
+                                    caption:"BEKLENEN ÜRETİM KAPASİTESİ"
+                               }
+
+                            ],
+                            height:"100%",
+                            paging: {
+                                pageSize: 10
+                            },
+                            sorting: {
+                                mode: "multiple"
+                            },summary: {
+                              totalItems: [{
+                                column: 'EXPECTED_QUANTITY',
+                                summaryType: 'sum',
+                                displayFormat: '{0}'
+                              },
+                              {
+                                column: 'WORK_TIME',
+                                summaryType: 'sum',
+                                displayFormat: '{0}'
+                              },
+                              {
+                                column: 'KISI',
+                                summaryType: 'sum',
+                                displayFormat: '{0}'
+                              }],
+                            },
+                            pager: {
+                              visible: true,
+                              allowedPageSizes: [5, 10, 'all'],
+                              showPageSizeSelector: true,
+                              showInfo: true,
+                              showNavigationButtons: true,
+                            },
+                            filterRow: {
+                                visible: true,
+                                applyFilter: "auto"
+                            },
+                            headerFilter: { visible: true },
+                            focusedRowEnabled: true,
+                            focusedRowIndex: 0,
+                            focusedColumnIndex: 0 ,
+                            showColumnLines: true,
+                            showRowLines: true,
+                            rowAlternationEnabled: true,
+                            showBorders: true,
+                            columnMinWidth: 80,
+                            showBorders: true,
+                        }).dxDataGrid("instance"); 
+                } catch (e) { }
+                    }
+
+                };
+
+                $("#popupDetay").dxPopup(popupOptions).dxPopup("instance").show(); 
+
+
+            }
+            , beforeSend: function () { 
+            }
+
+
+        }).always(function () {
+            getLoadPanelInstance().hide();
+        });
+        }
+       
     }
 </script>

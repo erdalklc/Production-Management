@@ -23,23 +23,25 @@ namespace EPM.Transver
 
             foreach (var item in gerceklesenler)
             {
-                if(item.BEDEN_ADI!=null && item.SEZON_ADI!=null && item.MODEL_ADI!=null && item.PAZAR_ADI != null)
-                { 
-                        EPM_PRODUCTION_EGEMEN aktarilacak = new EPM_PRODUCTION_EGEMEN();
-                        aktarilacak.TYPE = 1;
-                        aktarilacak.BIRINCI_KALITE = item.BIRINCI_KALITE_SAYISI;
-                        aktarilacak.DEMET = item.DEMET_MIKTARI;
-                        aktarilacak.IKINCI_KALITE = item.IKINCI_KALITE_SAYISI;
-                        aktarilacak.KAYIP = item.KAYIP_MIKTAR;
-                        aktarilacak.MODEL = item.MODEL_ADI;
-                        aktarilacak.COLOR = item.RENK_ADI;
-                        aktarilacak.PRODUCT_SIZE = item.BEDEN_ADI;
-                        aktarilacak.SEASON = seasonList.Find(ob => ob.EGEMEN_ADI == item.SEZON_ADI).ID;
-                        aktarilacak.SIPARIS_TIPI = orderTypes.Find(ob => ob.ADI == item.SIPARIS_TIPI).ID;
-                        aktarilacak.MARKET = marketList.Find(ob => ob.EGEMEN_ADI == item.PAZAR_ADI).ID;
-                        aktarilacak.FASON_FIRMA = item.FASON_FIRMA;
-                        aktarilacak.KESIM_FOYU_NO = item.KESIM_FOYU_NO;
-                        egemenAktarim.Add(aktarilacak); 
+                if (item.BEDEN_ADI != null && item.SEZON_ADI != null && item.MODEL_ADI != null && item.PAZAR_ADI != null)
+                {
+                    EPM_PRODUCTION_EGEMEN aktarilacak = new EPM_PRODUCTION_EGEMEN();
+                    aktarilacak.TYPE = 1;
+                    aktarilacak.BIRINCI_KALITE = item.BIRINCI_KALITE_SAYISI;
+                    aktarilacak.DEMET = item.DEMET_MIKTARI;
+                    aktarilacak.IKINCI_KALITE = item.IKINCI_KALITE_SAYISI;
+                    aktarilacak.KAYIP = item.KAYIP_MIKTAR;
+                    aktarilacak.MODEL = item.MODEL_ADI;
+                    aktarilacak.COLOR = item.RENK_ADI;
+                    aktarilacak.PRODUCT_SIZE = item.BEDEN_ADI;
+                    aktarilacak.SEASON = seasonList.Find(ob => ob.EGEMEN_ADI == item.SEZON_ADI).ID;
+                    aktarilacak.SIPARIS_TIPI = orderTypes.Find(ob => ob.ADI == item.SIPARIS_TIPI).ID;
+                    aktarilacak.MARKET = marketList.Find(ob => ob.EGEMEN_ADI == item.PAZAR_ADI).ID;
+                    aktarilacak.FASON_FIRMA = item.FASON_FIRMA;
+                    aktarilacak.KESIM_FOYU_NO = item.KESIM_FOYU_NO;
+                    aktarilacak.START_WEEK = item.START_WEEK;
+                    aktarilacak.START_YEAR = item.START_YEAR;
+                    egemenAktarim.Add(aktarilacak);
                 }
                
             }

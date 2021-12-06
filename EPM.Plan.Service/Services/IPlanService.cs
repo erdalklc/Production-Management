@@ -25,7 +25,8 @@ namespace EPM.Plan.Service.Services
         public List<KapasitePlanUyum> GetKapasiteUyumList(int YEAR, int BAND_GROUP);
         public List<KapasitePlanPerformans> GetKapasitePerformansList(int YEAR, int BAND_GROUP);
         public object GetPlanByChart(KapasiyeUyumChart_Filter filter);
-
+        public object GetUretimGerceklesenByChart(KapasiyeUyumChart_Filter filter);
+        public object GeKapasiteListByChart(KapasiyeUyumChart_Filter filter);
         public List<EpmBandWorkModel> GetBandWorkers(int YEAR, int BAND_GROUP,int PRODUCT_GROUP);
         public List<EpmBandWorkMinuteModel> GetBandWorkMinutes(int YEAR, int BAND_GROUP);
         public List<ModelSureleriView> ProductionTimesLoad();

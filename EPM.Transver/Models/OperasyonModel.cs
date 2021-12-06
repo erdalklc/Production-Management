@@ -16,6 +16,8 @@ namespace EPM.Transver.Models
         public string SIPARIS_TIPI { get; set; }
         public string KESIM_FOYU_NO { get; set; }
         public string KESIM_FOYU_NOT { get; set; }
+        public int START_WEEK { get; set; }
+        public int START_YEAR { get; set; }
         public int OPERASYON_ID { get; set; }
         public int MIKTAR { get; set; }
     }

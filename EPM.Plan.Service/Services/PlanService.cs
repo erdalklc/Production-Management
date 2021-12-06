@@ -651,8 +651,16 @@ ORDER BY P.YEAR,P.WEEK,H.MODEL", BAND_GROUP, YEAR);
                     }
                     else item.CAPACITY_RELEASED = 0;
                 }
-            }
 
+                if (BAND_GROUP == 1)
+                    item.PRODUCTION_RELEASED = _planRepository.ReadInteger("SELECT SUM(MIKTAR) FROM  FDEIT005.EPM_OPERATION_QUANTITYS WHERE OPERASYON_ID IN (5,600,845,80) AND START_YEAR=" + YEAR + " AND START_WEEK=" + item.WEEK + "");
+                else if (BAND_GROUP == 2)
+                    item.PRODUCTION_RELEASED = _planRepository.ReadInteger("SELECT SUM(MIKTAR) FROM  FDEIT005.EPM_OPERATION_QUANTITYS WHERE OPERASYON_ID IN (670) AND START_YEAR=" + YEAR + " AND START_WEEK=" + item.WEEK + "");
+                else if (BAND_GROUP == 3)
+                    item.PRODUCTION_RELEASED = _planRepository.ReadInteger("SELECT SUM(MIKTAR) FROM  FDEIT005.EPM_OPERATION_QUANTITYS WHERE OPERASYON_ID IN (9595) AND START_YEAR=" + YEAR + " AND START_WEEK=" + item.WEEK + "");
+
+            }
+           
             
             return kapasite;
         }
@@ -1066,6 +1074,99 @@ ORDER BY 1
             }
 
             return productGroups;
+        }
+
+        public object GetUretimGerceklesenByChart(KapasiyeUyumChart_Filter filter)
+        {
+            DataTable dt = new DataTable();
+            if (filter.BAND == 1)
+                dt = _planRepository.QueryFill("SELECT MODEL_ADI,RENK_ADI,SEZON_ADI,PAZAR_ADI,SIPARIS_TIPI,KESIM_FOYU_NO,BEDEN_ADI,START_WEEK,START_YEAR,SUM(MIKTAR) MIKTAR  FROM  FDEIT005.EPM_OPERATION_QUANTITYS WHERE OPERASYON_ID IN (5,600,845,80) AND START_YEAR=" + filter.YEAR + " AND START_WEEK=" + filter.WEEK + " GROUP BY MODEL_ADI,RENK_ADI,SEZON_ADI,PAZAR_ADI,SIPARIS_TIPI,KESIM_FOYU_NO,BEDEN_ADI,START_WEEK,START_YEAR");
+            else if (filter.BAND == 2)
+                dt = _planRepository.QueryFill("SELECT MODEL_ADI,RENK_ADI,SEZON_ADI,PAZAR_ADI,SIPARIS_TIPI,KESIM_FOYU_NO,BEDEN_ADI,START_WEEK,START_YEAR,SUM(MIKTAR) MIKTAR  FROM  FDEIT005.EPM_OPERATION_QUANTITYS WHERE OPERASYON_ID IN (670) AND START_YEAR=" + filter.YEAR + " AND START_WEEK=" + filter.WEEK + " GROUP BY MODEL_ADI,RENK_ADI,SEZON_ADI,PAZAR_ADI,SIPARIS_TIPI,KESIM_FOYU_NO,BEDEN_ADI,START_WEEK,START_YEAR");
+            else if (filter.BAND == 3)
+                dt = _planRepository.QueryFill("SELECT MODEL_ADI,RENK_ADI,SEZON_ADI,PAZAR_ADI,SIPARIS_TIPI,KESIM_FOYU_NO,BEDEN_ADI,START_WEEK,START_YEAR,SUM(MIKTAR) MIKTAR  FROM  FDEIT005.EPM_OPERATION_QUANTITYS WHERE OPERASYON_ID IN (9595) AND START_YEAR=" + filter.YEAR + " AND START_WEEK=" + filter.WEEK + " GROUP BY MODEL_ADI,RENK_ADI,SEZON_ADI,PAZAR_ADI,SIPARIS_TIPI,KESIM_FOYU_NO,BEDEN_ADI,START_WEEK,START_YEAR");
+
+            dt.Columns.Add("ROW_ID",typeof(string));
+            foreach (DataRow row in dt.Rows) 
+                row["ROW_ID"] = Guid.NewGuid().ToString(); 
+            return JsonConvert.SerializeObject(dt, Formatting.Indented);
+        }
+
+        public object GeKapasiteListByChart(KapasiyeUyumChart_Filter filter)
+        {
+            List<EPM_BAND_WORKERS> workers = _planRepository.DeserializeList<EPM_BAND_WORKERS>("SELECT * FROM  FDEIT005.EPM_BAND_WORKERS WHERE YEAR=" + filter.YEAR + "");
+            List<EPM_BAND_WORK_MINUTES> workerMinutes = _planRepository.DeserializeList<EPM_BAND_WORK_MINUTES>("SELECT * FROM  FDEIT005.EPM_BAND_WORK_MINUTES WHERE YEAR=" + filter.YEAR + "");
+            List<ModelSureleri> sureler = GetSureler();
+
+            string sql = string.Format(@"SELECT H.MODEL,P.YEAR,P.WEEK,SUM(P.QUANTITY) QUANTITY,0 AS KISI,0 AS WORK_TIME,0 AS EXPECTED_QUANTITY,0.00 SURE  FROM FDEIT005.EPM_MASTER_PRODUCTION_H H
+INNER JOIN FDEIT005.EPM_PRODUCTION_PLAN P ON P.HEADER_ID=H.ID
+WHERE H.BAND_ID={0} AND P.YEAR={1} and P.WEEK={2}
+GROUP BY H.MODEL,P.YEAR,P.WEEK
+ORDER BY P.YEAR,P.WEEK,H.MODEL", filter.BAND,filter.YEAR,filter.WEEK);
+            DataTable dt=_planRepository.QueryFill(sql);
+            foreach (DataRow row in dt.Rows)
+            {
+                var sure = sureler.Find(ob => ob.MODEL == row["MODEL"].ToString());
+                if (sure != null)
+                {
+                    var kisiSayisi = 0;
+                    int PRODUCT_GROUP_ID = _planRepository.ReadInteger("SELECT PRODUCT_GROUP FROM (SELECT PRODUCT_GROUP FROM FDEIT005.EPM_MASTER_PRODUCTION_H WHERE MODEL ='" + row["MODEL"].ToString() + "'  ORDER BY ID DESC) A WHERE ROWNUM=1 ");
+                    var worker = workers.Find(ob => ob.BAND_ID == filter.BAND && ob.WEEK == filter.WEEK && ob.PRODUCT_GROUP == PRODUCT_GROUP_ID);
+                    if (worker != null)
+                        kisiSayisi = worker.WORKER;
+                    else
+                    {
+                        if (filter.BAND == 1)
+                        {
+                            switch (PRODUCT_GROUP_ID)
+                            {
+                                case 8://ELBISE
+                                    kisiSayisi = 23;
+                                    break;
+                                case 16://POLO
+                                case 20://TRIKO
+                                    kisiSayisi = 17;
+                                    break;
+                                case 21://SSHIRT
+                                    kisiSayisi = 11;
+                                    break;
+                                case 24://SACBANDI
+                                    kisiSayisi = 3;
+                                    break;
+                                case 19://SSHIRT
+                                    kisiSayisi = 17;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            kisiSayisi = 70;
+                        }
+                        else if (filter.BAND == 2)
+                            kisiSayisi = 46;
+                        else if (filter.BAND == 3)
+                            kisiSayisi = 50;
+                    }
+                    if (kisiSayisi != 0)
+                    {
+
+                        var tQuantity = (sure.SURE * row["QUANTITY"].IntParse()) / kisiSayisi;
+                        var workTime = 0;
+                        var work = workerMinutes.Find(ob => ob.BAND_ID == filter.BAND && ob.WEEK == filter.WEEK);
+                        if (work != null)
+                            workTime = work.WORK_MINUTE;
+                        else workTime = 2700;
+                        decimal tOrt = ((tQuantity) / workTime);
+                        row["SURE"] = sure.SURE;
+                        row["WORK_TIME"] = workTime;
+                        row["KISI"] = kisiSayisi;
+                        row["EXPECTED_QUANTITY"] = Convert.ToInt32((row["QUANTITY"].IntParse() / tOrt));
+                    }
+                }
+            }
+            dt.Columns.Add("ROW_ID", typeof(string));
+            foreach (DataRow row in dt.Rows)
+                row["ROW_ID"] = Guid.NewGuid().ToString();
+            return JsonConvert.SerializeObject(dt, Formatting.Indented);
         }
     }
 }

@@ -19,5 +19,7 @@ namespace EPM.Transver.Model
         public int KAYIP_MIKTAR { get; set; }
         public int BIRINCI_KALITE_SAYISI { get; set; }
         public int IKINCI_KALITE_SAYISI { get; set; }
+        public int START_WEEK { get; set; }
+        public int START_YEAR { get; set; }
     }
 }

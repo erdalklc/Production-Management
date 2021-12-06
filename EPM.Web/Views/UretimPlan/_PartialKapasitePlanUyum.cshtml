@@ -37,13 +37,15 @@
 
     ).OnPointClick(@<text>
         function (e) {
-                        Chart_Clicked(e.target.data.WEEK);
+            console.log(e);
+                        Chart_Clicked(e.target.data.WEEK,e.target.series.name);
                     }
     </text>) 
     .Series(s =>
     {
         s.Add().ValueField("QUANTITY").Name("PLAN TOPLAM").Type(SeriesType.Line).Label(l=>l.Visible(true).CustomizeText(@<text>function(e){if(e.value==0) return ""; else return e.value;}</text>).Font(f=>f.Size("9"))).HoverMode(ChartSeriesHoverMode.IncludePoints); 
-        s.Add().ValueField("CAPACITY_RELEASED").Label(l=>l.Visible(false).Font(f=>f.Size("10px"))).Name("KAPASİTE").Type(SeriesType.StackedBar).HoverMode(ChartSeriesHoverMode.OnlyPoint); 
+        s.Add().ValueField("CAPACITY_RELEASED").Label(l=>l.Visible(false).Font(f=>f.Size("10px"))).Name("KAPASİTE").Type(SeriesType.Bar).HoverMode(ChartSeriesHoverMode.OnlyPoint); 
+        s.Add().ValueField("PRODUCTION_RELEASED").Label(l=>l.Visible(false).Font(f=>f.Size("10px"))).Name("ÜRETİM GERÇEKLEŞEN").Type(SeriesType.Bar).HoverMode(ChartSeriesHoverMode.OnlyPoint); 
         
     }) 
     .Legend(l => l
@@ -84,7 +86,7 @@
 
     ).OnPointClick(@<text>
         function (e) {
-                        Chart_Clicked(e.target.data.WEEK);
+                        Chart_Clicked(e.target.data.WEEK,e.target.series.name);
                     }
     </text>)
     .RedrawOnResize(true)

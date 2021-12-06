@@ -28,6 +28,8 @@ Select  Sezon.adi AS SEZON_ADI
 ,   SUM(IsEmri.KayipMiktar) AS KAYIP_MIKTAR
 ,   SUM(IsEmri.IsEmriMiktari-IsEmri.IkinciKaliteMiktari) AS BIRINCI_KALITE_SAYISI
 ,   SUM(IsEmri.IkinciKaliteMiktari) AS IKINCI_KALITE_SAYISI
+,EXTRACT(WEEK FROM KaliteTeslimFisi.FisTarihi) AS START_WEEK
+,EXTRACT(YEAR FROM KaliteTeslimFisi.FisTarihi) AS START_YEAR
               from KaliteTeslimFisi
   left join KaliteTeslimFisiDetay On KaliteTeslimFisiDetay.KaliteTeslimFisiID = KaliteTeslimFisi.KaliteTeslimFisiID
   left join IsEmri On IsEmri.IsEmriKayitID = KaliteTeslimFisiDetay.IsEmriKayitID
@@ -49,7 +51,9 @@ Select  Sezon.adi AS SEZON_ADI
 ,   Pazar.Adi
 ,   Firma.Adi
 ,   kesimfoyu.SIPARISTIPI
-,   KesimFoyu.referanskesimfoyuno";
+,   KesimFoyu.referanskesimfoyuno
+,EXTRACT(WEEK FROM KaliteTeslimFisi.FisTarihi)
+,EXTRACT(YEAR FROM KaliteTeslimFisi.FisTarihi)";
 
             return FirebirdServer.DeserializeList<LacosteUretim>(sql);
         }
