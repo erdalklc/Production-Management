@@ -28,10 +28,15 @@ namespace EPM.Web.Controllers
         public IActionResult PlanOlustur()
         { 
             ViewData["CanEditPlan"] = _menuService.CanEditPlan(Request.HttpContext);
-            ViewBag.Page = "ÜRETİM PLAN GİRİŞİ"; 
+            ViewBag.Page = "PLAN GİRİŞİ (YÜKLEME TERMİN)"; 
             return View(new Plan_Filter());
         }
-
+        public IActionResult PlanOlusturBandGiris()
+        {
+            ViewData["CanEditPlan"] = _menuService.CanEditPlan(Request.HttpContext);
+            ViewBag.Page = "PLAN GİRİŞİ (BANT GİRİŞ)";
+            return View(new Plan_Filter());
+        }
         public IActionResult KapasitePlan()
         {
             ViewBag.Page = "KAPASİTE PLANI GİRİŞİ";
@@ -44,6 +49,12 @@ namespace EPM.Web.Controllers
             ViewBag.Page = "KAPASİTE UYUM";
             return View();
         }
+        public IActionResult YuklemeUyum()
+        {
+            ViewData["CanEditPlan"] = _menuService.CanEditPlan(Request.HttpContext);
+            ViewBag.Page = "YÜKLEME UYUM";
+            return View();
+        }
 
         public IActionResult _PartialKapasitePlanList()
         {
@@ -51,6 +62,11 @@ namespace EPM.Web.Controllers
         }
 
         public IActionResult _PartialKapasitePlanUyum()
+        {
+            return PartialView();
+        }
+
+        public IActionResult _PartialYuklemePlanUyum()
         {
             return PartialView();
         }
@@ -77,6 +93,12 @@ namespace EPM.Web.Controllers
             return DataSourceLoader.Load(PlanServiceHelper.GetKapasiteUyumList(YEAR, BAND_GROUP), loadOptions);
         }
         [HttpGet]
+        public object YuklemePlanUyumLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "YEAR")] int YEAR, [FromQuery(Name = "BAND_GROUP")] int BAND_GROUP)
+        {
+            return DataSourceLoader.Load(PlanServiceHelper.GetYuklemeUyumList(YEAR, BAND_GROUP), loadOptions);
+        }
+
+        [HttpGet]
         public object GetProductGroupList(DataSourceLoadOptions loadOptions ,[FromQuery(Name = "BAND_GROUP")] int BAND_GROUP)
         {
             return DataSourceLoader.Load(PlanServiceHelper.GetProductGroupList( BAND_GROUP), loadOptions);
@@ -85,6 +107,11 @@ namespace EPM.Web.Controllers
         public object KapasitePlanPerformansLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "YEAR")] int YEAR, [FromQuery(Name = "BAND_GROUP")] int BAND_GROUP)
         {
             return DataSourceLoader.Load(PlanServiceHelper.GetKapasitePerformansList(YEAR, BAND_GROUP), loadOptions);
+        }
+        [HttpGet]
+        public object YuklemePlanPerformansLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "YEAR")] int YEAR, [FromQuery(Name = "BAND_GROUP")] int BAND_GROUP)
+        {
+            return DataSourceLoader.Load(PlanServiceHelper.GetYuklemePerformansList(YEAR, BAND_GROUP), loadOptions);
         }
         [HttpGet]
         public object BandWorkersLoad(DataSourceLoadOptions loadOptions, [FromQuery(Name = "YEAR")] int YEAR, [FromQuery(Name = "BAND_GROUP")] int BAND_GROUP, [FromQuery(Name = "PRODUCT_GROUP")] int PRODUCT_GROUP)
@@ -145,9 +172,20 @@ namespace EPM.Web.Controllers
             return PlanServiceHelper.GetPlan(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, BRAND, SEASON, MODEL, COLOR, ORDER_TYPE, PRODUCTION_TYPE, FABRIC_TYPE, PLAN_DURUM);
         }
         [HttpGet, HttpPost]
+        public object _PartialGetPlanListBandGiris(int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM)
+        {
+            return PlanServiceHelper.GetPlanBandGiris(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, BRAND, SEASON, MODEL, COLOR, ORDER_TYPE, PRODUCTION_TYPE, FABRIC_TYPE, PLAN_DURUM);
+        }
+        [HttpGet, HttpPost]
         public object _PartialGetPlanListByChart(KapasiyeUyumChart_Filter filter)
         {
             return PlanServiceHelper.GetPlanByChart(filter);
+        }
+
+        [HttpGet, HttpPost]
+        public object _PartialGetPlanListByChartBandGiris(KapasiyeUyumChart_Filter filter)
+        {
+            return PlanServiceHelper.GetPlanByChartBandGiris(filter);
         }
         [HttpGet, HttpPost]
         public object _PartialGetUretimGerceklesenListByChart(KapasiyeUyumChart_Filter filter)
@@ -159,12 +197,20 @@ namespace EPM.Web.Controllers
         {
             return PlanServiceHelper.GeKapasiteListByChart(filter);
         }
+        [HttpGet, HttpPost]
+        public object _PartialGeKapasiteListByChartBandGiris(KapasiyeUyumChart_Filter filter)
+        {
+            return PlanServiceHelper.GeKapasiteListByChartBandGiris(filter);
+        }
         [HttpPut,HttpGet,HttpPost]
         public object UpdateTask( [FromBody] JObject elem)
         {
             return PlanServiceHelper.UpdateInsertPlan(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, elem);
         }
-
+        public object UpdateTaskBandGiris([FromBody] JObject elem)
+        {
+            return PlanServiceHelper.UpdateInsertPlanBandGiris(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, elem);
+        }
 
         [HttpGet]
         public object GetPlanStatusList(DataSourceLoadOptions loadOptions, [FromQuery(Name = "all")] bool hepsi) => DataSourceLoader.Load(PlanServiceHelper.GetPlanStatusList(hepsi), loadOptions);

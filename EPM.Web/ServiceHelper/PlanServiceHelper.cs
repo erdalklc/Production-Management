@@ -18,9 +18,23 @@ namespace EPM.Web.ServiceHelper
                 , BRAND,SEASON,MODEL,COLOR,ORDER_TYPE,PRODUCTION_TYPE,FABRIC_TYPE,PLAN_DURUM });
             return list;
         }
+        public static object GetPlanBandGiris(string USER_CODE, int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM)
+        {
+            string apiUrl = "GetPlanBandGiris";
+            var list = PostRequest<object[], object>(EPMServiceType.Plan, apiUrl, new object[] { USER_CODE
+                , BRAND,SEASON,MODEL,COLOR,ORDER_TYPE,PRODUCTION_TYPE,FABRIC_TYPE,PLAN_DURUM });
+            return list;
+        }
         public static object GetPlanByChart(KapasiyeUyumChart_Filter filter)
         {
             string apiUrl = "GetPlanByChart";
+            var list = PostRequest<KapasiyeUyumChart_Filter, object>(EPMServiceType.Plan, apiUrl, filter);
+            return list;
+        }
+
+        public static object GetPlanByChartBandGiris(KapasiyeUyumChart_Filter filter)
+        {
+            string apiUrl = "GetPlanByChartBandGiris";
             var list = PostRequest<KapasiyeUyumChart_Filter, object>(EPMServiceType.Plan, apiUrl, filter);
             return list;
         }
@@ -30,7 +44,12 @@ namespace EPM.Web.ServiceHelper
             var list = PostRequest<object[], object>(EPMServiceType.Plan, apiUrl, new object[] { USER_CODE , obj });
             return list;
         }
-
+        public static object UpdateInsertPlanBandGiris(string USER_CODE, JObject obj)
+        {
+            string apiUrl = "UpdateInsertPlanBandGiris";
+            var list = PostRequest<object[], object>(EPMServiceType.Plan, apiUrl, new object[] { USER_CODE, obj });
+            return list;
+        }
         public static List<EPM_PRODUCTION_BAND_CAPASITIES> GetKapasitePlanList()
         {
             string apiUrl = "GetKapasitePlanList";
@@ -82,7 +101,13 @@ namespace EPM.Web.ServiceHelper
                 , BAND_GROUP });
             return list;
         }
-
+        public static List<KapasitePlanUyum> GetYuklemeUyumList(int YEAR, int BAND_GROUP)
+        {
+            string apiUrl = "GetYuklemeUyumList";
+            var list = PostRequest<object[], List<KapasitePlanUyum>>(EPMServiceType.Plan, apiUrl, new object[] { YEAR
+                , BAND_GROUP });
+            return list;
+        }
         public static List<ModelSureleriView> ProductionTimesLoad()
         {
             string apiUrl = "ProductionTimesLoad";
@@ -97,7 +122,13 @@ namespace EPM.Web.ServiceHelper
                 , BAND_GROUP });
             return list;
         }
-
+        public static List<KapasitePlanPerformans> GetYuklemePerformansList(int YEAR, int BAND_GROUP)
+        {
+            string apiUrl = "GetYuklemePerformansList";
+            var list = PostRequest<object[], List<KapasitePlanPerformans>>(EPMServiceType.Plan, apiUrl, new object[] { YEAR
+                , BAND_GROUP });
+            return list;
+        }
         public static List<EpmBandWorkModel> GetBandWorkers(int YEAR, int BAND_GROUP,int PRODUCT_GROUP)
         {
             string apiUrl = "GetBandWorkers";
@@ -131,6 +162,12 @@ namespace EPM.Web.ServiceHelper
         public static object GeKapasiteListByChart(KapasiyeUyumChart_Filter filter)
         {
             string apiUrl = "GeKapasiteListByChart";
+            var list = PostRequest<KapasiyeUyumChart_Filter, object>(EPMServiceType.Plan, apiUrl, filter);
+            return list;
+        }
+        public static object GeKapasiteListByChartBandGiris(KapasiyeUyumChart_Filter filter)
+        {
+            string apiUrl = "GeKapasiteListByChartBandGiris";
             var list = PostRequest<KapasiyeUyumChart_Filter, object>(EPMServiceType.Plan, apiUrl, filter);
             return list;
         }

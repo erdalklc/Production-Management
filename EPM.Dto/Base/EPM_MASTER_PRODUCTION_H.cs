@@ -59,5 +59,6 @@ namespace EPM.Dto.Base
         public int STATUS { get; set; } = 0; 
         public List<EPM_MASTER_PRODUCTION_D> DETAIL=new List<EPM_MASTER_PRODUCTION_D>();
         public List<EPM_PRODUCTION_PLAN> PLAN=new List<EPM_PRODUCTION_PLAN>();
+        public List<EPM_PRODUCTION_PLAN_ENTERY> PLAN_ENTRY=new List<EPM_PRODUCTION_PLAN_ENTERY>();
     }
 }

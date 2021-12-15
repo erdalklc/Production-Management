@@ -1,0 +1,130 @@
+﻿@{ 
+    int[] years = { DateTime.Now.Year - 1, DateTime.Now.Year, DateTime.Now.Year + 1 };
+}  
+<div class="dx-card wide-card">
+    @(Html.DevExtreme().Form()
+        .ID("edFilter").ShowValidationSummary(true)
+        .ColCount(8)
+        .Items(items =>
+        {
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddSimple().Editor(ob => ob.Lookup().Value(0).Name("edProductGroup").OnSelectionChanged("RefreshChart").DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimple().Editor(ob => ob.Lookup().Value(DateTime.Now.Year).Name("edYear").OnSelectionChanged("RefreshChart").DataSource(d => d.Array().Data(years)));
+            items.AddEmpty();
+            items.AddEmpty(); 
+            items.AddEmpty();
+
+        })
+        .FormData(Model).ShowValidationSummary(false)
+    )
+
+
+</div>   
+<div style="clear:both">
+    <div class="dx-card wide-card">
+    <div style="width:88%;max-width:100%;">
+        @(Html.DevExtreme().Chart()
+    .ID("edChart")
+    .Title(t=>t.Text("Plan Kapasite Uyum"))
+    .CommonSeriesSettings(s => s
+        .ArgumentField("WEEK")
+        .Label(l=>l.Visible(true).ShowForZeroValues(false).Format(x=>x.Type(Format.FixedPoint).Precision(0)))
+        .Type(SeriesType.Bar)
+        .HoverMode(ChartSeriesHoverMode.AllArgumentPoints)
+        .SelectionMode(ChartSeriesSelectionMode.AllArgumentPoints)
+
+    ).OnPointClick(@<text>
+        function (e) {
+            console.log(e);
+                        Chart_Clicked(e.target.data.WEEK,e.target.series.name);
+                    }
+    </text>) 
+    .Series(s =>
+    {
+        s.Add().ValueField("QUANTITY").Name("PLAN TOPLAM").Type(SeriesType.Line).Label(l=>l.Visible(true).CustomizeText(@<text>function(e){if(e.value==0) return ""; else return e.value;}</text>).Font(f=>f.Size("9"))).HoverMode(ChartSeriesHoverMode.IncludePoints); 
+        s.Add().ValueField("CAPACITY_RELEASED").Label(l=>l.Visible(false).Font(f=>f.Size("10px"))).Name("KAPASİTE").Type(SeriesType.Bar).HoverMode(ChartSeriesHoverMode.OnlyPoint); 
+        s.Add().ValueField("PRODUCTION_RELEASED").Label(l=>l.Visible(false).Font(f=>f.Size("10px"))).Name("ÜRETİM GERÇEKLEŞEN").Type(SeriesType.Bar).HoverMode(ChartSeriesHoverMode.OnlyPoint); 
+        
+    }) 
+    .Legend(l => l
+        .VerticalAlignment(VerticalEdge.Bottom)
+        .HorizontalAlignment(HorizontalAlignment.Center)
+        .ItemTextPosition(Position.Top)
+    ).ArgumentAxis(a => a.Type(AxisScaleType.Discrete)
+       .VisualRange(range => range.StartValue(1).EndValue(52))
+    )
+    .Crosshair(c=>c.Enabled(true)
+    .Color("#949494")
+    .Width(3)
+    .DashStyle(DashStyle.LongDash)
+    .Label(l=> l.Visible(true).Format(x=>x.Type(Format.FixedPoint).Precision(0)).BackgroundColor("red")
+    .Font(f=>f.Color("#ffff").Size(12)) ) )
+    .DataSource(ob=>
+        ob.Mvc()
+        .Controller("UretimPlan")
+        .LoadAction("YuklemePlanUyumLoad")
+        .LoadParams(new { YEAR = new JS("GetYear"), BAND_GROUP = new JS("GetGroup") })
+        )
+)
+    </div>  
+    </div>  
+</div>
+
+<div class="dx-card wide-card">
+    <div style="width:88%;max-width:100%;">
+        @(Html.DevExtreme().Chart()
+    .ID("edChart2")
+    .Title(t=>t.Text("Kapasite Doluluk Oranı"))
+    .CommonSeriesSettings(s => s
+        .ArgumentField("WEEK")
+        .Label(l=>l.Visible(true).Format(x=>x.Type(Format.Percent).Precision(0)))
+        .Type(SeriesType.Bar)
+        .HoverMode(ChartSeriesHoverMode.AllArgumentPoints)
+        .SelectionMode(ChartSeriesSelectionMode.AllArgumentPoints)
+
+    ).OnPointClick(@<text>
+        function (e) {
+                        Chart_Clicked(e.target.data.WEEK,e.target.series.name);
+                    }
+    </text>)
+    .RedrawOnResize(true)
+    .AdjustOnZoom(true)
+    .Series(s =>
+    {
+        s.Add().ValueField("PERFORMANS").Label(l=>l.Visible(true).CustomizeText(@<text>function(e){if(e.value==0) return ""; else return parseFloat(e.value * 100).toFixed(2) +" %";}</text>).Font(f=>f.Size("9"))).Name("PERFORMANS"); 
+    })
+    .Legend(l => l
+        .VerticalAlignment(VerticalEdge.Bottom)
+        .HorizontalAlignment(HorizontalAlignment.Center)
+        .ItemTextPosition(Position.Top)
+    ).ArgumentAxis(a => a.Type(AxisScaleType.Discrete)
+       .VisualRange(range => range.StartValue(1).EndValue(52))
+    )
+    .DataSource(ob=>
+        ob.Mvc()
+        .Controller("UretimPlan")
+        .LoadAction("YuklemePlanPerformansLoad")
+        .LoadParams(new { YEAR = new JS("GetYear"), BAND_GROUP = new JS("GetGroup") })
+        )
+)
+    </div>
+</div>
+<script>
+   
+    function GetYear() { 
+        return jQuery("[name=edYear]").val();
+    }
+    function RefreshChart() {
+        try{ 
+        $("#edChart").dxChart("getDataSource").reload();
+        $("#edChart2").dxChart("getDataSource").reload();
+        }catch{
+
+        }  
+    }
+    function GetGroup() { 
+        return jQuery("[name=edProductGroup]").val();
+    }
+</script>

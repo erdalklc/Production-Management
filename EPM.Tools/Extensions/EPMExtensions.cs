@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Text;
 
 namespace EPM.Tools.Extensions
@@ -110,6 +111,18 @@ namespace EPM.Tools.Extensions
             if (value == null)
                 return DateTime.Now;
 
+            DateTime temp = DateTime.Now;
+            DateTime.TryParse(value.ToString(), out temp);
+            return temp;
+        }
+        public static int GetWeekNumber(this DateTime value)
+        {
+            CultureInfo ciCurr = CultureInfo.CurrentCulture;
+            int weekNum = ciCurr.Calendar.GetWeekOfYear(value, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return weekNum;
+        }
+        public static DateTime? DatetimeParseNulable(this object value)
+        { 
             DateTime temp = DateTime.Now;
             DateTime.TryParse(value.ToString(), out temp);
             return temp;

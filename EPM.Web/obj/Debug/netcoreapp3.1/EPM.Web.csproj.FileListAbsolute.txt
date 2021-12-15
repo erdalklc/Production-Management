@@ -1518,3 +1518,6 @@ E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\U
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialBandWorkMinutes.cshtml.g.cs
 E:\Eren\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialProductionTimes.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialProductionTimes.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\PlanOlusturBandGiris.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\YuklemeUyum.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Debug\netcoreapp3.1\Razor\Views\UretimPlan\_PartialYuklemePlanUyum.cshtml.g.cs

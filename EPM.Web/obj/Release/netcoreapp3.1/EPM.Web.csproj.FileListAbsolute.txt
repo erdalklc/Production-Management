@@ -511,3 +511,6 @@ D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\EPM.Web
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\UretimPlan\_PartialBandWork.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\UretimPlan\_PartialBandWorkMinutes.cshtml.g.cs
 D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\UretimPlan\_PartialProductionTimes.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\UretimPlan\PlanOlusturBandGiris.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\UretimPlan\YuklemeUyum.cshtml.g.cs
+D:\Projects\Eren Production Management\EPM.Web\obj\Release\netcoreapp3.1\Razor\Views\UretimPlan\_PartialYuklemePlanUyum.cshtml.g.cs

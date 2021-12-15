@@ -44,5 +44,7 @@ namespace EPM.Dto.Models
         public int COLLECTION_TYPE { get; set; }
         public int PLAN_YEAR { get; set; }
         public int PLAN_WEEK { get; set; }
+        public DateTime? START_DATE { get; set; }
+        public int START_WEEK { get; set; }
     }
 }

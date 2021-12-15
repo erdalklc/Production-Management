@@ -10,8 +10,8 @@
             items.AddEmpty();
             items.AddEmpty();
             items.AddEmpty();
-            items.AddSimple().Editor(ob => ob.Lookup().Name("edProductGroup").OnSelectionChanged("RefreshChart").DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
-            items.AddSimple().Editor(ob => ob.Lookup().Name("edYear").OnSelectionChanged("RefreshChart").DataSource(d => d.Array().Data(years)));
+            items.AddSimple().Editor(ob => ob.Lookup().Value(0).Name("edProductGroup").OnSelectionChanged("RefreshChart").DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimple().Editor(ob => ob.Lookup().Value(DateTime.Now.Year).Name("edYear").OnSelectionChanged("RefreshChart").DataSource(d => d.Array().Data(years)));
             items.AddEmpty();
             items.AddEmpty(); 
             items.AddEmpty();
@@ -117,8 +117,12 @@
         return jQuery("[name=edYear]").val();
     }
     function RefreshChart() {
+        try{ 
         $("#edChart").dxChart("getDataSource").reload();
         $("#edChart2").dxChart("getDataSource").reload();
+        }catch{
+
+        }  
     }
     function GetGroup() { 
         return jQuery("[name=edProductGroup]").val();

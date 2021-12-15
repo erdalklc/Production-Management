@@ -20,16 +20,21 @@ namespace EPM.Plan.Api.Controllers
         }
         [ HttpPost]
         public ActionResult<object> GetPlan(object[] obj)=>_planService.GetPlan(obj[0].ToStringParse(),obj[1].IntParse(), obj[2].IntParse(), obj[3].ToStringParse(), obj[4].ToStringParse(), obj[5].IntParse(), obj[6].IntParse(), obj[7].IntParse(), obj[8].IntParse());
+        public ActionResult<object> GetPlanBandGiris(object[] obj)=>_planService.GetPlanBandGiris(obj[0].ToStringParse(),obj[1].IntParse(), obj[2].IntParse(), obj[3].ToStringParse(), obj[4].ToStringParse(), obj[5].IntParse(), obj[6].IntParse(), obj[7].IntParse(), obj[8].IntParse());
 
         [HttpPost]
         public ActionResult<object> GetPlanByChart(KapasiyeUyumChart_Filter filter) => _planService.GetPlanByChart(filter);
+        public ActionResult<object> GetPlanByChartBandGiris(KapasiyeUyumChart_Filter filter) => _planService.GetPlanByChartBandGiris(filter);
         [HttpPost]
         public ActionResult<object> GetUretimGerceklesenByChart(KapasiyeUyumChart_Filter filter) => _planService.GetUretimGerceklesenByChart(filter);
         [HttpPost]
         public ActionResult<object> GeKapasiteListByChart(KapasiyeUyumChart_Filter filter) => _planService.GeKapasiteListByChart(filter);
+        [HttpPost]
+        public ActionResult<object> GeKapasiteListByChartBandGiris(KapasiyeUyumChart_Filter filter) => _planService.GeKapasiteListByChartBandGiris(filter);
 
         [HttpPost]
         public object UpdateInsertPlan(object[] obj)=>_planService.UpdateInsertPlan(obj[0].ToString(),(JObject)obj[1]);
+        public object UpdateInsertPlanBandGiris(object[] obj)=>_planService.UpdateInsertPlanBandGiris(obj[0].ToString(),(JObject)obj[1]);
 
         [HttpGet]
         public List<EPM_PRODUCTION_BAND_CAPASITIES> GetKapasitePlanList()=>_planService.GetKapasitePlanList();
@@ -54,7 +59,12 @@ namespace EPM.Plan.Api.Controllers
         public List<KapasitePlanUyum> GetKapasiteUyumList(object[] obj) => _planService.GetKapasiteUyumList(obj[0].IntParse(), obj[1].IntParse());
 
         [HttpPost]
+        public List<KapasitePlanUyum> GetYuklemeUyumList(object[] obj) => _planService.GetYuklemeUyumList(obj[0].IntParse(), obj[1].IntParse());
+
+        [HttpPost]
         public List<KapasitePlanPerformans> GetKapasitePerformansList(object[] obj) => _planService.GetKapasitePerformansList(obj[0].IntParse(), obj[1].IntParse());
+        [HttpPost]
+        public List<KapasitePlanPerformans> GetYuklemePerformansList(object[] obj) => _planService.GetYuklemePerformansList(obj[0].IntParse(), obj[1].IntParse());
 
 
         [HttpPost]

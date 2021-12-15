@@ -10,9 +10,9 @@
         {
             items.AddEmpty();
             items.AddEmpty();
-            items.AddSimple().Editor(ob => ob.Lookup().Name("edBandGroup").OnSelectionChanged("RefreshProductGroup").DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
-            items.AddSimple().Editor(ob => ob.Lookup().Name("edProductGroup").ID("edProductGroup").OnSelectionChanged("RefreshChart").DataSource(d => d.Mvc().LoadParams(new { BAND_GROUP = new JS("function(){return jQuery('[name=edBandGroup]').val()}") }).Controller("UretimPlan").LoadAction("GetProductGroupList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
-            items.AddSimple().Editor(ob => ob.Lookup().Name("edYear").OnSelectionChanged("RefreshChart").DataSource(d => d.Array().Data(years)));
+            items.AddSimple().Editor(ob => ob.Lookup().Value(0).Name("edBandGroup").OnSelectionChanged("RefreshProductGroup").DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimple().Editor(ob => ob.Lookup().Value(0).Name("edProductGroup").ID("edProductGroup").OnSelectionChanged("RefreshChart").DataSource(d => d.Mvc().LoadParams(new { BAND_GROUP = new JS("function(){return jQuery('[name=edBandGroup]').val()}") }).Controller("UretimPlan").LoadAction("GetProductGroupList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimple().Editor(ob => ob.Lookup().Value(DateTime.Now.Year).Name("edYear").OnSelectionChanged("RefreshChart").DataSource(d => d.Array().Data(years)));
             items.AddEmpty();
             items.AddEmpty(); 
 
