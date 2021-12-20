@@ -19,8 +19,8 @@ namespace EPM.Plan.Api.Controllers
             _planService = planService;
         }
         [ HttpPost]
-        public ActionResult<object> GetPlan(object[] obj)=>_planService.GetPlan(obj[0].ToStringParse(),obj[1].IntParse(), obj[2].IntParse(), obj[3].ToStringParse(), obj[4].ToStringParse(), obj[5].IntParse(), obj[6].IntParse(), obj[7].IntParse(), obj[8].IntParse());
-        public ActionResult<object> GetPlanBandGiris(object[] obj)=>_planService.GetPlanBandGiris(obj[0].ToStringParse(),obj[1].IntParse(), obj[2].IntParse(), obj[3].ToStringParse(), obj[4].ToStringParse(), obj[5].IntParse(), obj[6].IntParse(), obj[7].IntParse(), obj[8].IntParse());
+        public ActionResult<object> GetPlan(object[] obj)=>_planService.GetPlan(obj[0].ToStringParse(),obj[1].IntParse(), obj[2].IntParse(), obj[3].ToStringParse(), obj[4].ToStringParse(), obj[5].IntParse(), obj[6].IntParse(), obj[7].IntParse(), obj[8].IntParse(), obj[9].ToString());
+        public ActionResult<object> GetPlanBandGiris(object[] obj)=>_planService.GetPlanBandGiris(obj[0].ToStringParse(),obj[1].IntParse(), obj[2].IntParse(), obj[3].ToStringParse(), obj[4].ToStringParse(), obj[5].IntParse(), obj[6].IntParse(), obj[7].IntParse(), obj[8].IntParse(), obj[9].ToString());
 
         [HttpPost]
         public ActionResult<object> GetPlanByChart(KapasiyeUyumChart_Filter filter) => _planService.GetPlanByChart(filter);
@@ -38,6 +38,8 @@ namespace EPM.Plan.Api.Controllers
 
         [HttpGet]
         public List<EPM_PRODUCTION_BAND_CAPASITIES> GetKapasitePlanList()=>_planService.GetKapasitePlanList();
+        [HttpGet]
+        public bool UretimSureleriYenile() => _planService.UretimSureleriYenile();
 
         [HttpGet]
         public List<ModelSureleriView> ProductionTimesLoad() => _planService.ProductionTimesLoad();

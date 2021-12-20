@@ -193,10 +193,11 @@
                     },
                     sorting: {
                         mode: "multiple"
-                    },summary: {
+                    },summary: {recalculateWhileEditing: true,
                       totalItems: [{
                         column: 'PLANSIZ_ADET',
-                        summaryType: 'sum',
+                        name:"PLANSIZADETTOPLAM",
+                        summaryType: 'custom',
                         displayFormat: '{0}'
                       },
                       {
@@ -209,6 +210,19 @@
                         summaryType: 'sum',
                         displayFormat: '{0}'
                       }],
+                          calculateCustomSummary(options) {
+                            if (options.name === 'PLANSIZADETTOPLAM') {
+                              if (options.summaryProcess === 'start') {
+                                options.totalValue = 0;
+                              }
+                              if (options.summaryProcess === 'finalize') { 
+                                var total=0;
+                                 for(var i=0;i <formData.length;i++)
+                                    total +=(parseFloat(formData[i].URETIM_ADET)-parseFloat(formData[i].PLANLANAN_ADET));
+                                    options.totalValue=total; 
+                              }
+                            }
+                          },	
                     },
                     filterRow: {
                         visible: true,

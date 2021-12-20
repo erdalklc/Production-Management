@@ -9,12 +9,13 @@
     {
         sCanEditPlan = "true";
     }
+    IEnumerable<string> Items = new List<string>(){(DateTime.Now.Year-2).ToString(),(DateTime.Now.Year-1).ToString(),(DateTime.Now.Year).ToString(),(DateTime.Now.Year+1).ToString(),(DateTime.Now.Year+2).ToString()};
 }
 <div id="form-container">
     <div class="dx-card wide-card">
         @(Html.DevExtreme().Form<Plan_Filter>()
         .ID("edOnayliListe").ShowValidationSummary(true)
-        .ColCount(9)
+        .ColCount(10)
         .Items(items =>
         {
 
@@ -26,7 +27,8 @@
             items.AddSimpleFor(m => m.ORDER_TYPE).Editor(ob => ob.Lookup().Value(0).SearchEnabled(true).DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetOrderList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
             items.AddSimpleFor(m => m.PRODUCTION_TYPE).Editor(ob => ob.Lookup().Value(0).SearchEnabled(true).DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetProductionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
             items.AddSimpleFor(m => m.FABRIC_TYPE).Editor(ob => ob.Lookup().Value(0).SearchEnabled(true).DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetFabricList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
-            items.AddEmpty();
+            items.AddSimple().Name("YEAR").Label(l=>l.Text("YEAR")).ColSpan(2).Editor(ob=>ob.TagBox().ShowSelectionControls(true).ApplyValueMode(EditorApplyValueMode.UseButtons).Items(Items).Value(new[]{Items.ToList()[2]})).IsRequired(false);
+            
             items.AddButton().HorizontalAlignment(HorizontalAlignment.Left).VerticalAlignment(VerticalAlignment.Center)
                    .ButtonOptions(b => b.Text("FİLTRELE")
                        .Type(ButtonType.Default)
@@ -63,6 +65,7 @@
             PRODUCTION_TYPE: jQuery("[name=PRODUCTION_TYPE]").val(),
             FABRIC_TYPE: jQuery("[name=FABRIC_TYPE]").val(),
             PLAN_DURUM: jQuery("[name=PLAN_DURUM]").val(),
+            YEAR: $("#edOnayliListe").dxForm("instance").getEditor("YEAR")._selectedItems,
         };
         getLoadPanelInstance().show();
         $.ajax({
@@ -95,10 +98,11 @@
                         visible: true,
                         applyFilter: "auto"
                     },
-                     summary: {
+                     summary: {recalculateWhileEditing: true,
                       totalItems: [{
                         column: 'PLANSIZ_ADET',
-                        summaryType: 'sum',
+                        name:"PLANSIZADETTOPLAM",
+                        summaryType: 'custom',
                         displayFormat: '{0}'
                       },
                       {
@@ -111,6 +115,19 @@
                         summaryType: 'sum',
                         displayFormat: '{0}'
                       }],
+                          calculateCustomSummary(options) {
+                            if (options.name === 'PLANSIZADETTOPLAM') {
+                              if (options.summaryProcess === 'start') {
+                                options.totalValue = 0;
+                              }
+                              if (options.summaryProcess === 'calculate') { 
+                                 var total=0;
+                                 for(var i=0;i <formData.length;i++)
+                                    total +=(parseFloat(formData[i].URETIM_ADET)-parseFloat(formData[i].PLANLANAN_ADET));
+                                    options.totalValue=total; 
+                              }
+                            }
+                          },	
                     },onSelectionChanged(e) {
                           e.component.refresh(true);
                         },
@@ -177,6 +194,7 @@
                                         columns[a].dataType = "number";
                                         columns[a].allowFiltering = false;
                                         columns[a].caption = columns[a].dataField.replace(YEARS[i].YEAR + '_', '') + ".HAFTA";
+                                        columns[a].showInColumnChooser=true;
 
 
                                     } else {

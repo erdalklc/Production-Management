@@ -1,5 +1,22 @@
 ﻿<div  class="dx-card wide-card" style="margin:4px">
     <div style="width:100%;height:30px;align-items:center;justify-content:center;text-align:center;padding:5px">MODEL ÜRETİM SÜRELERİ</div>
+    @(Html.DevExtreme().Form()
+        .ID("edOnayliListe").ShowValidationSummary(true)
+        .ColCount(1)
+        .Items(items =>
+        { 
+            items.AddButton().HorizontalAlignment(HorizontalAlignment.Left).VerticalAlignment(VerticalAlignment.Center)
+                   .ButtonOptions(b => b.Text("SÜRELERİ YENİLE")
+                       .Type(ButtonType.Default)
+                       .Icon("fas fa-sync")
+                       .Width("100%")
+                       .OnClick("UretimSureleriYenile")
+                       .UseSubmitBehavior(true)
+               );
+
+        })
+        .FormData(Model).ShowValidationSummary(false)
+    )
  @(Html.DevExtreme().DataGrid<EPM.Plan.Dto.Plan.ModelSureleriView> ().ID("edgridWorkTimes")
     .ShowBorders(false)
     .DataSource(
@@ -7,7 +24,7 @@
         .LoadAction("ProductionTimesLoad") 
         .Key("ID")
     )
-    .Height("calc(100vh - 150px)")
+    .Height("calc(100vh - 188px)")
     .FilterRow(f => f.Visible(true))
     .OnRowUpdating("onWorkUpdating")
     .FocusedRowEnabled(true)

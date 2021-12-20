@@ -27,7 +27,7 @@
     <div style="width:88%;max-width:100%;">
         @(Html.DevExtreme().Chart()
     .ID("edChart")
-    .Title(t=>t.Text("Plan Kapasite Uyum"))
+    .Title(t=>t.Text("Yükleme Plan Uyum"))
     .CommonSeriesSettings(s => s
         .ArgumentField("WEEK")
         .Label(l=>l.Visible(true).ShowForZeroValues(false).Format(x=>x.Type(Format.FixedPoint).Precision(0)))
@@ -44,7 +44,7 @@
     .Series(s =>
     {
         s.Add().ValueField("QUANTITY").Name("PLAN TOPLAM").Type(SeriesType.Line).Label(l=>l.Visible(true).CustomizeText(@<text>function(e){if(e.value==0) return ""; else return e.value;}</text>).Font(f=>f.Size("9"))).HoverMode(ChartSeriesHoverMode.IncludePoints); 
-        s.Add().ValueField("CAPACITY_RELEASED").Label(l=>l.Visible(false).Font(f=>f.Size("10px"))).Name("KAPASİTE").Type(SeriesType.Bar).HoverMode(ChartSeriesHoverMode.OnlyPoint); 
+        //s.Add().ValueField("CAPACITY_RELEASED").Label(l=>l.Visible(false).Font(f=>f.Size("10px"))).Name("KAPASİTE").Type(SeriesType.Bar).HoverMode(ChartSeriesHoverMode.OnlyPoint); 
         s.Add().ValueField("PRODUCTION_RELEASED").Label(l=>l.Visible(false).Font(f=>f.Size("10px"))).Name("ÜRETİM GERÇEKLEŞEN").Type(SeriesType.Bar).HoverMode(ChartSeriesHoverMode.OnlyPoint); 
         
     }) 
@@ -72,7 +72,7 @@
     </div>  
 </div>
 
-<div class="dx-card wide-card">
+@*<div class="dx-card wide-card">
     <div style="width:88%;max-width:100%;">
         @(Html.DevExtreme().Chart()
     .ID("edChart2")
@@ -110,7 +110,7 @@
         )
 )
     </div>
-</div>
+</div>*@
 <script>
    
     function GetYear() { 

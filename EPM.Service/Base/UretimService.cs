@@ -32,7 +32,7 @@ namespace EPM.Service.Base
             , List<EPM_PRODUCTION_TYPES> productionTypes
             , List<EPM_PRODUCT_GROUP> productGroups
             , List<EPM_PRODUCTION_RECIPE> productionRecipe
-            , List<EPM_PRODUCTION_BAND_GROUP> productionBandGroup, List<EPM_PRODUCTION_SEASON_WEEKS> weeks)
+            , List<EPM_PRODUCTION_BAND_GROUP> productionBandGroup)
         {
             object[] err = { true, "" };
             var myFile = request.Form.Files["myFile"];
@@ -163,50 +163,50 @@ namespace EPM.Service.Base
                             err[0] = false;
                             err[1] += (i + 1) + " Satırındaki " + reader.GetValue(9).ToStringParse() + " Bilgisi MARKET Alanında Bulunamadı<br>";
                         }
-                        if((bool)err[0])
-                        {
-                            if(reader.GetValue(30).IntParse()!=0 && reader.GetValue(31).IntParse() != 0)
-                            {
-                                EPM_PRODUCTION_SEASON_WEEKS week = weeks.Find(ob => ob.SEASON_ID == seasonList.Find(ob => ob.ADI == reader.GetValue(2).ToStringParse()).ID);
-                                if (week != null)
-                                {
-                                    if (week.START_YEAR <= reader.GetValue(30).IntParse() && week.END_YEAR >= reader.GetValue(30).IntParse())
-                                    {
+                        //if((bool)err[0])
+                        //{
+                        //    if(reader.GetValue(30).IntParse()!=0 && reader.GetValue(31).IntParse() != 0)
+                        //    {
+                        //        EPM_PRODUCTION_SEASON_WEEKS week = weeks.Find(ob => ob.SEASON_ID == seasonList.Find(ob => ob.ADI == reader.GetValue(2).ToStringParse()).ID);
+                        //        if (week != null)
+                        //        {
+                        //            if (week.START_YEAR <= reader.GetValue(30).IntParse() && week.END_YEAR >= reader.GetValue(30).IntParse())
+                        //            {
 
-                                        if (week.START_YEAR == reader.GetValue(30).IntParse())
-                                        {
-                                            if (!(week.START_WEEK <= reader.GetValue(31).IntParse()))
-                                            {
-                                                err[0] = false;
-                                                err[1] += (i + 1) + " Satırında girilen Plan haftası Sezon sınırlarında değil<br>";
-                                            }
-                                        }
+                        //                if (week.START_YEAR == reader.GetValue(30).IntParse())
+                        //                {
+                        //                    if (!(week.START_WEEK <= reader.GetValue(31).IntParse()))
+                        //                    {
+                        //                        err[0] = false;
+                        //                        err[1] += (i + 1) + " Satırında girilen Plan haftası Sezon sınırlarında değil<br>";
+                        //                    }
+                        //                }
 
-                                        if (week.END_YEAR == reader.GetValue(30).IntParse())
-                                        {
-                                            if (!(week.END_WEEK >= reader.GetValue(31).IntParse()))
-                                            {
-                                                err[0] = false;
-                                                err[1] += (i + 1) + " Satırında girilen Plan haftası Sezon sınırlarında değil<br>";
-                                            }
+                        //                if (week.END_YEAR == reader.GetValue(30).IntParse())
+                        //                {
+                        //                    if (!(week.END_WEEK >= reader.GetValue(31).IntParse()))
+                        //                    {
+                        //                        err[0] = false;
+                        //                        err[1] += (i + 1) + " Satırında girilen Plan haftası Sezon sınırlarında değil<br>";
+                        //                    }
 
-                                        }
-                                    }
-                                    else
-                                    {
-                                        err[0] = false;
-                                        err[1] += (i + 1) + " Satırında girilen Plan Yılı Sezon sınırlarında değil<br>";
-                                    }
-                                }
-                                else
-                                {
+                        //                }
+                        //            }
+                        //            else
+                        //            {
+                        //                err[0] = false;
+                        //                err[1] += (i + 1) + " Satırında girilen Plan Yılı Sezon sınırlarında değil<br>";
+                        //            }
+                        //        }
+                        //        else
+                        //        {
 
-                                    err[0] = false;
-                                    err[1] += (i + 1) + " Satırında Sezon bilgisine ait hafta-yıl bilgisi bulunamadı<br>";
-                                }
-                            }
+                        //            err[0] = false;
+                        //            err[1] += (i + 1) + " Satırında Sezon bilgisine ait hafta-yıl bilgisi bulunamadı<br>";
+                        //        }
+                        //    }
                             
-                        }
+                        //}
 
                     }
                     
@@ -236,9 +236,9 @@ namespace EPM.Service.Base
                 List<EPM_PRODUCT_GROUP> productGroups = _epmRepository.DeserializeList<EPM_PRODUCT_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCT_GROUP");
                 List<EPM_PRODUCTION_RECIPE> productionRecipe = _epmRepository.DeserializeList<EPM_PRODUCTION_RECIPE>("SELECT * FROM FDEIT005.EPM_PRODUCTION_RECIPE");
                 List<EPM_PRODUCTION_BAND_GROUP> productionBandGroup = _epmRepository.DeserializeList<EPM_PRODUCTION_BAND_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCTION_BAND_GROUP");
-                List<EPM_PRODUCTION_SEASON_WEEKS> weeks = _epmRepository.DeserializeList<EPM_PRODUCTION_SEASON_WEEKS>("SELECT * FROM FDEIT005.EPM_PRODUCTION_SEASON_WEEKS");
+                //List<EPM_PRODUCTION_SEASON_WEEKS> weeks = _epmRepository.DeserializeList<EPM_PRODUCTION_SEASON_WEEKS>("SELECT * FROM FDEIT005.EPM_PRODUCTION_SEASON_WEEKS");
 
-                object[] kontrol = CheckForErrors(request, brandList, subBrandList, fabricTypes, marketList, orderTypes, seasonList, productionTypes, productGroups, productionRecipe, productionBandGroup, weeks);
+                object[] kontrol = CheckForErrors(request, brandList, subBrandList, fabricTypes, marketList, orderTypes, seasonList, productionTypes, productGroups, productionRecipe, productionBandGroup);
 
                 if (!(bool)kontrol[0])
                 {
@@ -291,7 +291,7 @@ namespace EPM.Service.Base
                             aktarim.ATTRIBUTE10 = reader.GetValue(29).ToStringParse();
                             aktarim.PLAN_YEAR = reader.GetValue(30).IntParse();
                             aktarim.PLAN_WEEK = reader.GetValue(31).IntParse(); 
-                            aktarim.START_DATE = reader.GetValue(32).DatetimeParseNulable();
+                            aktarim.START_DATE = reader.GetValue(32)==null ?null : reader.GetValue(32).DatetimeParseNulable();
                             aktarim.START_WEEK = reader.GetValue(33).IntParse();
                             aktarim.CREATED_BY = user.USER_CODE;
                             if (OnayliBelge)
@@ -394,7 +394,7 @@ namespace EPM.Service.Base
                                     MARKET_ID = item.MARKET,
                                     QUANTITY = item.QUANTITY,
                                     WEEK = item.START_WEEK,
-                                    YEAR = item.START_DATE.DatetimeParse().GetWeekNumber(),
+                                    YEAR = item.START_DATE.Value.Year,
                                     ENTERY_DATE = item.START_DATE.DatetimeParse(), 
                                     CREATED_BY = item.CREATED_BY
                                 });
@@ -427,7 +427,7 @@ namespace EPM.Service.Base
                                     MARKET_ID = item.MARKET,
                                     QUANTITY = item.QUANTITY,
                                     WEEK = item.START_WEEK,
-                                    YEAR = item.START_DATE.DatetimeParse().GetWeekNumber(),
+                                    YEAR = item.START_DATE.Value.Year,
                                     ENTERY_DATE = item.START_DATE.DatetimeParse(),
                                     CREATED_BY = item.CREATED_BY
                                 });

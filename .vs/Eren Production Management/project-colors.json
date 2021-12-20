@@ -130,7 +130,12 @@
       "ProjectGuid": "c30864a6-f74e-40aa-a809-bbeeb40a99a0",
       "DisplayName": "EPM.Core",
       "ColorIndex": 8
+    },
+    "7aa24831-c90b-49a9-9d53-143d5435d0b1": {
+      "ProjectGuid": "7aa24831-c90b-49a9-9d53-143d5435d0b1",
+      "DisplayName": "EPM.WMS.Service",
+      "ColorIndex": 9
     }
   },
-  "NextColorIndex": 9
+  "NextColorIndex": 10
 }

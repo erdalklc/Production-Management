@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text;
 
 namespace EPM.Plan.Dto.Plan
@@ -32,5 +33,9 @@ namespace EPM.Plan.Dto.Plan
         [Display(Name = "PRODUCT GROUP")]
         public int PRODUCT_GROUP { get; set; } = 0;
         public int PLAN_DURUM { get; set; } = 0;
+
+        public List<string> YEAR { get; set; }
     }
+    
+     
 }

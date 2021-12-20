@@ -8,6 +8,7 @@ using EPM.Tools.Managers;
 using EPM.Web.ServiceHelper; 
 using Microsoft.AspNetCore.Mvc;  
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace EPM.Web.Controllers
 {
@@ -167,14 +168,14 @@ namespace EPM.Web.Controllers
         }
 
         [HttpGet,HttpPost]
-        public object _PartialGetPlanList(int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE,int PLAN_DURUM)
+        public object _PartialGetPlanList(int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE,int PLAN_DURUM,List<string> YEAR)
         {
-            return PlanServiceHelper.GetPlan(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, BRAND, SEASON, MODEL, COLOR, ORDER_TYPE, PRODUCTION_TYPE, FABRIC_TYPE, PLAN_DURUM);
+            return PlanServiceHelper.GetPlan(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, BRAND, SEASON, MODEL, COLOR, ORDER_TYPE, PRODUCTION_TYPE, FABRIC_TYPE, PLAN_DURUM,YEAR);
         }
         [HttpGet, HttpPost]
-        public object _PartialGetPlanListBandGiris(int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM)
+        public object _PartialGetPlanListBandGiris(int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM, List<string> YEAR)
         {
-            return PlanServiceHelper.GetPlanBandGiris(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, BRAND, SEASON, MODEL, COLOR, ORDER_TYPE, PRODUCTION_TYPE, FABRIC_TYPE, PLAN_DURUM);
+            return PlanServiceHelper.GetPlanBandGiris(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, BRAND, SEASON, MODEL, COLOR, ORDER_TYPE, PRODUCTION_TYPE, FABRIC_TYPE, PLAN_DURUM, YEAR);
         }
         [HttpGet, HttpPost]
         public object _PartialGetPlanListByChart(KapasiyeUyumChart_Filter filter)
@@ -201,6 +202,12 @@ namespace EPM.Web.Controllers
         public object _PartialGeKapasiteListByChartBandGiris(KapasiyeUyumChart_Filter filter)
         {
             return PlanServiceHelper.GeKapasiteListByChartBandGiris(filter);
+        }
+
+        [HttpGet,HttpPost]
+        public bool UretimSureleriYenile()
+        {
+            return PlanServiceHelper.UretimSureleriYenile();
         }
         [HttpPut,HttpGet,HttpPost]
         public object UpdateTask( [FromBody] JObject elem)

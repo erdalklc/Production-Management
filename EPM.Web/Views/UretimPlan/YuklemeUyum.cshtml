@@ -28,8 +28,7 @@
             YEAR: GetYear(),
             WEEK: WEEK_VALUE 
         };
-        getLoadPanelInstance().show();
-        console.log(SERIES_NAME);
+        getLoadPanelInstance().show();  
         if(SERIES_NAME=="ÜRETİM GERÇEKLEŞEN"){
                $.ajax({
             type: "POST",
@@ -52,7 +51,7 @@
                     dragEnabled: true,
                     closeOnOutsideClick: true,
                     onContentReady: function () {
-                        try { 
+                        try {  
                             $("#edReport").dxDataGrid({
                             dataSource: formData,
                             keyExpr: "ROW_ID",
@@ -162,7 +161,7 @@
                 var formData = JSON.parse(income).DATA;
                 var YEARS = JSON.parse(income).YEARS;
                 var COLUMNNAMES = JSON.parse(income).COLUMNNAMES;
-
+                console.log(formData);
                 var popupOptions = {
                     contentTemplate: function () {
                       
@@ -174,7 +173,7 @@
                     title: GetYear()+" - "+WEEK_VALUE +". HAFTA YÜKLEME PLAN DETAY",
                     dragEnabled: true,
                     closeOnOutsideClick: true,
-                    onContentReady: function () {
+                    onContentReady: function () { 
                         try { $("#edReport").dxDataGrid({
                     dataSource: formData,
                     keyExpr: "ROW_ID",
@@ -189,13 +188,16 @@
                     
                     ,paging: {
                         pageSize: 100
+                    },onSelectionChanged(e) {
+                      e.component.refresh(true);
                     },
                     sorting: {
                         mode: "multiple"
-                    },summary: {
+                    },summary: {recalculateWhileEditing: true,
                       totalItems: [{
                         column: 'PLANSIZ_ADET',
-                        summaryType: 'sum',
+                        name:"PLANSIZADETTOPLAM",
+                        summaryType: 'custom',
                         displayFormat: '{0}'
                       },
                       {
@@ -208,6 +210,19 @@
                         summaryType: 'sum',
                         displayFormat: '{0}'
                       }],
+                          calculateCustomSummary(options) {
+                            if (options.name === 'PLANSIZADETTOPLAM') {
+                              if (options.summaryProcess === 'start') {
+                                options.totalValue = 0;
+                              }
+                              if (options.summaryProcess === 'finalize') { 
+                                var total=0;
+                                 for(var i=0;i <formData.length;i++)
+                                    total +=(parseFloat(formData[i].URETIM_ADET)-parseFloat(formData[i].PLANLANAN_ADET));
+                                    options.totalValue=total; 
+                              }
+                            }
+                          },	
                     },
                     filterRow: {
                         visible: true,
@@ -256,7 +271,7 @@
                                 }
                                 if (columns[a].dataField == "PLANSIZ_ADET") {
                                     columns[a].calculateCellValue = function (rowData) {
-                                        rowData.PLANSIZ_ADET = rowData.URETIM_ADET - rowData.PLANLANAN_ADET;
+                                        rowData.PLANSIZ_ADET = parseFloat(rowData.URETIM_ADET) - parseFloat(rowData.PLANLANAN_ADET);
                                         return rowData.PLANSIZ_ADET;
                                     }
                                 }

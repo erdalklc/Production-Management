@@ -88,4 +88,26 @@
         value.WORK_MINUTE=e.newData.WORK_MINUTE; 
         e.newData=value;
     }
+
+    function UretimSureleriYenile(){
+        
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("UretimSureleriYenile", "UretimPlan")',
+            data: "",
+            contentType: 'application/x-www-form-urlencoded',
+            timeout: 180000,
+            success: function (income, status, xmlRequest) {
+                  $("#edModelWorkTimes").load('@Url.Action("_PartialProductionTimes","UretimPlan")', function() { 
+                    });
+
+            }, beforeSend: function () {
+                getLoadPanelInstance().show();
+            }
+
+
+        }).always(function () {
+            getLoadPanelInstance().hide();
+        });
+    }
 </script>
