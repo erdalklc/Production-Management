@@ -39,7 +39,11 @@ namespace EPM.Plan.Service.Services
                              FT.ADI AS FABRIC_TYPE,
                              OT.ADI AS ORDER_TYPE,
                              PT.ADI AS PRODUCTION_TYPE,
-                             H.DEADLINE,H.SHIPMENT_DATE,
+                             H.DEADLINE,
+                             H.DEADLINE_2,
+                             H.DEADLINE_3,
+                             H.DEADLINE_4,
+                             H.SHIPMENT_DATE,
                              MR.ADI AS MARKET,
                              MR.ID AS MARKET_ID,
                              0.00 AS CREATE_MINUTE,
@@ -56,7 +60,7 @@ namespace EPM.Plan.Service.Services
                         INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_D D ON D.HEADER_ID = H.ID 
                         INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET MR ON MR.ID=D.MARKET
                         INNER JOIN FDEIT005.EPM_PRODUCTION_PLAN PL ON PL.HEADER_ID=H.ID AND PL.MARKET_ID=MR.ID
-                        WHERE 0=0 AND H.STATUS=0 AND H.APPROVAL_STATUS=1";
+                        WHERE 0=0 AND H.STATUS=0 AND H.APPROVAL_STATUS=1 AND D.STATUS=0";
             sql += " AND H.BAND_ID=" + filter.BAND;
             sql += " AND PL.WEEK=" + filter.WEEK;
             sql += " AND PL.YEAR=" + filter.YEAR; 
@@ -69,7 +73,10 @@ namespace EPM.Plan.Service.Services
                              PG.ADI,
                              FT.ADI,
                              PT.ADI,
-                             H.DEADLINE,
+                            H.DEADLINE,
+                             H.DEADLINE_2,
+                             H.DEADLINE_3,
+                             H.DEADLINE_4,
                              H.SHIPMENT_DATE,
                              MR.ADI, MR.ID
                     ORDER BY H.ID) A WHERE URETIM_ADET>0";
@@ -154,7 +161,12 @@ namespace EPM.Plan.Service.Services
                     }
                 }
             }
+
             dt.AcceptChanges();
+            foreach (DataRow row in dt.Rows)
+                row["PLANSIZ_ADET"] = row["URETIM_ADET"].IntParse() - row["PLANLANAN_ADET"].IntParse();
+            dt.AcceptChanges();
+
             dt.TableName = "DATA";
             DataTable dtYear = new DataTable();
             dtYear.Columns.Add("YEAR", typeof(int));
@@ -184,7 +196,11 @@ namespace EPM.Plan.Service.Services
                              FT.ADI AS FABRIC_TYPE,
                              OT.ADI AS ORDER_TYPE,
                              PT.ADI AS PRODUCTION_TYPE,
-                             H.DEADLINE,H.SHIPMENT_DATE,
+                             H.DEADLINE,
+                             H.DEADLINE_2,
+                             H.DEADLINE_3,
+                             H.DEADLINE_4,
+                             H.SHIPMENT_DATE,
                              MR.ADI AS MARKET,
                              MR.ID AS MARKET_ID,
                              0.00 AS CREATE_MINUTE,
@@ -201,7 +217,7 @@ namespace EPM.Plan.Service.Services
                         INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_D D ON D.HEADER_ID = H.ID 
                         INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET MR ON MR.ID=D.MARKET
                         INNER JOIN FDEIT005.EPM_PRODUCTION_PLAN_ENTERY PL ON PL.HEADER_ID=H.ID AND PL.MARKET_ID=MR.ID
-                        WHERE 0=0 AND H.STATUS=0 AND H.APPROVAL_STATUS=1";
+                        WHERE 0=0 AND H.STATUS=0 AND H.APPROVAL_STATUS=1 AND D.STATUS=0";
             sql += " AND H.BAND_ID=" + filter.BAND;
             sql += " AND PL.WEEK=" + filter.WEEK;
             sql += " AND PL.YEAR=" + filter.YEAR;
@@ -214,7 +230,10 @@ namespace EPM.Plan.Service.Services
                              PG.ADI,
                              FT.ADI,
                              PT.ADI,
-                             H.DEADLINE,
+                            H.DEADLINE,
+                             H.DEADLINE_2,
+                             H.DEADLINE_3,
+                             H.DEADLINE_4,
                              H.SHIPMENT_DATE,
                              MR.ADI, MR.ID
                     ORDER BY H.ID) A WHERE URETIM_ADET>0";
@@ -300,6 +319,11 @@ namespace EPM.Plan.Service.Services
                 }
             }
             dt.AcceptChanges();
+            foreach (DataRow row in dt.Rows)
+                row["PLANSIZ_ADET"] = row["URETIM_ADET"].IntParse() - row["PLANLANAN_ADET"].IntParse();
+            dt.AcceptChanges();
+
+
             dt.TableName = "DATA";
             DataTable dtYear = new DataTable();
             dtYear.Columns.Add("YEAR", typeof(int));
@@ -313,9 +337,10 @@ namespace EPM.Plan.Service.Services
             set.Tables.Add(dtColumnNames);
             return JsonConvert.SerializeObject(set, Formatting.Indented);
         }
-        public object GetPlan(string USER_CODE, int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM, string YEAR)
+        public object GetPlan(string USER_CODE, int BRAND, string SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM, string YEAR)
         { 
             List<string> YEARS=JsonConvert.DeserializeObject<List<string>>(YEAR);
+            List<EPM_PRODUCTION_SEASON> SEASONS=JsonConvert.DeserializeObject<List<EPM_PRODUCTION_SEASON>>(SEASON);
             DataTable dtColumnNames = new DataTable();
             dtColumnNames.TableName = "COLUMNNAMES";
             dtColumnNames.Columns.Add("NAME", typeof(string));
@@ -329,7 +354,11 @@ namespace EPM.Plan.Service.Services
                              FT.ADI AS FABRIC_TYPE,
                              OT.ADI AS ORDER_TYPE,
                              PT.ADI AS PRODUCTION_TYPE,
-                             H.DEADLINE,
+                              H.DEADLINE,
+                             H.DEADLINE_2,
+                             H.DEADLINE_3,
+                             H.DEADLINE_4,
+                             H.SHIPMENT_DATE,
                              MR.ADI AS MARKET,
                              MR.ID AS MARKET_ID,
                              0.00 AS CREATE_MINUTE,
@@ -345,7 +374,7 @@ namespace EPM.Plan.Service.Services
                         INNER JOIN FDEIT005.EPM_PRODUCT_GROUP PG ON PG.ID=H.PRODUCT_GROUP
                         INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_D D ON D.HEADER_ID = H.ID 
                         INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET MR ON MR.ID=D.MARKET
-                        WHERE 0=0 AND H.STATUS=0 AND H.APPROVAL_STATUS=1";
+                        WHERE 0=0 AND H.STATUS=0 AND H.APPROVAL_STATUS=1  AND D.STATUS=0 AND MODEL NOT LIKE 'RL%' AND MODEL NOT LIKE 'RF%'";
 
             if (BRAND != 0)
                 sql += " AND H.BRAND=" + BRAND;
@@ -361,7 +390,7 @@ namespace EPM.Plan.Service.Services
                 sql += " AND H.COLOR='" + COLOR + "'";
             if (MODEL != null && MODEL != "")
                 sql += " AND H.MODEL='" + MODEL + "'";
-            sql += " AND H.SEASON=" + SEASON;
+            sql += " AND H.SEASON IN(" + string.Join(',',(SEASONS.Select(ob=>ob.ID)).ToArray()) + ")";
             sql += @"GROUP BY H.ID,
                              BR.ADI,
                              PS.ADI,
@@ -372,6 +401,10 @@ namespace EPM.Plan.Service.Services
                              FT.ADI,
                              PT.ADI,
                              H.DEADLINE,
+                             H.DEADLINE_2,
+                             H.DEADLINE_3,
+                             H.DEADLINE_4,
+                             H.SHIPMENT_DATE,
                              MR.ADI, MR.ID
                     ORDER BY H.ID) A WHERE URETIM_ADET>0";
             DataTable dt = _planRepository.QueryFill(sql); 
@@ -403,7 +436,7 @@ namespace EPM.Plan.Service.Services
             }
             
             List<EPM_PRODUCTION_PLAN> plan = _planRepository.DeserializeList<EPM_PRODUCTION_PLAN>(@"SELECT PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR,SUM(PL.QUANTITY) QUANTITY FROM FDEIT005.EPM_PRODUCTION_PLAN PL
-                    INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=PL.HEADER_ID AND H.STATUS=0 AND H.APPROVAL_STATUS=1 AND H.SEASON=" + SEASON + "    GROUP BY PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR");
+                    INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=PL.HEADER_ID AND H.STATUS=0 AND H.APPROVAL_STATUS=1 AND H.SEASON IN(" + string.Join(',', (SEASONS.Select(ob => ob.ID)).ToArray()) + ")    GROUP BY PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR");
             foreach (var item in plan)
             {
                 DataRow[] row = dt.Select("ID=" + item.HEADER_ID + " AND MARKET_ID=" + item.MARKET_ID + "");
@@ -418,8 +451,12 @@ namespace EPM.Plan.Service.Services
                     }
                 }
             }
-             
+
             dt.AcceptChanges();
+            foreach (DataRow row in dt.Rows)
+                row["PLANSIZ_ADET"] = row["URETIM_ADET"].IntParse() - row["PLANLANAN_ADET"].IntParse();
+            dt.AcceptChanges();
+
             dt.TableName = "DATA";  
             dtYear.TableName = "YEARS";
             set.Tables.Add(dt);
@@ -428,9 +465,10 @@ namespace EPM.Plan.Service.Services
             return JsonConvert.SerializeObject(set, Formatting.Indented);
         }
 
-        public object GetPlanBandGiris(string USER_CODE, int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM, string YEAR)
+        public object GetPlanBandGiris(string USER_CODE, int BRAND, string SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM, string YEAR)
         {
             List<string> YEARS = JsonConvert.DeserializeObject<List<string>>(YEAR);
+            List<EPM_PRODUCTION_SEASON> SEASONS = JsonConvert.DeserializeObject<List<EPM_PRODUCTION_SEASON>>(SEASON);
             DataTable dtColumnNames = new DataTable();
             dtColumnNames.TableName = "COLUMNNAMES";
             dtColumnNames.Columns.Add("NAME", typeof(string));
@@ -445,6 +483,10 @@ namespace EPM.Plan.Service.Services
                              OT.ADI AS ORDER_TYPE,
                              PT.ADI AS PRODUCTION_TYPE,
                              H.DEADLINE,
+                             H.DEADLINE_2,
+                             H.DEADLINE_3,
+                             H.DEADLINE_4,
+                             H.SHIPMENT_DATE,
                              MR.ADI AS MARKET,
                              MR.ID AS MARKET_ID,
                              0.00 AS CREATE_MINUTE,
@@ -460,7 +502,7 @@ namespace EPM.Plan.Service.Services
                         LEFT JOIN FDEIT005.EPM_PRODUCT_GROUP PG ON PG.ID=H.PRODUCT_GROUP
                         LEFT JOIN FDEIT005.EPM_MASTER_PRODUCTION_D D ON D.HEADER_ID = H.ID 
                         LEFT JOIN FDEIT005.EPM_PRODUCTION_MARKET MR ON MR.ID=D.MARKET
-                        WHERE 0=0 AND H.STATUS=0 AND H.APPROVAL_STATUS=1";
+                        WHERE 0=0 AND H.STATUS=0 AND H.APPROVAL_STATUS=1  AND D.STATUS=0 AND MODEL NOT LIKE 'RL%' AND MODEL NOT LIKE 'RF%'";
 
             if (BRAND != 0)
                 sql += " AND H.BRAND=" + BRAND;
@@ -476,7 +518,7 @@ namespace EPM.Plan.Service.Services
                 sql += " AND H.COLOR='" + COLOR + "'";
             if (MODEL != null && MODEL != "")
                 sql += " AND H.MODEL='" + MODEL + "'";
-            sql += " AND H.SEASON=" + SEASON;
+            sql += " AND H.SEASON IN(" + string.Join(',', (SEASONS.Select(ob => ob.ID)).ToArray()) + ")";
             sql += @"GROUP BY H.ID,
                              BR.ADI,
                              PS.ADI,
@@ -487,6 +529,10 @@ namespace EPM.Plan.Service.Services
                              FT.ADI,
                              PT.ADI,
                              H.DEADLINE,
+                             H.DEADLINE_2,
+                             H.DEADLINE_3,
+                             H.DEADLINE_4,
+                             H.SHIPMENT_DATE,
                              MR.ADI, MR.ID
                     ORDER BY H.ID) A WHERE URETIM_ADET>0";
             DataTable dt = _planRepository.QueryFill(sql);
@@ -496,7 +542,7 @@ namespace EPM.Plan.Service.Services
             foreach (DataRow item in dt.Rows)
             {
                 var Model = item["MODEL"].ToString();
-                var sureL = sureler.Find(ob => ob.MODEL == Model);
+                var sureL = sureler.Find(ob => ob.MODEL == Model);  
                 if (sureL != null)
                     item["CREATE_MINUTE"] = sureL.SURE;
             }
@@ -517,7 +563,7 @@ namespace EPM.Plan.Service.Services
             }
 
                 List<EPM_PRODUCTION_PLAN_ENTERY> plan = _planRepository.DeserializeList<EPM_PRODUCTION_PLAN_ENTERY>(@"SELECT PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR,SUM(PL.QUANTITY) QUANTITY FROM FDEIT005.EPM_PRODUCTION_PLAN_ENTERY PL
-                    INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=PL.HEADER_ID AND H.STATUS=0 AND H.APPROVAL_STATUS=1 AND H.SEASON=" + SEASON + "    GROUP BY PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR");
+                    INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=PL.HEADER_ID AND H.STATUS=0 AND H.APPROVAL_STATUS=1 AND H.SEASON IN ("+ string.Join(',', (SEASONS.Select(ob => ob.ID)).ToArray()) + ")   GROUP BY PL.ID,PL.HEADER_ID,PL.MARKET_ID,PL.WEEK,PL.YEAR");
             foreach (var item in plan)
             {
                 DataRow[] row = dt.Select("ID=" + item.HEADER_ID + " AND MARKET_ID=" + item.MARKET_ID + "");
@@ -527,13 +573,16 @@ namespace EPM.Plan.Service.Services
                     {
                         row[0][item.YEAR + "_" + item.WEEK] = item.QUANTITY;
                         row[0]["PLANLANAN_ADET"] = row[0]["PLANLANAN_ADET"].IntParse() + item.QUANTITY;
-                        row[0]["PLANSIZ_ADET"] = row[0]["URETIM_ADET"].IntParse() - row[0]["PLANLANAN_ADET"].IntParse();
+                        row[0]["PLANSIZ_ADET"] = row[0]["URETIM_ADET"].IntParse() - row[0]["PLANLANAN_ADET"].IntParse(); 
 
                     }
                 }
             }
-
             dt.AcceptChanges();
+            foreach (DataRow row in dt.Rows) 
+                row["PLANSIZ_ADET"] = row["URETIM_ADET"].IntParse() - row["PLANLANAN_ADET"].IntParse();
+            dt.AcceptChanges();
+
             dt.TableName = "DATA"; 
             dtYear.TableName = "YEARS";
             set.Tables.Add(dt);
@@ -686,6 +735,30 @@ namespace EPM.Plan.Service.Services
                     plan.CREATED_BY = USER_CODE;
                     _planRepository.Serialize(plan);
                     _planRepository.ExecSql("DELETE FDEIT005.EPM_PRODUCTION_PLAN_ENTERY WHERE QUANTITY=0");
+
+                   
+                    List<EPM_PRODUCTION_PLAN_ENTERY> bandGrisler = new List<EPM_PRODUCTION_PLAN_ENTERY>();
+                    bandGrisler = _planRepository.DeserializeList<EPM_PRODUCTION_PLAN_ENTERY>("SELECT * FROM FDEIT005.EPM_PRODUCTION_PLAN_ENTERY WHERE HEADER_ID=" + plan.HEADER_ID + " AND MARKET_ID =" + plan.MARKET_ID + "");
+                    _planRepository.ExecSql("DELETE FDEIT005.EPM_PRODUCTION_PLAN WHERE HEADER_ID=" + plan.HEADER_ID + " AND MARKET_ID =" + plan.MARKET_ID + "");
+                    foreach (var item in bandGrisler)
+                    {
+                        int yukelemeYear = item.YEAR;
+                        int yuklemeHafta = item.WEEK + 2;
+                        if (yuklemeHafta > 52)
+                        {
+                            yukelemeYear++;
+                            yuklemeHafta = yuklemeHafta - 52;
+                        }
+                        EPM_PRODUCTION_PLAN planYukleme=new EPM_PRODUCTION_PLAN();
+                        planYukleme.MARKET_ID = item.MARKET_ID;
+                        planYukleme.HEADER_ID = item.HEADER_ID;
+                        planYukleme.WEEK = yuklemeHafta;
+                        planYukleme.YEAR = yukelemeYear;
+                        planYukleme.QUANTITY = item.QUANTITY;
+                        planYukleme.CREATED_BY = item.CREATED_BY;
+                        _planRepository.Serialize(planYukleme);
+                    }
+                     
                 }
                 else
                 {

@@ -451,7 +451,7 @@ namespace EPM.Production.Service.Services
 ,0 AS REALESED_COST
 FROM FDEIT005.EPM_MASTER_PRODUCTION_D D  
 INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H ON H.ID=D.HEADER_ID 
-WHERE HEADER_ID=" + ID);
+WHERE D.STATUS=0 AND HEADER_ID=" + ID);
         }
 
         public object[] UretimOnayliDetailUpdate(string USER_CODE, int Key, string Values, ILogService logRepository)
@@ -498,6 +498,7 @@ WHERE HEADER_ID=" + ID);
 
                 _productionRepository.ExecSql("UPDATE FDEIT005.EPM_MASTER_PRODUCTION_D SET STATUS=1 WHERE ID=" + detail.ID);
                 _productionRepository.ExecSql("DELETE FROM FDEIT005.EPM_PRODUCTION_PLAN WHERE HEADER_ID=" + detail.HEADER_ID + " AND MARKET_ID=" + detail.MARKET);
+                _productionRepository.ExecSql("DELETE FROM FDEIT005.EPM_PRODUCTION_PLAN_ENTERY WHERE HEADER_ID=" + detail.HEADER_ID + " AND MARKET_ID=" + detail.MARKET);
             }
             catch (Exception ex)
             {
@@ -522,17 +523,23 @@ WHERE HEADER_ID=" + ID);
             object[] ok = new object[] { true, "Başarılı" };
             try
             {
-                LOG_EPM_MASTER_PRODUCTION_H log = new LOG_EPM_MASTER_PRODUCTION_H();
-                EPM_MASTER_PRODUCTION_H detail = _productionRepository.Deserialize<EPM_MASTER_PRODUCTION_H>(@"SELECT * FROM FDEIT005.EPM_MASTER_PRODUCTION_H D  WHERE D.ID=" + Key);
-                log.OLD_VALUE = ProductionExtensions.GetPropValue(detail, dic.Keys.ToList()[0].ToString());
-                JsonConvert.PopulateObject(Values, detail);
-                log.NEW_VALUE = ProductionExtensions.GetPropValue(detail, dic.Keys.ToList()[0].ToString());
-                _productionRepository.Serialize<EPM_MASTER_PRODUCTION_H>(detail); 
-                log.CHANGED_COLUMN = dic.Keys.ToList()[0].ToString();
-                log.CREATE_DATE = DateTime.Now;
-                log.CHANGED_BY = USER_CODE;
-                log.HEADER_ID = detail.ID;
-                logRepository.SaveMaster(log);
+                EPM_MASTER_PRODUCTION_H detail = _productionRepository.Deserialize<EPM_MASTER_PRODUCTION_H>(@"SELECT * FROM FDEIT005.EPM_MASTER_PRODUCTION_H D  WHERE D.ID=" + Key); 
+                foreach (var item in dic.Keys.ToList())
+                {
+                    EPM_MASTER_PRODUCTION_H dTemp = detail;
+                    LOG_EPM_MASTER_PRODUCTION_H log = new LOG_EPM_MASTER_PRODUCTION_H();
+                    log.OLD_VALUE = ProductionExtensions.GetPropValue(dTemp, item.ToString());
+                    JsonConvert.PopulateObject(Values, dTemp);
+                    log.NEW_VALUE = ProductionExtensions.GetPropValue(dTemp, item.ToString());
+                    log.CHANGED_COLUMN = dic.Keys.ToList()[0].ToString();
+                    log.CREATE_DATE = DateTime.Now;
+                    log.CHANGED_BY = USER_CODE;
+                    log.HEADER_ID = detail.ID;
+                    logRepository.SaveMaster(log);
+                }
+                 
+                JsonConvert.PopulateObject(Values, detail); 
+                _productionRepository.Serialize(detail);
             }
             catch (Exception ex)
             {

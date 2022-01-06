@@ -12,18 +12,18 @@ namespace EPM.Web.ServiceHelper
 {
     public class PlanServiceHelper: EPMHttpCaller
     {
-        public static object GetPlan(string USER_CODE, int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM, List<string> YEAR)
+        public static object GetPlan(string USER_CODE, int BRAND, List<EPM_PRODUCTION_SEASON> SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM, List<string> YEAR)
         {
             string apiUrl = "GetPlan";
             var list = PostRequest<object[], object>(EPMServiceType.Plan, apiUrl, new object[] { USER_CODE
-                , BRAND,SEASON,MODEL,COLOR,ORDER_TYPE,PRODUCTION_TYPE,FABRIC_TYPE,PLAN_DURUM,JsonConvert.SerializeObject( YEAR) });
+                , BRAND,JsonConvert.SerializeObject( SEASON),MODEL,COLOR,ORDER_TYPE,PRODUCTION_TYPE,FABRIC_TYPE,PLAN_DURUM,JsonConvert.SerializeObject( YEAR) });
             return list;
         }
-        public static object GetPlanBandGiris(string USER_CODE, int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM, List<string> YEAR)
+        public static object GetPlanBandGiris(string USER_CODE, int BRAND, List<EPM_PRODUCTION_SEASON> SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM, List<string> YEAR)
         {
             string apiUrl = "GetPlanBandGiris";
             var list = PostRequest<object[], object>(EPMServiceType.Plan, apiUrl, new object[] { USER_CODE
-                , BRAND,SEASON,MODEL,COLOR,ORDER_TYPE,PRODUCTION_TYPE,FABRIC_TYPE,PLAN_DURUM,JsonConvert.SerializeObject( YEAR) });
+                , BRAND,JsonConvert.SerializeObject( SEASON) ,MODEL,COLOR,ORDER_TYPE,PRODUCTION_TYPE,FABRIC_TYPE,PLAN_DURUM,JsonConvert.SerializeObject( YEAR) });
             return list;
         }
         public static object GetPlanByChart(KapasiyeUyumChart_Filter filter)

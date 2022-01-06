@@ -21,19 +21,25 @@
 
             @*items.AddSimpleFor(m => m.PLAN_DURUM).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("UretimPlan").LoadAction("GetPlanStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);*@
             items.AddSimpleFor(m => m.BRAND).Editor(ob => ob.Lookup().Value(0).SearchEnabled(true).DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
-            items.AddSimpleFor(m => m.SEASON).Editor(ob => ob.Lookup().SearchEnabled(true).DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+            items.AddSimple().Name("SEASON").ColSpan(3).Label(l=>l.Text("SEASON")).Editor(ob => ob.TagBox().ShowSelectionControls(true).SearchEnabled(true).DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));            
+            items.AddEmpty();
             items.AddSimpleFor(m => m.MODEL).Editor(ob=>ob.TextBox().ID("edModel")).IsRequired(false);
             items.AddSimpleFor(m => m.COLOR).Editor(ob=>ob.TextBox().ID("edColor")).IsRequired(false);
             items.AddSimpleFor(m => m.ORDER_TYPE).Editor(ob => ob.Lookup().Value(0).SearchEnabled(true).DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetOrderList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
             items.AddSimpleFor(m => m.PRODUCTION_TYPE).Editor(ob => ob.Lookup().Value(0).SearchEnabled(true).DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetProductionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
             items.AddSimpleFor(m => m.FABRIC_TYPE).Editor(ob => ob.Lookup().Value(0).SearchEnabled(true).DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetFabricList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
-            items.AddSimple().Name("YEAR").Label(l=>l.Text("YEAR")).ColSpan(2).Editor(ob=>ob.TagBox().ShowSelectionControls(true).ApplyValueMode(EditorApplyValueMode.UseButtons).Items(Items).Value(new[]{Items.ToList()[2]})).IsRequired(false);
-            
-            items.AddButton().HorizontalAlignment(HorizontalAlignment.Left).VerticalAlignment(VerticalAlignment.Center)
+            items.AddSimple().Name("YEAR").Label(l=>l.Text("YEAR")).ColSpan(3).Editor(ob=>ob.TagBox().ShowSelectionControls(true).ApplyValueMode(EditorApplyValueMode.Instantly).Items(Items).Value(new[]{Items.ToList()[2],Items.ToList()[3]})).IsRequired(false); 
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddEmpty();
+            items.AddEmpty(); 
+            items.AddButton().HorizontalAlignment(HorizontalAlignment.Right).VerticalAlignment(VerticalAlignment.Center)
                    .ButtonOptions(b => b.Text("FİLTRELE")
                        .Type(ButtonType.Default)
                        .Icon("fas fa-sign-in-alt")
-                       .Width("100%")
+                       .Width("100%") 
                        .OnClick("UretimOnayliFiltrele")
                        .UseSubmitBehavior(true)
                );
@@ -48,7 +54,7 @@
 
 <div id="form-container">
     <div class="dx-card wide-card">
-        <div id="edReport" style="height:calc(100vh - 150px)">
+        <div id="edReport" style="height:calc(100vh - 205px)">
         </div>
     </div>
 </div>
@@ -56,9 +62,13 @@
 
     var datax = null;
     function UretimOnayliFiltrele() {
+          if($("#edOnayliListe").dxForm("instance").getEditor("SEASON")._selectedItems.length==0 || $("#edOnayliListe").dxForm("instance").getEditor("YEAR")._selectedItems ==0){
+            DevExpress.ui.notify("Lütfen tüm değerlerin seçildiğinden emin olunuz", "error", 600);
+            return;
+        } 
         var data = {
             BRAND: jQuery("[name=BRAND]").val(),
-            SEASON: jQuery("[name=SEASON]").val(),
+            SEASON: $("#edOnayliListe").dxForm("instance").getEditor("SEASON")._selectedItems,
             MODEL: jQuery("[name=MODEL]").val(),
             COLOR: jQuery("[name=COLOR]").val(),
             ORDER_TYPE: jQuery("[name=ORDER_TYPE]").val(),
@@ -88,7 +98,7 @@
                     
                     ,paging: {
                         pageSize: 50
-                    },
+                    },  
                     sorting: {
                         mode: "multiple"
                     }, export: {
@@ -98,12 +108,13 @@
                         visible: true,
                         applyFilter: "auto"
                     },
-                     summary: {recalculateWhileEditing: true,
+                     summary: {
+                         recalculateWhileEditing: true,
+                        skipEmptyValues: true,
                       totalItems: [{
-                        column: 'PLANSIZ_ADET',
-                        name:"PLANSIZADETTOPLAM",
-                        summaryType: 'custom',
-                        displayFormat: '{0}'
+                        column: 'PLANSIZ_ADET', 
+                        summaryType: 'sum',
+                        displayFormat: '{0}' , 
                       },
                       {
                         column: 'URETIM_ADET',
@@ -115,19 +126,6 @@
                         summaryType: 'sum',
                         displayFormat: '{0}'
                       }],
-                          calculateCustomSummary(options) {
-                            if (options.name === 'PLANSIZADETTOPLAM') {
-                              if (options.summaryProcess === 'start') {
-                                options.totalValue = 0;
-                              }
-                              if (options.summaryProcess === 'calculate') { 
-                                 var total=0;
-                                 for(var i=0;i <formData.length;i++)
-                                    total +=(parseFloat(formData[i].URETIM_ADET)-parseFloat(formData[i].PLANLANAN_ADET));
-                                    options.totalValue=total; 
-                              }
-                            }
-                          },	
                     },onSelectionChanged(e) {
                           e.component.refresh(true);
                         },
@@ -136,7 +134,8 @@
                         mode: "cell",
                         allowUpdating: @sCanEditPlan
                     }, columnChooser: {
-                        enabled: true
+                        enabled: true,
+                        mode:"select"
                     }, customizeColumns: function (columns) {
                         for (var i = 0; i < YEARS.length; i++) {
                             columns.push({
@@ -144,7 +143,7 @@
                                 isBand: true
                             });
                             for (var a = 0; a < columns.length - 1; a++) {
-                                if (a < 18) {
+                                if (a < 21) {
                                     columns[a].fixed = true;
                                     columns[a].allowEditing = false;
                                 }
@@ -154,8 +153,12 @@
                                 else if (columns[a].dataField == "MARKET") {
                                     columns[a].width = 100;
                                 }
-                                else if (columns[a].dataField == "DEADLINE") {
+                                else if (columns[a].dataField == "DEADLINE" ||columns[a].dataField == "SHIPMENT_DATE") {
                                     columns[a].width = 100;
+                                    columns[a].dataType = "date";
+                                }
+                                else if (columns[a].dataField == "DEADLINE_2" ||columns[a].dataField == "DEADLINE_3" ||columns[a].dataField == "DEADLINE_4") {
+                                    columns[a].visible = false;
                                     columns[a].dataType = "date";
                                 }
                                 else if (columns[a].dataField == "PLANSIZ_ADET" || columns[a].dataField == "URETIM_ADET" || columns[a].dataField == "PLANLANAN_ADET") {
@@ -263,7 +266,7 @@
                     showRowLines: true, 
                     showBorders: true,
                     onContentReady: function (e) { 
-                         // e.component.refresh(true);
+                          
                     },
                     onCellDblClick: function (e) {
                        if(@sCanEditPlan){

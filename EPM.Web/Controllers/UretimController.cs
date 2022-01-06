@@ -146,7 +146,15 @@ namespace EPM.Web.Controllers
         [HttpPost]
         public IActionResult UretimOnayliInsert(string values)
         {
-            return Ok(ProductionServiceHelper.UretimOnayliInsert(values));
+            try
+            {
+
+                return Ok(ProductionServiceHelper.UretimOnayliInsert(values));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]

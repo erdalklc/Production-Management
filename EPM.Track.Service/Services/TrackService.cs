@@ -1031,32 +1031,84 @@ ORDER BY RD.QUEUE", PO_HEADER_ID, DETAIL_ID, HEADER_ID);
             DateTime basTarih = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0).AddYears(-1).AddMonths(1);
             DateTime bitTarih = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0).AddYears(-1).AddMonths(2).AddSeconds(-1);
             string sql = string.Format(@"  
-SELECT MA.MODEL,
-           MA.RENK,
-           MA.BEDEN,
-           MA.MODEL||'.'||MA.RENK||'.'||MA.BEDEN AS SKU,
-           MA.ADET AS MIN_ADET,
-            NVL (NOTR.ENVANTER, 0)+  NVL (NOIHR.ENVANTER, 0) NOS_ADET, 
-           NVL (NOTR.ENVANTER, 0) NOSTR_ADET, 
-           NVL (NOIHR.ENVANTER, 0) NOSIHR_ADET, 
-           NVL (LO.ENVANTER, 0) LOJ_ADET,
-           STAY.SATIS_ADET_AY,
-           cast((CASE WHEN ((NVL (NOTR.ENVANTER, 0)+  NVL (NOIHR.ENVANTER, 0)) / MA.ADET)*100.00 >100 THEN 100 ELSE ((NVL (NOTR.ENVANTER, 0)+  NVL (NOIHR.ENVANTER, 0)) / MA.ADET)*100.00 END) as integer) AS YUZDE,
-           CASE
-              WHEN MA.ADET - (NVL (NOTR.ENVANTER, 0)+  NVL (NOIHR.ENVANTER, 0)) >= 0
+
+
+SELECT N.*
+,cast((CASE WHEN (NOS_ADET / N.MIN_ADET)*100.00 >100 THEN 100 ELSE (NOS_ADET / N.MIN_ADET)*100.00 END) as integer) AS YUZDE
+,CASE
+              WHEN (N.MIN_ADET - NOS_ADET) >= 0
               THEN
-                 MA.ADET - (NVL (NOTR.ENVANTER, 0)+  NVL (NOIHR.ENVANTER, 0))
+                 (N.MIN_ADET - NOS_ADET)
               ELSE
                  0
            END
               AS SA_URETIM_ADET,
               0 PLANLANAN_URETIM_ADET
-        FROM XXER_NOS_MIN_ADETLER MA
-           LEFT JOIN
-           (  SELECT msi.segment1 MODEL,
+ FROM (
+SELECT MODEL,RENK,BEDEN,MODEL||'.'||RENK||'.'||BEDEN AS SKU,SUM(NOSIHR_ADET) NOSIHR_ADET ,SUM(NOSTR_ADET) AS NOSTR_ADET,SUM(LOJ_ADET) LOJ_ADET,SUM(MIN_ADET) MIN_ADET,SUM(SATIS_ADET_AY) SATIS_ADET_AY,SUM(NOSIHR_ADET)+ SUM(NOSTR_ADET) NOS_ADET FROM (
+SELECT MODEL,RENK,BEDEN,MODEL||'.'||RENK||'.'||BEDEN AS SKU,SUM(NOSIHR_ADET) NOSIHR_ADET ,SUM(NOSTR_ADET) AS NOSTR_ADET,SUM(LOJ_ADET) LOJ_ADET,SUM(MIN_ADET) MIN_ADET,SUM(SATIS_ADET_AY) SATIS_ADET_AY FROM (
+SELECT  MODEL,RENK,BEDEN,SUM(LOTMIKTAR) NOSIHR_ADET ,0 AS NOSTR_ADET,0 LOJ_ADET,0 MIN_ADET,0 SATIS_ADET_AY
+ FROM ( 
+SELECT   msi.segment1 model, msi.segment2 renk, msi.segment3 beden,
+msi.CONCATENATED_SEGMENTS kalem_kodu, 
+         mmt.subinventory_code depo,           
+SUM(NVL(mtln.primary_quantity,mmt.primary_quantity)) lotmiktar
+    FROM apps.mtl_system_items_b_kfv msi,
+         apps.mtl_material_transactions mmt,
+         apps.mtl_transaction_lot_numbers mtln,
+         apps.mtl_item_locations_kfv mil
+   WHERE mmt.inventory_item_id = msi.inventory_item_id
+     AND mmt.transaction_id = mtln.transaction_id(+)
+     and mmt.inventory_item_id=mtln.inventory_item_id(+)
+     AND mmt.locator_id = mil.inventory_location_id(+)
+     and mmt.organization_id=mil.organization_id(+)
+     AND msi.organization_id =105
+     AND mmt.organization_id =105
+     AND to_date(mmt.transaction_date,'DD-MM-YYYY')<sysdate +1
+     AND mmt.subinventory_code IN ('NOSIHR')
+GROUP BY msi.segment1,
+         msi.segment2,
+         msi.segment3, 
+         mmt.subinventory_code
+  HAVING SUM(NVL(mtln.primary_quantity,mmt.primary_quantity)) <> 0
+ ) A
+ GROUP BY MODEL,RENK,BEDEN
+ UNION ALL
+ SELECT  MODEL,RENK,BEDEN,0 AS NOSIHR_ADET,SUM(LOTMIKTAR) NOSTR_ADET ,0 LOJ_ADET,0 MIN_ADET,0 SATIS_ADET_AY
+ FROM ( 
+SELECT   msi.segment1 model, msi.segment2 renk, msi.segment3 beden,
+msi.CONCATENATED_SEGMENTS kalem_kodu, 
+         mmt.subinventory_code depo,           
+SUM(NVL(mtln.primary_quantity,mmt.primary_quantity)) lotmiktar
+    FROM apps.mtl_system_items_b_kfv msi,
+         apps.mtl_material_transactions mmt,
+         apps.mtl_transaction_lot_numbers mtln,
+         apps.mtl_item_locations_kfv mil
+   WHERE mmt.inventory_item_id = msi.inventory_item_id
+     AND mmt.transaction_id = mtln.transaction_id(+)
+     and mmt.inventory_item_id=mtln.inventory_item_id(+)
+     AND mmt.locator_id = mil.inventory_location_id(+)
+     and mmt.organization_id=mil.organization_id(+)
+     AND msi.organization_id =105
+     AND mmt.organization_id =105
+     AND to_date(mmt.transaction_date,'DD-MM-YYYY')<sysdate +1
+     AND mmt.subinventory_code IN ('NOSTR')
+GROUP BY msi.segment1,
+         msi.segment2,
+         msi.segment3, 
+         mmt.subinventory_code
+  HAVING SUM(NVL(mtln.primary_quantity,mmt.primary_quantity)) <> 0
+ ) A
+ GROUP BY MODEL,RENK,BEDEN
+ UNION ALL
+ SELECT msi.segment1 MODEL,
                      msi.segment2 RENK,
                      msi.segment3 BEDEN,
-                     SUM (v.on_hand) AS ENVANTER
+                     0 AS NOSIHR_ADET,
+                     0 NOSTR_ADET ,
+                     SUM (v.on_hand) AS LOJ_ADET,
+                     0 MIN_ADET,
+                     0 SATIS_ADET_AY
                 FROM APPS.mtl_onhand_total_mwb_v v, APPS.mtl_system_items_b msi
                WHERE     1 = 1
                      AND v.organization_id = 1903
@@ -1064,87 +1116,29 @@ SELECT MA.MODEL,
                      AND msi.organization_id = 1903
                      AND v.subinventory_code IN ('CORLU')
             GROUP BY msi.segment1, msi.segment2, msi.segment3
-              HAVING 1 = 1) LO
-              ON LO.MODEL = MA.MODEL
-                 AND LO.RENK = MA.RENK
-                 AND LO.BEDEN = MA.BEDEN
-LEFT JOIN (
-                 SELECT  o3501345.DEPO as DEPO,o3501345.MIKTAR as ENVANTER,o3501345.MODEL ,o3501345.RENK ,o3501345.BEDEN 
-FROM ( select 
-msi.segment1 model,
-msi.segment2 renk,
-msi.segment3 beden, 
-ws.SUBINVENTORY_CODE depo,
-msi.ATTRIBUTE12,
-sum(ws.TRANSACTION_QUANTITY) miktar,
-(
-select 
-ml.segment1||'.'||
-ml.segment2||'.'||
-ml.segment3 
-from
-apps.mtl_item_locations ml
-where ml.INVENTORY_LOCATION_ID=ws.LOCATOR_ID
-and ml.ORGANIZATION_ID=ws.ORGANIZATION_ID)raf
-from
-apps.mtl_onhand_quantities_detail ws,
-apps.mtl_system_items_b msi 
-where 1=1 
-and ws.ORGANIZATION_ID=105
-and msi.INVENTORY_ITEM_ID=ws.INVENTORY_ITEM_ID
-and msi.ORGANIZATION_ID=105   
-and ws.SUBINVENTORY_CODE in ('NOSTR') 
-group by  ws.SUBINVENTORY_CODE, 
-msi.segment1,msi.segment2,msi.ATTRIBUTE12,
-msi.segment3
-) o3501345    ) NOTR ON NOTR.MODEL = MA.MODEL
-                 AND NOTR.RENK = MA.RENK
-                 AND NOTR.BEDEN = MA.BEDEN  
-LEFT JOIN (
-                 SELECT  o3501345.DEPO as DEPO,o3501345.MIKTAR as ENVANTER,o3501345.MODEL ,o3501345.RENK ,o3501345.BEDEN 
-FROM ( select 
-msi.segment1 model,
-msi.segment2 renk,
-msi.segment3 beden, 
-ws.SUBINVENTORY_CODE depo,
-msi.ATTRIBUTE12,
-sum(ws.TRANSACTION_QUANTITY) miktar,
-(
-select 
-ml.segment1||'.'||
-ml.segment2||'.'||
-ml.segment3 
-from
-apps.mtl_item_locations ml
-where ml.INVENTORY_LOCATION_ID=ws.LOCATOR_ID
-and ml.ORGANIZATION_ID=ws.ORGANIZATION_ID)raf
-from
-apps.mtl_onhand_quantities_detail ws,
-apps.mtl_system_items_b msi 
-where 1=1 
-and ws.ORGANIZATION_ID=105
-and msi.INVENTORY_ITEM_ID=ws.INVENTORY_ITEM_ID
-and msi.ORGANIZATION_ID=105   
-and ws.SUBINVENTORY_CODE in ('NOSIHR') 
-group by  ws.SUBINVENTORY_CODE, 
-msi.segment1,msi.segment2,msi.ATTRIBUTE12,
-msi.segment3
-) o3501345    ) NOIHR ON NOIHR.MODEL = MA.MODEL
-                 AND NOIHR.RENK = MA.RENK
-                 AND NOIHR.BEDEN = MA.BEDEN  
-                                 LEFT JOIN
-                (SELECT MODEL,
+              HAVING 1 = 1 
+ UNION ALL
+ SELECT MODEL,RENK,BEDEN,0 AS NOSIHR_ADET, 0 NOSTR_ADET , 0 AS LOJ_ADET,SUM(ADET) MIN_ADET,0 SATIS_ADET_AY FROM    XXER.XXER_NOS_MIN_ADETLER GROUP BY MODEL,RENK,BEDEN
+ UNION ALL
+  SELECT MODEL,
                           RENK,
                           BEDEN,
+                          0 AS NOSIHR_ADET, 
+                          0 NOSTR_ADET ,
+                          0 AS LOJ_ADET,
+                          0 MIN_ADET,
                           SUM (MIKTAR) AS SATIS_ADET_AY
                      FROM APPS.HERIT009_MAGAZA_SATIS_corlu_v
                     WHERE     DURUM<> 'IADE'
                              AND tarih BETWEEN {0}
                                            AND {1}
-                    GROUP BY MODEL, RENK, BEDEN) STAY
-                      ON STAY.MODEL = MA.MODEL
-                         AND STAY.RENK = MA.RENK
-                         AND STAY.BEDEN = MA.BEDEN
+                    GROUP BY MODEL, RENK, BEDEN 
+ ) A  
+ WHERE MODEL||RENK||BEDEN IN (SELECT MODEL||RENK||BEDEN FROM  XXER.XXER_NOS_MIN_ADETLER )
+ GROUP BY MODEL,RENK,BEDEN
+ ORDER BY  MODEL,RENK,BEDEN
+ ) M GROUP BY MODEL,RENK,BEDEN,SKU ) N
+  
              ", _trackRepository.ToOracleTime(basTarih), _trackRepository.ToOracleTime(bitTarih));
             List<NOS_TRACK> analiz = _trackRepository.DeserializeList<NOS_TRACK>(sql);
 

@@ -63,11 +63,11 @@
 </div>
 <script>
     function UpdateMasterRow(e) {
-         
+
         var data = {
             "key": e.key,
             "values": JSON.stringify(e.newData)
-        }; 
+        };
         var res = $.ajax({
             url: '@Url.Action("UretimOnayliUpdate","Uretim")',
             method: "PUT",
@@ -82,14 +82,43 @@
         e.cancel = res.promise();
 
     }
+    var lastInsertedMaster=null;
+    function InsertingMasterRow(e) {
 
-     function InsertMasterRow(e){
+        const deferred = $.Deferred();
+        var data = {
+            "values": JSON.stringify(e.data)
+        };
+        $.ajax({
+            url: '@Url.Action("UretimOnayliInsert", "Uretim")',
+            method: "POST",
+            data: data,
+            async:false,
+            success: function (data) {
+                lastInsertedMaster = data;
+                deferred.resolve(false);
+                e.data.ID = lastInsertedMaster.ID;
+                e.component.saveEditData();
+            },
+            error: function (textStatus, errorThrown) {
+                deferred.reject(textStatus + " " + errorThrown);
+            }
+        }); 
 
-
-        //console.log(e);
+        e.cancel = deferred.promise();
 
     }
+    function InsertedMasterRow(e) {
+        console.log(e);
+        console.log(lastInsertedMaster);
+        e.data = lastInsertedMaster;
 
+    }
+    function OnRowInserted(e) {
+        console.log("inserted");
+        console.log(e);
+        e.data = lastInsertedMaster;
+    }
     function DeleteMasterRow(e) {
         var data = {
             "key": e.key
@@ -226,7 +255,7 @@
             BAND_ID: jQuery("[name=BAND_ID]").val(),
             APPROVAL_STATUS: jQuery("[name=APPROVAL_STATUS]").val(),
             STATUS: jQuery("[name=STATUS]").val()
-        }; 
+        };
         $.ajax({
             type: "POST",
             url: '@Url.Action("_PartialUretimOnayliListeFiltrele", "Uretim")',

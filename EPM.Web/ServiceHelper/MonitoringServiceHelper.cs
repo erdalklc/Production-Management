@@ -29,7 +29,7 @@ namespace EPM.Web.ServiceHelper
         public static object GetProductionDetails(List<HaftaModel> haftaModel, List<ProductModel> productModel, FilterModel filterModel, List<EPM_PRODUCT_GROUP> productGroupModel, List<EPM_PRODUCTION_MARKET> marketModel)
         {
             string apiUrl = "GetProductionDetails";
-            var list = PostRequest<Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, List<EPM_PRODUCT_GROUP>, List<EPM_PRODUCTION_MARKET>>, Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>, List<ProductionModel>>>(EPMServiceType.Monitoring, apiUrl, new Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, List<EPM_PRODUCT_GROUP>, List<EPM_PRODUCTION_MARKET>>(haftaModel, productModel, filterModel,productGroupModel,marketModel));
+            var list = PostRequest<Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, List<EPM_PRODUCT_GROUP>, List<EPM_PRODUCTION_MARKET>>, Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>, List<ProductionModel>, List<PlanModel>>>(EPMServiceType.Monitoring, apiUrl, new Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, List<EPM_PRODUCT_GROUP>, List<EPM_PRODUCTION_MARKET>>(haftaModel, productModel, filterModel,productGroupModel,marketModel));
 
             var Ids = list.Item4.Where(ob => ob.PRODUCTION_TYPE == 2).Select(ob => ob.ID).ToArray();
             if (Ids.Length > 0)

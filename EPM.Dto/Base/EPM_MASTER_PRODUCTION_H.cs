@@ -12,7 +12,7 @@ namespace EPM.Dto.Base
         [Dapper.Contrib.Extensions.Key]
         public int ID { get; set; }
         [Required(ErrorMessage = "Marka ID Bilgisi Gereklidir")]
-        public int BRAND { get; set; }
+        public int BRAND { get; set; } = 1;
         [Required(ErrorMessage = "Alt Marka ID Bilgisi Gereklidir")]
         public int SUB_BRAND { get; set; }
         [Required(ErrorMessage = "Season Bilgisi Gereklidir")]

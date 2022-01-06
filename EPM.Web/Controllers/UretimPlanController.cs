@@ -1,5 +1,6 @@
 ﻿using DevExtreme.AspNet.Data;
-using DevExtreme.AspNet.Mvc; 
+using DevExtreme.AspNet.Mvc;
+using EPM.Dto.Base;
 using EPM.Dto.Models;
 using EPM.Plan.Dto.Plan;
 using EPM.Service.Base;
@@ -168,12 +169,12 @@ namespace EPM.Web.Controllers
         }
 
         [HttpGet,HttpPost]
-        public object _PartialGetPlanList(int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE,int PLAN_DURUM,List<string> YEAR)
+        public object _PartialGetPlanList(int BRAND, List<EPM_PRODUCTION_SEASON> SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE,int PLAN_DURUM,List<string> YEAR)
         {
             return PlanServiceHelper.GetPlan(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, BRAND, SEASON, MODEL, COLOR, ORDER_TYPE, PRODUCTION_TYPE, FABRIC_TYPE, PLAN_DURUM,YEAR);
         }
         [HttpGet, HttpPost]
-        public object _PartialGetPlanListBandGiris(int BRAND, int SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM, List<string> YEAR)
+        public object _PartialGetPlanListBandGiris(int BRAND, List<EPM_PRODUCTION_SEASON> SEASON, string MODEL, string COLOR, int ORDER_TYPE, int PRODUCTION_TYPE, int FABRIC_TYPE, int PLAN_DURUM, List<string> YEAR)
         {
             return PlanServiceHelper.GetPlanBandGiris(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, BRAND, SEASON, MODEL, COLOR, ORDER_TYPE, PRODUCTION_TYPE, FABRIC_TYPE, PLAN_DURUM, YEAR);
         }

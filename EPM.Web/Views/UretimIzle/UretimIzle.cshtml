@@ -40,7 +40,7 @@
             items.AddGroup().ColCount(8).Items(groupItems =>
             {
                 groupItems.AddSimpleFor(m => m.BRAND).Editor(ob => ob.Lookup().SearchEnabled(true).DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
-                groupItems.AddSimpleFor(m => m.SEASON).Editor(ob => ob.Lookup().SearchEnabled(true).DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
+                groupItems.AddSimple().Name("SEASON").ColSpan(1).Label(l=>l.Text("SEASON")).Editor(ob => ob.TagBox().ShowSelectionControls(true).SearchEnabled(true).DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));            
                 groupItems.AddSimpleFor(m => m.MODEL).Editor(ob => ob.TextBox().ID("edModel")).IsRequired(false);
                 groupItems.AddSimpleFor(m => m.COLOR).Editor(ob => ob.TextBox().ID("edColor")).IsRequired(false);
                 groupItems.AddSimpleFor(m => m.ORDER_TYPE).Editor(ob => ob.Lookup().DataSource(d => d.Mvc().LoadParams(new { all = true }).Controller("Uretim").LoadAction("GetOrderList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID")).IsRequired(false);
@@ -84,7 +84,9 @@
             <div class="dx-card wide-card" id="productBar" style="width: 49.4%; height: 200px; display: inline-block; margin: 0 1px">
 
             </div>
+            <div class="dx-card wide-card" id="releasedSeasonal" style="width: 100%; height: 250px; display: inline-block; margin: 0 1px">
 
+            </div>
             <div class="dx-card wide-card" id="releasedTasnif" style="width: 49.4%; height: 250px; display: inline-block; margin: 0 1px">
 
             </div>
@@ -133,7 +135,10 @@
         columns.AddFor(m => m.RECIPE).Width(140).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetRecipeList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.BAND_ID).Visible(false).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
         columns.AddFor(m => m.DEADLINE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy");
-        columns.AddFor(m => m.SHIPMENT_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Visible(false);
+        columns.AddFor(m => m.DEADLINE_2).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy");
+        columns.AddFor(m => m.DEADLINE_3).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy");
+        columns.AddFor(m => m.DEADLINE_4).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy");
+        columns.AddFor(m => m.SHIPMENT_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy");
         columns.AddFor(m => m.QUANTITY);
 
         columns.AddFor(m => m.PROCESS_INFO).Caption("SÜREÇ DURUMU");
@@ -250,6 +255,9 @@
         try { $("#releasedKaliteG").dxChart("instance").option("dataSource", null); } catch (e) { }
         try { $("#productPlan").dxDataGrid("instance").option("dataSource", null); } catch (e) { }
         try { $("#edUretimTakipGrid").dxDataGrid("instance").option("dataSource", null); } catch (e) { }
+        try { $("#releasedSeasonal").dxChart("instance").option("dataSource", null); } catch (e) { }
+
+        
     }
     function ClearGrid() {
         $("#productBar").dxChart("instance").option("dataSource", null);
@@ -361,7 +369,7 @@
         try { $("#productDetail").dxList("instance").option("dataSource", null); } catch (e) { }
         var data = {
             BRAND: jQuery("[name=BRAND]").val(),
-            SEASON: jQuery("[name=SEASON]").val(),
+            SEASON: $("#edOnayliListe").dxForm("instance").getEditor("SEASON")._selectedItems,
             BAND: jQuery("[name=BAND]").val(),
             MODEL: jQuery("[name=MODEL]").val(),
             COLOR: jQuery("[name=COLOR]").val(),
@@ -426,7 +434,7 @@
             productGroupModel: productGroupModel,
             filterModel: {
                 BRAND: jQuery("[name=BRAND]").val(),
-                SEASON: jQuery("[name=SEASON]").val(),
+                SEASON: $("#edOnayliListe").dxForm("instance").getEditor("SEASON")._selectedItems,
                 BAND: jQuery("[name=BAND]").val(),
                 MODEL: jQuery("[name=MODEL]").val(),
                 COLOR: jQuery("[name=COLOR]").val(),
@@ -491,7 +499,7 @@
             productGroupModel: productGroupModel,
             filterModel: {
                 BRAND: jQuery("[name=BRAND]").val(),
-                SEASON: jQuery("[name=SEASON]").val(),
+                SEASON: $("#edOnayliListe").dxForm("instance").getEditor("SEASON")._selectedItems,
                 BAND: jQuery("[name=BAND]").val(),
                 MODEL: jQuery("[name=MODEL]").val(),
                 COLOR: jQuery("[name=COLOR]").val(),
@@ -506,6 +514,7 @@
             contentType: 'application/json',
             timeout: 180000,
             success: function (income, status, xmlRequest) {
+                console.log(income);
                 var totalPLAN = 0;
                 var totalORDER = 0;
                 for (var i = 0; i < income.Item1.length; i++) {
@@ -556,6 +565,64 @@
 
 
                 try { $("#edUretimTakipGrid").dxDataGrid("instance").option("dataSource", income.Item4); } catch (e) { }
+
+                var barSeasonal = [];
+                for (var i = 0; i < income.Item5.length; i++) {
+                    var marketReleased = income.Item5[i];
+                    barSeasonal.push({ SEASON: marketReleased.SEASON_NAME, QUANTITY: marketReleased.QUANTITY, ORDER_QUANTITY: marketReleased.ORDER_QUANTITY, KESIM: marketReleased.KESIM, TASNIF: marketReleased.TASNIF, BANT: marketReleased.BANT, KALITE: marketReleased.KALITE, KALITE_GERCEKLESEN: marketReleased.KALITE_GERCEKLESEN })
+                }
+                $("#releasedSeasonal").dxChart({
+                    commonSeriesSettings: {
+                        argumentField: 'SEASON', type: 'bar',
+                        label: {
+                            visible: true,
+                            format: {
+                                type: "fixedPoint",
+                                precision: 0
+                            }
+                        }
+                    },
+                    dataSource: barSeasonal,
+                    palette: "Material",
+                    paletteExtensionMode: "Extrapolate",
+                    legend: {
+                        visible: false
+                    },
+                    series: [
+                        { valueField: 'QUANTITY', name: 'PLAN TOPLAM' },
+                        { valueField: 'ORDER_QUANTITY', name: 'SİPARİŞ TOPLAM' },
+                        { valueField: 'KESIM', name: 'KESİM' },
+                        { valueField: 'TASNIF', name: 'TASNİF' },
+                        { valueField: 'BANT', name: 'BANT' },
+                        { valueField: 'KALITE', name: 'KALİTE' },
+                        { valueField: 'KALITE_GERCEKLESEN', name: 'KALİTE GERÇEKLEŞEN' },
+                    ], tooltip: {
+                        enabled: true
+                    },
+                    argumentAxis: {
+                        tickInterval: 5,
+                        label: {
+                            format: {
+                                type: "decimal"
+                            }, font: {
+                                color: "black",
+                                size: 8
+                            }
+                        }
+
+                    },
+                    legend: {
+                        verticalAlignment: 'bottom',
+                        horizontalAlignment: 'center',
+                    },
+                    title: {
+                        text: "SEZONSAL",
+                        font: {
+                            color: "black",
+                            size: 14
+                        }
+                    },
+                });
                 $("#releasedTasnif").dxChart({
                     commonSeriesSettings: {
                         label: {
@@ -779,7 +846,20 @@
                     },
                     hoverStateEnabled: true,
                     showBorders: true,
-                    columns: ["MARKET_NAME", "QUANTITY", "ORDER_QUANTITY"],
+                    columns: [
+                        {
+                            dataField: 'MARKET_NAME',
+                            caption: 'PAZAR ADI',
+                        },
+                        {
+                            dataField: 'QUANTITY',
+                            caption: 'PLAN ADEDİ',
+                        },
+                        {
+                            dataField: 'ORDER_QUANTITY',
+                            caption: 'SİPARİŞ ADEDİ',
+                        }
+                    ],
                     showBorders: true,
                     summary: {
                         totalItems: [{
@@ -800,8 +880,13 @@
         }).always(function () {
             getLoadPanelInstance().hide();
         });
+        //"MARKET_NAME", "QUANTITY", "ORDER_QUANTITY"
     }
     function GetProductionDetailsList(OPERATION, MARKET) {
+        if(OPERATION=="SİPARİŞ" || OPERATION=="HAFTALIK PLAN")
+        return;
+        console.log(OPERATION);
+        console.log(MARKET);
         data = {
             haftaModel: haftaModel,
             productModel: productModel,
@@ -809,7 +894,7 @@
             productGroupModel: productGroupModel,
             filterModel: {
                 BRAND: jQuery("[name=BRAND]").val(),
-                SEASON: jQuery("[name=SEASON]").val(),
+                SEASON: $("#edOnayliListe").dxForm("instance").getEditor("SEASON")._selectedItems,
                 BAND: jQuery("[name=BAND]").val(),
                 MODEL: jQuery("[name=MODEL]").val(),
                 COLOR: jQuery("[name=COLOR]").val(),

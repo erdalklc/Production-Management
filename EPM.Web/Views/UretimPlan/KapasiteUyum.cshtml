@@ -182,7 +182,8 @@
                     loadPanel: {
                         enabled: true
                     },columnChooser: {
-                        enabled: true
+                        enabled: true,
+                        mode:"select"
                     }, export: {
                         enabled: true
                     },
@@ -193,12 +194,13 @@
                     },
                     sorting: {
                         mode: "multiple"
-                    },summary: {recalculateWhileEditing: true,
+                    },summary: {
+                         recalculateWhileEditing: true,
+                        skipEmptyValues: true,
                       totalItems: [{
-                        column: 'PLANSIZ_ADET',
-                        name:"PLANSIZADETTOPLAM",
-                        summaryType: 'custom',
-                        displayFormat: '{0}'
+                        column: 'PLANSIZ_ADET', 
+                        summaryType: 'sum',
+                        displayFormat: '{0}' , 
                       },
                       {
                         column: 'URETIM_ADET',
@@ -210,19 +212,6 @@
                         summaryType: 'sum',
                         displayFormat: '{0}'
                       }],
-                          calculateCustomSummary(options) {
-                            if (options.name === 'PLANSIZADETTOPLAM') {
-                              if (options.summaryProcess === 'start') {
-                                options.totalValue = 0;
-                              }
-                              if (options.summaryProcess === 'finalize') { 
-                                var total=0;
-                                 for(var i=0;i <formData.length;i++)
-                                    total +=(parseFloat(formData[i].URETIM_ADET)-parseFloat(formData[i].PLANLANAN_ADET));
-                                    options.totalValue=total; 
-                              }
-                            }
-                          },	
                     },
                     filterRow: {
                         visible: true,
@@ -240,7 +229,7 @@
                             });
 
                             for (var a = 0; a < columns.length - 1; a++) {
-                                if (a < 18) {
+                                if (a < 21) {
                                     columns[a].fixed = true;
                                     columns[a].allowEditing = false;
                                 }
@@ -250,8 +239,12 @@
                                 else if (columns[a].dataField == "MARKET") {
                                     columns[a].width = 100;
                                 }
-                                else if (columns[a].dataField == "DEADLINE" ||columns[a].dataField == "SHIPMENT_DATE") {
+                               else if (columns[a].dataField == "DEADLINE" ||columns[a].dataField == "SHIPMENT_DATE") {
                                     columns[a].width = 100;
+                                    columns[a].dataType = "date";
+                                }
+                                else if (columns[a].dataField == "DEADLINE_2" ||columns[a].dataField == "DEADLINE_3" ||columns[a].dataField == "DEADLINE_4") {
+                                    columns[a].visible = false;
                                     columns[a].dataType = "date";
                                 }
                                 else if (columns[a].dataField == "PLANSIZ_ADET" || columns[a].dataField == "URETIM_ADET" || columns[a].dataField == "PLANLANAN_ADET") {

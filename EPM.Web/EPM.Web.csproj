@@ -31,6 +31,6 @@
       <None Include="wwwroot\AppData\EPM AKTARIM SABLON.xlsx" />
     </ItemGroup>
 
-    <ProjectExtensions><VisualStudio><UserProperties TemplateFeatures="NETCORE" /></VisualStudio></ProjectExtensions>
+    <ProjectExtensions><VisualStudio><UserProperties DismissedDevExtremeVersion="20.2.9" TemplateFeatures="NETCORE" /></VisualStudio></ProjectExtensions>
 
 </Project>
