@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ksVSYhWLB6jXCl9OmeIygo06rzQChHAxWF/2wh3Ah17bOqpuvqObq4O2ZudoxBRbaGecNLuj1kwfRkSaI/cbcQ==",
+  "dgSpecHash": "2DzC1MDwlpl3F4q4bU7eBQFi/7xhEPVzucdYMqWCMku29MKU9vs8Xh6ZzKPvT/YTNcu+JcjzuRrAFpQILv/DMg==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\Eren Production Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj",
+  "projectFilePath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\FDEIT005\\.nuget\\packages\\dapper\\2.0.78\\dapper.2.0.78.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\dapper.contrib\\2.0.78\\dapper.contrib.2.0.78.nupkg.sha512",
@@ -15,7 +15,7 @@
     "C:\\Users\\FDEIT005\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512"
+    "C:\\Users\\FDEIT005\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -28,3 +28,18 @@ D:\Projects\Eren Production Management\EPM.Plan.Repository\bin\Debug\netcoreapp3
 E:\Eren\Eren Production Management\EPM.Plan.Repository\bin\Debug\netcoreapp3.1\EPM.Dto.dll
 E:\Eren\Eren Production Management\EPM.Plan.Repository\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
 E:\Eren\Eren Production Management\EPM.Plan.Repository\obj\Debug\netcoreapp3.1\EPM.Plan.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\obj\Debug\netcoreapp3.1\EPM.Plan.Repository.dll
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\obj\Debug\netcoreapp3.1\EPM.Plan.Repository.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\bin\Debug\netcoreapp3.1\EPM.Plan.Repository.deps.json
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\bin\Debug\netcoreapp3.1\EPM.Plan.Repository.dll
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\bin\Debug\netcoreapp3.1\EPM.Plan.Repository.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\bin\Debug\netcoreapp3.1\EPM.Plan.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\bin\Debug\netcoreapp3.1\EPM.Plan.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\obj\Debug\netcoreapp3.1\EPM.Plan.Repository.csproj.AssemblyReference.cache
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\obj\Debug\netcoreapp3.1\EPM.Plan.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\obj\Debug\netcoreapp3.1\EPM.Plan.Repository.AssemblyInfoInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\obj\Debug\netcoreapp3.1\EPM.Plan.Repository.AssemblyInfo.cs
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\obj\Debug\netcoreapp3.1\EPM.Plan.Repository.csproj.CoreCompileInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Repository\obj\Debug\netcoreapp3.1\EPM.Plan.Repository.csproj.CopyComplete

@@ -28,3 +28,18 @@ E:\Eren\Eren Production Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\
 D:\Projects\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.GeneratedMSBuildEditorConfig.editorconfig
 E:\Eren\Eren Production Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.dll
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.deps.json
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.dll
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Fason.Repository.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Tools.dll
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Tools.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.csproj.AssemblyReference.cache
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.AssemblyInfoInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.AssemblyInfo.cs
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.csproj.CoreCompileInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Repository\obj\Debug\netcoreapp3.1\EPM.Fason.Repository.csproj.CopyComplete

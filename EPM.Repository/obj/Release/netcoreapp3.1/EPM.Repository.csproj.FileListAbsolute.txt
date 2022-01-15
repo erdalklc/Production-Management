@@ -13,3 +13,18 @@ D:\Projects\Eren Production Management\EPM.Repository\obj\Release\netcoreapp3.1\
 D:\Projects\Eren Production Management\EPM.Repository\obj\Release\netcoreapp3.1\EPM.Repository.pdb
 D:\Projects\Eren Production Management\EPM.Repository\obj\Release\netcoreapp3.1\EPM.Repository.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Repository\obj\Release\netcoreapp3.1\EPM.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Repository\bin\Release\netcoreapp3.1\EPM.Repository.deps.json
+D:\GitProjects\Eren-Production-Management\EPM.Repository\bin\Release\netcoreapp3.1\EPM.Repository.dll
+D:\GitProjects\Eren-Production-Management\EPM.Repository\bin\Release\netcoreapp3.1\EPM.Repository.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Repository\bin\Release\netcoreapp3.1\EPM.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Repository\bin\Release\netcoreapp3.1\EPM.Tools.dll
+D:\GitProjects\Eren-Production-Management\EPM.Repository\bin\Release\netcoreapp3.1\EPM.Tools.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Repository\bin\Release\netcoreapp3.1\EPM.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Repository\obj\Release\netcoreapp3.1\EPM.Repository.csproj.AssemblyReference.cache
+D:\GitProjects\Eren-Production-Management\EPM.Repository\obj\Release\netcoreapp3.1\EPM.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Repository\obj\Release\netcoreapp3.1\EPM.Repository.AssemblyInfoInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Repository\obj\Release\netcoreapp3.1\EPM.Repository.AssemblyInfo.cs
+D:\GitProjects\Eren-Production-Management\EPM.Repository\obj\Release\netcoreapp3.1\EPM.Repository.csproj.CoreCompileInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Repository\obj\Release\netcoreapp3.1\EPM.Repository.csproj.CopyComplete
+D:\GitProjects\Eren-Production-Management\EPM.Repository\obj\Release\netcoreapp3.1\EPM.Repository.dll
+D:\GitProjects\Eren-Production-Management\EPM.Repository\obj\Release\netcoreapp3.1\EPM.Repository.pdb

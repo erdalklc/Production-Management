@@ -32,3 +32,20 @@ D:\Projects\Eren Production Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1
 D:\Projects\Eren Production Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.GeneratedMSBuildEditorConfig.editorconfig
 E:\Eren\Eren Production Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.dll
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\bin\Debug\netcoreapp3.1\EPM.Admin.Service.deps.json
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\bin\Debug\netcoreapp3.1\EPM.Admin.Service.dll
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\bin\Debug\netcoreapp3.1\EPM.Admin.Service.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\bin\Debug\netcoreapp3.1\EPM.Admin.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\bin\Debug\netcoreapp3.1\EPM.Admin.Repository.dll
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\bin\Debug\netcoreapp3.1\EPM.Admin.Repository.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\bin\Debug\netcoreapp3.1\EPM.Admin.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.csproj.AssemblyReference.cache
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.AssemblyInfoInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.AssemblyInfo.cs
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.csproj.CoreCompileInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Admin.Service\obj\Debug\netcoreapp3.1\EPM.Admin.Service.csproj.CopyComplete

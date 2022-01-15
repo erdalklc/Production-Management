@@ -23,11 +23,11 @@ namespace EPM.Service.Base
         public List<Menu> GetMenuList(HttpContext context)
         {
             List<Menu> menu = new List<Menu>();
-            menu = _cacheService.Get<List<Menu>>(0, "MENU");
+            menu = _cacheService.Get<List<Menu>>(6, "MENU");
             if (menu == null)
             {
                 menu = _epmRepository.DeserializeList<Menu>("SELECT * FROM FDEIT005.EPM_WEB_MENU");
-                _cacheService.Add(0, "MENU", menu);
+                _cacheService.Add(6, "MENU", menu);
             }
             try
             { 

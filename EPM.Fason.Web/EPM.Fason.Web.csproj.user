@@ -11,5 +11,6 @@
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>False</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <NameOfLastUsedPublishProfile>IISProfile</NameOfLastUsedPublishProfile>
     <WebStackScaffolding_LayoutPageFile>~/Views/Shared/_LayoutInspection.cshtml</WebStackScaffolding_LayoutPageFile>
+    <DismissedDevExtremeVersion>21.2.4</DismissedDevExtremeVersion>
   </PropertyGroup>
 </Project>

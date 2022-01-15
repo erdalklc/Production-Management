@@ -153,7 +153,12 @@ namespace EPM.Web.ServiceHelper
             var list = PostRequest<object[], List<VerticalList>>(EPMServiceType.Production, apiUrl, new object[] { USER_CODE, liste });
             return list;
         }
-
+        public static List<LOG_HEADER_REPORT> UretimListesiDegisiklik(string USER_CODE, UretimOnayliListe liste)
+        {
+            string apiUrl = "UretimListesiDegisiklik";
+            var list = PostRequest<object[], List<LOG_HEADER_REPORT>>(EPMServiceType.Production, apiUrl, new object[] { USER_CODE, liste });
+            return list;
+        }
         public static List<DetailList> OnayliUretimListesiDetail(int ID)
         {
             string apiUrl = "OnayliUretimListesiDetail";

@@ -17,3 +17,22 @@ D:\Projects\Eren Production Management\EPM.Plan.Service\obj\Release\netcoreapp3.
 D:\Projects\Eren Production Management\EPM.Plan.Service\obj\Release\netcoreapp3.1\EPM.Plan.Service.GeneratedMSBuildEditorConfig.editorconfig
 D:\Projects\Eren Production Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Tools.dll
 D:\Projects\Eren Production Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Tools.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Plan.Service.deps.json
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Plan.Service.dll
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Plan.Service.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Plan.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Plan.Repository.dll
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Tools.dll
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Plan.Repository.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Tools.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\bin\Release\netcoreapp3.1\EPM.Plan.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\obj\Release\netcoreapp3.1\EPM.Plan.Service.csproj.AssemblyReference.cache
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\obj\Release\netcoreapp3.1\EPM.Plan.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\obj\Release\netcoreapp3.1\EPM.Plan.Service.AssemblyInfoInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\obj\Release\netcoreapp3.1\EPM.Plan.Service.AssemblyInfo.cs
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\obj\Release\netcoreapp3.1\EPM.Plan.Service.csproj.CoreCompileInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\obj\Release\netcoreapp3.1\EPM.Plan.Service.csproj.CopyComplete
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\obj\Release\netcoreapp3.1\EPM.Plan.Service.dll
+D:\GitProjects\Eren-Production-Management\EPM.Plan.Service\obj\Release\netcoreapp3.1\EPM.Plan.Service.pdb

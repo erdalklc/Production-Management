@@ -11,3 +11,16 @@ D:\Projects\Eren Production Management\EPM.Tools\bin\Release\netcoreapp3.1\EPM.D
 D:\Projects\Eren Production Management\EPM.Tools\obj\Release\netcoreapp3.1\EPM.Tools.csproj.CopyComplete
 D:\Projects\Eren Production Management\EPM.Tools\obj\Release\netcoreapp3.1\EPM.Tools.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Tools\obj\Release\netcoreapp3.1\EPM.Tools.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Tools\bin\Release\netcoreapp3.1\EPM.Tools.deps.json
+D:\GitProjects\Eren-Production-Management\EPM.Tools\bin\Release\netcoreapp3.1\EPM.Tools.dll
+D:\GitProjects\Eren-Production-Management\EPM.Tools\bin\Release\netcoreapp3.1\EPM.Tools.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Tools\bin\Release\netcoreapp3.1\EPM.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Tools\bin\Release\netcoreapp3.1\EPM.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Tools\obj\Release\netcoreapp3.1\EPM.Tools.csproj.AssemblyReference.cache
+D:\GitProjects\Eren-Production-Management\EPM.Tools\obj\Release\netcoreapp3.1\EPM.Tools.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Tools\obj\Release\netcoreapp3.1\EPM.Tools.AssemblyInfoInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Tools\obj\Release\netcoreapp3.1\EPM.Tools.AssemblyInfo.cs
+D:\GitProjects\Eren-Production-Management\EPM.Tools\obj\Release\netcoreapp3.1\EPM.Tools.csproj.CoreCompileInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Tools\obj\Release\netcoreapp3.1\EPM.Tools.csproj.CopyComplete
+D:\GitProjects\Eren-Production-Management\EPM.Tools\obj\Release\netcoreapp3.1\EPM.Tools.dll
+D:\GitProjects\Eren-Production-Management\EPM.Tools\obj\Release\netcoreapp3.1\EPM.Tools.pdb

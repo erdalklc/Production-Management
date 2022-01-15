@@ -46,7 +46,7 @@
           "lib/netstandard2.0/Dapper.Oracle.dll": {}
         }
       },
-      "DevExtreme.AspNet.Core/20.2.3": {
+      "DevExtreme.AspNet.Core/21.2.4": {
         "type": "package",
         "dependencies": {
           "DevExtreme.AspNet.Data": "2.0.0",
@@ -60,7 +60,7 @@
           "lib/netstandard2.0/DevExtreme.AspNet.Core.dll": {}
         }
       },
-      "DevExtreme.AspNet.Data/2.7.1": {
+      "DevExtreme.AspNet.Data/2.8.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.4.0",
@@ -3568,28 +3568,29 @@
         "lib/netstandard2.0/Dapper.Oracle.pdb"
       ]
     },
-    "DevExtreme.AspNet.Core/20.2.3": {
-      "sha512": "iSQpIgTUp5ak3QFJ7FFXIqG0fwmYQiirChmEHt+u0M1eU0C7HlkODltUx1psFH7otHCzl/+lNoKIGVrzNM1Cpw==",
+    "DevExtreme.AspNet.Core/21.2.4": {
+      "sha512": "J1ly4c+56fx4dU8aM0b3crDT7CpFC6tVT8dYuXNi2lmx71G7OoB20WYho7wCZTh+S8j2hCWcMPuTb3A9vg17Ow==",
       "type": "package",
-      "path": "devextreme.aspnet.core/20.2.3",
+      "path": "devextreme.aspnet.core/21.2.4",
       "files": [
         ".nupkg.metadata",
-        "DevExtreme.AspNet.Core.20.2.3.nupkg.sha512",
-        "DevExtreme.AspNet.Core.nuspec",
         "LICENSE.txt",
+        "devextreme.aspnet.core.21.2.4.nupkg.sha512",
+        "devextreme.aspnet.core.nuspec",
         "dxlogo.png",
         "lib/netstandard2.0/DevExtreme.AspNet.Core.dll",
         "lib/netstandard2.0/DevExtreme.AspNet.Core.xml"
       ]
     },
-    "DevExtreme.AspNet.Data/2.7.1": {
-      "sha512": "nWcLaUnyFEur5UXXqBQqyluSZjftkLsOPjITOmuUAb7QOIPrGVP7L8PGtGhJHTg94qeOPmo9ef3s5f/VZfzvsA==",
+    "DevExtreme.AspNet.Data/2.8.2": {
+      "sha512": "y1TXRAcJXhzllwNYAVyMZhiM0J8TghGNhxMjKk0ihxK0agYo1LfPZbDInysH0FrlNKd8QeV2yvvVAaURzWWnBA==",
       "type": "package",
-      "path": "devextreme.aspnet.data/2.7.1",
+      "path": "devextreme.aspnet.data/2.8.2",
       "files": [
         ".nupkg.metadata",
-        "DevExtreme.AspNet.Data.2.7.1.nupkg.sha512",
-        "DevExtreme.AspNet.Data.nuspec",
+        ".signature.p7s",
+        "devextreme.aspnet.data.2.8.2.nupkg.sha512",
+        "devextreme.aspnet.data.nuspec",
         "lib/net452/DevExtreme.AspNet.Data.dll",
         "lib/net452/DevExtreme.AspNet.Data.xml",
         "lib/netstandard2.0/DevExtreme.AspNet.Data.dll",
@@ -10112,8 +10113,8 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "BuildBundlerMinifier >= 2.9.406",
-      "DevExtreme.AspNet.Core >= 20.2.3",
-      "DevExtreme.AspNet.Data >= 2.7.1",
+      "DevExtreme.AspNet.Core >= 21.2.4",
+      "DevExtreme.AspNet.Data >= 2.8.2",
       "EPM.Admin.Dto >= 1.0.0",
       "EPM.Fason.Dto >= 1.0.0",
       "EPM.Plan.Dto >= 1.0.0",
@@ -10132,25 +10133,26 @@
   "packageFolders": {
     "C:\\Users\\FDEIT005\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\Eren Production Management\\EPM.Web\\EPM.Web.csproj",
+      "projectUniqueName": "D:\\GitProjects\\Eren-Production-Management\\EPM.Web\\EPM.Web.csproj",
       "projectName": "EPM.Web",
-      "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Web\\EPM.Web.csproj",
+      "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Web\\EPM.Web.csproj",
       "packagesPath": "C:\\Users\\FDEIT005\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\Eren Production Management\\EPM.Web\\obj\\",
+      "outputPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages"
       ],
       "configFilePaths": [
-        "D:\\Projects\\Eren Production Management\\NuGet.Config",
+        "D:\\GitProjects\\Eren-Production-Management\\NuGet.Config",
         "C:\\Users\\FDEIT005\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10158,7 +10160,8 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\System\\Components\\Packages": {},
-        "C:\\Program Files (x86)\\DevExpress 20.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
+        "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\System\\Components\\Packages": {},
+        "C:\\Program Files (x86)\\DevExpress 21.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
@@ -10166,29 +10169,29 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Projects\\Eren Production Management\\EPM.Admin.Dto\\EPM.Admin.Dto.csproj": {
-              "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Admin.Dto\\EPM.Admin.Dto.csproj"
+            "D:\\GitProjects\\Eren-Production-Management\\EPM.Admin.Dto\\EPM.Admin.Dto.csproj": {
+              "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Admin.Dto\\EPM.Admin.Dto.csproj"
             },
-            "D:\\Projects\\Eren Production Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj": {
-              "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj"
+            "D:\\GitProjects\\Eren-Production-Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj": {
+              "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj"
             },
-            "D:\\Projects\\Eren Production Management\\EPM.Plan.Dto\\EPM.Plan.Dto.csproj": {
-              "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Plan.Dto\\EPM.Plan.Dto.csproj"
+            "D:\\GitProjects\\Eren-Production-Management\\EPM.Plan.Dto\\EPM.Plan.Dto.csproj": {
+              "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Plan.Dto\\EPM.Plan.Dto.csproj"
             },
-            "D:\\Projects\\Eren Production Management\\EPM.Production.Dto\\EPM.Production.Dto.csproj": {
-              "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Production.Dto\\EPM.Production.Dto.csproj"
+            "D:\\GitProjects\\Eren-Production-Management\\EPM.Production.Dto\\EPM.Production.Dto.csproj": {
+              "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Production.Dto\\EPM.Production.Dto.csproj"
             },
-            "D:\\Projects\\Eren Production Management\\EPM.Production.Monitoring.Dto\\EPM.Production.Monitoring.Dto.csproj": {
-              "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Production.Monitoring.Dto\\EPM.Production.Monitoring.Dto.csproj"
+            "D:\\GitProjects\\Eren-Production-Management\\EPM.Production.Monitoring.Dto\\EPM.Production.Monitoring.Dto.csproj": {
+              "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Production.Monitoring.Dto\\EPM.Production.Monitoring.Dto.csproj"
             },
-            "D:\\Projects\\Eren Production Management\\EPM.Service\\EPM.Service.csproj": {
-              "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Service\\EPM.Service.csproj"
+            "D:\\GitProjects\\Eren-Production-Management\\EPM.Service\\EPM.Service.csproj": {
+              "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Service\\EPM.Service.csproj"
             },
-            "D:\\Projects\\Eren Production Management\\EPM.Tools\\EPM.Tools.csproj": {
-              "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Tools\\EPM.Tools.csproj"
+            "D:\\GitProjects\\Eren-Production-Management\\EPM.Tools\\EPM.Tools.csproj": {
+              "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Tools\\EPM.Tools.csproj"
             },
-            "D:\\Projects\\Eren Production Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj": {
-              "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj"
+            "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj": {
+              "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj"
             }
           }
         }
@@ -10209,11 +10212,11 @@
           },
           "DevExtreme.AspNet.Core": {
             "target": "Package",
-            "version": "[20.2.3, )"
+            "version": "[21.2.4, )"
           },
           "DevExtreme.AspNet.Data": {
             "target": "Package",
-            "version": "[2.7.1, )"
+            "version": "[2.8.2, )"
           },
           "Microsoft.AspNetCore.Authentication.Negotiate": {
             "target": "Package",
@@ -10254,7 +10257,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

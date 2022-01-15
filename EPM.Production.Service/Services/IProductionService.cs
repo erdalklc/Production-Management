@@ -46,6 +46,8 @@ namespace EPM.Production.Service.Services
 
         public List<VerticalList> UretimListesiDikey(string USER_CODE, UretimOnayliListe liste);
 
+        public List<LOG_HEADER_REPORT> UretimListesiDegisiklik(string USER_CODE, UretimOnayliListe liste, ILogService _logService);
+
         public List<DetailList> OnayliUretimListesiDetail(int ID);
 
         public object[] UretimOnayliDetailUpdate(string USER_CODE, int Key, string Values, ILogService logRepository);

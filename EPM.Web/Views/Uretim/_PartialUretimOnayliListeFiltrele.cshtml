@@ -101,7 +101,7 @@
     .AllowColumnResizing(true)
     .AllowColumnReordering(true)
     //.Paging(ob=>ob.PageSize(25).Enabled(true))
-    .Height("calc(100vh - 200px)")
+    .Height("calc(100vh - 255px)")
     .ShowColumnLines(true)
     .ColumnChooser(ch => { ch.Mode(GridColumnChooserMode.Select);ch.Enabled(true); })
     .ShowColumnHeaders(true)
@@ -147,7 +147,14 @@
         columns.AddFor(m => m.DEADLINE_3).Caption("3. DEADLINE").Visible(true).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
         columns.AddFor(m => m.DEADLINE_4).Caption("4. DEADLINE").Visible(true).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
         columns.AddFor(m => m.SHIPMENT_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
+        columns.AddFor(m => m.BANT_WEEK);
+        columns.AddFor(m => m.BANT_YEAR);
         columns.AddFor(m => m.QUANTITY);
+        columns.AddFor(m => m.PLAN_QUANTITY);
+        columns.AddFor(m => m.KESIM);
+        columns.AddFor(m => m.TASNIF);
+        columns.AddFor(m => m.KALITE);
+        columns.AddFor(m => m.KALITE_GERCEKLESEN);
         columns.Add().AllowEditing(false).Width(20);;
     })
     .OnEditingStart(@<text>

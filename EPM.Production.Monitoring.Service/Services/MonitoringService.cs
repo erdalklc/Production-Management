@@ -95,7 +95,7 @@ INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND M.
             return _monitoringRepository.DeserializeList<ProductModel>(sql);
         }
 
-        public Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>, List<ProductionModel>, List<PlanModel>> GetProductionDetails(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, List<EPM_PRODUCT_GROUP>, List<EPM_PRODUCTION_MARKET>> model)
+        public Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>, List<ProductionModel>, List<PlanModel>, List<ProductionDetailPivotModel>> GetProductionDetails(Tuple<List<HaftaModel>, List<ProductModel>, FilterModel, List<EPM_PRODUCT_GROUP>, List<EPM_PRODUCTION_MARKET>> model)
         {
             string filterHeader = "";
             for (int i = 0; i < model.Item2.Count; i++)
@@ -106,7 +106,107 @@ INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M ON M.ID=P.MARKET_ID WHERE 0=0 AND M.
 
                 filterHeader += " SELECT '" + item.MODEL + "." + item.COLOR + "' M FROM DUAL";
             }
-             
+            string sqlPivot = string.Format(@"WITH FILTER_MODEL AS({2}) 
+  SELECT YEAR,
+         WEEK,
+         MARKET_ID,
+         MARKET_NAME,
+         MODEL,
+         COLOR,
+         SEASON_NAME,
+         ORDER_NAME,
+         ORDER_TYPE,
+         (SELECT SUM (QUANTITY)
+            FROM FDEIT005.EPM_MASTER_PRODUCTION_D
+           WHERE MARKET = A.MARKET_ID AND HEADER_ID = A.HEADER_ID)
+            ORDER_QUANTITY,
+         SUM (QUANTITY) AS QUANTITY,
+             /*(SELECT SUM (MIKTAR)
+                FROM FDEIT005.EPM_OPERATION_QUANTITYS QT
+               WHERE     QT.SEZON_ADI = A.SEASON_NAME
+                     AND QT.MODEL_ADI = A.MODEL
+                     AND QT.RENK_ADI = A.COLOR
+                     AND QT.SIPARIS_TIPI = A.ORDER_NAME 
+                     AND OPERASYON_ID IN (5515, 5516, 5517))
+                AS KESIM,
+             (SELECT SUM (MIKTAR)
+                FROM FDEIT005.EPM_OPERATION_QUANTITYS QT
+               WHERE     QT.SEZON_ADI = A.SEASON_NAME
+                     AND QT.MODEL_ADI = A.MODEL
+                     AND QT.RENK_ADI = A.COLOR
+                     AND QT.SIPARIS_TIPI = A.ORDER_NAME
+                     AND QT.PAZAR_ADI = A.MARKET_NAME
+                     AND OPERASYON_ID IN (8631,
+                                          8632,
+                                          8633,
+                                          9576))
+                AS TASNIF,
+             (SELECT SUM (MIKTAR)
+                FROM FDEIT005.EPM_OPERATION_QUANTITYS QT
+               WHERE     QT.SEZON_ADI = A.SEASON_NAME
+                     AND QT.MODEL_ADI = A.MODEL
+                     AND QT.RENK_ADI = A.COLOR
+                     AND QT.SIPARIS_TIPI = A.ORDER_NAME
+                     AND QT.PAZAR_ADI = A.MARKET_NAME
+                     AND OPERASYON_ID IN (5,
+                                          600,
+                                          9595,
+                                          845,
+                                          670,
+                                          80))
+                AS BANT,
+             (SELECT SUM (MIKTAR)
+                FROM FDEIT005.EPM_OPERATION_QUANTITYS QT
+               WHERE     QT.SEZON_ADI = A.SEASON_NAME
+                     AND QT.MODEL_ADI = A.MODEL
+                     AND QT.RENK_ADI = A.COLOR
+                     AND QT.SIPARIS_TIPI = A.ORDER_NAME
+                     AND QT.PAZAR_ADI = A.MARKET_NAME
+                     AND OPERASYON_ID IN (181,
+                                          1160,
+                                          745,
+                                          743,
+                                          744))
+                AS KALITE,*/
+         (SELECT SUM (BIRINCI_KALITE)
+            FROM FDEIT005.EPM_PRODUCTION_EGEMEN KG
+           WHERE     KG.MODEL = A.MODEL
+                 AND KG.COLOR = A.COLOR
+                 AND KG.MARKET = A.MARKET_ID
+                 AND KG.SIPARIS_TIPI = A.ORDER_TYPE
+                 AND KG.SEASON=A.SEASON)
+            KALITE_GERCEKLESEN
+    FROM (SELECT P.*,
+                 M.EGEMEN_ADI AS MARKET_NAME,
+                 H.MODEL,
+                 H.COLOR,
+                 (SELECT SUM (P.QUANTITY)
+                    FROM FDEIT005.EPM_MASTER_PRODUCTION_D
+                   WHERE MARKET = M.ID AND HEADER_ID = H.ID)
+                    ORDER_QUANTITY,
+                 S.EGEMEN_ADI SEASON_NAME,
+                 TT.ADI AS ORDER_NAME,
+                 TT.ID AS ORDER_TYPE,
+                 H.SEASON
+            FROM FDEIT005.EPM_PRODUCTION_PLAN P
+                 INNER JOIN FDEIT005.EPM_PRODUCTION_MARKET M
+                    ON M.ID = P.MARKET_ID
+                 INNER JOIN FDEIT005.EPM_MASTER_PRODUCTION_H H
+                    ON H.ID = P.HEADER_ID
+                 INNER JOIN FDEIT005.EPM_PRODUCTION_ORDER_TYPES TT
+                    ON TT.ID = H.ORDER_TYPE
+                 INNER JOIN FDEIT005.EPM_PRODUCTION_SEASON S ON S.ID = H.SEASON
+        WHERE H.STATUS=0 AND M.ID IN ({3}) AND H.PRODUCT_GROUP IN ({4}) AND P.YEAR IN ({0}) AND P.WEEK IN ({1}) AND H.MODEL||'.'||H.COLOR IN (SELECT M FROM FILTER_MODEL) "
+, string.Join(',', model.Item1.Select(ob => ob.YEAR).Distinct().ToList())
+, string.Join(',', model.Item1.Select(ob => ob.WEEK).Distinct().ToList())
+, filterHeader
+, string.Join(',', model.Item5.Select(ob => ob.ID).Distinct().ToList())
+, string.Join(',', model.Item4.Select(ob => ob.ID).Distinct().ToList()));
+
+            if (model.Item3.ORDER_TYPE != 0)
+                sqlPivot += " AND H.ORDER_TYPE=" + model.Item3.ORDER_TYPE;
+            sqlPivot += " ) A GROUP BY MARKET_ID,MARKET_NAME,MODEL,COLOR,SEASON_NAME,HEADER_ID,YEAR,WEEK,ORDER_NAME,ORDER_TYPE,SEASON";
+            List<ProductionDetailPivotModel> pivotModel = _monitoringRepository.DeserializeList<ProductionDetailPivotModel>(sqlPivot);
             string sql = string.Format(@"WITH FILTER_MODEL AS({2}) 
 SELECT SUM(QUANTITY) AS QUANTITY,MARKET_ID,MARKET_NAME,MODEL,COLOR,SEASON_NAME,
 (SELECT SUM (QUANTITY)
@@ -338,7 +438,7 @@ FROM FDEIT005.EPM_MASTER_PRODUCTION_H H WHERE   H.PRODUCT_GROUP IN ({3}) {4} AND
             foreach (var item in planReturnSeasonal)
                 item.SEASON_NAME = _monitoringRepository.ReadString("SELECT ADI FROM FDEIT005.EPM_PRODUCTION_SEASON WHERE EGEMEN_ADI='" + item.SEASON_NAME + "'");
             List<ProductionModel> productionModel = _monitoringRepository.DeserializeList<ProductionModel>(sql);
-            return new Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>, List<ProductionModel>, List<PlanModel>>(planReturn, values, valuesReleased, productionModel, planReturnSeasonal);
+            return new Tuple<List<PlanModel>, EPM_TRACKING_PROCESS_VALUES, List<MarketReleasedModel>, List<ProductionModel>, List<PlanModel>, List<ProductionDetailPivotModel>>(planReturn, values, valuesReleased, productionModel, planReturnSeasonal,pivotModel);
 
         }
 
@@ -397,11 +497,11 @@ WHERE P.YEAR IN ({0}) AND P.WEEK IN ({1})  AND ({2})"
         public List<EPM_PRODUCTION_MARKET> GetMarketList()
         {
             List<EPM_PRODUCTION_MARKET> market;
-            market = _cacheService.Get<List<EPM_PRODUCTION_MARKET>>(0, "EPM_PRODUCTION_MARKET");
+            market = _cacheService.Get<List<EPM_PRODUCTION_MARKET>>(6, "EPM_PRODUCTION_MARKET");
             if (market == null)
             {
                 market = _monitoringRepository.DeserializeList<EPM_PRODUCTION_MARKET>("SELECT * FROM FDEIT005.EPM_PRODUCTION_MARKET"); 
-                _cacheService.Add(0, "EPM_PRODUCTION_MARKET", market);
+                _cacheService.Add(6, "EPM_PRODUCTION_MARKET", market);
             }
             return market;
         }
@@ -410,11 +510,11 @@ WHERE P.YEAR IN ({0}) AND P.WEEK IN ({1})  AND ({2})"
         {
             List<EPM_PRODUCT_GROUP> groups;
 
-            groups = _cacheService.Get<List<EPM_PRODUCT_GROUP>>(0, "EPM_PRODUCT_GROUP");
+            groups = _cacheService.Get<List<EPM_PRODUCT_GROUP>>(6, "EPM_PRODUCT_GROUP");
             if (groups == null)
             {
                 groups = _monitoringRepository.DeserializeList<EPM_PRODUCT_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCT_GROUP");
-                _cacheService.Add(0, "EPM_PRODUCT_GROUP", groups);
+                _cacheService.Add(6, "EPM_PRODUCT_GROUP", groups);
             }
             return groups; 
         }

@@ -39,7 +39,7 @@ namespace EPM.Service.Base
         {
             return _epmHLogs.Find(_ => true).ToList();
         }
-
+         
         public IEnumerable<LOG_EPM_MASTER_PRODUCTION_D> GetDetail()
         {
             return _epmDLogs.Find(_ => true).ToList();

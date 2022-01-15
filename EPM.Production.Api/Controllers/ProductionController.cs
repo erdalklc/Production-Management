@@ -79,6 +79,8 @@ namespace EPM.Production.Api.Controllers
 
         [HttpGet, HttpPost]
         public ActionResult<List<VerticalList>> UretimListesiDikey(object[] obj) => _productionService.UretimListesiDikey(obj[0].ToString(), JsonConvert.DeserializeObject<UretimOnayliListe>(obj[1].ToStringParse()));
+        [HttpGet, HttpPost]
+        public ActionResult<List<LOG_HEADER_REPORT>> UretimListesiDegisiklik(object[] obj) => _productionService.UretimListesiDegisiklik(obj[0].ToString(), JsonConvert.DeserializeObject<UretimOnayliListe>(obj[1].ToStringParse()), _logService);
 
         [HttpGet, HttpPost]
         public ActionResult<List<DetailList>> OnayliUretimListesiDetail(object[] obj) => _productionService.OnayliUretimListesiDetail(obj[0].IntParse());

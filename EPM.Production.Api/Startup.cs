@@ -30,8 +30,8 @@ namespace EPM.Production.Api
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddScoped<IProductionService, ProductionService>();
-            services.AddScoped<RedisServer>();
-            services.AddScoped<ICacheService, RedisCacheService>();
+            services.AddSingleton<RedisServer>();
+            services.AddSingleton<ICacheService, RedisCacheService>();
             services.AddSingleton<ILogService, LogService>();
             services.AddSingleton<IProductionRepository, ProductionRepository>();
             services.AddSingleton<IMongoRepository, MongoRepository>();

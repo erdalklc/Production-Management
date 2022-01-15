@@ -199,11 +199,11 @@ namespace EPM.Production.Service.Services
         public List<EPM_PRODUCTION_BRANDS> GetBrandList(string USER_CODE, List<EPM_USER_BRANDS> userBrands, bool hepsi = true)
         {
             List<EPM_PRODUCTION_BRANDS> list;
-            list = _cacheService.Get<List<EPM_PRODUCTION_BRANDS>>(0, "EPM_PRODUCTION_BRANDS");
+            list = _cacheService.Get<List<EPM_PRODUCTION_BRANDS>>(6, "EPM_PRODUCTION_BRANDS");
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_BRANDS>("SELECT * FROM FDEIT005.EPM_PRODUCTION_BRANDS");
-                _cacheService.Add(0, "EPM_PRODUCTION_BRANDS", list);
+                _cacheService.Add(6, "EPM_PRODUCTION_BRANDS", list);
             }
             list = list.Where(ob => userBrands.Select(ob => ob.BRAND_ID).ToArray().Contains(ob.ID)).ToList();
             if (hepsi)
@@ -215,11 +215,11 @@ namespace EPM.Production.Service.Services
         public List<EPM_PRODUCTION_SUB_BRANDS> GetSubBrandList(string USER_CODE, bool hepsi = true)
         {
             List<EPM_PRODUCTION_SUB_BRANDS> list;
-            list = _cacheService.Get<List<EPM_PRODUCTION_SUB_BRANDS>>(0, "EPM_PRODUCTION_SUB_BRANDS");
+            list = _cacheService.Get<List<EPM_PRODUCTION_SUB_BRANDS>>(6, "EPM_PRODUCTION_SUB_BRANDS");
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_SUB_BRANDS>("SELECT * FROM FDEIT005.EPM_PRODUCTION_SUB_BRANDS");
-                _cacheService.Add(0, "EPM_PRODUCTION_SUB_BRANDS", list);
+                _cacheService.Add(6, "EPM_PRODUCTION_SUB_BRANDS", list);
             }
             if (hepsi)
                 list.Insert(0, new EPM_PRODUCTION_SUB_BRANDS() { ID = 0, ADI = "HEPSİ" }); 
@@ -230,11 +230,11 @@ namespace EPM.Production.Service.Services
         public List<EPM_PRODUCTION_SEASON> GetSeasonList()
         {
             List<EPM_PRODUCTION_SEASON> list;
-            list = _cacheService.Get<List<EPM_PRODUCTION_SEASON>>(0, "EPM_PRODUCTION_SEASON");
+            list = _cacheService.Get<List<EPM_PRODUCTION_SEASON>>(6, "EPM_PRODUCTION_SEASON");
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_SEASON>("SELECT * FROM FDEIT005.EPM_PRODUCTION_SEASON");
-                _cacheService.Add(0, "EPM_PRODUCTION_SEASON", list);
+                _cacheService.Add(6, "EPM_PRODUCTION_SEASON", list);
             } 
             return list; 
         }
@@ -242,11 +242,11 @@ namespace EPM.Production.Service.Services
         public List<EPM_PRODUCTION_MARKET> GetMarketList(bool hepsi = true)
         {
             List<EPM_PRODUCTION_MARKET> list;
-            list = _cacheService.Get<List<EPM_PRODUCTION_MARKET>>(0, "EPM_PRODUCTION_MARKET");
+            list = _cacheService.Get<List<EPM_PRODUCTION_MARKET>>(6, "EPM_PRODUCTION_MARKET");
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_MARKET>("SELECT * FROM FDEIT005.EPM_PRODUCTION_MARKET");
-                _cacheService.Add(0, "EPM_PRODUCTION_MARKET", list);
+                _cacheService.Add(6, "EPM_PRODUCTION_MARKET", list);
             }
 
             if (hepsi)
@@ -257,11 +257,11 @@ namespace EPM.Production.Service.Services
         public List<EPM_PRODUCTION_ORDER_TYPES> GetOrderList(bool hepsi = true)
         {
             List<EPM_PRODUCTION_ORDER_TYPES> list;
-            list = _cacheService.Get<List<EPM_PRODUCTION_ORDER_TYPES>>(0, "EPM_PRODUCTION_ORDER_TYPES");
+            list = _cacheService.Get<List<EPM_PRODUCTION_ORDER_TYPES>>(6, "EPM_PRODUCTION_ORDER_TYPES");
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_ORDER_TYPES>("SELECT * FROM FDEIT005.EPM_PRODUCTION_ORDER_TYPES");
-                _cacheService.Add(0, "EPM_PRODUCTION_ORDER_TYPES", list);
+                _cacheService.Add(6, "EPM_PRODUCTION_ORDER_TYPES", list);
             }
 
             if (hepsi)
@@ -272,11 +272,11 @@ namespace EPM.Production.Service.Services
         public List<EPM_PRODUCTION_FABRIC_TYPES> GetFabricTypes(string USER_CODE,List<EPM_USER_FABRIC_TYPES> userFabricTypes, bool hepsi = true)
         {
             List<EPM_PRODUCTION_FABRIC_TYPES> list;
-            list = _cacheService.Get<List<EPM_PRODUCTION_FABRIC_TYPES>>(0, "EPM_PRODUCTION_FABRIC_TYPES");
+            list = _cacheService.Get<List<EPM_PRODUCTION_FABRIC_TYPES>>(6, "EPM_PRODUCTION_FABRIC_TYPES");
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_FABRIC_TYPES>("SELECT * FROM FDEIT005.EPM_PRODUCTION_FABRIC_TYPES");
-                _cacheService.Add(0, "EPM_PRODUCTION_FABRIC_TYPES", list);
+                _cacheService.Add(6, "EPM_PRODUCTION_FABRIC_TYPES", list);
             }
 
             list = list.Where(ob => userFabricTypes.Select(ob => ob.FABRIC_TYPE_ID).ToArray().Contains(ob.ID)).ToList();
@@ -288,11 +288,11 @@ namespace EPM.Production.Service.Services
         public List<EPM_PRODUCTION_TYPES> GetProductionTypes(string USER_CODE, List<EPM_USER_PRODUCTION_TYPES> userProductionTypes, bool hepsi = true)
         {
             List<EPM_PRODUCTION_TYPES> list;
-            list = _cacheService.Get<List<EPM_PRODUCTION_TYPES>>(0, "EPM_PRODUCTION_TYPES");
+            list = _cacheService.Get<List<EPM_PRODUCTION_TYPES>>(6, "EPM_PRODUCTION_TYPES");
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_TYPES>("SELECT * FROM FDEIT005.EPM_PRODUCTION_TYPES");
-                _cacheService.Add(0, "EPM_PRODUCTION_TYPES", list);
+                _cacheService.Add(6, "EPM_PRODUCTION_TYPES", list);
             }
 
             list = list.Where(ob => userProductionTypes.Select(ob => ob.PRODUCTION_TYPE_ID).ToArray().Contains(ob.ID)).ToList();
@@ -306,11 +306,11 @@ namespace EPM.Production.Service.Services
         public List<EPM_PRODUCT_COLLECTION_TYPES> GetCollectionTypes(bool hepsi = true)
         {
             List<EPM_PRODUCT_COLLECTION_TYPES> list;
-            list = _cacheService.Get<List<EPM_PRODUCT_COLLECTION_TYPES>>(0, "EPM_PRODUCT_COLLECTION_TYPES");
+            list = _cacheService.Get<List<EPM_PRODUCT_COLLECTION_TYPES>>(6, "EPM_PRODUCT_COLLECTION_TYPES");
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCT_COLLECTION_TYPES>("SELECT * FROM FDEIT005.EPM_PRODUCT_COLLECTION_TYPES");
-                _cacheService.Add(0, "EPM_PRODUCT_COLLECTION_TYPES", list);
+                _cacheService.Add(6, "EPM_PRODUCT_COLLECTION_TYPES", list);
             }
 
             if (hepsi)
@@ -321,11 +321,11 @@ namespace EPM.Production.Service.Services
         public List<EPM_PRODUCTION_BAND_GROUP> GetBandList(bool hepsi = true)
         {
             List<EPM_PRODUCTION_BAND_GROUP> list;
-            list = _cacheService.Get<List<EPM_PRODUCTION_BAND_GROUP>>(0, "EPM_PRODUCTION_BAND_GROUP");
+            list = _cacheService.Get<List<EPM_PRODUCTION_BAND_GROUP>>(6, "EPM_PRODUCTION_BAND_GROUP");
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_BAND_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCTION_BAND_GROUP");
-                _cacheService.Add(0, "EPM_PRODUCTION_BAND_GROUP", list);
+                _cacheService.Add(6, "EPM_PRODUCTION_BAND_GROUP", list);
             }
 
             if (hepsi)
@@ -336,11 +336,11 @@ namespace EPM.Production.Service.Services
         public List<EPM_PRODUCT_GROUP> GetProductGroupList(bool hepsi = true)
         {
             List<EPM_PRODUCT_GROUP> list; 
-            list = _cacheService.Get<List<EPM_PRODUCT_GROUP>>(0, "EPM_PRODUCT_GROUP");
+            list = _cacheService.Get<List<EPM_PRODUCT_GROUP>>(6, "EPM_PRODUCT_GROUP");
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCT_GROUP>("SELECT * FROM FDEIT005.EPM_PRODUCT_GROUP");
-                _cacheService.Add(0, "EPM_PRODUCT_GROUP", list);
+                _cacheService.Add(6, "EPM_PRODUCT_GROUP", list);
             }
 
             if (hepsi)
@@ -351,11 +351,11 @@ namespace EPM.Production.Service.Services
         public List<EPM_PRODUCTION_RECIPE> GetRecipeList(bool hepsi = true)
         {
             List<EPM_PRODUCTION_RECIPE> list;
-            list = _cacheService.Get<List<EPM_PRODUCTION_RECIPE>>(0, "EPM_PRODUCTION_RECIPE");
+            list = _cacheService.Get<List<EPM_PRODUCTION_RECIPE>>(6, "EPM_PRODUCTION_RECIPE");
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_RECIPE>("SELECT * FROM FDEIT005.EPM_PRODUCTION_RECIPE");
-                _cacheService.Add(0, "EPM_PRODUCTION_RECIPE", list);
+                _cacheService.Add(6, "EPM_PRODUCTION_RECIPE", list);
             }
             if (hepsi)
                 list.Insert(0, new EPM_PRODUCTION_RECIPE() { ID = 0, ADI = "HEPSİ" }); 
@@ -365,11 +365,11 @@ namespace EPM.Production.Service.Services
         public List<EPM_PRODUCTION_RECIPE> GetRecipeListByType(bool hepsi = true,int TYPE=1)
         {
             List<EPM_PRODUCTION_RECIPE> list;
-            list = _cacheService.Get<List<EPM_PRODUCTION_RECIPE>>(0, "EPM_PRODUCTION_RECIPE");
+            list = _cacheService.Get<List<EPM_PRODUCTION_RECIPE>>(6, "EPM_PRODUCTION_RECIPE");
             if (list == null)
             {
                 list = _productionRepository.DeserializeList<EPM_PRODUCTION_RECIPE>("SELECT * FROM FDEIT005.EPM_PRODUCTION_RECIPE");
-                _cacheService.Add(0, "EPM_PRODUCTION_RECIPE", list);
+                _cacheService.Add(6, "EPM_PRODUCTION_RECIPE", list);
             }
 
             if (hepsi)
@@ -442,7 +442,36 @@ namespace EPM.Production.Service.Services
             List<VerticalList> productionTypes = _productionRepository.DeserializeListPROC<VerticalList>("FDEIT005.GET_EPM_PRODUCTION_VERTICAL_M", dynamicParameters);
             return productionTypes; 
         }
+        public List<LOG_HEADER_REPORT> UretimListesiDegisiklik(string USER_CODE, UretimOnayliListe liste, ILogService _logService)
+        {
 
+            List<LOG_EPM_MASTER_PRODUCTION_H> logList= _logService.GetMaster().ToList();
+            List<LOG_HEADER_REPORT> report = JsonConvert.DeserializeObject<List<LOG_HEADER_REPORT>>(JsonConvert.SerializeObject(logList));
+            OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
+            dynamicParameters.Add(":P_BRAND", liste.BRAND, OracleMappingType.Int32, ParameterDirection.Input);
+            dynamicParameters.Add(":P_SEASON", liste.SEASON, OracleMappingType.Int32, ParameterDirection.Input);
+            dynamicParameters.Add(":P_MODEL", liste.MODEL.ToStringParse(), OracleMappingType.Varchar2, ParameterDirection.Input);
+            dynamicParameters.Add(":P_COLOR", liste.COLOR.ToStringParse(), OracleMappingType.Varchar2, ParameterDirection.Input);
+            dynamicParameters.Add(":P_PRODUCT_GROUP", liste.PRODUCT_GROUP, OracleMappingType.Int32, ParameterDirection.Input);
+            dynamicParameters.Add(":P_FABRIC_TYPE", liste.FABRIC_TYPE, OracleMappingType.Int32, ParameterDirection.Input);
+            dynamicParameters.Add(":P_PRODUCTION_TYPE", liste.PRODUCTION_TYPE, OracleMappingType.Int32, ParameterDirection.Input);
+            dynamicParameters.Add(":P_RECIPE", liste.RECIPE, OracleMappingType.Int32, ParameterDirection.Input);
+            dynamicParameters.Add(":P_ORDER_TYPE", liste.ORDER_TYPE, OracleMappingType.Int32, ParameterDirection.Input);
+            dynamicParameters.Add(":P_APPROVAL_STATUS", liste.APPROVAL_STATUS, OracleMappingType.Int32, ParameterDirection.Input);
+            dynamicParameters.Add(":P_BAND_ID", liste.BAND_ID, OracleMappingType.Int32, ParameterDirection.Input);
+            dynamicParameters.Add(":P_USER_CODE", USER_CODE, OracleMappingType.Varchar2, ParameterDirection.Input);
+            dynamicParameters.Add(":P_STATUS", liste.STATUS, OracleMappingType.Int32, ParameterDirection.Input);
+            //dynamicParameters.Add(":P_IDS", string.Join(',',logList.Select(ob=>ob.HEADER_ID).ToList().Distinct().ToArray()), OracleMappingType.NVarchar2, ParameterDirection.Input);
+            dynamicParameters.Add(":P_RECORDSET", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
+            List<LogMasterList> productionTypes = _productionRepository.DeserializeListPROC<LogMasterList>("FDEIT005.GET_EPM_PRODUCTION_MASTER", dynamicParameters);
+
+            foreach (var item in report)
+            {
+                item.MASTER = productionTypes.Find(ob => ob.ID == item.HEADER_ID);
+            }
+            report.RemoveAll(ob=>ob.MASTER== null);    
+            return report;
+        }
         public List<DetailList> OnayliUretimListesiDetail(int ID)
         {
             return _productionRepository.DeserializeList<DetailList>(@" SELECT D.*

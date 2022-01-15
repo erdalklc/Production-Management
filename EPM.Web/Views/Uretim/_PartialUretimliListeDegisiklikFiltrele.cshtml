@@ -1,0 +1,73 @@
+﻿
+@model EPM.Production.Dto.Production.UretimOnayliListe 
+
+<div class="dx-card wide-card">
+    @(Html.DevExtreme().DataGrid<EPM.Dto.Loglar.LOG_HEADER_REPORT> ().ID("edgridHeader")
+    .ShowBorders(false)
+    .DataSource(
+        ob=>ob.Mvc().Controller("Uretim")
+        .LoadParams(Model)
+        .LoadAction("UretimListeDegisiklikLoad")
+        .Key("ID")
+    )
+    .OnExporting("exportingDikeyListe")
+    .Export(e =>
+    {
+        e.Enabled(true);
+    })
+    .FilterRow(f => f.Visible(true))
+    .FocusedRowEnabled(true)
+    .FocusedRowIndex(0) 
+    .AllowColumnResizing(true) 
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .ColumnAutoWidth(true)
+    .Pager(p=>p.Visible(true).ShowInfo(true).ShowPageSizeSelector(true).ShowNavigationButtons(true))
+    .ShowBorders(true)
+    //.Scrolling(ob=>ob.Mode(GridScrollingMode.Standard))
+    .Paging(p=> {
+        p.Enabled(true);
+        p.PageSize(50);
+    })
+    .Height("calc(100vh - 250px)")
+    .ShowColumnLines(true)
+    .ColumnChooser(ch => { ch.Mode(GridColumnChooserMode.Select);ch.Enabled(true); })
+    .ShowColumnHeaders(true)
+    .ColumnMinWidth(60)
+    .Summary(ob=>ob.TotalItems(items=> {
+    items.AddFor(m => m.MASTER.QUANTITY).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>); 
+        items.AddFor(m => m.MASTER.MODEL).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Count).CustomizeText(@<text>function(data){return data.value}</text>);
+    }))
+    //.Scrolling(ob=>ob.Mode(GridScrollingMode.Virtual))
+    .Columns(columns =>
+    { 
+        columns.AddFor(m => m.ID).Visible(false).Width(60).AllowEditing(false);
+        columns.AddFor(m => m.MASTER.APPROVAL_STATUS).Visible(false).Caption("APPROVAL STATUS").Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetApprovalStatusList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.MASTER.BRAND).Caption("BRAND").Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.MASTER.SUB_BRAND).Caption("SUB BRAND").Width(110).Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetSubBrandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.MASTER.SEASON).Caption("SEASON").Lookup(look => look.DataSource(d => d.Mvc().Controller("Uretim").LoadAction("GetSeasonList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.MASTER.MODEL).Caption("MODEL");
+        columns.AddFor(m => m.MASTER.COLOR).Caption("COLOR");
+        columns.AddFor(m => m.MASTER.COLLECTION_TYPE).Visible(false).Caption("COLLECTION TYPE").Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetCollectionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.MASTER.ROYALTY).Visible(false).Caption("ROYALTY");
+        columns.AddFor(m => m.MASTER.TEMA).Visible(false).Caption("TEMA");
+        columns.AddFor(m => m.MASTER.ANA_TEMA).Visible(false).Caption("ANA TEMA");
+        columns.AddFor(m => m.MASTER.PRODUCT_GROUP).Visible(false).Caption("PRODUCT GROUP").Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetProductGroupList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.MASTER.FABRIC_TYPE).Visible(false).Caption("FABRIC_TYPE").Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetFabricList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.MASTER.PRODUCTION_TYPE).Visible(false).Caption("PRODUCTION TYPE").Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetProductionTypes").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.MASTER.ORDER_TYPE).Visible(false).Caption("ORDER TYPE").Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetOrderList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.MASTER.RECIPE).Visible(false).Caption("RECIPE").Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetRecipeList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.MASTER.BAND_ID).Visible(false).Caption("BAND ID").Lookup(look => look.DataSource(d => d.Mvc().LoadParams(new { all = false }).Controller("Uretim").LoadAction("GetBandList").Key("ID")).DisplayExpr("ADI").ValueExpr("ID"));
+        columns.AddFor(m => m.MASTER.DEADLINE).Caption("1. DEADLINE").AllowEditing(false).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
+        columns.AddFor(m => m.MASTER.DEADLINE_2).Caption("2. DEADLINE").DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
+        columns.AddFor(m => m.MASTER.DEADLINE_3).Caption("3. DEADLINE").Visible(true).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
+        columns.AddFor(m => m.MASTER.DEADLINE_4).Caption("4. DEADLINE").Visible(true).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right);
+        columns.AddFor(m => m.MASTER.SHIPMENT_DATE).DataType(GridColumnDataType.Date).Format("dd.MM.yyyy").Alignment(HorizontalAlignment.Right); 
+        columns.AddFor(m => m.MASTER.QUANTITY).Caption("QUANTITY");
+        columns.AddFor(m => m.CHANGED_COLUMN);
+        columns.AddFor(m => m.CHANGED_BY);
+        columns.AddFor(m => m.OLD_VALUE);
+        columns.AddFor(m => m.NEW_VALUE);
+    })
+    )
+</div>
+

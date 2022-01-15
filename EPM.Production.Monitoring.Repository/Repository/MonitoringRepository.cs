@@ -135,13 +135,13 @@ namespace EPM.Production.Monitoring.Repository.Repository
                     if (((KeyAttribute)Attribute.GetCustomAttribute(pi[i], typeof(KeyAttribute))) == null)
                     {
 
-                        if (!(pi[i].PropertyType.DbType() == System.Data.DbType.DateTime && (pi[i].GetValue(obj, null) == null || ((DateTime)pi[i].GetValue(obj, null)).Year == 1)))
-                        {
+                        //if (!(pi[i].PropertyType.DbType() == System.Data.DbType.DateTime && (pi[i].GetValue(obj, null) == null || ((DateTime)pi[i].GetValue(obj, null)).Year == 1)))
+                        //{
                             fieldNames += (fieldNames == string.Empty ? string.Empty : ",") + pi[i].Name;
                             insertParameters += (insertParameters == string.Empty ? string.Empty : ",") + ":" + pi[i].Name;
                             updateParameters += (updateParameters == string.Empty ? string.Empty : ",") + pi[i].Name + "=:" + pi[i].Name;
                             parameters.Add(pi[i].Name, pi[i].GetValue(obj, null));
-                        }
+                        //}
                     }
                     else
                     {

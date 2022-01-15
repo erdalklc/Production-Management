@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\Eren Production Management\\EPM.Track.Service\\EPM.Track.Service.csproj": {}
+    "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Service\\EPM.Track.Service.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\Eren Production Management\\EPM.Dto\\EPM.Dto.csproj": {
+    "D:\\GitProjects\\Eren-Production-Management\\EPM.Dto\\EPM.Dto.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Eren Production Management\\EPM.Dto\\EPM.Dto.csproj",
+        "projectUniqueName": "D:\\GitProjects\\Eren-Production-Management\\EPM.Dto\\EPM.Dto.csproj",
         "projectName": "EPM.Dto",
-        "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Dto\\EPM.Dto.csproj",
+        "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Dto\\EPM.Dto.csproj",
         "packagesPath": "C:\\Users\\FDEIT005\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Eren Production Management\\EPM.Dto\\obj\\",
+        "outputPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Dto\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages"
         ],
         "configFilePaths": [
-          "D:\\Projects\\Eren Production Management\\NuGet.Config",
+          "D:\\GitProjects\\Eren-Production-Management\\NuGet.Config",
           "C:\\Users\\FDEIT005\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,7 +29,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\System\\Components\\Packages": {},
-          "C:\\Program Files (x86)\\DevExpress 20.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\DevExpress 21.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -72,27 +74,28 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Projects\\Eren Production Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj": {
+    "D:\\GitProjects\\Eren-Production-Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Eren Production Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj",
+        "projectUniqueName": "D:\\GitProjects\\Eren-Production-Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj",
         "projectName": "EPM.Fason.Dto",
-        "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj",
+        "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj",
         "packagesPath": "C:\\Users\\FDEIT005\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Eren Production Management\\EPM.Fason.Dto\\obj\\",
+        "outputPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Fason.Dto\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages"
         ],
         "configFilePaths": [
-          "D:\\Projects\\Eren Production Management\\NuGet.Config",
+          "D:\\GitProjects\\Eren-Production-Management\\NuGet.Config",
           "C:\\Users\\FDEIT005\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -100,7 +103,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\System\\Components\\Packages": {},
-          "C:\\Program Files (x86)\\DevExpress 20.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\DevExpress 21.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -152,27 +156,28 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Projects\\Eren Production Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj": {
+    "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Eren Production Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj",
+        "projectUniqueName": "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj",
         "projectName": "EPM.Track.Dto",
-        "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj",
+        "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj",
         "packagesPath": "C:\\Users\\FDEIT005\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Eren Production Management\\EPM.Track.Dto\\obj\\",
+        "outputPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Dto\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages"
         ],
         "configFilePaths": [
-          "D:\\Projects\\Eren Production Management\\NuGet.Config",
+          "D:\\GitProjects\\Eren-Production-Management\\NuGet.Config",
           "C:\\Users\\FDEIT005\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -180,7 +185,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\System\\Components\\Packages": {},
-          "C:\\Program Files (x86)\\DevExpress 20.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\DevExpress 21.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -188,8 +194,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Projects\\Eren Production Management\\EPM.Dto\\EPM.Dto.csproj": {
-                "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Dto\\EPM.Dto.csproj"
+              "D:\\GitProjects\\Eren-Production-Management\\EPM.Dto\\EPM.Dto.csproj": {
+                "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Dto\\EPM.Dto.csproj"
               }
             }
           }
@@ -224,27 +230,28 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Projects\\Eren Production Management\\EPM.Track.Repository\\EPM.Track.Repository.csproj": {
+    "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Repository\\EPM.Track.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Eren Production Management\\EPM.Track.Repository\\EPM.Track.Repository.csproj",
+        "projectUniqueName": "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Repository\\EPM.Track.Repository.csproj",
         "projectName": "EPM.Track.Repository",
-        "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Track.Repository\\EPM.Track.Repository.csproj",
+        "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Repository\\EPM.Track.Repository.csproj",
         "packagesPath": "C:\\Users\\FDEIT005\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Eren Production Management\\EPM.Track.Repository\\obj\\",
+        "outputPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages"
         ],
         "configFilePaths": [
-          "D:\\Projects\\Eren Production Management\\NuGet.Config",
+          "D:\\GitProjects\\Eren-Production-Management\\NuGet.Config",
           "C:\\Users\\FDEIT005\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -252,7 +259,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\System\\Components\\Packages": {},
-          "C:\\Program Files (x86)\\DevExpress 20.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\DevExpress 21.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -260,8 +268,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Projects\\Eren Production Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj": {
-                "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj"
+              "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj": {
+                "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj"
               }
             }
           }
@@ -308,27 +316,28 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Projects\\Eren Production Management\\EPM.Track.Service\\EPM.Track.Service.csproj": {
+    "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Service\\EPM.Track.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Eren Production Management\\EPM.Track.Service\\EPM.Track.Service.csproj",
+        "projectUniqueName": "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Service\\EPM.Track.Service.csproj",
         "projectName": "EPM.Track.Service",
-        "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Track.Service\\EPM.Track.Service.csproj",
+        "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Service\\EPM.Track.Service.csproj",
         "packagesPath": "C:\\Users\\FDEIT005\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Eren Production Management\\EPM.Track.Service\\obj\\",
+        "outputPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages"
         ],
         "configFilePaths": [
-          "D:\\Projects\\Eren Production Management\\NuGet.Config",
+          "D:\\GitProjects\\Eren-Production-Management\\NuGet.Config",
           "C:\\Users\\FDEIT005\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -336,7 +345,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\System\\Components\\Packages": {},
-          "C:\\Program Files (x86)\\DevExpress 20.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\DevExpress 21.2\\DevExtreme\\System\\DevExtreme\\Bin\\AspNetCore": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -344,17 +354,17 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Projects\\Eren Production Management\\EPM.Dto\\EPM.Dto.csproj": {
-                "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Dto\\EPM.Dto.csproj"
+              "D:\\GitProjects\\Eren-Production-Management\\EPM.Dto\\EPM.Dto.csproj": {
+                "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Dto\\EPM.Dto.csproj"
               },
-              "D:\\Projects\\Eren Production Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj": {
-                "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj"
+              "D:\\GitProjects\\Eren-Production-Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj": {
+                "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Fason.Dto\\EPM.Fason.Dto.csproj"
               },
-              "D:\\Projects\\Eren Production Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj": {
-                "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj"
+              "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj": {
+                "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Dto\\EPM.Track.Dto.csproj"
               },
-              "D:\\Projects\\Eren Production Management\\EPM.Track.Repository\\EPM.Track.Repository.csproj": {
-                "projectPath": "D:\\Projects\\Eren Production Management\\EPM.Track.Repository\\EPM.Track.Repository.csproj"
+              "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Repository\\EPM.Track.Repository.csproj": {
+                "projectPath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Repository\\EPM.Track.Repository.csproj"
               }
             }
           }
@@ -397,7 +407,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

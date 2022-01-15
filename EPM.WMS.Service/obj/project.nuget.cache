@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DH3tfaFkkTHgAMvJeV0oUbwZukS9HgvLIUJdNJUnSTAc14UN/m0+kW5IJDSTc3+mtf1DBo/DzxgdqhFUuUgtTA==",
+  "dgSpecHash": "5bpQGFVyjU2suyeyrEpNFKa87Hu8gSMJsPoiVEnufSvDHBNQ9kstSLS9+y00cmL196RhZyk5r+hKbs8VbwfqIQ==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\Eren Production Management\\EPM.WMS.Service\\EPM.WMS.Service.csproj",
+  "projectFilePath": "D:\\GitProjects\\Eren-Production-Management\\EPM.WMS.Service\\EPM.WMS.Service.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

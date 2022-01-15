@@ -17,3 +17,22 @@ D:\Projects\Eren Production Management\EPM.Production.Service\bin\Release\netcor
 D:\Projects\Eren Production Management\EPM.Production.Service\bin\Release\netcoreapp3.1\EPM.Tools.pdb
 D:\Projects\Eren Production Management\EPM.Production.Service\obj\Release\netcoreapp3.1\EPM.Production.Service.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Production.Service\obj\Release\netcoreapp3.1\EPM.Production.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\bin\Release\netcoreapp3.1\EPM.Production.Service.deps.json
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\bin\Release\netcoreapp3.1\EPM.Production.Service.dll
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\bin\Release\netcoreapp3.1\EPM.Production.Service.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\bin\Release\netcoreapp3.1\EPM.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\bin\Release\netcoreapp3.1\EPM.Production.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\bin\Release\netcoreapp3.1\EPM.Production.Repository.dll
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\bin\Release\netcoreapp3.1\EPM.Tools.dll
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\bin\Release\netcoreapp3.1\EPM.Production.Repository.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\bin\Release\netcoreapp3.1\EPM.Tools.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\bin\Release\netcoreapp3.1\EPM.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\bin\Release\netcoreapp3.1\EPM.Production.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\obj\Release\netcoreapp3.1\EPM.Production.Service.csproj.AssemblyReference.cache
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\obj\Release\netcoreapp3.1\EPM.Production.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\obj\Release\netcoreapp3.1\EPM.Production.Service.AssemblyInfoInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\obj\Release\netcoreapp3.1\EPM.Production.Service.AssemblyInfo.cs
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\obj\Release\netcoreapp3.1\EPM.Production.Service.csproj.CoreCompileInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\obj\Release\netcoreapp3.1\EPM.Production.Service.csproj.CopyComplete
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\obj\Release\netcoreapp3.1\EPM.Production.Service.dll
+D:\GitProjects\Eren-Production-Management\EPM.Production.Service\obj\Release\netcoreapp3.1\EPM.Production.Service.pdb

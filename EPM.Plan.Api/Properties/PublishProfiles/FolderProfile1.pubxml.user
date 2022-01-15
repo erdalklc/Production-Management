@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>\\10.1.1.159\c$\inetpub\wwwroot\plan.erenperakende.com</_PublishTargetUrl>
+    <History>True|2022-01-13T14:38:13.2176366Z;True|2022-01-11T14:30:00.0923720+03:00;True|2022-01-11T14:27:03.1359301+03:00;True|2022-01-11T14:25:49.6442334+03:00;True|2022-01-11T11:55:18.5895446+03:00;True|2022-01-11T11:50:59.3885513+03:00;True|2022-01-07T10:55:39.8776974+03:00;False|2022-01-07T10:55:27.1694647+03:00;</History>
+  </PropertyGroup>
+</Project>

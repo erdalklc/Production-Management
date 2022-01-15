@@ -33,7 +33,7 @@
     .ShowColumnLines(true)
     .ColumnHidingEnabled(false)
     .Paging(ob => ob.PageSize(50).Enabled(true))
-    .Height("calc(100vh - 200px)")
+    .Height("calc(100vh - 255px)")
     .ShowBorders(true)
     .Summary(ob=>ob.TotalItems(items=> {
     items.AddFor(m => m.QUANTITY).Alignment(HorizontalAlignment.Right).SummaryType(SummaryType.Sum).CustomizeText(@<text>function(data){return data.value}</text>); 

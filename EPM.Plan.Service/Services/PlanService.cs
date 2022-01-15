@@ -1842,7 +1842,7 @@ SELECT WK.ID,
 
         List<ModelSureleri> GetSureler()
         {
-            List<ModelSureleri> sureler = _cacheService.Get<List<ModelSureleri>>(0, "ModelSureleri");
+            List<ModelSureleri> sureler = _cacheService.Get<List<ModelSureleri>>(6, "ModelSureleri");
             if (sureler == null)
             {
                 string sqlSureler = @"Select RotaOperasyonlari.RotaId MODEL,sum(RotaOperasyonlari.StandartSure) SURE  from RotaOperasyonlari
@@ -1856,7 +1856,7 @@ SELECT WK.ID,
    
    ";
                 sureler = _egemenRepository.DeserializeList<ModelSureleri>(sqlSureler);
-                _cacheService.Add(0, "ModelSureleri", sureler);
+                _cacheService.Add(6, "ModelSureleri", sureler);
             }
 
             return sureler;
@@ -2097,8 +2097,8 @@ ORDER BY P.YEAR,P.WEEK,H.MODEL", filter.BAND, filter.YEAR, filter.WEEK);
    
    ";
                 var sureler = _egemenRepository.DeserializeList<ModelSureleri>(sqlSureler);
-                _cacheService.Remove(0, "ModelSureleri");
-                _cacheService.Add(0, "ModelSureleri", sureler);
+                _cacheService.Remove(6, "ModelSureleri");
+                _cacheService.Add(6, "ModelSureleri", sureler);
             }
             catch (Exception ex)
             {

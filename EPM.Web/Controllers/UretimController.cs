@@ -2,6 +2,7 @@
 using DevExtreme.AspNet.Mvc;
 using EPM.Dto.Base;
 using EPM.Dto.Models;
+using EPM.Production.Dto.Production;
 using EPM.Service.Base;
 using EPM.Tools.Helpers;
 using EPM.Tools.Managers;
@@ -51,7 +52,7 @@ namespace EPM.Web.Controllers
 
         public IActionResult UretimListesi()
         {
-            EPM.Production.Dto.Production.UretimOnayliListe liste =new EPM.Production.Dto.Production.UretimOnayliListe();
+            UretimOnayliListe liste =new UretimOnayliListe();
             liste.APPROVAL_STATUS = 1;
             return View(liste);
         }
@@ -59,36 +60,50 @@ namespace EPM.Web.Controllers
         public IActionResult UretimListesiDikey()
         {
             ViewBag.Page = "ÜRETİM LİSTESİ DİKEY";
-            return View(new EPM.Production.Dto.Production.UretimOnayliListe());
+            return View(new UretimOnayliListe());
         }
+        public IActionResult UretimListesiDegisiklik()
+        {
 
+            ViewBag.Page = "ÜRETİM LİSTESİ DEĞİŞİKLİKLER";
+            return View(new UretimOnayliListe());
+        }
         [HttpPost, HttpGet]
-        public IActionResult _PartialUretimOnayliListeFiltrele(EPM.Production.Dto.Production.UretimOnayliListe liste)
+        public IActionResult _PartialUretimOnayliListeFiltrele(UretimOnayliListe liste)
         {
             ViewData["CanEditUretim"] = _menuService.CanUserEditUretim(Request.HttpContext);
             ViewData["OnayliKullanici"] = _menuService.OnayliKullanici(Request.HttpContext);
-            return PartialView(new Tuple<List<EPM.Production.Dto.Production.MasterList>, EPM.Production.Dto.Production.UretimOnayliListe>(ProductionServiceHelper.OnayliUretimListesi(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, liste), liste));
+            return PartialView(new Tuple<List<MasterList>, UretimOnayliListe>(ProductionServiceHelper.OnayliUretimListesi(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, liste), liste));
 
         }
 
         [HttpPost, HttpGet]
-        public IActionResult _PartialUretimliListeDikeyFiltrele(EPM.Production.Dto.Production.UretimOnayliListe liste)
+        public IActionResult _PartialUretimliListeDikeyFiltrele(UretimOnayliListe liste)
         {
             ViewData["CanEditUretim"] = _menuService.CanUserEditUretim(Request.HttpContext);
             return PartialView(liste);
         }
-
+        [HttpPost, HttpGet]
+        public IActionResult _PartialUretimliListeDegisiklikFiltrele(UretimOnayliListe liste)
+        {
+            ViewData["CanEditUretim"] = _menuService.CanUserEditUretim(Request.HttpContext);
+            return PartialView(liste);
+        }
         [HttpGet]
-        public object UretimOnaylilLoad2( EPM.Production.Dto.Production.UretimOnayliListe liste)
+        public object UretimOnaylilLoad2(UretimOnayliListe liste)
         {
             return ProductionServiceHelper.OnayliUretimListesi(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext,"USER").USER_CODE, liste);
         }
         [HttpGet]
-        public object UretimListeDikeyLoad(DataSourceLoadOptions loadOptions, EPM.Production.Dto.Production.UretimOnayliListe liste)
+        public object UretimListeDikeyLoad(DataSourceLoadOptions loadOptions, UretimOnayliListe liste)
         {
             return DataSourceLoader.Load(ProductionServiceHelper.UretimListesiDikey(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, liste), loadOptions);
         }
-
+        [HttpGet]
+        public object UretimListeDegisiklikLoad(DataSourceLoadOptions loadOptions, UretimOnayliListe liste)
+        {
+            return DataSourceLoader.Load(ProductionServiceHelper.UretimListesiDegisiklik(new CookieHelper().GetObjectFromCookie<WebLogin>(Request.HttpContext, "USER").USER_CODE, liste), loadOptions);
+        }
         public IActionResult _PartialUretimOnayliListeFiltreleDetail(int ID)
         {
             ViewData["CanEditUretim"] = _menuService.CanUserEditUretim(Request.HttpContext); 
@@ -223,5 +238,7 @@ namespace EPM.Web.Controllers
             var fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             return File(fs, "application/octet-stream", "EPM AKTARIM SABLON.xlsx");
         }
+
+       
     }
 }

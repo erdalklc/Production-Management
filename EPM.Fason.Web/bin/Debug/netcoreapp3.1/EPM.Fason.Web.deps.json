@@ -31,8 +31,8 @@
     ".NETCoreApp,Version=v3.1": {
       "EPM.Fason.Web/1.0.0": {
         "dependencies": {
-          "DevExtreme.AspNet.Core": "20.2.3",
-          "DevExtreme.AspNet.Data": "2.7.1",
+          "DevExtreme.AspNet.Core": "21.2.4",
+          "DevExtreme.AspNet.Data": "2.8.2",
           "EPM.Fason.Service": "1.0.0",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "3.1.12",
           "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "3.1.12",
@@ -345,31 +345,31 @@
           "lib/netstandard2.0/Dapper.Contrib.dll": {}
         }
       },
-      "DevExtreme.AspNet.Core/20.2.3": {
+      "DevExtreme.AspNet.Core/21.2.4": {
         "dependencies": {
-          "DevExtreme.AspNet.Data": "2.7.1",
+          "DevExtreme.AspNet.Data": "2.8.2",
           "Microsoft.AspNetCore.Mvc": "2.0.0",
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/netstandard2.0/DevExtreme.AspNet.Core.dll": {
-            "assemblyVersion": "20.2.3.0",
-            "fileVersion": "20.2.3.0"
+            "assemblyVersion": "21.2.4.0",
+            "fileVersion": "21.2.4.0"
           }
         },
         "compile": {
           "lib/netstandard2.0/DevExtreme.AspNet.Core.dll": {}
         }
       },
-      "DevExtreme.AspNet.Data/2.7.1": {
+      "DevExtreme.AspNet.Data/2.8.2": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/netstandard2.0/DevExtreme.AspNet.Data.dll": {
-            "assemblyVersion": "2.7.1.0",
-            "fileVersion": "2.7.1.0"
+            "assemblyVersion": "2.8.2.0",
+            "fileVersion": "2.8.2.0"
           }
         },
         "compile": {
@@ -4066,19 +4066,19 @@
       "path": "dapper.contrib/2.0.78",
       "hashPath": "dapper.contrib.2.0.78.nupkg.sha512"
     },
-    "DevExtreme.AspNet.Core/20.2.3": {
+    "DevExtreme.AspNet.Core/21.2.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-iSQpIgTUp5ak3QFJ7FFXIqG0fwmYQiirChmEHt+u0M1eU0C7HlkODltUx1psFH7otHCzl/+lNoKIGVrzNM1Cpw==",
-      "path": "devextreme.aspnet.core/20.2.3",
-      "hashPath": "devextreme.aspnet.core.20.2.3.nupkg.sha512"
+      "sha512": "sha512-J1ly4c+56fx4dU8aM0b3crDT7CpFC6tVT8dYuXNi2lmx71G7OoB20WYho7wCZTh+S8j2hCWcMPuTb3A9vg17Ow==",
+      "path": "devextreme.aspnet.core/21.2.4",
+      "hashPath": "devextreme.aspnet.core.21.2.4.nupkg.sha512"
     },
-    "DevExtreme.AspNet.Data/2.7.1": {
+    "DevExtreme.AspNet.Data/2.8.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-nWcLaUnyFEur5UXXqBQqyluSZjftkLsOPjITOmuUAb7QOIPrGVP7L8PGtGhJHTg94qeOPmo9ef3s5f/VZfzvsA==",
-      "path": "devextreme.aspnet.data/2.7.1",
-      "hashPath": "devextreme.aspnet.data.2.7.1.nupkg.sha512"
+      "sha512": "sha512-y1TXRAcJXhzllwNYAVyMZhiM0J8TghGNhxMjKk0ihxK0agYo1LfPZbDInysH0FrlNKd8QeV2yvvVAaURzWWnBA==",
+      "path": "devextreme.aspnet.data/2.8.2",
+      "hashPath": "devextreme.aspnet.data.2.8.2.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Antiforgery/2.0.0": {
       "type": "package",

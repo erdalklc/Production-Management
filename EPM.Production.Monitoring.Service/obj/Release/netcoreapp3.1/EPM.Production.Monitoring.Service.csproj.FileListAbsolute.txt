@@ -17,3 +17,22 @@ D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\bin\Rel
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Tools.pdb
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.deps.json
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.dll
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Production.Monitoring.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Production.Monitoring.Repository.dll
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Tools.dll
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Production.Monitoring.Repository.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Tools.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\bin\Release\netcoreapp3.1\EPM.Production.Monitoring.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.csproj.AssemblyReference.cache
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.AssemblyInfoInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.AssemblyInfo.cs
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.csproj.CoreCompileInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.csproj.CopyComplete
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.dll
+D:\GitProjects\Eren-Production-Management\EPM.Production.Monitoring.Service\obj\Release\netcoreapp3.1\EPM.Production.Monitoring.Service.pdb

@@ -40,3 +40,20 @@ E:\Eren\Eren Production Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Dto.dll
 E:\Eren\Eren Production Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.dll
+D:\GitProjects\Eren-Production-Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Core.deps.json
+D:\GitProjects\Eren-Production-Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Core.dll
+D:\GitProjects\Eren-Production-Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Core.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Fason.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Tools.dll
+D:\GitProjects\Eren-Production-Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Fason.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Tools.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Core\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.csproj.AssemblyReference.cache
+D:\GitProjects\Eren-Production-Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.AssemblyInfoInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.AssemblyInfo.cs
+D:\GitProjects\Eren-Production-Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.csproj.CoreCompileInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Core\obj\Debug\netcoreapp3.1\EPM.Core.csproj.CopyComplete

@@ -8,3 +8,13 @@ D:\Projects\Eren Production Management\EPM.Fason.Dto\obj\Release\netcoreapp3.1\E
 D:\Projects\Eren Production Management\EPM.Fason.Dto\obj\Release\netcoreapp3.1\EPM.Fason.Dto.pdb
 D:\Projects\Eren Production Management\EPM.Fason.Dto\obj\Release\netcoreapp3.1\EPM.Fason.Dto.GeneratedMSBuildEditorConfig.editorconfig
 D:\Projects\Eren Production Management\EPM.Fason.Dto\obj\Release\netcoreapp3.1\EPM.Fason.Dto.csproj.AssemblyReference.cache
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Dto\bin\Release\netcoreapp3.1\EPM.Fason.Dto.deps.json
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Dto\bin\Release\netcoreapp3.1\EPM.Fason.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Dto\bin\Release\netcoreapp3.1\EPM.Fason.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Dto\obj\Release\netcoreapp3.1\EPM.Fason.Dto.csproj.AssemblyReference.cache
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Dto\obj\Release\netcoreapp3.1\EPM.Fason.Dto.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Dto\obj\Release\netcoreapp3.1\EPM.Fason.Dto.AssemblyInfoInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Dto\obj\Release\netcoreapp3.1\EPM.Fason.Dto.AssemblyInfo.cs
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Dto\obj\Release\netcoreapp3.1\EPM.Fason.Dto.csproj.CoreCompileInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Dto\obj\Release\netcoreapp3.1\EPM.Fason.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Fason.Dto\obj\Release\netcoreapp3.1\EPM.Fason.Dto.pdb

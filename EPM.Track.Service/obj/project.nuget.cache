@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ruk3TAVD7gMkfhHeP64DL5Etoa76vqxf+JqGE1x0UbPDNnVxTpqNXIEnW71EK+2PWybe0+pjGmkodj13qQXThA==",
+  "dgSpecHash": "SaoioDH55zetty5lF54mqmzUQYvVFEegzJKVqjeI581HYI52O47yAGPHg2vblQWxMonOWYosYfX3+Be/CuUb1A==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\Eren Production Management\\EPM.Track.Service\\EPM.Track.Service.csproj",
+  "projectFilePath": "D:\\GitProjects\\Eren-Production-Management\\EPM.Track.Service\\EPM.Track.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\FDEIT005\\.nuget\\packages\\dapper\\2.0.78\\dapper.2.0.78.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\dapper.contrib\\2.0.78\\dapper.contrib.2.0.78.nupkg.sha512",
@@ -37,7 +37,7 @@
     "C:\\Users\\FDEIT005\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.7.0\\system.security.cryptography.protecteddata.4.7.0.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512",
+    "C:\\Users\\FDEIT005\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\system.text.json\\4.7.1\\system.text.json.4.7.1.nupkg.sha512",
     "C:\\Users\\FDEIT005\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
   ],

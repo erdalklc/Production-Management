@@ -28,3 +28,18 @@ D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp
 D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.GeneratedMSBuildEditorConfig.editorconfig
 E:\Eren\Eren Production Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.dll
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\bin\Debug\netcoreapp3.1\EPM.Track.Repository.deps.json
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\bin\Debug\netcoreapp3.1\EPM.Track.Repository.dll
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\bin\Debug\netcoreapp3.1\EPM.Track.Repository.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\bin\Debug\netcoreapp3.1\EPM.Track.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\bin\Debug\netcoreapp3.1\EPM.Track.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.csproj.AssemblyReference.cache
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.AssemblyInfoInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.AssemblyInfo.cs
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.csproj.CoreCompileInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Track.Repository\obj\Debug\netcoreapp3.1\EPM.Track.Repository.csproj.CopyComplete

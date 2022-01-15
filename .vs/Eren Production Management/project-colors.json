@@ -140,7 +140,12 @@
       "ProjectGuid": "240eff19-167b-4e16-90ed-cdc5a31ce31a",
       "DisplayName": "EPM.Production.Monitoring.Repository",
       "ColorIndex": 10
+    },
+    "505d79cc-61f4-4d8b-8deb-b2ef1de4f0b9": {
+      "ProjectGuid": "505d79cc-61f4-4d8b-8deb-b2ef1de4f0b9",
+      "DisplayName": "DevExtreme NuGet.config",
+      "ColorIndex": 11
     }
   },
-  "NextColorIndex": 11
+  "NextColorIndex": 12
 }

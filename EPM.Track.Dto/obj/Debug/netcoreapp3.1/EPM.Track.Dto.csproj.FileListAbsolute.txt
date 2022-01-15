@@ -24,3 +24,16 @@ D:\Projects\Eren Production Management\EPM.Track.Dto\obj\Debug\netcoreapp3.1\EPM
 D:\Projects\Eren Production Management\EPM.Track.Dto\obj\Debug\netcoreapp3.1\EPM.Track.Dto.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.Track.Dto\obj\Debug\netcoreapp3.1\EPM.Track.Dto.GeneratedMSBuildEditorConfig.editorconfig
 E:\Eren\Eren Production Management\EPM.Track.Dto\obj\Debug\netcoreapp3.1\EPM.Track.Dto.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Track.Dto\bin\Debug\netcoreapp3.1\EPM.Track.Dto.deps.json
+D:\GitProjects\Eren-Production-Management\EPM.Track.Dto\bin\Debug\netcoreapp3.1\EPM.Track.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Track.Dto\bin\Debug\netcoreapp3.1\EPM.Track.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Track.Dto\bin\Debug\netcoreapp3.1\EPM.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Track.Dto\bin\Debug\netcoreapp3.1\EPM.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.Track.Dto\obj\Debug\netcoreapp3.1\EPM.Track.Dto.csproj.AssemblyReference.cache
+D:\GitProjects\Eren-Production-Management\EPM.Track.Dto\obj\Debug\netcoreapp3.1\EPM.Track.Dto.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.Track.Dto\obj\Debug\netcoreapp3.1\EPM.Track.Dto.AssemblyInfoInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Track.Dto\obj\Debug\netcoreapp3.1\EPM.Track.Dto.AssemblyInfo.cs
+D:\GitProjects\Eren-Production-Management\EPM.Track.Dto\obj\Debug\netcoreapp3.1\EPM.Track.Dto.csproj.CoreCompileInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.Track.Dto\obj\Debug\netcoreapp3.1\EPM.Track.Dto.csproj.CopyComplete
+D:\GitProjects\Eren-Production-Management\EPM.Track.Dto\obj\Debug\netcoreapp3.1\EPM.Track.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.Track.Dto\obj\Debug\netcoreapp3.1\EPM.Track.Dto.pdb

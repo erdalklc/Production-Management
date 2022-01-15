@@ -23,3 +23,16 @@ D:\Projects\Eren Production Management\EPM.WMS.Repository\obj\Debug\netcoreapp3.
 D:\Projects\Eren Production Management\EPM.WMS.Repository\obj\Debug\netcoreapp3.1\EPM.WMS.Repository.pdb
 D:\Projects\Eren Production Management\EPM.WMS.Repository\obj\Debug\netcoreapp3.1\EPM.WMS.Repository.csproj.AssemblyReference.cache
 D:\Projects\Eren Production Management\EPM.WMS.Repository\obj\Debug\netcoreapp3.1\EPM.WMS.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.WMS.Repository\obj\Debug\netcoreapp3.1\EPM.WMS.Repository.dll
+D:\GitProjects\Eren-Production-Management\EPM.WMS.Repository\obj\Debug\netcoreapp3.1\EPM.WMS.Repository.pdb
+D:\GitProjects\Eren-Production-Management\EPM.WMS.Repository\bin\Debug\netcoreapp3.1\EPM.WMS.Repository.deps.json
+D:\GitProjects\Eren-Production-Management\EPM.WMS.Repository\bin\Debug\netcoreapp3.1\EPM.WMS.Repository.dll
+D:\GitProjects\Eren-Production-Management\EPM.WMS.Repository\bin\Debug\netcoreapp3.1\EPM.WMS.Repository.pdb
+D:\GitProjects\Eren-Production-Management\EPM.WMS.Repository\bin\Debug\netcoreapp3.1\EPM.WMS.Dto.dll
+D:\GitProjects\Eren-Production-Management\EPM.WMS.Repository\bin\Debug\netcoreapp3.1\EPM.WMS.Dto.pdb
+D:\GitProjects\Eren-Production-Management\EPM.WMS.Repository\obj\Debug\netcoreapp3.1\EPM.WMS.Repository.csproj.AssemblyReference.cache
+D:\GitProjects\Eren-Production-Management\EPM.WMS.Repository\obj\Debug\netcoreapp3.1\EPM.WMS.Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitProjects\Eren-Production-Management\EPM.WMS.Repository\obj\Debug\netcoreapp3.1\EPM.WMS.Repository.AssemblyInfoInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.WMS.Repository\obj\Debug\netcoreapp3.1\EPM.WMS.Repository.AssemblyInfo.cs
+D:\GitProjects\Eren-Production-Management\EPM.WMS.Repository\obj\Debug\netcoreapp3.1\EPM.WMS.Repository.csproj.CoreCompileInputs.cache
+D:\GitProjects\Eren-Production-Management\EPM.WMS.Repository\obj\Debug\netcoreapp3.1\EPM.WMS.Repository.csproj.CopyComplete
